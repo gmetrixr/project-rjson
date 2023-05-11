@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  rjson2:
+    image: "gmetrixr/baseimage:node-18-dev-v1"
+    container_name: gmetri_rjson
+    command: ["tail", "-f", "/dev/null"]
+    working_dir: /src
+    user: node
+    # ports:
+    #   - "8002:8002" #Format: HOST:CONTAINER
+    volumes:
+      - .:/src
+      #Allow running host to run git commands:
+      - ~/.ssh:/home/node/.ssh:ro
+      - ~/.gitconfig:/home/node/.gitconfig:ro
+    environment:
+      - IS_LOCAL=true
+      - BUILD_VERSION=localversion
+      - NAMESPACE=local
+
+networks:
+  default:
+    name: teaxr

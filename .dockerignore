@@ -1,0 +1,24 @@
+node_modules/
+.pnpm-store/
+
+.npm/
+# Can't include git in docker ignore - needs to be present in publisher image
+#  .git/
+#  #short_ref needed in BUILD_VERSION
+#  !.git/short_ref
+
+.idea/
+.vscode/
+
+data/
+build/
+cloud/
+snowpack/
+
+# ESlint coverage files
+.coverage.eslint.codeframe
+coverage/
+.nyc_output/
+# test/ -- test folder needs to be a part of the docker context so that it's present in the publisher image (in which tests are run)
+
+dev/pgadmin4/.pgpass

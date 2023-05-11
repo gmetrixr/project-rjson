@@ -1,0 +1,20 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+indent_style = space
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js,jsx,ts,tsx,py,sh,gql,graphql,yaml,json,sql,njk,scss,css}]
+charset = utf-8
+indent_size = 2
+
+#4 spaces needed in markdown to detect lists
+[*.{md}]
+charset = utf-8
+indent_size = 4
