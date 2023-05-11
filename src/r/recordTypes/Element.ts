@@ -278,7 +278,7 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.preload]: false,
   // Adding it as a string because it created a circular dependency while adding it from enum
   [ElementProperty.volume_type]: "cube",
-  [ElementProperty.mouse_jump]: true,
+  [ElementProperty.mouse_jump]: false,
   [ElementProperty.visible]: false,
   [ElementProperty.pose]: "idle",
   [ElementProperty.use_proximity_optimization]: true,

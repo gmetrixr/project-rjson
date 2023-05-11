@@ -28,7 +28,8 @@ export const Audio: IElementDefinition = {
     [ElementProperty.audio_type]: "upload",
   },
   events: [
-    RuleEvent.on_end
+    RuleEvent.on_end,
+    RuleEvent.on_duration_match
   ],
   actions: [
     RuleAction.play_resume,

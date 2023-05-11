@@ -118,8 +118,8 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.use_custom_branding]: false,
   [ProjectProperty.initial_graphics_setting]: InitialGraphicsSetting.high,
   [ProjectProperty.avatar_system_body_type]: AvatarBodyType.fullbody,
-  [ProjectProperty.avatar_system]: AvatarSystem.basic,
-  [ProjectProperty.viewer_camera_mode]: ViewerCameraMode.first_person,
+  [ProjectProperty.avatar_system]: AvatarSystem.none,
+  [ProjectProperty.viewer_camera_mode]: ViewerCameraMode.third_person,
   [ProjectProperty.use_legacy_color_management]: false,
   [ProjectProperty.viewer_language]: Language.en,
 };

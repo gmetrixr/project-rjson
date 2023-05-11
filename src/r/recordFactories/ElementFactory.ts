@@ -6,8 +6,6 @@ import { RT, recordTypeDefinitions, RTP, rtp } from "../R/RecordTypes";
 import { en, fn } from "../definitions";
 import { jsUtils } from "@gmetrixr/gdash";
 
-const { generateId } = jsUtils;
-
 const deepClone = jsUtils.deepClone;
 
 export class ElementFactory extends RecordFactory<RT.element> {
@@ -20,46 +18,6 @@ export class ElementFactory extends RecordFactory<RT.element> {
       this.elementType = element_type;
     } else {
       throw Error(`The type ${element_type} of this ElementJson isn't a known ElementType`);
-    }
-  }
-
-  /** 
-   * ISSUE : We were facing issue when we copy element from root to group, id for that element was duplicated and that was causing an issue. Below id fix for that
-   * this function will add record with new element id to prevent duplicate issue.
-   */
-  pasteFromClipboardObject(this: ElementFactory, {obj, position}: {obj: ClipboardR, position?: number}): (RecordNode<RT> | undefined)[] {
-    if(obj.parentType !== this._type) {
-      console.error(`Can't paste this object into a RecordNode of type of ${this._type}`);
-      return [];
-    }
-    const addedRecords = [];
-    for(const rn of obj.nodes) {
-      // * if position is passed, then keep incrementing to insert in order, else add at the end of the list
-      rn.id = generateId();
-      // * generate new ids if required for child elements. ex: group children
-      new ElementFactory(rn).dedupeChildElementIds();
-      const addedRecord = super.addRecord(rn, position? position++: position);
-      if (addedRecord !== undefined) {
-        addedRecords.push(addedRecord);
-      }
-    }
-
-    return addedRecords;
-  }
-
-  /**
-   * Regenerate new element_id for all children recursively
-   */
-  dedupeChildElementIds(this: ElementFactory): void {
-    if(this.elementType === en.ElementType.group) {
-      // change ids of all children
-      const children = this.getRecords(RT.element);
-      for(const c of children) {
-        this.changeRecordId(RT.element, c.id);
-        if(c.props.element_type === en.ElementType.group) {
-          new ElementFactory(c).dedupeChildElementIds();
-        }
-      }
     }
   }
 
@@ -172,7 +130,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
 
   addElementOfType (this: ElementFactory, elementType: ElementType, position?: number): RecordNode<RT.element> {
     const defaultName = ElementUtils.getElementDefinition(elementType).elementDefaultName;
-    const newElement = createRecord<RT.element>(RT.element, undefined, defaultName);
+    const newElement = createRecord<RT.element>(RT.element, defaultName);
     newElement.props = ElementUtils.getElementTypeDefaults(elementType);
     newElement.props.element_type = elementType;
     this.addRecord<RT.element>(newElement, position);

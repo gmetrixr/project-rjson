@@ -1,5 +1,6 @@
 import { ICogObjectDefinition } from "../BaseCogObject";
 import { Source } from "../files";
+import { pathUtils } from "@gmetrixr/gdash";
 
 export interface ISpecialDefinition extends ICogObjectDefinition {
   special_type: SpecialType;
@@ -102,3 +103,21 @@ export enum BloomKernelSize {
   very_large = "very_large",
   huge = "huge",
 }
+
+export const sceneEnvironmentOptions: SceneEnvironment[] = [{
+  id: 1,
+  name: "Event 1",
+  source: {
+    id: -1,
+    name: "Event 1",
+    file_urls: {
+      o: "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb",
+      glb: "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb",
+      t: "https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png"
+    },
+    type: pathUtils.FileType.THREED
+  },
+  scale: 0.5,
+  placer_3d: [0, -1.6, 0, 0, 0, 0, 1, 1, 1],
+  scene_bounds: [-15, 4.5, 0, 5, -4.5, 15]
+}];

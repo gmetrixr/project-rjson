@@ -67,7 +67,8 @@ export enum PredefinedVariableName {
   scorm_suspend_data = "scorm_suspend_data",  //Updates at runtime
   scorm_score = "scorm_score",  //Updates at runtime
   lastname_var = "lastname_var", //Added when project is created
-  fullname_var = "fullname_var" //Added when project is created
+  fullname_var = "fullname_var", //Added when project is created
+  player_count_var = "player_count_var" //Added when project is created
 }
 
 /**
@@ -104,6 +105,8 @@ export const predefinedVariableDefaults: Record<PredefinedVariableName, Predefin
     description: "Stores the viewer's last name if available from the authentication mechanism" },
   [PredefinedVariableName.fullname_var]: {id: -17, type: VariableType.string,
     description: "Stores the viewer's full name if available from the authentication mechanism" },
+  [PredefinedVariableName.player_count_var]: {id: -18, type: VariableType.number,
+    description: "Stores the total number of live viewers in the experience" },
 }
 
 /** Note: JS keys get converted to strings in json */
@@ -119,7 +122,8 @@ export const predefinedVariableIdToName: Record<number, PredefinedVariableName> 
   [-14]: PredefinedVariableName.scorm_suspend_data,
   [-15]: PredefinedVariableName.scorm_score,
   [-16]: PredefinedVariableName.lastname_var,
-  [-17]: PredefinedVariableName.fullname_var
+  [-17]: PredefinedVariableName.fullname_var,
+  [-18]: PredefinedVariableName.player_count_var
 }
 
 export function convertVarValueToType(value: any, varType: VariableType): number | string | boolean {

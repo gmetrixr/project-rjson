@@ -7,7 +7,7 @@ import {
   VariableType,
 } from "../definitions/variables/VariableTypes";
 import { RecordFactory } from "../R/RecordFactory";
-import { ClipboardR, createRecord, emptyROM, RecordMap, RecordNode } from "../R/RecordNode";
+import { ClipboardR, createRecord, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
