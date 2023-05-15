@@ -16,7 +16,7 @@ export interface RecordNode<T extends RT> {
 }
 
 export type RecordMap<T extends RT> = Record<string, RecordNode<T>>
-
+export type RecordMapGeneric = Record<string, RecordNode<RT>>
 /**
  * Creates an object of any of the known record types
  * name is optional - used only in case this rcord type needs a name. In case not given, can also use once from rt definitions.
