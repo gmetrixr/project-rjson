@@ -673,7 +673,7 @@ export class RecordFactory<T extends RT> {
   /**
    * Keeps ids intact
    */
-  moveDeepRecordsToAddress(sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
+  moveDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
     const destParentRecord = this.getRecordAtAddress(destParentAddr);
     if(destParentRecord === undefined) return;
 
@@ -701,7 +701,7 @@ export class RecordFactory<T extends RT> {
   /**
    * Created new ids of the records created
    */
-  copyDeepRecordsToAddress(sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
+  copyDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
     const destParentRecord = this.getRecordAtAddress(destParentAddr);
     if(destParentRecord === undefined) return;
 
@@ -712,6 +712,17 @@ export class RecordFactory<T extends RT> {
         parentF.addRecord(copiedRecord, destPosition);
       }
     }
+  }
+
+  /**
+   * Change all inner ids, and their references (values) in properties if any
+   * Useful when you are copying an element folder / group for example - when you don't want any duplication
+   * of ids when copy pasting
+   */
+  cycleInnerIds(this: RecordFactory<T>) {
+    //Go to every inner id recursively
+    //Keep replacing them one by one in the whole tree
+
   }
 
   /** 
