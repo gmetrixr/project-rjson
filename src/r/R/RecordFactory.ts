@@ -6,11 +6,7 @@ const { mapValuesToOrder, deepClone, generateId } = jsUtils;
 const { getSafeAndUniqueRecordName } = stringUtils;
 
 type PredicateType<N extends RT> = (value: RecordNode<N>, index?: number, array?: RecordNode<N>[]) => boolean;
-/**
- * p: parent RecordNode
- * c: child RecordNode
- * cid: child id
- */
+/** p: parent RecordNode, c: child RecordNode, cid: child id */
 type cAndP = {p: RecordNode<RT> | undefined, c: RecordNode<RT>, cid: number};
 type idAndRecord = {id: number, record: RecordNode<RT>};
 
@@ -20,6 +16,39 @@ type idAndRecord = {id: number, record: RecordNode<RT>};
  *
  * Using arrow functions in Classes has a runtime performance cost. The constructor bloats up.
  * Solution: https://www.typescriptlang.org/docs/handbook/2/classes.html#this-parameters
+ * 
+ * JSON Structure:
+ * 
+ * { //RecordNode -> Any recordNode doesn't know what it's id is. The id is defined one level above
+ *   name: "string" //optional record name
+ *   type: "project"
+ *   order: "integer" //the order of the record in the list
+ *   props: {"key1": "value1", "key2", "value2"} //All properties in a record
+ *   records: {
+ *     "scene": { //Scene RecordMap
+ *       "7878789089": { //record id 1
+ *          //Sub RecordNode 1
+ *       },
+ * *     "7878789777": { //record id 2
+ *          //Sub RecordNode 2
+ *       }
+ *     }
+ *     "varaible": {} //Varaible RecordMap
+ *   }
+ * }
+ * 
+ * getName -> name
+ * get/set -> props
+ * getRecordTypes -> list of subrecord types ["scene", "variable"]
+ * getRecordMapOfType -> individual record map
+ * getRecordMap -> Merged record map of all types
+ * getDeepRecordMap -> Merged record map of all types in the whole tree
+ * getRecord -> needs just an id, only returns level 1 records
+ * getDeepRecord -> needs just an id, returns record from any level
+ * getSortedRecordsIdsOfType -> Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
+ * getSortedRecordsOfType
+ * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
+ * cycleAllRecordIds -> Changes all ids
  */
 export class RecordFactory<T extends RT> {
   protected readonly _json: RecordNode<T>;
@@ -125,7 +154,7 @@ export class RecordFactory<T extends RT> {
     const recordMap: RecordMapGeneric = {};
     const children = this.getRecordMap();
     for(const record of Object.values(children)) {
-      const childSubRecords = new RecordFactory(record).getRecordMap();
+      const childSubRecords = new RecordFactory(record).getDeepRecordMap();
       Object.assign(recordMap, childSubRecords);
     }
     return recordMap;
@@ -194,7 +223,7 @@ export class RecordFactory<T extends RT> {
   /** 
    * Updates all references to a recordId in the tree and in properties 
    */
-  changeDeepRecordId(this: RecordFactory<T>, id: number, newId?: number): number | undefined {
+  changeDeepRecordId(this: RecordFactory<T>, id: number, newId?: number): number {
     if (newId === undefined) newId = generateId();
 
     for (const type of this.getRecordTypes()) {
@@ -215,7 +244,7 @@ export class RecordFactory<T extends RT> {
         new RecordFactory(value).changeDeepRecordId(id, newId);
       }
     }
-    return undefined;
+    return newId;
   }
 
   /** Change all record ids (of sub-records) in this RecordNode */
@@ -282,6 +311,11 @@ export class RecordFactory<T extends RT> {
     return this.addRecord(record, position);
   }
 
+  //Todo: Needed for reparenting fn where don't want to change ids
+  // addRecordKeepingIdsIntact(this: RecordFactory, {record}) {
+
+  // }
+  
   /**
    * Definition of "position" - the [gap] to insert into: [0] 0, [1] 1, [2] 2, [3] 3, [4] 4 [5]
    * If position is undefined, it gets inserted at the end
