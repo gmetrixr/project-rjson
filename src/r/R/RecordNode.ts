@@ -29,7 +29,6 @@ export const createRecord = <T extends RT>(type: T, name?: string) :RecordNode<T
     props: {},
     //records: {}, //Optional, so don't set here. Automatically set when first record is added.
   }
-  console.log("=============> node: ", node);
   //Add name only if this RecordType uses name
   if(recordTypeDefinitions[type].defaultName !== undefined) {
     node.name = name ?? recordTypeDefinitions[type].defaultName;

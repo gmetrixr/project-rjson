@@ -236,7 +236,9 @@ export class RecordFactory<T extends RT> {
         }
         //Change all property values that refer to the older id also
         for(const prop of this.getProps()) {
+          //@ts-ignore
           if(this._json.props[prop] === id) {
+            //@ts-ignore
             this._json.props[prop] = newId;
           }
         }
@@ -292,15 +294,20 @@ export class RecordFactory<T extends RT> {
   }
 
   changePropertyName(this: RecordFactory<T>, propertyName: string, newPropertyName: string): RecordFactory<T> {
+    //@ts-ignore
     if (this._json.props[propertyName] !== undefined) {
+      //@ts-ignore
       this._json.props[newPropertyName] = this._json.props[propertyName];
+      //@ts-ignore
       delete this._json.props[propertyName];
     }
     return this;
   }
 
   deleteProperty(this: RecordFactory<T>, propertyName: string): RecordFactory<T> {
+    //@ts-ignore
     if (this._json.props[propertyName]) {
+      //@ts-ignore
       delete this._json.props[propertyName];
     }
     return this;
