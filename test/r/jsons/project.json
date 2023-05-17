@@ -1,0 +1,20 @@
+{
+    "type": "project",
+    "name": "Project 1",
+    "order": 1,
+    "props": {
+
+    },
+    "records": {
+        "scene": {
+            "1684325255018": {
+                "type": "scene",
+                "name": "Scene 1",
+                "order": 1,
+                "props": {
+                    
+                }
+            }
+        }
+    }
+}

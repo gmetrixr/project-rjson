@@ -1,0 +1,23 @@
+//Normal: mocha -r ts-node/register 'test/**/*.{ts,tsx}'
+//Watch: mocha -r ts-node/register --watch --watch-files src,test 'test/**/*.{ts,tsx}'
+{
+  // "diff": true,
+  "extension": ["ts", "tsx"],
+  "require": ["ts-node/register","source-map-support/register"],
+  //To choose a subset of tests, temporarily, swap the comment below:
+   "spec": "test/r/1.factory.spec.{ts,tsx}",
+  // "spec": "test/r/1.factory.spec.{ts,tsx}",
+  // "spec": "test/r/2.rules.spec.{ts,tsx}",
+  // "spec": "test/r/3.discussion.spec.{ts,tsx}",
+//   "spec": "test/r/4.elementFactory.spec.{ts,tsx}",
+//   "spec": "test/r/5.sceneFactory.spec.{ts,tsx}",
+//   "spec": "test/r/6.projectFactory.spec.{ts,tsx}",
+  //"spec": "test/r/**/*.{ts,tsx}",
+  // package: "./package.json",
+  // reporter: "spec",
+  // slow: 75,
+  // timeout: 2000,
+  // ui: "bdd",
+  "watch-files": ["src", "test"],
+  "watch-ignore": ["lib/vendor"]
+}
