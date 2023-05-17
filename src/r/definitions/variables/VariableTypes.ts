@@ -1,5 +1,5 @@
 import { ICogObjectDefinition } from "../BaseCogObject";
-import { ROM, RT } from "../../R";
+import { RT } from "../../R";
 
 export interface IVariableDefinition extends ICogObjectDefinition {
   variable_type: VariableType;
@@ -32,7 +32,7 @@ export enum VarCategory {
  * VariableDefinition RecordOrderedMap
  * This is the type of the outout of r.project(projectJson).getRecordOrderedMap(RT.variable)
  */
-export type VarDefROM = ROM<RT.variable>;
+// export type VarDefROM = ROM<RT.variable>;
 
 /**
  * The shape of the object used to store the values of all variables in memory and in database
