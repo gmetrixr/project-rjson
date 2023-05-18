@@ -37,16 +37,18 @@ type idAndRecord = {id: number, record: RecordNode<RT>};
  *   }
  * }
  * 
+ * json -> return full json
  * getName -> name
- * get/set -> props
+ * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
+ * get/set/delete/getValueOrDefault/getDefault -> prop's values
+ * changePropertyName -> used during migrations
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
- * getRecordMapOfType -> individual record map
- * getRecordMap -> Merged record map of all types
+ * getRecordMapOfType / getRecordMap -> individual record map / Merged record map of all types
  * getDeepRecordMap -> Merged record map of all types in the whole tree
- * getRecord -> needs just an id, only returns level 1 records
+ * getRecordOfType / getRecord -> get subrecord of a type (lvl 1) / get subrecord of any type (needs just an id, lvl 1)
  * getDeepRecord -> needs just an id, returns record from any level
- * getSortedRecordsIdsOfType -> Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
- * getSortedRecordsOfType
+ * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType -> Sorting only 
+ *    makes sense in a single type (eg: you wont sort variables & scenes)
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
  */
@@ -87,11 +89,6 @@ export class RecordFactory<T extends RT> {
     return Object.keys(rtp[this._type]);
   }
 
-  /** A list of Records this json has (eg: project might have scene, variable, menu) */
-  getRecordTypes(this: RecordFactory<T>): RT[] {
-    return Object.keys(this._json.records ?? {}) as RT[];
-  }
-
   /** In case a property isn't defined in the json, this method returns "undefined" */
   get(this: RecordFactory<T>, property: RTP[T]): unknown {
     return this._json.props[property];
@@ -130,6 +127,21 @@ export class RecordFactory<T extends RT> {
     return deepClone(defaultValues[property]);
   }
 
+  /** Used mostly for migrations. And so this fn doesn't do type check on property name. */
+  changePropertyName(this: RecordFactory<T>, propertyName: string, newPropertyName: string): RecordFactory<T> {
+    if (this._json.props[propertyName] !== undefined) {
+      this._json.props[newPropertyName] = this._json.props[propertyName];
+      delete this._json.props[propertyName];
+    }
+    return this;
+  }
+
+  /** A list of Records this json has (eg: project might have scene, variable, menu) */
+  getRecordTypes(this: RecordFactory<T>): RT[] {
+    return Object.keys(this._json.records ?? {}) as RT[];
+  }
+  
+
   /** Returns all sub records (one-lvl deep) of a single type */
   getRecordMapOfType<N extends RT>(this: RecordFactory<T>, type: N): RecordMap<N> {
     return this._json.records?.[type] ?? {};
@@ -160,6 +172,10 @@ export class RecordFactory<T extends RT> {
     return recordMap;
   }
 
+  getRecordOfType<N extends RT>(this: RecordFactory<T>, type: N, id: number): RecordNode<N> | undefined {
+    return (this._json.records?.[type] as RecordMap<N>)?.[id];
+  }
+
   getRecord(this: RecordFactory<T>, id: number): RecordNode<RT> | undefined {
     return this.getRecordMap()[id];
   }
@@ -168,15 +184,11 @@ export class RecordFactory<T extends RT> {
     return this.getDeepRecordMap()[id];
   }
 
-  getRecordOfType<N extends RT>(this: RecordFactory<T>, type: N, id: number): RecordNode<N> | undefined {
-    return (this._json.records?.[type] as RecordMap<N>)?.[id];
-  }
-
   /**
    * Ensures that all records of a given type have the ".order" key in them. 
    * This function finds the max order, and increments the order by 1 for each new entry
    */
-  ensureOrderKeyPresentOfType(this: RecordFactory<T>, type: RT) {
+  private ensureOrderKeyPresentOfType(this: RecordFactory<T>, type: RT) {
     const valuesArray = Object.values(this.getRecordMapOfType(type));
 
     let undefinedFound = false;
@@ -202,22 +214,27 @@ export class RecordFactory<T extends RT> {
     }
   }
 
-  /** 
-   * ORDERED ids 
-   */
-  getSortedRecordIdsOfType(this: RecordFactory<T>, type: RT): number[] {
+  /** ORDERED entries of id, records. Returns ids as strings. */
+  getSortedRecordEntriesOfType(this: RecordFactory<T>, type: RT): [number, RecordNode<RT>][] {
     this.ensureOrderKeyPresentOfType(type);
     const entriesArray = Object.entries(this.getRecordMapOfType(type));
     //We know that at this point order is not undefined. So we just forcefully cast it to a number.
-    entriesArray.sort((a,b) => {return <number>a[1].order - <number>b[1].order});
-    return entriesArray.map(nodeEntry => Number(nodeEntry[0]));
+    const numberEntriesArray = entriesArray
+      .sort((a,b) => {return <number>a[1].order - <number>b[1].order})
+      .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+    return numberEntriesArray;
   }
 
-  /** 
-   * ORDERED records
-   */
+  /** ORDERED ids */
+  getSortedRecordIdsOfType(this: RecordFactory<T>, type: RT): number[] {
+    const entriesArray = this.getSortedRecordEntriesOfType(type);
+    return entriesArray.map(nodeEntry => nodeEntry[0]);
+  }
+
+  /** ORDERED records */
   getSortedRecordsOfType<N extends RT>(this: RecordFactory<T>, type: N): RecordNode<N>[] {
-    return mapValuesToOrder(<RecordMap<N>>this._json.records?.[type], this.getSortedRecordIdsOfType(type));
+    const entriesArray = this.getSortedRecordEntriesOfType(type);
+    return entriesArray.map(nodeEntry => nodeEntry[1]);
   }
 
   /** 
@@ -289,21 +306,6 @@ export class RecordFactory<T extends RT> {
     }
     const parentF = new RecordFactory(deepCAndP.p);
     return parentF.changeRecordName(type, id, newName);
-  }
-
-  changePropertyName(this: RecordFactory<T>, propertyName: string, newPropertyName: string): RecordFactory<T> {
-    if (this._json.props[propertyName] !== undefined) {
-      this._json.props[newPropertyName] = this._json.props[propertyName];
-      delete this._json.props[propertyName];
-    }
-    return this;
-  }
-
-  deleteProperty(this: RecordFactory<T>, propertyName: string): RecordFactory<T> {
-    if (this._json.props[propertyName]) {
-      delete this._json.props[propertyName];
-    }
-    return this;
   }
 
   addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number):{id: number, record: RecordNode<N>} | undefined {
