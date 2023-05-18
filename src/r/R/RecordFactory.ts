@@ -41,10 +41,8 @@ export interface ClipboardData {
  *   }
  * }
  * 
- * json -> return full json
- * getName -> name
- * 
  * PROPS
+ * json / getName -> return full json / return name
  * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
  * get/set/reset/delete/getValueOrDefault/getDefault -> prop's values
  * changePropertyName -> used during migrations
@@ -56,7 +54,7 @@ export interface ClipboardData {
  * getRecordOfType / getRecord -> get subrecord of a type (lvl 1) / get subrecord of any type (needs just an id, lvl 1)
  * getDeepRecord -> needs just an idOrAddress, returns record from any level
  * 
- * SORTED RECORDS
+ * SORTED RECORDS (FOR UI)
  * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType -> Sorting only 
  *    makes sense in a single type (eg: you wont sort variables & scenes)
  * 
@@ -76,13 +74,9 @@ export interface ClipboardData {
  * duplicateRecord / deleteRecord / changeRecordName
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
  * 
- * MOVE/COPY
- * reorderRecords
- * copyDeepRecordsToAddress / moveDeepRecordsToAddress
- * 
- * CLIPBOARD
- * copySelectionToClipboard
- * pasteFromClipboard
+ * MOVE/COPY/CLIPBOARD
+ * reorderRecords / copyDeepRecords / moveDeepRecords
+ * copySelectionToClipboard / pasteFromClipboard
  */
 export class RecordFactory<T extends RT> {
   protected readonly _json: RecordNode<T>;
@@ -691,7 +685,7 @@ export class RecordFactory<T extends RT> {
   }
 
   /** Keeps ids intact */
-  moveDeepRecordsToAddress(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+  moveDeepRecords(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
     const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
     const destRAndP = this.getRecordAndParent(dest);
     if(sourceRAndPArray === undefined || destRAndP === undefined) return false;
@@ -722,7 +716,7 @@ export class RecordFactory<T extends RT> {
   }
 
   /** Changes ids */
-  copyDeepRecordsToAddress(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+  copyDeepRecords(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
     const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
     const destRAndP = this.getRecordAndParent(dest);
     if(sourceRAndPArray === undefined || destRAndP === undefined) return false;
