@@ -42,32 +42,47 @@ export interface ClipboardData {
  * }
  * 
  * json -> return full json
+ * 
  * NAME
  * getName -> name
  * private changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
+ * 
  * PROPS
  * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
  * get/set/reset/delete/getValueOrDefault/getDefault -> prop's values
  * changePropertyName -> used during migrations
+ * 
  * RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
  * getRecordMapOfType / getRecordMap -> individual record map / Merged record map of all types
  * getDeepRecordMap -> Merged record map of all types in the whole tree
  * getRecordOfType / getRecord -> get subrecord of a type (lvl 1) / get subrecord of any type (needs just an id, lvl 1)
  * getDeepRecord -> needs just an idOrAddress, returns record from any level
+ * 
  * SORTED RECORDS
  * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType -> Sorting only 
  *    makes sense in a single type (eg: you wont sort variables & scenes)
+ * 
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
  * private getRecordAndParentWithId / getRecordAndParentAtAddress -> Find a record and its parent
  * getPropertyAtAddress / updatePropertyAtAddress
  * getRecordAndParent -> Find record with either id or address
+ * getBreadCrumbs -> returns an array of all sub-records leading to the given idOrAddress
+ * 
  * RECORD RELATED
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
  * addRecord / duplicateRecord
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
+ * 
+ * MOVE/COPY
+ * reorderRecords
+ * copyDeepRecordsToAddress / moveDeepRecordsToAddress
+ * 
+ * CLIPBOARD
+ * copySelectionToClipboard
+ * pasteFromClipboard
  */
 export class RecordFactory<T extends RT> {
   protected readonly _json: RecordNode<T>;
@@ -296,19 +311,15 @@ export class RecordFactory<T extends RT> {
 
   /** Find a record and its parent given any record id */
   private getRecordAndParentWithId<N extends RT>(this: RecordFactory<T>, id: number): rAndP | undefined {
-    for (const type of this.getRecordTypes()) {
-      const recordMap = this.getRecordMapOfType(type);
-      for(const [key, value] of Object.entries(recordMap)) {
-        //In case this is the record whose id is to be changed, change it
-        if(id === Number(key)) {
-          //Found it!!! return the cAndP object
-          const rAndP: rAndP = {p: this._json, r: recordMap[id], id: id};
-          return rAndP;
-        }
-        const subRecord = new RecordFactory(value).getRecordAndParentWithId(id);
-        if(subRecord !== undefined) {
-          return subRecord;
-        }
+    const recordMap = this.getRecordMap();
+    for(const [key, value] of Object.entries(recordMap)) {
+      if(id === Number(key)) {
+        //Found it!!! return the rAndP object
+        return {p: this._json, r: recordMap[id], id: id};
+      }
+      const subRecordRAndP = new RecordFactory(value).getRecordAndParentWithId(id);
+      if(subRecordRAndP !== undefined) {
+        return subRecordRAndP;
       }
     }
   }
@@ -351,48 +362,75 @@ export class RecordFactory<T extends RT> {
   private getRecordAndParentAtAddress(this: RecordFactory<T>, addr: string): rAndP | undefined {
     // Sanitize and remove and unwanted cases
     // Replace everything after a ! with a blank string
-    const recordsArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
-    if(recordsArray.length === 0 || this._json.records === undefined) {
+    const recordStringArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
+    if(recordStringArray.length === 0 || this._json.records === undefined) {
       return undefined;
     }
-    let parentRF: RecordFactory<RT> = this;
-    let childRF: RecordFactory<RT> = this;
+    let parentR: RecordNode<RT> = this._json;
+    let childR: RecordNode<RT> = this._json;
     let childId = 0;
-    for (let i = 0; i < recordsArray.length; i++) {
-      parentRF = childRF;
-      const [type, id] = recordsArray[i].split(":"); // [scene, 1]
-      const childR = parentRF.getRecordOfType(type as RT, Number(id));
-      if(childR === undefined) return undefined;
-      childRF = new RecordFactory(childR);
+    for (let i = 0; i < recordStringArray.length; i++) {
+      parentR = childR;
+      const [type, id] = recordStringArray[i].split(":"); // [scene, 1]
+      let newChild = new RecordFactory(parentR).getRecordOfType(type as RT, Number(id));
+      if(newChild === undefined) return undefined;
+      childR = newChild;
       childId = Number(id);
     }
-    const rAndP: rAndP = { id: childId, r: childRF._json, p: parentRF?._json, };
+    const rAndP: rAndP = { id: childId, r: childR, p: parentR };
     return rAndP;
   }
 
-  // private getBreadCrumbsFromAddress(this: RecordFactory<T>, addr: string): idAndRecord[] | undefined {
-  //   // Sanitize and remove and unwanted cases
-  //   // Replace everything after a ! with a blank string
-  //   const recordsArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
-  //   if(recordsArray.length === 0 || this._json.records === undefined) {
-  //     return undefined;
-  //   }
-  //   let parentRF: RecordFactory<RT> = this;
-  //   let childRF: RecordFactory<RT> = this;
-  //   let childId = 0;
-  //   const breadCrumbs: idAndRecord[] = []
-  //   for (let i = 0; i < recordsArray.length; i++) {
-  //     parentRF = childRF;
-  //     const [type, id] = recordsArray[i].split(":"); // [scene, 1]
-  //     const childR = parentRF.getRecordOfType(type as RT, Number(id));
-  //     if(childR === undefined) return undefined;
-  //     childRF = new RecordFactory(childR);
-  //     childId = Number(id);
-  //     breadCrumbs.push({id: childId, record: childR});
-  //   }
-  //   const rAndP: rAndP = { id: childId, r: childRF._json, p: parentRF?._json, };
-  //   return rAndP;
-  // }
+  private getBreadCrumbsWithId<N extends RT>(this: RecordFactory<T>, id: number, breadCrumb?: idAndRecord[]): idAndRecord[] | undefined {
+    if(breadCrumb === undefined) breadCrumb = [];
+
+    const recordMap = this.getRecordMap();
+    for(const [key, value] of Object.entries(recordMap)) {
+      if(id === Number(key)) {
+        //Found it!!! return the rAndP object
+        const lastEntry: idAndRecord = {id: Number(key), record: recordMap[id]};
+        return [lastEntry];
+      }
+      const breadCrumbArray = new RecordFactory(value).getBreadCrumbsWithId(id);
+      if(breadCrumbArray !== undefined) {
+        const currentEntry: idAndRecord = {id: Number(key), record: recordMap[id]};
+        breadCrumbArray.splice(0, 0, currentEntry);
+        return breadCrumbArray;
+      }
+    }
+    return undefined;
+  }
+
+  private getBreadCrumbsWithAddr(this: RecordFactory<T>, addr: string): idAndRecord[] | undefined {
+    const breadCrumbs: idAndRecord[] = []
+    // Sanitize and remove and unwanted cases
+    // Replace everything after a ! with a blank string
+    const recordsStringArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
+    if(recordsStringArray.length === 0 || this._json.records === undefined) {
+      return undefined;
+    }
+    let parentR: RecordNode<RT> = this._json;
+    let childR: RecordNode<RT> = this._json;
+    let childId = 0;
+    for (let i = 0; i < recordsStringArray.length; i++) {
+      parentR = childR;
+      const [type, id] = recordsStringArray[i].split(":"); // [scene, 1]
+      let newChild = new RecordFactory(parentR).getRecordOfType(type as RT, Number(id));
+      if(newChild === undefined) return undefined;
+      childR = newChild;
+      childId = Number(id);
+      breadCrumbs.push({id: childId, record: childR});
+    }
+    return breadCrumbs;
+  }
+
+  getBreadCrumbs(this: RecordFactory<T>, idOrAddress: idOrAddress): idAndRecord[] | undefined {
+    if(typeof idOrAddress === "number") {
+      return this.getBreadCrumbsWithId(idOrAddress);
+    } else {
+      return this.getBreadCrumbsWithAddr(idOrAddress);
+    }
+  }
   
   /**
    * Given an address like scene:1|element:2!wh>1, get its value
@@ -648,7 +686,7 @@ export class RecordFactory<T extends RT> {
   }
 
   /** Keeps ids intact */
-  reparentDeepRecordsToAddress(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+  moveDeepRecordsToAddress(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
     const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
     const destRAndP = this.getRecordAndParent(dest);
     if(sourceRAndPArray === undefined || destRAndP === undefined) return false;
@@ -708,7 +746,7 @@ export class RecordFactory<T extends RT> {
     return {nodes};
   }
 
-  pasteSelectionFromClipboard(this: RecordFactory<T>, parentIdOrAddr: idOrAddress, clipboardData: ClipboardData, positionInPlace?: number) {
+  pasteFromClipboard(this: RecordFactory<T>, parentIdOrAddr: idOrAddress, clipboardData: ClipboardData, positionInPlace?: number) {
     const parentRecord = this.getDeepRecord(parentIdOrAddr);
     if(parentRecord !== undefined) {
       const parentRF = new RecordFactory(parentRecord);
