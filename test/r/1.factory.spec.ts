@@ -21,6 +21,15 @@ describe ("r RecordFactory tests", () => {
     expect(r.record(projectJson).getName()).to.be.equal(projectJson.name);
   });
 
+  it ("should change record name of type for a project", () => {
+    const projectF = r.record(projectJson);
+    projectF.changeRecordNameOfType(RT.variable, 1684391763659);
+    projectF.changeRecordNameOfType(RT.variable, 1684391315311, "Variable Name Update");
+    const recordMapOfTypeVar = projectF.getRecordMapOfType(RT.variable);
+    expect(recordMapOfTypeVar["1684391763659"].name).to.be.equal(recordTypeDefinitions[RT.variable].defaultName);
+    expect(recordMapOfTypeVar["1684391315311"].name).to.be.equal("Variable Name Update");
+  });
+
   it ("should get project props", () => {
     const props = r.record(projectJson).getProps();
     expect(props.length).to.be.equal(Object.keys(projectJson.props).length);
@@ -93,8 +102,103 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get deep record map for a project", () => {
+    expect(Object.keys(r.record(projectJson).getDeepRecordMap()).length).to.be.equal(10);
+  });
+
+  it ("should get record of type for a project", () => {
+    const record = r.record(projectJson).getRecordOfType(RT.scene, 1684325255018);
+    expect(record).to.not.be.undefined;
+    expect(record?.type).to.be.equal("scene");
+  });
+
+  it ("should get record for a project", () => {
+    const record = r.record(projectJson).getRecord(1684391315311);
+    expect(record).to.not.be.undefined;
+    expect(record?.type).to.be.equal(RT.variable);
+  });
+
+  it ("should get a deep record for a project", () => {
+    const record = r.record(projectJson).getDeepRecord(1684392104132);
+    expect(record).to.not.be.undefined;
+    expect(record?.type).to.be.equal(RT.element);
+  });
+
+  it ("should get sorted record entries of type for a project", () => {
+    const sortedRecordEntries = r.record(projectJson).getSortedRecordEntriesOfType(RT.variable);
+    for (let i = 0; i < sortedRecordEntries.length - 1; i++) {
+      expect(sortedRecordEntries[i][1].order).to.be.lessThan(sortedRecordEntries[i+1][1].order as number);
+    }
+  });
+
+  it ("should get sorted ids of type for a project", () => {
     const projectF = r.record(projectJson);
-    const deepRecordMap = projectF.getDeepRecordMap();
-    console.log("=============> deep record map: ", deepRecordMap);
+    const sortedIds = projectF.getSortedRecordIdsOfType(RT.scene);
+    for (let i = 0; i < sortedIds.length - 1; i++) {
+      expect(projectF.getRecord(sortedIds[i])?.order).to.be.lessThan(projectF.getRecord(sortedIds[i+1])?.order as number);
+    }
+  });
+
+  it ("should get sorted records of type for a project", () => {
+    const sortedRecords = r.record(projectJson).getSortedRecordsOfType(RT.variable);
+    for (let i = 0; i < sortedRecords.length - 1; i++) {
+      expect(sortedRecords[i].order).to.be.lessThan(sortedRecords[i+1].order as number);
+    }
+  });
+
+  it ("should get address of a subnode for a project", () => {
+    const projectF = r.record(projectJson);
+    const address = projectF.getAddress({ id: 1684405505170 });
+    const addressWithType = projectF.getAddress({ id: 1684405505170, type: RT.scene });
+    const addressWithSelfAddress = projectF.getAddress({ id: 1684405505170, selfAddr: "project" });
+    const addressWithProperty = projectF.getAddress({ id: 1684405505170, property: rtp.scene.scene_allow_zooming });
+    const addressWithPropertyAndIndex = projectF.getAddress({ id: 1684405505170, property: rtp.scene.scene_allow_zooming, index: 2 });
+    const addressWithEverything = projectF.getAddress({ id: 1684405505170, type: RT.scene, selfAddr: "project", property: rtp.scene.scene_allow_zooming, index: 2 });
+    expect(address).to.be.equal("scene:1684405505170");
+    expect(addressWithType).to.be.equal("scene:1684405505170");
+    expect(addressWithSelfAddress).to.be.equal("project|scene:1684405505170");
+    expect(addressWithProperty).to.be.equal("scene:1684405505170!scene_allow_zooming");
+    expect(addressWithPropertyAndIndex).to.be.equal("scene:1684405505170!scene_allow_zooming>2");
+    expect(addressWithEverything).to.be.equal("project|scene:1684405505170!scene_allow_zooming>2");
+  });
+
+  it ("should get record and parent with id for a project", () => {
+    const rpid1 = r.record(projectJson).getRecordAndParentWithId(1684391763659);
+    expect(rpid1?.p?.type).to.be.equal(RT.project);
+    expect(rpid1?.r.type).to.be.equal(RT.variable);
+    expect(rpid1?.id).to.be.equal(1684391763659);
+
+    const rpid2 = r.record(projectJson).getRecordAndParentWithId(1684404927844);
+    expect(rpid2?.p?.type).to.be.equal(RT.scene);
+    expect(rpid2?.r.type).to.be.equal(RT.element);
+    expect(rpid2?.id).to.be.equal(1684404927844);
+  });
+
+  it ("should get record and parent at address for a project", () => {
+    const rpid = r.record(projectJson).getRecordAndParentAtAddress("scene:1684325255018|element:1684404941443");
+    expect(rpid?.p?.type).to.be.equal(RT.scene);
+    expect(rpid?.r.type).to.be.equal(RT.element);
+    expect(rpid?.r.props.element_type).to.be.equal("pano_image");
+    expect(rpid?.id).to.be.equal(1684404941443);
+  });
+
+  it ("should get property at address for a project", () => {
+    const projectF = r.record(projectJson);
+    expect(projectF.getPropertyAtAddress("scene:1684325255018|element:1684404941443!hidden")).to.be.equal(false);
+    expect(projectF.getPropertyAtAddress("variable:1684391763659!var_type")).to.be.equal("string");
+  });
+
+  it ("should update property at address for a project", () => {
+    const projectF = r.record(projectJson);
+    projectF.updatePropertyAtAddress("scene:1684325255018|element:1684392104132!wireframe", true);
+    projectF.updatePropertyAtAddress("variable:1684391315311!var_default", 8);
+    expect(projectF.getPropertyAtAddress("scene:1684325255018|element:1684392104132!wireframe")).to.be.equal(true);
+    expect(projectF.getPropertyAtAddress("variable:1684391315311!var_default")).to.be.equal(8);
+  });
+
+  it ("should change deep record id for a project", () => {
+    const projectF = r.record(projectJson);
+    projectF.changeDeepRecordId(1684404927844);
+    const recordMap = projectF.getDeepRecordMap();
+    console.log("=============> ", recordMap);
   });
 });
