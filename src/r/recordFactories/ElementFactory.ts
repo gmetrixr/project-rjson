@@ -24,6 +24,8 @@ export class ElementFactory extends RecordFactory<RT.element> {
   getElementType(this: ElementFactory): ElementType {
     return this.elementType;
   }
+
+  /** Override so that updating element_type prop updates this instance's elementType property */
   set(this: ElementFactory, property: RTP[RT.element], value: unknown): ElementFactory {
     super.set(property, value);
     if(property === rtp.element.element_type && (typeof value === "string") && isElementType(value)) {
@@ -77,7 +79,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     }
     //Get file ids from item properties
     for(const sourceProp of en.sourcePropertyNames.itemProperties) {
-      for(const item of this.getRecords(RT.item)) {
+      for(const item of Object.values(this.getRecordMapOfType(RT.item))) {
         const itemProps = Object.keys(item.props);
         if(itemProps.includes(sourceProp)) { //Not checking for image_source, as it isn't used in items
           fileIds.push(...ElementUtils.getFileIdsFromValue(item.props[sourceProp]));
@@ -115,7 +117,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     }
     //Get file ids from item properties
     for(const sourceProp of en.sourcePropertyNames.itemProperties) {
-      for(const item of this.getRecords(RT.item)) {
+      for(const item of Object.values(this.getRecordMapOfType(RT.item))) {
         const itemProps = Object.keys(item.props);
         if(itemProps.includes(sourceProp)) { //Not checking for image_source, as it isn't used in items
           const currentValue = item.props[sourceProp];
@@ -133,7 +135,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     const newElement = createRecord<RT.element>(RT.element, defaultName);
     newElement.props = ElementUtils.getElementTypeDefaults(elementType);
     newElement.props.element_type = elementType;
-    this.addRecord<RT.element>(newElement, position);
+    this.addRecord<RT.element>({record: newElement, position});
     return newElement;
   }
 }

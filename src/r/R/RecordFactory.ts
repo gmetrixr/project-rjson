@@ -561,15 +561,20 @@ export class RecordFactory<T extends RT> {
    * And all sub-ids in this new record. 
    * And make sure none overlap.
    */
-  addRecord<N extends RT>(this: RecordFactory<T>, {record, position, id, keepSubRecordIds}: {
-    record: RecordNode<N>, position?: number, id?: number, keepSubRecordIds?: boolean
+  addRecord<N extends RT>(this: RecordFactory<T>, {record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+    record: RecordNode<N>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): {id: number, record: RecordNode<N>} | undefined {
+    if(parentIdOrAddress !== undefined) {
+      const parentRecord = this.getDeepRecord(parentIdOrAddress);
+      if(parentRecord === undefined) return undefined;
+      return new RecordFactory(parentRecord).addRecord({record, position, id, dontCycleSubRecordIds});
+    }
     const type = <RT> record.type;
     if(!this.initializeRecordMap(type)) return undefined;
     const recordMap = this.getRecordMapOfType(type);
     const recordsArray = this.getSortedRecordsOfType(type);
     record.order = this.getNewOrders(recordsArray, 1, position)[0];
-    if(!keepSubRecordIds) {
+    if(!dontCycleSubRecordIds) {
       //Cycle all ids in the new record being added so that there are no id clashes
       new RecordFactory(record).cycleAllSubRecordIds();
     }
@@ -709,7 +714,8 @@ export class RecordFactory<T extends RT> {
         record: idAndRecord.record, 
         id: idAndRecord.id, 
         position: destPosition, 
-        keepSubRecordIds: true
+        dontCycleSubRecordIds: true,
+        parentIdOrAddress: dest,
       })
     }
     return true;
@@ -727,6 +733,7 @@ export class RecordFactory<T extends RT> {
       this.addRecord({
         record: rAndP.r,
         position: destPosition,
+        parentIdOrAddress: dest,
       })
     }
     return true;
