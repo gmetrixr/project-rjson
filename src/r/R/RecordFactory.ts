@@ -182,6 +182,7 @@ export class RecordFactory<T extends RT> {
   getDeepRecordMap(this: RecordFactory<T>): RecordMapGeneric {
     const recordMap: RecordMapGeneric = {};
     const children = this.getRecordMap();
+    Object.assign(recordMap, children);
     for(const record of Object.values(children)) {
       const childSubRecords = new RecordFactory(record).getDeepRecordMap();
       Object.assign(recordMap, childSubRecords);

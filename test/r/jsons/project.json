@@ -1,48 +1,42 @@
 {
-    "type": "project",
-    "name": "Project 1",
-    "order": 1,
-    "props": {
-        "show_menu": false
+  "type": "project",
+  "name": "Project 1",
+  "order": 1,
+  "props": {
+    "show_menu": false
+  },
+  "records": {
+    "scene": {
+      "1684325255018": {
+        "type": "scene",
+        "name": "Scene 1",
+        "order": 1,
+        "props": {},
+        "records": {
+          "element": {
+            "1684392104132": {
+              "type": "element",
+              "name": "Cube",
+              "order": 1,
+              "props": {}
+            }
+          }  
+        }      
+      }
     },
-    "records": {
-        "scene": {
-            "1684325255018": {
-                "type": "scene",
-                "name": "Scene 1",
-                "order": 1,
-                "props": {
-                    
-                },
-                "element": {
-                    "1684392104132": {
-                        "type": "element",
-                        "name": "Cube",
-                        "order": 1,
-                        "props": {
-
-                        }
-                    }
-                }
-            }
-        },
-        "variable": {
-            "1684391315311": {
-                "type": "variable",
-                "name": "Score variable",
-                "order": 1,
-                "props": {
-
-                }
-            },
-            "1684391763659": {
-                "type": "variable",
-                "name": "Media Upload variable",
-                "order": 2,
-                "props": {
-
-                }
-            }
-        }
+    "variable": {
+      "1684391315311": {
+        "type": "variable",
+        "name": "Score variable",
+        "order": 1,
+        "props": {}
+      },
+      "1684391763659": {
+        "type": "variable",
+        "name": "Media Upload variable",
+        "order": 2,
+        "props": {}
+      }
     }
+  }
 }
