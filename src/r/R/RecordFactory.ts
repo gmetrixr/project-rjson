@@ -6,8 +6,8 @@ const { deepClone, generateId } = jsUtils;
 const { getSafeAndUniqueRecordName } = stringUtils;
 
 type PredicateType<N extends RT> = (value: RecordNode<N>, index?: number, array?: RecordNode<N>[]) => boolean;
-/** p: parent RecordNode, c: child RecordNode, cid: child id */
-type rAndP = {p: RecordNode<RT> | undefined, c: RecordNode<RT>, cid: number};
+/** id: child id, r: child RecordNode, p: parent RecordNode */
+type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> | undefined };
 type idAndRecord = {id: number, record: RecordNode<RT>};
 
 /**
@@ -38,7 +38,9 @@ type idAndRecord = {id: number, record: RecordNode<RT>};
  * }
  * 
  * json -> return full json
+ * NAME
  * getName -> name
+ * changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
  * PROPS
  * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
  * get/set/reset/delete/getValueOrDefault/getDefault -> prop's values
@@ -52,11 +54,10 @@ type idAndRecord = {id: number, record: RecordNode<RT>};
  * SORTED RECORDS
  * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType -> Sorting only 
  *    makes sense in a single type (eg: you wont sort variables & scenes)
- * changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
  * getRecordAndParentWithId -> Find a record and its parent given any record id
- * getRecordAndParentAtAddress / getRecordAtAddress / getPropertyAtAddress / updatePropertyAtAddress
+ * getRecordAndParentAtAddress / getPropertyAtAddress / updatePropertyAtAddress
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
  */
@@ -287,7 +288,7 @@ export class RecordFactory<T extends RT> {
         //In case this is the record whose id is to be changed, change it
         if(id === Number(key)) {
           //Found it!!! return the cAndP object
-          const rAndP: rAndP = {p: this._json, c: recordMap[id], cid: id};
+          const rAndP: rAndP = {p: this._json, r: recordMap[id], id: id};
           return rAndP;
         }
         const subRecord = new RecordFactory(value).getRecordAndParentWithId(id);
@@ -340,8 +341,8 @@ export class RecordFactory<T extends RT> {
     if(recordsArray.length === 0 || this._json.records === undefined) {
       return undefined;
     }
-    let parentRF = this;
-    let childRF = this;
+    let parentRF: RecordFactory<RT> | undefined = undefined;
+    let childRF: RecordFactory<RT> = this;
     let childId = 0;
     for (let i = 0; i < recordsArray.length; i++) {
       const [type, id] = recordsArray[i].split(":"); // [scene, 1]
@@ -351,21 +352,17 @@ export class RecordFactory<T extends RT> {
       childRF = new RecordFactory(childR);
       childId = Number(id);
     }
-    const cAndP: rAndP = { c: childRF._json, p: parentRF._json, cid: childId };
-    return cAndP;
+    const rAndP: rAndP = { id: childId, r: childRF._json, p: parentRF?._json, };
+    return rAndP;
   }
   
-  /** Uses getChildAndParentAtAddress to return record at an address */
-  getRecordAtAddress(this: RecordFactory<T>, addr: string): RecordNode<RT> | undefined {
-    return this.getRecordAndParentAtAddress(addr)?.c;
-  }
-
   /**
    * Given an address like scene:1|element:2!wh>1, get its value
    * If it doesn't find a value, return undefined
    */
   getPropertyAtAddress(this: RecordFactory<T>, addr: string): unknown {
-    const recordAtAddress = this.getRecordAtAddress(addr);
+    const recordAtAddress = this.getRecordAndParentAtAddress(addr)?.r;
+    if(!recordAtAddress) return undefined;
     // find the matching property value string and then remove the ! from the lead
     const propertyAddr = addr.match(/!.*/)?.[0]?.replace("!", ""); // ex: !scene_yaw_correction
     if(!recordAtAddress || !propertyAddr) return undefined;
@@ -381,7 +378,8 @@ export class RecordFactory<T extends RT> {
    * 2. scene:1|element:2!wh>1
    */
   updatePropertyAtAddress(this: RecordFactory<T>, addr: string, value: unknown): boolean {
-    const recordAtAddress = this.getRecordAtAddress(addr);
+    const recordAtAddress = this.getRecordAndParentAtAddress(addr)?.r;
+    if(!recordAtAddress) return false;
     const propertyAddr = addr.match(/!.*/)?.[0]?.replace("!", ""); // ex: !scene_yaw_correction
     if(!recordAtAddress || !propertyAddr) return false;
     const [property, index] = propertyAddr.split(">");
@@ -676,7 +674,7 @@ export class RecordFactory<T extends RT> {
   copySelectionToClipboard(this: RecordFactory<T>, selectedAddresses: string[]): ClipboardR {
     const nodes: RecordNode<RT>[] = [];
     for(const addr of selectedAddresses) {
-      const node = this.getRecordAtAddress(addr);
+      const node = this.getRecordAndParentAtAddress(addr)?.r;
       if(node !== undefined)
       nodes.push(node);
     }
@@ -684,7 +682,7 @@ export class RecordFactory<T extends RT> {
   }
 
   pasteSelectionFromClipboard(this: RecordFactory<T>, parentAddress: string, clipboardEntry: ClipboardR, positionInPlace: number) {
-    const parentNode = this.getRecordAtAddress(parentAddress);
+    const parentNode = this.getRecordAndParentAtAddress(parentAddress)?.r;
     if(parentNode !== undefined) {
       const parentF = new RecordFactory(parentNode);
       for(const node of clipboardEntry.nodes) {
@@ -697,14 +695,14 @@ export class RecordFactory<T extends RT> {
    * Keeps ids intact
    */
   moveDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getRecordAtAddress(destParentAddr);
+    const destParentRecord = this.getRecordAndParentAtAddress(destParentAddr)?.r;
     if(destParentRecord === undefined) return;
 
     const cAndPArray = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr));
     const deletedRecordEntries: {id: number, record: RecordNode<RT>}[] = [];
     for(const sourceCAndP of cAndPArray) {
       if (sourceCAndP?.p !== undefined) {
-        const deletedRecordEntry = new RecordFactory(sourceCAndP?.p).deleteRecord(sourceCAndP.cid);
+        const deletedRecordEntry = new RecordFactory(sourceCAndP?.p).deleteRecord(sourceCAndP.id);
         if(deletedRecordEntry !== undefined) {
           deletedRecordEntries.push(deletedRecordEntry)
         }
@@ -725,10 +723,10 @@ export class RecordFactory<T extends RT> {
    * Created new ids of the records created
    */
   copyDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getRecordAtAddress(destParentAddr);
+    const destParentRecord = this.getRecordAndParentAtAddress(destParentAddr)?.r;
     if(destParentRecord === undefined) return;
 
-    const copiedRecords = sourceRecordAddresses.map(addr => this.getRecordAtAddress(addr));
+    const copiedRecords = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr)?.r);
     const parentF = new RecordFactory(destParentRecord);
     for(const copiedRecord of copiedRecords.reverse()) {
       if(copiedRecord !== undefined) {
