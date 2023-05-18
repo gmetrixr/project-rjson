@@ -43,7 +43,6 @@ export interface ClipboardData {
  * 
  * json -> return full json
  * getName -> name
- * private changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
  * 
  * PROPS
  * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
@@ -63,16 +62,16 @@ export interface ClipboardData {
  * 
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
- * private getRecordAndParentWithId / getRecordAndParentWithAddress
+ * $ private getRecordAndParentWithId / getRecordAndParentWithAddress
  * getRecordAndParent -> Find record and its parent with either id or address
- * private getBreadCrumbsWithAddress / getBreadCrumbsWithId
+ * $ private getBreadCrumbsWithAddress / getBreadCrumbsWithId
  * getBreadCrumbs -> returns an array of all sub-records leading to the given idOrAddress
  * getPropertyAtAddress / updatePropertyAtAddress
  * 
  * RECORD RELATED
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
- * private getNewOrders / initializeRecordMap
+ * $ private getNewOrders / initializeRecordMap
  * addRecord / addBlankRecord
  * duplicateRecord / deleteRecord / changeRecordName
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
