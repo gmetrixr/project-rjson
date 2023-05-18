@@ -41,7 +41,7 @@ type idOrAddress = number | string;
  * json -> return full json
  * NAME
  * getName -> name
- * changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
+ * private changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
  * PROPS
  * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
  * get/set/reset/delete/getValueOrDefault/getDefault -> prop's values
@@ -60,9 +60,11 @@ type idOrAddress = number | string;
  * private getRecordAndParentWithId / getRecordAndParentAtAddress -> Find a record and its parent
  * getPropertyAtAddress / updatePropertyAtAddress
  * getRecordAndParent -> Find record with either id or address
+ * RECORD RELATED
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
- * duplicateDeepRecord / deleteDeepRecord
+ * addRecord / duplicateRecord
+ * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
  */
 export class RecordFactory<T extends RT> {
   protected readonly _json: RecordNode<T>;
@@ -181,6 +183,7 @@ export class RecordFactory<T extends RT> {
   /**
    * A flattened record map of all ids and records in a tree, of all types
    * If there are two records with the same id, this function will fail
+   * Uses DFS
    */
   getDeepRecordMap(this: RecordFactory<T>): RecordMapGeneric {
     const recordMap: RecordMapGeneric = {};
@@ -262,7 +265,7 @@ export class RecordFactory<T extends RT> {
     return entriesArray.map(nodeEntry => nodeEntry[1]);
   }
 
-  changeRecordNameOfType<N extends RT>(this: RecordFactory<T>, type: N, id: number, newName?: string): RecordNode<N> | undefined {
+  private changeRecordNameOfType<N extends RT>(this: RecordFactory<T>, type: N, id: number, newName?: string): RecordNode<N> | undefined {
     const record = this.getRecordOfType(type, id);
     if (record === undefined) {
       return undefined;
@@ -412,23 +415,22 @@ export class RecordFactory<T extends RT> {
   changeDeepRecordId(this: RecordFactory<T>, id: number, newId?: number): number {
     if (newId === undefined) newId = generateIdV2();
 
-    for (const type of this.getRecordTypes()) {
-      const recordMap = this.getRecordMapOfType(type);
-      for(const [key, value] of Object.entries(recordMap)) {
-        //In case this is the record whose id is to be changed, change it
-        if(id === Number(key)) {
-          recordMap[newId] = recordMap[id];
-          delete recordMap[id];
-        }
-        //Change all property values that refer to the older id also
-        for(const prop of this.getProps()) {
-          if(this._json.props[(prop as RTP[T])] === id) {
-            this._json.props[(prop as RTP[T])] = newId;
-          }
-        }
-        //Go deeper and change all references in sub-records also (and check if the id exists deeper also)
-        new RecordFactory(value).changeDeepRecordId(id, newId);
+    //Change all property values that refer to the older id
+    for(const prop of this.getProps()) {
+      if(this._json.props[(prop as RTP[T])] === id) {
+        this._json.props[(prop as RTP[T])] = newId;
       }
+    }
+    
+    const recordMap = this.getRecordMap();
+    for(const [key, value] of Object.entries(recordMap)) {
+      //In case this child is the record whose id is to be changed, change it
+      if(id === Number(key)) {
+        recordMap[newId] = recordMap[id];
+        delete recordMap[id];
+      }
+      //Go deeper and change all references in sub-records also (and check if the id exists deeper also)
+      new RecordFactory(value).changeDeepRecordId(id, newId);
     }
     return newId;
   }
@@ -448,12 +450,6 @@ export class RecordFactory<T extends RT> {
     } else {
       return this.getRecordAndParentAtAddress(idOrAddress);
     }
-  }
-
-  changeDeepRecordName<N extends RT>(this: RecordFactory<T>, idOrAddress: idOrAddress, newName?: string): RecordNode<N> | undefined {
-    const rAndP = this.getRecordAndParent(idOrAddress);
-    if(rAndP === undefined || rAndP.r === undefined) return undefined;
-    return new RecordFactory(rAndP.r).changeRecordNameOfType(rAndP.r.type as RT, rAndP.id, newName);
   }
 
   addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number):{id: number, record: RecordNode<N>} | undefined {
@@ -568,6 +564,12 @@ export class RecordFactory<T extends RT> {
     return {id: rAndP.id, record: recordToDelete};
   }
 
+  changeDeepRecordName<N extends RT>(this: RecordFactory<T>, idOrAddress: idOrAddress, newName?: string): RecordNode<N> | undefined {
+    const rAndP = this.getRecordAndParent(idOrAddress);
+    if(rAndP === undefined || rAndP.r === undefined) return undefined;
+    return new RecordFactory(rAndP.p).changeRecordNameOfType(rAndP.r.type as RT, rAndP.id, newName);
+  }
+
   /**
    * Used in drag-drop operations
    * When you remove the ids, you also impact the position. So first come up with the new order numbers
@@ -621,56 +623,6 @@ export class RecordFactory<T extends RT> {
   }
 
   /**
-   * Documentation for filter predicate: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#description
-   * //TODO: Update logic to use getDeepRecordMap and run predicate on each of those
-   */
-  getAllDeepChildrenIdsWithFilter<N extends RT>(this: RecordFactory<T>, type: N, predicate: PredicateType<N>): number[] {
-    const idsToReturn: number[] = [];
-    if (this._json.records === undefined) return idsToReturn;
-    for (const recordType of (Object.keys(this._json.records) as RT[])) {
-      if (recordType === type) {
-        //The order needs to be same as above. So not using getRecords()
-        const records = Object.values(this.getRecordMapOfType(type));
-        const ids = Object.keys(this.getRecordMapOfType(type));
-        for(let i = 0; i < records.length; i++) {
-          if(predicate(records[i], i, records)) {
-            idsToReturn.push(Number(ids[i]));
-          }
-        }
-      }
-      if (!isTypeSubChildOf(this._type, type)) {
-        continue;
-      }
-      for (const record of this.getSortedRecordsOfType(recordType)) { //Go a level deeper if available
-        const recordDeepChildrenIds = new RecordFactory(record).getAllDeepChildrenIdsWithFilter(type, predicate);
-        idsToReturn.push(...recordDeepChildrenIds);
-      }
-    }
-    return idsToReturn;
-  }
-
-  /**
-   * //TODO: Update logic to use getDeepRecordMap and run predicate on each of those
-   */
-  getAllDeepChildrenWithFilter<N extends RT>(this: RecordFactory<T>, type: N, predicate: PredicateType<N>): RecordNode<N>[] {
-    const recordsToReturn: RecordNode<N>[] = [];
-    if (this._json.records === undefined) return recordsToReturn;
-    for (const recordType of (Object.keys(this._json.records) as RT[])) {
-      if (recordType === type) {
-        recordsToReturn.push(...this.getSortedRecordsOfType(recordType).filter(predicate));
-      }
-      if (!isTypeSubChildOf(this._type, type)) {
-        continue;
-      }
-      for (const record of this.getSortedRecordsOfType(recordType)) {
-        const recordDeepChildren = new RecordFactory(record).getAllDeepChildrenWithFilter(type, predicate);
-        recordsToReturn.push(...recordDeepChildren);
-      }
-    }
-    return recordsToReturn;
-  }
-
-  /**
    * TODO
    * Add moveRecords in RecordFactory. ProjectFactory will override this to add rules logic.
    * moveRecords(selectIds: [{id: , path: [recordId, parentRecordId, parent2RecordId....]}], destiation: {id: ,path: []}, destinationPosition)
@@ -711,7 +663,7 @@ export class RecordFactory<T extends RT> {
     const deletedRecordEntries: {id: number, record: RecordNode<RT>}[] = [];
     for(const sourceRAndP of rAndPArray) {
       if (sourceRAndP?.p !== undefined) {
-        const deletedRecordEntry = new RecordFactory(sourceRAndP?.p).deleteRecord(sourceRAndP.id);
+        const deletedRecordEntry = new RecordFactory(sourceRAndP?.p).deleteDeepRecord(sourceRAndP.id);
         if(deletedRecordEntry !== undefined) {
           deletedRecordEntries.push(deletedRecordEntry)
         }
@@ -923,36 +875,6 @@ export class RecordFactory<T extends RT> {
   //   return recordsToReturn;
   // }
 
-  // /**
-  //  * Get address for a deep record
-  //  */
-  // getDeepRecordAddress(this: RecordFactory<T>, { id, type, parentAddr }: { id: number, type: RT, parentAddr?: string }): string {
-  //   const breadcrumbs = this.getBreadcrumbs(id, type);
-  //   let address = "";
-  //   for (let i = 0; i < breadcrumbs.length; i++) {
-  //     const b = breadcrumbs[i];
-  //     address += `${b.type}:${b.id}`;
-  //     // if this isnt the last entry, then append `|`
-  //     if (i !== breadcrumbs.length - 1) {
-  //       address += "|";
-  //     }
-  //   }
-  //   return parentAddr ? `${parentAddr}|${address}` : address;
-  // }
-
-  // /**
-  //  * Get record + parent address for a given record
-  //  */
-  // getDeepChildAndParentAddress(this: RecordFactory<T>, id: number, type: RT): string[] | undefined {
-  //   const deepChildAndParent = this.getDeepChildAndParent(type, id);
-  //   if(deepChildAndParent === undefined) {
-  //     return undefined;
-  //   }
-  //   const recordAddress = this.getDeepRecordAddress({ id, type });
-  //   const parentAddress = this.getDeepRecordAddress({ id: deepChildAndParent.p.id, type: deepChildAndParent.p.type as RT });
-
-  //   return [recordAddress, parentAddress];
-  // }
 }
 
 export class RecordUtils {

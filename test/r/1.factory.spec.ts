@@ -23,8 +23,8 @@ describe ("r RecordFactory tests", () => {
 
   it ("should change record name of type for a project", () => {
     const projectF = r.record(projectJson);
-    projectF.changeRecordNameOfType(RT.variable, 1684391763659);
-    projectF.changeRecordNameOfType(RT.variable, 1684391315311, "Variable Name Update");
+    projectF.changeDeepRecordName(1684391763659);
+    projectF.changeDeepRecordName(1684391315311, "Variable Name Update");
     const recordMapOfTypeVar = projectF.getRecordMapOfType(RT.variable);
     expect(recordMapOfTypeVar["1684391763659"].name).to.be.equal(recordTypeDefinitions[RT.variable].defaultName);
     expect(recordMapOfTypeVar["1684391315311"].name).to.be.equal("Variable Name Update");
@@ -199,6 +199,5 @@ describe ("r RecordFactory tests", () => {
     const projectF = r.record(projectJson);
     projectF.changeDeepRecordId(1684404927844);
     const recordMap = projectF.getDeepRecordMap();
-    console.log("=============> ", recordMap);
   });
 });
