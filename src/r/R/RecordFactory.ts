@@ -1,16 +1,19 @@
-import { RecordNode, RecordMap, createRecord, ClipboardR, RecordMapGeneric } from "./RecordNode";
+import { RecordNode, RecordMap, createRecord, RecordMapGeneric } from "./RecordNode";
 import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
 
 const { deepClone, generateIdV2 } = jsUtils;
 const { getSafeAndUniqueRecordName } = stringUtils;
 
-type PredicateType<N extends RT> = (value: RecordNode<N>, index?: number, array?: RecordNode<N>[]) => boolean;
 /** id: child id, r: child RecordNode, p: parent RecordNode */
-type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> };
-type idAndRecord = {id: number, record: RecordNode<RT>};
-type idOrAddress = number | string;
-
+export type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> };
+export type idAndRecord = {id: number, record: RecordNode<RT>};
+export type idOrAddress = number | string;
+/** clipboard contains the strigified version of this */
+export interface ClipboardData {
+  // parentType: RT, Might need to get this back
+  nodes: idAndRecord[]
+}
 /**
  * A convenient Factory class to maninpulate a RecordNode object of any type
  * This class can be extended to provide any recordType specific funcitonality
@@ -366,6 +369,30 @@ export class RecordFactory<T extends RT> {
     const rAndP: rAndP = { id: childId, r: childRF._json, p: parentRF?._json, };
     return rAndP;
   }
+
+  // private getBreadCrumbsFromAddress(this: RecordFactory<T>, addr: string): idAndRecord[] | undefined {
+  //   // Sanitize and remove and unwanted cases
+  //   // Replace everything after a ! with a blank string
+  //   const recordsArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
+  //   if(recordsArray.length === 0 || this._json.records === undefined) {
+  //     return undefined;
+  //   }
+  //   let parentRF: RecordFactory<RT> = this;
+  //   let childRF: RecordFactory<RT> = this;
+  //   let childId = 0;
+  //   const breadCrumbs: idAndRecord[] = []
+  //   for (let i = 0; i < recordsArray.length; i++) {
+  //     parentRF = childRF;
+  //     const [type, id] = recordsArray[i].split(":"); // [scene, 1]
+  //     const childR = parentRF.getRecordOfType(type as RT, Number(id));
+  //     if(childR === undefined) return undefined;
+  //     childRF = new RecordFactory(childR);
+  //     childId = Number(id);
+  //     breadCrumbs.push({id: childId, record: childR});
+  //   }
+  //   const rAndP: rAndP = { id: childId, r: childRF._json, p: parentRF?._json, };
+  //   return rAndP;
+  // }
   
   /**
    * Given an address like scene:1|element:2!wh>1, get its value
@@ -435,8 +462,8 @@ export class RecordFactory<T extends RT> {
     return newId;
   }
 
-  /** Change all record ids (of sub-records) in this RecordNode */
-  cycleAllRecordIds(this: RecordFactory<T>): void {
+  /** Change all sub-record ids (of sub-records) in this RecordNode */
+  cycleAllSubRecordIds(this: RecordFactory<T>): void {
     //Get all record ids
     const allRecordsMap = this.getDeepRecordMap();
     for(const key of Object.keys(allRecordsMap)) {
@@ -454,32 +481,45 @@ export class RecordFactory<T extends RT> {
 
   addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number):{id: number, record: RecordNode<N>} | undefined {
     const record = createRecord(type);
-    return this.addRecord(record, position);
+    return this.addRecord({record, position});
   }
   
   /**
    * Adding ".order" key to the new entry - even if the record already had a .order, we will overwrite it
    * potential value of respective orders: [4, 4.5, 4.75, 5, 8]
+   * newRecordsCount: the number of new records to enter
    * meaning of "position" - the [gap] to insert into: [0] 0, [1] 1, [2] 2, [3] 3, [4] 4 [5]
    * if this is the only record, order = 1
    * if its inserted at [0], order = order of the first entry - 1
    * if its inserted at [5], order = order of the last entry + 1 (default, when position is undefined)
    * if its inserted at [x], order = ( order of [x - 1] entry + order of [x] entry ) / 2 
    */
-  private getNewOrder<N extends RT>(this: RecordFactory<T>, sortedRecords: RecordNode<T>[], position?: number): number {
-    let order = 0;
-    const minOrder = sortedRecords[0]?.order ?? 0;
-    const maxOrder = sortedRecords[sortedRecords.length - 1]?.order ?? 0;
-    if(sortedRecords.length === 0) {
-      order = 1;
+  private getNewOrder<N extends RT>(this: RecordFactory<T>, sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
+    let order = [];
+    let minOrder = sortedRecords[0]?.order ?? 0;
+    let maxOrder = sortedRecords[sortedRecords.length - 1]?.order ?? 0;
+    if(sortedRecords.length === 0) { //return [1, 2, 3 ...]
+      for(let i=0; i<newRecordsCount; i++) {
+        order[i] = i+1;
+      }
     } else if(position === 0) {
-      order = minOrder - 1;
+      for(let i=0; i<newRecordsCount; i++) {
+        minOrder = minOrder-1;
+        order[i] = minOrder;
+      }
     } else if(position === sortedRecords.length || position === undefined) {
-      order = maxOrder + 1;
+      for(let i=0; i<newRecordsCount; i++) {
+        maxOrder = maxOrder+1;
+        order[i] = maxOrder;
+      }
     } else {
       const prevOrder = sortedRecords[position - 1].order ?? 0;
       const nextOrder = sortedRecords[position].order ?? 0;
-      order = (prevOrder + nextOrder) / 2;
+      let segment = 0;
+      for(let i=0; i<newRecordsCount; i++) {
+        segment += 1;
+        order[i] = prevOrder + (nextOrder - prevOrder) / (newRecordsCount + 1) * segment;
+      }
     }
     return order;
   }
@@ -514,44 +554,59 @@ export class RecordFactory<T extends RT> {
    * And all sub-ids in this new record. 
    * And make sure none overlap.
    */
-  addRecord<N extends RT>(this: RecordFactory<T>, record: RecordNode<N>, position?: number): {id: number, record: RecordNode<N>} | undefined {
+  addRecord<N extends RT>(this: RecordFactory<T>, {record, position, id, keepSubRecordIds}: {
+    record: RecordNode<N>, position?: number, id?: number, keepSubRecordIds?: boolean
+  }): {id: number, record: RecordNode<N>} | undefined {
     const type = <RT> record.type;
     if(!this.initializeRecordMap(type)) return undefined;
     const recordMap = this.getRecordMapOfType(type);
     const recordsArray = this.getSortedRecordsOfType(type);
-    record.order = this.getNewOrder(recordsArray, position);
-    //Cycle all ids in the new record being added so that there are no id clashes
-    new RecordFactory(record).cycleAllRecordIds();
+    record.order = this.getNewOrder(recordsArray, 1, position)[0];
+    if(!keepSubRecordIds) {
+      //Cycle all ids in the new record being added so that there are no id clashes
+      new RecordFactory(record).cycleAllSubRecordIds();
+    }
 
-    const id = generateIdV2();
+    if(id === undefined) {
+      id = generateIdV2();
+    }
     recordMap[id] = record;
     //This fn make sure that the name isn't a duplicate one, and also that its given only if its required
     this.changeRecordNameOfType(type, id, record.name);
     return {id, record};
   }
 
-  duplicateRecord<N extends RT>(this: RecordFactory<T>, id: number): idAndRecord | undefined {
-    const orig = this.getRecord(id);
+  duplicateRecord<N extends RT>(this: RecordFactory<T>, type: RT, id: number): idAndRecord | undefined {
+    const orig = this.getRecordOfType(type, id);
     if (orig === undefined) return undefined;
     const clonedJson = deepClone(orig);
 
-    //get the next record
+    //get the position
     const ids = this.getSortedRecordIdsOfType(<RT> orig.type);
     const origPositionIndex = ids.indexOf(id);
 
     //addRecord makes sure that the id of the record itself isn't duplicate amongst its siblings
     //Also makes sure that the cloneJson.order is correct
-    return this.addRecord<N>(clonedJson, origPositionIndex + 1);
+    return this.addRecord<N>({record: clonedJson, position: origPositionIndex + 1});
   }
 
   duplicateDeepRecord<T>(this: RecordFactory<RT>, idOrAddress: idOrAddress): rAndP | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
-    const duplicatedIdAndRecord = new RecordFactory(rAndP.p).duplicateRecord(rAndP.id);
+    const duplicatedIdAndRecord = new RecordFactory(rAndP.p).duplicateRecord(rAndP.r.type as RT, rAndP.id);
     if(duplicatedIdAndRecord === undefined) return undefined;
     rAndP.id = duplicatedIdAndRecord?.id;
     rAndP.r = duplicatedIdAndRecord.record;
     return rAndP;
+  }
+
+  deleteRecord<T>(this: RecordFactory<RT>, type: RT, id: number): idAndRecord | undefined {
+    const recordToDelete = this.getRecordOfType(type, id);
+    if(recordToDelete === undefined) return undefined;
+
+    const recordMapOfType = this.getRecordMapOfType(type);
+    delete recordMapOfType[id];
+    return {id, record: recordToDelete};
   }
 
   deleteDeepRecord<T>(this: RecordFactory<RT>, idOrAddress: idOrAddress): idAndRecord | undefined {
@@ -584,297 +639,84 @@ export class RecordFactory<T extends RT> {
    * Initial Ord:  1,   2,   3,   4,   5,   6  ]
    * Final Ord:    1,   5.3, 3,   5.6, 5,   6  ] 
    */
-  moveRecords(this: RecordFactory<T>, type: RT, ids: number[], position: number): undefined {
-    const recordMap = this.getRecordMapOfType(type);
-    if (recordMap === undefined) { return; }
-    if (ids.length === 0) { return; }
-    const records = ids.map(id => recordMap[id]);
-    //Get the list of ids in order
-    const allIds = this.getSortedRecordIdsOfType(type);
-
-    //When you remove the ids, you also impact the position. So first come up with the new order numbers
-    //if position is the last one, keep incrementing the last order by 1
-    //if position is the first one, keep decrementing the first order by 1
-    //if position is somewhere in the middle, take the prior and next order, and divide it equally
-    if(position === allIds.length) {
-      let maxOrder = recordMap[allIds[allIds.length - 1]].order ?? 0;
-      for(const record of records) {
-        maxOrder += 1;
-        record.order = maxOrder;
-      }
-    } else if (position === 0) {
-      let minOrder = recordMap[0].order ?? 0;
-      const reversedRecords = records.reverse();
-      for(const record of reversedRecords) {
-        minOrder -= 1;
-        record.order = minOrder;
-      }
-    } else {
-      const previousRecordOrder = recordMap[allIds[position - 1]].order ?? 0;
-      const nextRecordOrder = recordMap[allIds[position]].order ?? 0;
-      let segment = 0;
-      for(const record of records) {
-        segment += 1;
-        //Previous entry : 4.1, next entry 4.5. Trying to insert 3 items at 4.2, 4.3 and 4.4
-        // 4.1 + (4.5-4.1) / 4 * segment
-        record.order = previousRecordOrder + (nextRecordOrder - previousRecordOrder) / (records.length + 1) * segment;
-      }
+  reorderRecords(this: RecordFactory<T>, type: RT, ids: number[], position: number) {
+    const sortedRecords = this.getSortedRecordsOfType(type);
+    const allOrders = this.getNewOrder(sortedRecords, ids.length, position);
+    for(let i=0; i<sortedRecords.length; i++) {
+      sortedRecords[i].order = allOrders[i];
     }
   }
 
-  /**
-   * TODO
-   * Add moveRecords in RecordFactory. ProjectFactory will override this to add rules logic.
-   * moveRecords(selectIds: [{id: , path: [recordId, parentRecordId, parent2RecordId....]}], destiation: {id: ,path: []}, destinationPosition)
-   */
+  /** Keeps ids intact */
+  reparentDeepRecordsToAddress(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+    const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
+    const destRAndP = this.getRecordAndParent(dest);
+    if(sourceRAndPArray === undefined || destRAndP === undefined) return false;
 
+    //Delete all sources:
+    const deletedIdAndRecords: idAndRecord[] = [];
+    for(const sourceRAndP of (sourceRAndPArray as rAndP[])) {
+      const parentRF = new RecordFactory(sourceRAndP.p);
+      const deletedIdAndRecord = parentRF.deleteRecord(sourceRAndP.r.type as RT, sourceRAndP.id);
+      if(deletedIdAndRecord !== undefined) {
+        deletedIdAndRecords.push(deletedIdAndRecord);
+      }
+    }
+
+    //Insert deleted records
+    //Inserted in reverse order because we keep inserting in the same position.
+    //If we don't reverse, a,b,c will get inserted into 1,2,3 as 1,2,3,c,b,a
+    for(const idAndRecord of deletedIdAndRecords.reverse()) {
+      this.addRecord({
+        record: idAndRecord.record, 
+        id: idAndRecord.id, 
+        position: destPosition, 
+        keepSubRecordIds: true
+      })
+    }
+    return true;
+  }
+
+  /** Changes ids */
+  copyDeepRecordsToAddress(this: RecordFactory<T>, source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+    const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
+    const destRAndP = this.getRecordAndParent(dest);
+    if(sourceRAndPArray === undefined || destRAndP === undefined) return false;
+
+    //Inserted in reverse order because we keep inserting in the same position.
+    //If we don't reverse, a,b,c will get inserted into 1,2,3 as 1,2,3,c,b,a
+    for(const rAndP of (sourceRAndPArray as rAndP[]).reverse()) {
+      this.addRecord({
+        record: rAndP.r,
+        position: destPosition,
+      })
+    }
+    return true;
+  }
 
   /**
    * Function to create what gets copied when you type ctrl+c
    */
-  copySelectionToClipboard(this: RecordFactory<T>, selectedAddresses: string[]): ClipboardR {
-    const nodes: RecordNode<RT>[] = [];
-    for(const addr of selectedAddresses) {
-      const node = this.getDeepRecord(addr);
-      if(node !== undefined)
-      nodes.push(node);
+  copySelectionToClipboard(this: RecordFactory<T>, selectedIdOrAddrs: idOrAddress[]): ClipboardData {
+    const nodes: idAndRecord[] = [];
+    for(const idOrAddr of selectedIdOrAddrs) {
+      const rAndP = this.getRecordAndParent(idOrAddr);
+      if(rAndP !== undefined) {
+        nodes.push({id: rAndP.id, record: rAndP.r})
+      }
     }
     return {nodes};
   }
 
-  pasteSelectionFromClipboard(this: RecordFactory<T>, parentAddress: string, clipboardEntry: ClipboardR, positionInPlace: number) {
-    const parentNode = this.getDeepRecord(parentAddress);
-    if(parentNode !== undefined) {
-      const parentF = new RecordFactory(parentNode);
-      for(const node of clipboardEntry.nodes) {
-        parentF.addRecord(node, positionInPlace);
+  pasteSelectionFromClipboard(this: RecordFactory<T>, parentIdOrAddr: idOrAddress, clipboardData: ClipboardData, positionInPlace?: number) {
+    const parentRecord = this.getDeepRecord(parentIdOrAddr);
+    if(parentRecord !== undefined) {
+      const parentRF = new RecordFactory(parentRecord);
+      for(const node of clipboardData.nodes) {
+        parentRF.addRecord({record: node.record, position: positionInPlace});
       }
     }
   }
-
-  /**
-   * Keeps ids intact
-   */
-  moveDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getDeepRecord(destParentAddr);
-    if(destParentRecord === undefined) return;
-
-    const rAndPArray = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr));
-    const deletedRecordEntries: {id: number, record: RecordNode<RT>}[] = [];
-    for(const sourceRAndP of rAndPArray) {
-      if (sourceRAndP?.p !== undefined) {
-        const deletedRecordEntry = new RecordFactory(sourceRAndP?.p).deleteDeepRecord(sourceRAndP.id);
-        if(deletedRecordEntry !== undefined) {
-          deletedRecordEntries.push(deletedRecordEntry)
-        }
-      }
-    }
-    const parentF = new RecordFactory(destParentRecord);
-    for(const recordEntry of deletedRecordEntries.reverse()) {
-      const addedRecord = parentF.addRecord(recordEntry.record, destPosition);
-      if(addedRecord !== undefined) {
-        const {id, record} = addedRecord;
-        //Try to keep id the same so rules don't break
-        parentF.changeDeepRecordId(id, recordEntry.id);
-      }
-    }
-  }
-
-  /**
-   * Created new ids of the records created
-   */
-  copyDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getDeepRecord(destParentAddr);
-    if(destParentRecord === undefined) return;
-
-    const copiedRecords = sourceRecordAddresses.map(addr => this.getDeepRecord(addr));
-    const parentF = new RecordFactory(destParentRecord);
-    for(const copiedRecord of copiedRecords.reverse()) {
-      if(copiedRecord !== undefined) {
-        parentF.addRecord(copiedRecord, destPosition);
-      }
-    }
-  }
-
-  /**
-   * Change all inner ids, and their references (values) in properties if any
-   * Useful when you are copying an element folder / group for example - when you don't want any duplication
-   * of ids when copy pasting
-   * Elements at different depths can refer to each other.
-   * So that's why, we first need to go to every record and make a list (and not change while going to every record)
-   * and only then change all record ids one by one
-   */
-  cycleInnerIds(this: RecordFactory<T>) {
-    //Go to every inner id recursively
-    const allRecords = this.getDeepRecordMap();
-    for(const [id, record] of Object.entries(allRecords)) {
-      
-    }
-    //Keep replacing them one by one in the whole tree
-
-  }
-
-  /** 
-   * Returns the object that needs to be stringified before sending to clipboard
-   * Needs to be overriden at Project/Scene level to ensure that 
-   * 1) Vars are copied correctly (in case of scene copy). Vars pasting will be a bit different - no point changing ids.
-   * 2) element ids don't conflict at any depth while pasting
-   * 3) To ensure Ctrl+V of scene works even within another scene (ie project's paste gets used)
-   *
-   * * For clipboard operation, this function can only be called at the parent level
-   * * For scene copy, call to r.project()
-   * * For element copy, call to r.scene()
-   *
-   * Scene copy logic:
-   * In scene rules, vars can be referenced via ids or via variable names (in templates used in elements)
-   * Copy all variables referenced.
-   * 
-   * Scene paste logic:
-   * For EACH variable which was copied
-   * - If the variable id and name doesn't exist - paste it
-   * - If the variable id exists, but name doesn't - ignore it. (To make this work, we need to go to each string template used in rules
-   * and elements in the new scene, and change the templates to use the new name)
-   * - If the variable id doesn't exist, but name does - replace the variable id in the new scene being pasted (in all rules)
-   * with the new variable id
-   * - If both the variable id and name exist - ignore it
-   */
-  //SHOULD MAKE THIS WORK WITH ADDRESSES INSTEAD OF IDS
-  // copyToClipboardObject(this: RecordFactory<T>, ids: number[]): ClipboardR {
-  //   //Keep searching for children until we get the same id
-  //   const romTypes = this.getROMTypes();
-  //   const foundRecordNodes: RecordNode<RT>[] = [];
-  //   for(const romType of romTypes) {
-  //     foundRecordNodes.push(...this.getAllDeepChildrenWithFilter(romType, (value => ids.includes(value.id))));
-  //   }
-  //   return {
-  //     parentType: this._type,
-  //     nodes: foundRecordNodes,
-  //   }
-  // }
-  
-  /** 
-   * Once the clipboard has been converted into ClipboardR, this function can be used to merge into parent RecordNode 
-   */
-  // pasteFromClipboardObject(this: RecordFactory<T>, { obj, position }: {obj: ClipboardR, position?: number}): void {
-  //   if(obj.parentType !== this._type) {
-  //     console.error(`Can't paste this object into a RecordNode of type of ${this._type}`);
-  //     return;
-  //   }
-  //   for(const rn of obj.nodes) {
-  //     // * if position is passed, then keep incrementing to insert in order, else add at the end of the list
-  //     this.addRecord(rn, position? position++: position);
-  //   }
-  // }
-
-
-
-
-  /**
-   * This allows re-parenting records between different depths inside a tree using their addresses.
-   * This needs to be called for the record where both sourceParentRecord and destParentRecord are child records of a common super parent record
-   * For almost all operations, we will use a top down approach here for re-parenting, i.e re-parenting process needs to start from the top most parent
-   * in this case, it is almost always project
-   * Example1: moving elements from within a group to 1 level above.
-   *
-   * Scene1
-   *  Element1 <-------|
-   *  Element2         |
-   *  Element3 (group) |
-   *    Element31 -----|
-   *    Element32
-   *
-   * In above scenario we want to move Element31 below Element1
-   * sourceRecordAddr = [{parentAddr: Scene:1|Element:3, recordAddr: Scene:1|Element:3|Element:31}]
-   * destParentAddr = Scene:1
-   * destPosition = 0 (we insert at x+1 index)
-   *
-   * Example2: moving elements from one scene to another
-   *
-   * Scene1
-   *  Element1
-   *  Element2
-   *  Element3 (group)
-   *    Element31
-   *    Element32  <-|
-   * Scene2          |
-   *  Element4 ------|
-   *  Element5
-   *
-   * In above scenario we want to move Element4 from Scene2 to Element3(Group)
-   * sourceRecordAddr = [{parentAddr: Scene:2, recordAddr: Scene:2|Element:4}]
-   * destParentAddr = Scene:1|Element:3
-   * destPosition = 1 (we insert at x+1 index)
-   *
-   */
-  // reParentRecordsWithAddress(destParentAddr: string, sourceRecordAddr: string[], destPosition?: number): [RecordNode<RT>[], RecordNode<RT>[]] {
-  //   const destParentRecord = this.getRecordAtAddress(destParentAddr);
-  //   const reParentedRecords: RecordNode<RT>[] = [];
-  //   const failedReParentedRecords: RecordNode<RT>[] = [];
-  //   if(destParentRecord === null) {
-  //     console.error(`[reParentRecordsWithAddress]: Error in re-parenting. destParentAddr: ${destParentAddr}`);
-  //     return [reParentedRecords, failedReParentedRecords];
-  //   }
-
-  //   const destinationParentRecordF = new RecordFactory(destParentRecord);
-  //   for(const s of sourceRecordAddr) {
-  //     const parentAndChild = this.getRecordAndParentAtAddress(s);
-  //     if(parentAndChild === null || parentAndChild.p === undefined) {
-  //       console.error(`[delete-sourceRecordAddresses]: can't find record/parent for : recordAddr: ${s}`);
-  //       continue;
-  //     }
-  //     const { p: sourceParentRecord, c: sourceRecord, cid: sourceRecordId } = parentAndChild;
-
-  //     /**
-  //      * The order of operations here is very important
-  //      * 1. add the record in the new parent
-  //      * 2. delete the record from older parent
-  //      *
-  //      * We do this in this order and not reverse since there can be records that don't qualify to be child of a parent
-  //      * for ex: a scene can't be a child of a group
-  //      * in this case, we don't re-parent the record at all and addRecord function returns undefined.
-  //      * A better UX for this would be to restrict the user to be able to do that at all in the UI
-  //      */
-
-  //     // * Add to destination parent
-  //     // * addRecord takes care of name clashes and id clashes
-  //     const addedRecord = destinationParentRecordF.addRecord(sourceRecord, destPosition);
-  //     // * Record was added correctly to the appropriate parent
-  //     if(addedRecord !== undefined) {
-  //       // * delete the record from resp parents
-  //       const sourceParentRecordF = new RecordFactory(sourceParentRecord);
-  //       sourceParentRecordF.deleteRecord(sourceRecord.type as RT, sourceRecordId);
-  //       reParentedRecords.push(addedRecord);
-  //     } else {
-  //       failedReParentedRecords.push(sourceRecord);
-  //     }
-  //   }
-  //   return [reParentedRecords, failedReParentedRecords];
-  // }
-
-  // /**
-  //  * This returns all the nodes in the path from a parent to a leaf
-  //  */
-  // getBreadcrumbs(this: RecordFactory<T>, id: number, type: RT): RecordNode<RT>[] {
-  //   const recordsToReturn: RecordNode<RT>[] = [];
-  //   const deepCAndP = this.getDeepChildAndParent(type, id);
-  //   if(deepCAndP === undefined) {
-  //     recordsToReturn.push(this.json());
-  //     return recordsToReturn;
-  //   }
-
-  //   // we've reached the parent
-  //   if(deepCAndP.p.id === this.getId() && deepCAndP.p.type === this._type) {
-  //     recordsToReturn.push(deepCAndP.p);
-  //     recordsToReturn.push(deepCAndP.c);
-  //   } else {
-  //     // this is a different parent, lets find it's parent
-  //     recordsToReturn.push(...this.getBreadcrumbs(deepCAndP.p.id, deepCAndP.p.type as RT));
-  //     recordsToReturn.push(deepCAndP.c);
-  //   }
-
-  //   return recordsToReturn;
-  // }
-
 }
 
 export class RecordUtils {
