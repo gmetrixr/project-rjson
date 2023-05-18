@@ -357,12 +357,15 @@ export class RecordFactory<T extends RT> {
     return rAndP;
   }
   
+  getRecordAtAddress(this: RecordFactory<T>, addr: string): RecordNode<RT> | undefined {
+    return this.getRecordAndParentAtAddress(addr)?.r;
+  }
   /**
    * Given an address like scene:1|element:2!wh>1, get its value
    * If it doesn't find a value, return undefined
    */
   getPropertyAtAddress(this: RecordFactory<T>, addr: string): unknown {
-    const recordAtAddress = this.getRecordAndParentAtAddress(addr)?.r;
+    const recordAtAddress = this.getRecordAtAddress(addr);
     if(!recordAtAddress) return undefined;
     // find the matching property value string and then remove the ! from the lead
     const propertyAddr = addr.match(/!.*/)?.[0]?.replace("!", ""); // ex: !scene_yaw_correction
@@ -379,7 +382,7 @@ export class RecordFactory<T extends RT> {
    * 2. scene:1|element:2!wh>1
    */
   updatePropertyAtAddress(this: RecordFactory<T>, addr: string, value: unknown): boolean {
-    const recordAtAddress = this.getRecordAndParentAtAddress(addr)?.r;
+    const recordAtAddress = this.getRecordAtAddress(addr);
     if(!recordAtAddress) return false;
     const propertyAddr = addr.match(/!.*/)?.[0]?.replace("!", ""); // ex: !scene_yaw_correction
     if(!recordAtAddress || !propertyAddr) return false;
@@ -675,7 +678,7 @@ export class RecordFactory<T extends RT> {
   copySelectionToClipboard(this: RecordFactory<T>, selectedAddresses: string[]): ClipboardR {
     const nodes: RecordNode<RT>[] = [];
     for(const addr of selectedAddresses) {
-      const node = this.getRecordAndParentAtAddress(addr)?.r;
+      const node = this.getRecordAtAddress(addr);
       if(node !== undefined)
       nodes.push(node);
     }
@@ -683,7 +686,7 @@ export class RecordFactory<T extends RT> {
   }
 
   pasteSelectionFromClipboard(this: RecordFactory<T>, parentAddress: string, clipboardEntry: ClipboardR, positionInPlace: number) {
-    const parentNode = this.getRecordAndParentAtAddress(parentAddress)?.r;
+    const parentNode = this.getRecordAtAddress(parentAddress);
     if(parentNode !== undefined) {
       const parentF = new RecordFactory(parentNode);
       for(const node of clipboardEntry.nodes) {
@@ -696,14 +699,14 @@ export class RecordFactory<T extends RT> {
    * Keeps ids intact
    */
   moveDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getRecordAndParentAtAddress(destParentAddr)?.r;
+    const destParentRecord = this.getRecordAtAddress(destParentAddr);
     if(destParentRecord === undefined) return;
 
-    const cAndPArray = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr));
+    const rAndPArray = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr));
     const deletedRecordEntries: {id: number, record: RecordNode<RT>}[] = [];
-    for(const sourceCAndP of cAndPArray) {
-      if (sourceCAndP?.p !== undefined) {
-        const deletedRecordEntry = new RecordFactory(sourceCAndP?.p).deleteRecord(sourceCAndP.id);
+    for(const sourceRAndP of rAndPArray) {
+      if (sourceRAndP?.p !== undefined) {
+        const deletedRecordEntry = new RecordFactory(sourceRAndP?.p).deleteRecord(sourceRAndP.id);
         if(deletedRecordEntry !== undefined) {
           deletedRecordEntries.push(deletedRecordEntry)
         }
@@ -724,10 +727,10 @@ export class RecordFactory<T extends RT> {
    * Created new ids of the records created
    */
   copyDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getRecordAndParentAtAddress(destParentAddr)?.r;
+    const destParentRecord = this.getRecordAtAddress(destParentAddr);
     if(destParentRecord === undefined) return;
 
-    const copiedRecords = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr)?.r);
+    const copiedRecords = sourceRecordAddresses.map(addr => this.getRecordAtAddress(addr));
     const parentF = new RecordFactory(destParentRecord);
     for(const copiedRecord of copiedRecords.reverse()) {
       if(copiedRecord !== undefined) {
