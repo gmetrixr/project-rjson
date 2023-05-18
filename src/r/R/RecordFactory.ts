@@ -11,7 +11,6 @@ export type idAndRecord = {id: number, record: RecordNode<RT>};
 export type idOrAddress = number | string;
 /** clipboard contains the strigified version of this */
 export interface ClipboardData {
-  // parentType: RT, Might need to get this back
   nodes: idAndRecord[]
 }
 /**
@@ -23,7 +22,7 @@ export interface ClipboardData {
  * 
  * JSON Structure:
  * 
- * { //RecordNode -> Any recordNode doesn't know what it's id is. The id is defined one level above
+ * { //RecordNode -> A recordNode doesn't know what it's id is. The id is defined one level above
  *   name: "string" //optional record name
  *   type: "project"
  *   order: "integer" //the order of the record in the list
@@ -37,7 +36,7 @@ export interface ClipboardData {
  *          //Sub RecordNode 2
  *       }
  *     }
- *     "varaible": {} //Varaible RecordMap
+ *     "variable": {} //Varaible RecordMap
  *   }
  * }
  * 
@@ -56,7 +55,7 @@ export interface ClipboardData {
  * 
  * SORTED RECORDS (FOR UI)
  * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType -> Sorting only 
- *    makes sense in a single type (eg: you wont sort variables & scenes)
+ *   makes sense in a single type (eg: you wont sort variables & scenes)
  * 
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
