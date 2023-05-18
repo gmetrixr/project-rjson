@@ -53,9 +53,9 @@ type idAndRecord = {id: number, record: RecordNode<RT>};
  * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType -> Sorting only 
  *    makes sense in a single type (eg: you wont sort variables & scenes)
  * changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
- * getRecordAndParentWithId -> Find a record and its parent given any record id
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
+ * getRecordAndParentWithId -> Find a record and its parent given any record id
  * getRecordAndParentAtAddress / getRecordAtAddress / getPropertyAtAddress / updatePropertyAtAddress
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
