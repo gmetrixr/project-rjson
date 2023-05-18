@@ -162,19 +162,19 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get record and parent with id for a project", () => {
-    const rpid1 = r.record(projectJson).getRecordAndParentWithId(1684391763659);
+    const rpid1 = r.record(projectJson).getRecordAndParent(1684391763659);
     expect(rpid1?.p?.type).to.be.equal(RT.project);
     expect(rpid1?.r.type).to.be.equal(RT.variable);
     expect(rpid1?.id).to.be.equal(1684391763659);
 
-    const rpid2 = r.record(projectJson).getRecordAndParentWithId(1684404927844);
+    const rpid2 = r.record(projectJson).getRecordAndParent(1684404927844);
     expect(rpid2?.p?.type).to.be.equal(RT.scene);
     expect(rpid2?.r.type).to.be.equal(RT.element);
     expect(rpid2?.id).to.be.equal(1684404927844);
   });
 
   it ("should get record and parent at address for a project", () => {
-    const rpid = r.record(projectJson).getRecordAndParentAtAddress("scene:1684325255018|element:1684404941443");
+    const rpid = r.record(projectJson).getRecordAndParent("scene:1684325255018|element:1684404941443");
     expect(rpid?.p?.type).to.be.equal(RT.scene);
     expect(rpid?.r.type).to.be.equal(RT.element);
     expect(rpid?.r.props.element_type).to.be.equal("pano_image");
