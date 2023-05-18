@@ -42,8 +42,6 @@ export interface ClipboardData {
  * }
  * 
  * json -> return full json
- * 
- * NAME
  * getName -> name
  * private changeRecordNameOfType -> Changes recordName of a given type (lvl 1)
  * 
@@ -65,15 +63,18 @@ export interface ClipboardData {
  * 
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
- * private getRecordAndParentWithId / getRecordAndParentAtAddress -> Find a record and its parent
- * getPropertyAtAddress / updatePropertyAtAddress
- * getRecordAndParent -> Find record with either id or address
+ * private getRecordAndParentWithId / getRecordAndParentWithAddress
+ * getRecordAndParent -> Find record and its parent with either id or address
+ * private getBreadCrumbsWithAddress / getBreadCrumbsWithId
  * getBreadCrumbs -> returns an array of all sub-records leading to the given idOrAddress
+ * getPropertyAtAddress / updatePropertyAtAddress
  * 
  * RECORD RELATED
  * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
- * addRecord / duplicateRecord
+ * private getNewOrders / initializeRecordMap
+ * addRecord / addBlankRecord
+ * duplicateRecord / deleteRecord / changeRecordName
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
  * 
  * MOVE/COPY
@@ -226,7 +227,7 @@ export class RecordFactory<T extends RT> {
     if(typeof idOrAddress === "number") {
       return this.getDeepRecordMap()[idOrAddress];
     } else {
-      return this.getRecordAndParentAtAddress(idOrAddress)?.r;
+      return this.getRecordAndParentWithAddress(idOrAddress)?.r;
     }
   }
 
@@ -283,47 +284,6 @@ export class RecordFactory<T extends RT> {
     return entriesArray.map(nodeEntry => nodeEntry[1]);
   }
 
-  private changeRecordNameOfType<N extends RT>(this: RecordFactory<T>, type: N, id: number, newName?: string): RecordNode<N> | undefined {
-    const record = this.getRecordOfType(type, id);
-    if (record === undefined) {
-      return undefined;
-    }
-    const defaultName = recordTypeDefinitions[type].defaultName;
-    if (defaultName === undefined) {
-      //This means that this type doesn't use name
-      return undefined;
-    }
-    if (newName === undefined) {
-      newName = defaultName;
-    }
-    const existingNames = <Array<string>>Object.entries(this.getRecordMapOfType(type))
-      .filter(idValue => Number(idValue[0]) !== id) //remove the same record itself
-      .map(idValue => idValue[1].name) //convert records to names
-      .filter(name => name !== undefined); //remove undefined names
-
-    if (existingNames.includes(newName)) {
-      record.name = getSafeAndUniqueRecordName(newName, existingNames);
-    } else {
-      record.name = newName;
-    }
-    return record;
-  }
-
-  /** Find a record and its parent given any record id */
-  private getRecordAndParentWithId<N extends RT>(this: RecordFactory<T>, id: number): rAndP | undefined {
-    const recordMap = this.getRecordMap();
-    for(const [key, value] of Object.entries(recordMap)) {
-      if(id === Number(key)) {
-        //Found it!!! return the rAndP object
-        return {p: this._json, r: recordMap[id], id: id};
-      }
-      const subRecordRAndP = new RecordFactory(value).getRecordAndParentWithId(id);
-      if(subRecordRAndP !== undefined) {
-        return subRecordRAndP;
-      }
-    }
-  }
-
   /**
    * Generate an address like scene:1|element:2 for any child RecordNode
    * RFC: https://docs.google.com/document/d/1DVM_i_Go5iX5-EShV5FikfI29k8YEC9cAjzeAY49blc/edit#
@@ -350,6 +310,21 @@ export class RecordFactory<T extends RT> {
     }
     return address;
   }
+  
+  /** Find a record and its parent given any record id */
+  private getRecordAndParentWithId<N extends RT>(this: RecordFactory<T>, id: number): rAndP | undefined {
+    const recordMap = this.getRecordMap();
+    for(const [key, value] of Object.entries(recordMap)) {
+      if(id === Number(key)) {
+        //Found it!!! return the rAndP object
+        return {p: this._json, r: recordMap[id], id: id};
+      }
+      const subRecordRAndP = new RecordFactory(value).getRecordAndParentWithId(id);
+      if(subRecordRAndP !== undefined) {
+        return subRecordRAndP;
+      }
+    }
+  }
 
   /**
    * Find the record and its parent with a given address. Searches only in child record nodes.
@@ -359,7 +334,7 @@ export class RecordFactory<T extends RT> {
    * 3. scene:1|element:2!opacity
    * 4. scene:1|element:2!wh>1
    */
-  private getRecordAndParentAtAddress(this: RecordFactory<T>, addr: string): rAndP | undefined {
+  private getRecordAndParentWithAddress(this: RecordFactory<T>, addr: string): rAndP | undefined {
     // Sanitize and remove and unwanted cases
     // Replace everything after a ! with a blank string
     const recordStringArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
@@ -379,6 +354,14 @@ export class RecordFactory<T extends RT> {
     }
     const rAndP: rAndP = { id: childId, r: childR, p: parentR };
     return rAndP;
+  }
+
+  getRecordAndParent(this: RecordFactory<T>, idOrAddress: idOrAddress): rAndP | undefined {
+    if(typeof idOrAddress === "number") {
+      return this.getRecordAndParentWithId(idOrAddress);
+    } else {
+      return this.getRecordAndParentWithAddress(idOrAddress);
+    }
   }
 
   private getBreadCrumbsWithId<N extends RT>(this: RecordFactory<T>, id: number, breadCrumb?: idAndRecord[]): idAndRecord[] | undefined {
@@ -401,7 +384,7 @@ export class RecordFactory<T extends RT> {
     return undefined;
   }
 
-  private getBreadCrumbsWithAddr(this: RecordFactory<T>, addr: string): idAndRecord[] | undefined {
+  private getBreadCrumbsWithAddress(this: RecordFactory<T>, addr: string): idAndRecord[] | undefined {
     const breadCrumbs: idAndRecord[] = []
     // Sanitize and remove and unwanted cases
     // Replace everything after a ! with a blank string
@@ -428,7 +411,7 @@ export class RecordFactory<T extends RT> {
     if(typeof idOrAddress === "number") {
       return this.getBreadCrumbsWithId(idOrAddress);
     } else {
-      return this.getBreadCrumbsWithAddr(idOrAddress);
+      return this.getBreadCrumbsWithAddress(idOrAddress);
     }
   }
   
@@ -509,19 +492,6 @@ export class RecordFactory<T extends RT> {
     }
   }
 
-  getRecordAndParent(this: RecordFactory<T>, idOrAddress: idOrAddress): rAndP | undefined {
-    if(typeof idOrAddress === "number") {
-      return this.getRecordAndParentWithId(idOrAddress);
-    } else {
-      return this.getRecordAndParentAtAddress(idOrAddress);
-    }
-  }
-
-  addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number):{id: number, record: RecordNode<N>} | undefined {
-    const record = createRecord(type);
-    return this.addRecord({record, position});
-  }
-  
   /**
    * Adding ".order" key to the new entry - even if the record already had a .order, we will overwrite it
    * potential value of respective orders: [4, 4.5, 4.75, 5, 8]
@@ -532,7 +502,7 @@ export class RecordFactory<T extends RT> {
    * if its inserted at [5], order = order of the last entry + 1 (default, when position is undefined)
    * if its inserted at [x], order = ( order of [x - 1] entry + order of [x] entry ) / 2 
    */
-  private getNewOrder<N extends RT>(this: RecordFactory<T>, sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
+  private getNewOrders<N extends RT>(this: RecordFactory<T>, sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
     let order = [];
     let minOrder = sortedRecords[0]?.order ?? 0;
     let maxOrder = sortedRecords[sortedRecords.length - 1]?.order ?? 0;
@@ -599,7 +569,7 @@ export class RecordFactory<T extends RT> {
     if(!this.initializeRecordMap(type)) return undefined;
     const recordMap = this.getRecordMapOfType(type);
     const recordsArray = this.getSortedRecordsOfType(type);
-    record.order = this.getNewOrder(recordsArray, 1, position)[0];
+    record.order = this.getNewOrders(recordsArray, 1, position)[0];
     if(!keepSubRecordIds) {
       //Cycle all ids in the new record being added so that there are no id clashes
       new RecordFactory(record).cycleAllSubRecordIds();
@@ -610,8 +580,13 @@ export class RecordFactory<T extends RT> {
     }
     recordMap[id] = record;
     //This fn make sure that the name isn't a duplicate one, and also that its given only if its required
-    this.changeRecordNameOfType(type, id, record.name);
+    this.changeRecordName(type, id, record.name);
     return {id, record};
+  }
+
+  addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number):{id: number, record: RecordNode<N>} | undefined {
+    const record = createRecord(type);
+    return this.addRecord({record, position});
   }
 
   duplicateRecord<N extends RT>(this: RecordFactory<T>, type: RT, id: number): idAndRecord | undefined {
@@ -657,10 +632,36 @@ export class RecordFactory<T extends RT> {
     return {id: rAndP.id, record: recordToDelete};
   }
 
+  changeRecordName<N extends RT>(this: RecordFactory<T>, type: N, id: number, newName?: string): RecordNode<N> | undefined {
+    const record = this.getRecordOfType(type, id);
+    if (record === undefined) {
+      return undefined;
+    }
+    const defaultName = recordTypeDefinitions[type].defaultName;
+    if (defaultName === undefined) {
+      //This means that this type doesn't use name
+      return undefined;
+    }
+    if (newName === undefined) {
+      newName = defaultName;
+    }
+    const existingNames = <Array<string>>Object.entries(this.getRecordMapOfType(type))
+      .filter(idValue => Number(idValue[0]) !== id) //remove the same record itself
+      .map(idValue => idValue[1].name) //convert records to names
+      .filter(name => name !== undefined); //remove undefined names
+
+    if (existingNames.includes(newName)) {
+      record.name = getSafeAndUniqueRecordName(newName, existingNames);
+    } else {
+      record.name = newName;
+    }
+    return record;
+  }
+
   changeDeepRecordName<N extends RT>(this: RecordFactory<T>, idOrAddress: idOrAddress, newName?: string): RecordNode<N> | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined || rAndP.r === undefined) return undefined;
-    return new RecordFactory(rAndP.p).changeRecordNameOfType(rAndP.r.type as RT, rAndP.id, newName);
+    return new RecordFactory(rAndP.p).changeRecordName(rAndP.r.type as RT, rAndP.id, newName);
   }
 
   /**
@@ -679,7 +680,7 @@ export class RecordFactory<T extends RT> {
    */
   reorderRecords(this: RecordFactory<T>, type: RT, ids: number[], position: number) {
     const sortedRecords = this.getSortedRecordsOfType(type);
-    const allOrders = this.getNewOrder(sortedRecords, ids.length, position);
+    const allOrders = this.getNewOrders(sortedRecords, ids.length, position);
     for(let i=0; i<sortedRecords.length; i++) {
       sortedRecords[i].order = allOrders[i];
     }
