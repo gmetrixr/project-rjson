@@ -12,62 +12,6 @@ export class SceneFactory extends RecordFactory<RT.scene> {
     super(json);
   }
 
-  /** Overriding add rule: Sub record ids should be made unique after duplications - this helps keeping all ids in the tree unique */
-  addRecord <N extends RT>(this: SceneFactory, record: RecordNode<N>, position?: number): RecordNode<N> | undefined {
-    const addedRecord = super.addRecord(record, position);
-    if(addedRecord?.type === RT.rule) {
-      this.dedupeWeTaIds(addedRecord);
-    }
-    return addedRecord;
-  }
-
-  /** 
-   * adds record into the group if groupElementId is present
-   * else adds record to the scene
-   */
-  addDeepRecord <N extends RT> (this: SceneFactory, { record, position, groupElementId }: { record: RecordNode<N>, position?: number, groupElementId?: number }): RecordNode<N> | undefined {
-    if (groupElementId) {
-      const group = this.getAllDeepChildrenWithFilter(RT.element, el => el.id === groupElementId);
-      if (group[0] !== undefined) {
-        const groupF = new ElementFactory(group[0]);
-        const addedRecord = groupF.addRecord(record, position);
-        return addedRecord;
-      }
-    } else {
-      const addedRecord = this.addRecord(record, position);
-      if(addedRecord?.type === RT.rule) {
-        this.dedupeWeTaIds(addedRecord);
-      }
-      return addedRecord;
-    }
-  }
-
-  /** Overriding duplicate rule: Sub record ids should be made unique after duplications - this helps keeping all ids in the tree unique */
-  duplicateRecord <N extends RT>(this: SceneFactory, type: N, id: number): RecordNode<N> | undefined {
-    const addedRecord = super.duplicateRecord(type, id);
-    if(addedRecord?.type === RT.rule) {
-      this.dedupeWeTaIds(addedRecord);
-    }
-    if(addedRecord?.type === RT.element) {
-      this.dedupeGroupElements(addedRecord);
-    }
-    return addedRecord;
-  }
-
-  /**
-   * Overriding duplicate rule: Sub record ids should be made unique after duplications - this helps keeping all ids in the tree unique
-   */
-  duplicateDeepRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
-    const addedRecord =  super.duplicateDeepRecord(type, id);
-    if(addedRecord?.type === RT.rule) {
-      this.dedupeWeTaIds(addedRecord);
-    }
-    if(addedRecord?.type === RT.element) {
-      this.dedupeGroupElements(addedRecord);
-    }
-    return addedRecord;
-  }
-
   /** Overriding delete element: Deleting an element/variable (any CogObject) should also delete its rules */
   deleteRecord <N extends RT>(this: SceneFactory, type: N, id: number): RecordNode<N> | undefined {
     if(type === RT.element) {
