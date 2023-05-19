@@ -1,0 +1,15 @@
+{
+  "id": 1684418937654,
+  "type": "deployment",
+  "props": {
+    "deployment_version": 2,
+    "enable_multiplayer": false,
+    "room_instance_count": 2000,
+    "multiplayer_chat_enabled": true,
+    "multiplayer_audio_enabled": true,
+    "room_instance_member_limit": 30,
+    "multiplayer_comments_enabled": true,
+    "multiplayer_screenshare_enabled": true,
+    "room_instance_overspill_message": "Looks like all rooms are full. Check back again after some time. You can still explore this space."
+  }
+}

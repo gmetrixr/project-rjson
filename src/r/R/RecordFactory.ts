@@ -703,30 +703,30 @@ export class RecordFactory<T extends RT> {
   /**
    * Keeps ids intact
    */
-  moveDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
-    const destParentRecord = this.getDeepRecord(destParentAddr);
-    if(destParentRecord === undefined) return;
+  // moveDeepRecordsToAddress(this: RecordFactory<T>, sourceRecordAddresses: string[], destParentAddr: string, destPosition?: number) {
+  //   const destParentRecord = this.getDeepRecord(destParentAddr);
+  //   if(destParentRecord === undefined) return;
 
-    const rAndPArray = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr));
-    const deletedRecordEntries: {id: number, record: RecordNode<RT>}[] = [];
-    for(const sourceRAndP of rAndPArray) {
-      if (sourceRAndP?.p !== undefined) {
-        const deletedRecordEntry = new RecordFactory(sourceRAndP?.p).deleteRecord(sourceRAndP.id);
-        if(deletedRecordEntry !== undefined) {
-          deletedRecordEntries.push(deletedRecordEntry)
-        }
-      }
-    }
-    const parentF = new RecordFactory(destParentRecord);
-    for(const recordEntry of deletedRecordEntries.reverse()) {
-      const addedRecord = parentF.addRecord(recordEntry.record, destPosition);
-      if(addedRecord !== undefined) {
-        const {id, record} = addedRecord;
-        //Try to keep id the same so rules don't break
-        parentF.changeDeepRecordId(id, recordEntry.id);
-      }
-    }
-  }
+  //   const rAndPArray = sourceRecordAddresses.map(addr => this.getRecordAndParentAtAddress(addr));
+  //   const deletedRecordEntries: {id: number, record: RecordNode<RT>}[] = [];
+  //   for(const sourceRAndP of rAndPArray) {
+  //     if (sourceRAndP?.p !== undefined) {
+  //       const deletedRecordEntry = new RecordFactory(sourceRAndP?.p).deleteRecord(sourceRAndP.id);
+  //       if(deletedRecordEntry !== undefined) {
+  //         deletedRecordEntries.push(deletedRecordEntry)
+  //       }
+  //     }
+  //   }
+  //   const parentF = new RecordFactory(destParentRecord);
+  //   for(const recordEntry of deletedRecordEntries.reverse()) {
+  //     const addedRecord = parentF.addRecord(recordEntry.record, destPosition);
+  //     if(addedRecord !== undefined) {
+  //       const {id, record} = addedRecord;
+  //       //Try to keep id the same so rules don't break
+  //       parentF.changeDeepRecordId(id, recordEntry.id);
+  //     }
+  //   }
+  // }
 
   /**
    * Created new ids of the records created
