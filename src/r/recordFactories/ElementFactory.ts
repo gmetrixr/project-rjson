@@ -21,12 +21,12 @@ export class ElementFactory extends RecordFactory<RT.element> {
     }
   }
 
-  getElementType(this: ElementFactory): ElementType {
+  getElementType(): ElementType {
     return this.elementType;
   }
 
   /** Override so that updating element_type prop updates this instance's elementType property */
-  set(this: ElementFactory, property: RTP[RT.element], value: unknown): ElementFactory {
+  set(property: RTP[RT.element], value: unknown): ElementFactory {
     super.set(property, value);
     if(property === rtp.element.element_type && (typeof value === "string") && isElementType(value)) {
       this.elementType = value;
@@ -38,7 +38,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
    * Returns the default value of a property. If no default is found, returns undefined
    * This is already defined in RecordFactory and is being overridden in ElementFactory
    */
-  getDefault(this: ElementFactory, property: RTP[RT.element]): unknown {
+  getDefault(property: RTP[RT.element]): unknown {
     const elementDefaultValues = eTypeToDefn[this.elementType]?.defaultOverrides ?? {};
     if(elementDefaultValues[property] !== undefined) return deepClone(elementDefaultValues[property]);
     const defaultValues = recordTypeDefinitions[RT.element].defaultValues;
@@ -49,7 +49,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
   /**
    * Used by the right bar to list down properties
    */
-  getJsonPropsAndDefaultProps(this: ElementFactory): string[] {
+  getJsonPropsAndDefaultProps(): string[] {
     const jsonProps = this.getProps();
     const elementProps = ElementUtils.getElementDefinition(this.elementType).properties;
     return Array.from(new Set(jsonProps.concat(elementProps)));
@@ -62,7 +62,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
    * Properties of type "source" are generally in properties ending with "source" (Eg: "background_source")
    * sources
    */
-  getFileIdsFromElement (this: ElementFactory): number[] {
+  getFileIdsFromElement (): number[] {
     const fileIds: number[] = [];
     const elementProps = this.getJsonPropsAndDefaultProps();
     //Get file ids form element properties
@@ -79,7 +79,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     }
     //Get file ids from item properties
     for(const sourceProp of en.sourcePropertyNames.itemProperties) {
-      for(const item of Object.values(this.getRecordMapOfType(RT.item))) {
+      for(const item of Object.values(this.getRecordMap(RT.item))) {
         const itemProps = Object.keys(item.props);
         if(itemProps.includes(sourceProp)) { //Not checking for image_source, as it isn't used in items
           fileIds.push(...ElementUtils.getFileIdsFromValue(item.props[sourceProp]));
@@ -94,7 +94,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
   /** 
    * Inject the given sources into the element
    */
-  injectSourceIntoElement (this: ElementFactory, sourceMap: {[id: number]: fn.Source}): void {
+  injectSourceIntoElement (sourceMap: {[id: number]: fn.Source}): void {
     const elementProps = this.getJsonPropsAndDefaultProps();
     //Get file ids form element properties
     for(const sourceProp of en.sourcePropertyNames.elementProperties) { //Iterating over sourceElementProperties instead of elementProps to reduce number of iterations
@@ -117,7 +117,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     }
     //Get file ids from item properties
     for(const sourceProp of en.sourcePropertyNames.itemProperties) {
-      for(const item of Object.values(this.getRecordMapOfType(RT.item))) {
+      for(const item of Object.values(this.getRecordMap(RT.item))) {
         const itemProps = Object.keys(item.props);
         if(itemProps.includes(sourceProp)) { //Not checking for image_source, as it isn't used in items
           const currentValue = item.props[sourceProp];
@@ -130,7 +130,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     }
   }
 
-  addElementOfType (this: ElementFactory, elementType: ElementType, position?: number): RecordNode<RT.element> {
+  addElementOfType (elementType: ElementType, position?: number): RecordNode<RT.element> {
     const defaultName = ElementUtils.getElementDefinition(elementType).elementDefaultName;
     const newElement = createRecord<RT.element>(RT.element, defaultName);
     newElement.props = ElementUtils.getElementTypeDefaults(elementType);

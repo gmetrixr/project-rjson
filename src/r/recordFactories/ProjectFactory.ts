@@ -49,7 +49,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    *   The corresponding variable is saved in the field var_id (of type string) in lead_gen_field
    *   These variable definitions (like name/type) shouldn't be modifiable by the user (read only = true)
    */
-  addRecord<T>(this: ProjectFactory, {record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+  addRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
     record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord | undefined {
     super.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
@@ -79,7 +79,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Adding custom logic for:
    * lead_gen_field: Renaming lead_gen_field should rename the linked variable name
    */
-  changeRecordName<N extends RT>(this: ProjectFactory, type: N, id: number, newName?: string): RecordNode<N> | undefined {
+  changeRecordName<N extends RT>(type: N, id: number, newName?: string): RecordNode<N> | undefined {
     const oldRecordName = this.getRecord(type, id)?.name;
     const record = super.changeRecordName<N>(type, id, newName);
     const newRecordName = record?.name; //Don't use newName as the new name, it might have undergone transformation
@@ -100,7 +100,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return record;
   }
 
-  addElementOfTypeToScene(this: ProjectFactory, { sceneId, elementType, position, groupElementId }: { sceneId: number, elementType: ElementType, position?: number, groupElementId?: number }): RecordNode<RT.element> | undefined {
+  addElementOfTypeToScene({ sceneId, elementType, position, groupElementId }: { sceneId: number, elementType: ElementType, position?: number, groupElementId?: number }): RecordNode<RT.element> | undefined {
     const defaultName = ElementUtils.getElementDefinition(elementType).elementDefaultName;
     const newElement = createRecord<RT.element>(RT.element, undefined, defaultName);
     newElement.props = ElementUtils.getElementTypeDefaults(elementType);
@@ -113,7 +113,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Updated version of addSceneSubRecord
    * Takes in groupElementId to add record to nth level as well.
    */
-  addSceneDeepRecord<N extends RT>(this: ProjectFactory, { sceneId, record, position, groupElementId }: { sceneId: number, record: RecordNode<N>, position?: number, groupElementId?: number }): RecordNode<N> | undefined {
+  addSceneDeepRecord<N extends RT>({ sceneId, record, position, groupElementId }: { sceneId: number, record: RecordNode<N>, position?: number, groupElementId?: number }): RecordNode<N> | undefined {
     const sceneJson = this.getRecord(RT.scene, sceneId);
     if (sceneJson !== undefined) {
       const addedRecord = (new SceneFactory(sceneJson)).addDeepRecord({ record, position, groupElementId });
@@ -129,7 +129,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Ideally elements should be renamed via SceneFactory. But because want media_upload element rename to impact
    * its linked variable, we do this via ProjectFactory (as only ProjectFactory has access to variables).
    */
-  changeSceneSubRecordName<N extends RT>(this: ProjectFactory, sceneId: number, type: N, id: number, newName?: string): RecordNode<N> | undefined {
+  changeSceneSubRecordName<N extends RT>(sceneId: number, type: N, id: number, newName?: string): RecordNode<N> | undefined {
     const sceneJson = this.getRecord(RT.scene, sceneId);
     if (sceneJson !== undefined) {
       const record = (new SceneFactory(sceneJson)).changeDeepRecordName(type, id, newName);
@@ -165,7 +165,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Ideally elements should get deleted via SceneFactory. But because we want deletion of media_upload element to delete the linked
    * variable, we do this via ProjectFactory (as only ProjectFactory has access to variables).
    */
-  deleteSceneDeepRecord<N extends RT>(this: ProjectFactory, sceneId: number, type: N, id: number): RecordNode<N> | undefined {
+  deleteSceneDeepRecord<N extends RT>(sceneId: number, type: N, id: number): RecordNode<N> | undefined {
     const sceneJson = this.getRecord(RT.scene, sceneId);
     if (sceneJson !== undefined) {
       const record = (new SceneFactory(sceneJson)).deleteDeepRecord(type, id);
@@ -183,7 +183,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * This has been written in Project Factory so that we can add linked variables to elements like SCORM and Media Upload
    * since only Project Factory has access to variables. 
    */
-  duplicateSceneDeepRecord<N extends RT>(this: ProjectFactory, sceneId: number, type: N, id: number): RecordNode<N> | undefined {
+  duplicateSceneDeepRecord<N extends RT>(sceneId: number, type: N, id: number): RecordNode<N> | undefined {
     const sceneJson = this.getRecord(RT.scene, sceneId);
     if (sceneJson !== undefined) {
       const sceneF = (new SceneFactory(sceneJson));
@@ -201,7 +201,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Override from record factory
    * Since only Project Factory has access to variables, get the deep records in the override and add the linked variables for SCORM and Media Upload.
    */
-  duplicateDeepRecord<N extends RT>(this: ProjectFactory, type: N, id: number): RecordNode<N> | undefined {
+  duplicateDeepRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
     const duplicatedRecord = super.duplicateDeepRecord(type, id);
 
     if (duplicatedRecord !== undefined) {
@@ -226,7 +226,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * scene: Should delete from menu and tour_mode lists also
    * lead_gen_field: Should delete the linked autogenerated variable
    */
-  deleteRecord<N extends RT>(this: ProjectFactory, type: N, id: number): RecordNode<N> | undefined {
+  deleteRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
     switch (type) {
       case RT.variable: {
         for (const scene of this.getRecords(RT.scene)) {
@@ -272,7 +272,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   /**
    * Override general variable defaults with the defaults specified for the given variableType
    */
-  addVariableOfType(this: ProjectFactory, variableType: VariableType, id?: number): idAndRecord | undefined {
+  addVariableOfType(variableType: VariableType, id?: number): idAndRecord | undefined {
     const defaults = variableTypeToDefn[variableType];
     const record = createRecord<RT.variable>(variable, defaults.varDefaultName);
     record.props.var_default = defaults.varDefaultValue;
@@ -285,7 +285,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Variables linked to specific functions, that need specific fixed ids (and names)
    * Predefined variables cannot be renamed or delted by the user, and are not shown on Variables interface
    */
-  addPredefinedVariable(this: ProjectFactory, predefinedVariableName: PredefinedVariableName): idAndRecord | undefined {
+  addPredefinedVariable(predefinedVariableName: PredefinedVariableName): idAndRecord | undefined {
     const pdvarDefaults = predefinedVariableDefaults[predefinedVariableName];
     let record = super.getRecord(pdvarDefaults.id, RT.variable);
     if(record !== undefined) {
@@ -301,7 +301,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  addGlobalVariable(this: ProjectFactory, globalVar: RecordNode<RT.variable>, id: number): idAndRecord | undefined {
+  addGlobalVariable(globalVar: RecordNode<RT.variable>, id: number): idAndRecord | undefined {
     const record = deepClone(globalVar);
     record.props.var_category = VarCategory.global;
     record.props.var_track = true;
@@ -312,16 +312,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * This needs to be done everytime before the project is loaded in the editor.
    * Because the definitions of the global vars might get updated anytime.
    */
-  updateGlobalVariableProperties(this: ProjectFactory, gvsMap: RecordMap<RT.variable>): void {
-    for (const variable of this.getRecords(RT.variable)) {
+  updateGlobalVariableProperties(gvsMap: RecordMap<RT.variable>): void {
+    for (const [vid, variable] of this.getRecordEntries(RT.variable)) {
       if (variable.props.var_category === VarCategory.global) {
-        const variableFromOrg = gvsMap[variable.id];
+        const variableFromOrg = gvsMap[vid];
         if (variableFromOrg !== undefined) {
           variable.name = variableFromOrg.name;
           variable.props.var_default = variableFromOrg.props.var_default;
           variable.props.var_type = variableFromOrg.props.var_type;
         } else {
-          console.log(`Variable ${variable.id} was marked global but not found in the passed global vars map. Marking it non-global`);
+          console.log(`Variable ${vid} was marked global but not found in the passed global vars map. Marking it non-global`);
           variable.props.var_category = VarCategory.user_defined;
         }
       }
@@ -333,7 +333,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Just need to update this function for any other element type to be added in future
    * Takes the elements as an array and adds variables to project factory
    */
-  addLinkedVariables<N extends RT>(this: ProjectFactory, records: RecordNode<N>[]): void {
+  addLinkedVariables<N extends RT>(records: RecordNode<N>[]): void {
     for (const record of records) {
       if (record?.type === RT.element) {
         switch ((record as RecordNode<RT.element>).props.element_type) {
@@ -383,7 +383,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Just need to update this function for any other element type to be added in future
    * Takes the elements as an array and deletes variables from project factory
    */
-  deleteLinkedVariables<N extends RT>(this: ProjectFactory, records: RecordNode<N>[]): void {
+  deleteLinkedVariables<N extends RT>(records: RecordNode<N>[]): void {
     for (const record of records) {
       if (record?.type === RT.element) {
         switch ((record as RecordNode<RT.element>).props.element_type) {
@@ -411,7 +411,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   //SCENE SPECIFIC FUNCTIONS
-  getInitialSceneId(this: ProjectFactory): number {
+  getInitialSceneId(): number {
     const initialSceneId = this.get(rtp.project.initial_scene_id) as (number | undefined);
     //Ignore the default value 0, it means its not set
     if (initialSceneId !== undefined && initialSceneId !== 0) {
@@ -427,7 +427,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  addMenuAndTourModeRecord(this: ProjectFactory, sceneId: number) {
+  addMenuAndTourModeRecord(sceneId: number) {
     //Add menu entry. Calling super.addBlankRecord and not ProjectFactory.addBlankRecord because internally it call addRecord, 
     //would end up in a cyclic call.
     const menuRecord = super.addBlankRecord(RT.menu, sceneId + 10001);
@@ -452,7 +452,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Works only on projects that have gone through "injectSourceIntoProject" (i.e. its source.file_urls are populated)
    * This just gets the first scene of the project and returns the thubmnail of the first pano it finds in it
    */
-  getProjectThumbnail(this: ProjectFactory): string | undefined {
+  getProjectThumbnail(): string | undefined {
     let thumbnail;
     const projectThumbnailSource = <fn.Source>this.get(rtp.project.project_thumbnail_source) as fn.Source;
     if(projectThumbnailSource !== undefined && projectThumbnailSource.file_urls?.o) {
@@ -480,7 +480,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return thumbnail;
   }
 
-  getFileIdsFromProject(this: ProjectFactory): number[] {
+  getFileIdsFromProject(): number[] {
     const fileIds: number[] = [];
     for (const scene of this.getRecords(RT.scene)) {
       const sceneF = new SceneFactory(scene);
@@ -501,7 +501,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return [...new Set(fileIds)]; //Unique ids only
   }
 
-  injectSourceIntoProject(this: ProjectFactory, sourceMap: { [id: number]: fn.Source }): void {
+  injectSourceIntoProject(sourceMap: { [id: number]: fn.Source }): void {
     for (const scene of this.getRecords(RT.scene)) {
       const sceneF = new SceneFactory(scene);
       for (const element of sceneF.getAllDeepChildren(RT.element)) {
@@ -525,7 +525,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  getMetadata(this: ProjectFactory): string[] {
+  getMetadata(): string[] {
 
     // 1. Project meta fields
     const metaArray = [
@@ -595,7 +595,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Copy all variables referenced.
    * @param ids - list of ids for child records
    */
-  copyToClipboardObject(this: ProjectFactory, ids: number[]): ClipboardR {
+  copyToClipboardObject(ids: number[]): ClipboardR {
     const baseClipboardObject = super.copyToClipboardObject(ids);
     /**
      * Parse through the extracted records to check if any variable needs to be added to the clipboard object
@@ -725,7 +725,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * @param obj
    * @param position
    */
-  pasteFromClipboardObject(this: ProjectFactory, { obj, position, groupElementId, sceneId }: { obj: ClipboardR, position?: number, groupElementId?: number, sceneId?: number }): void {
+  pasteFromClipboardObject({ obj, position, groupElementId, sceneId }: { obj: ClipboardR, position?: number, groupElementId?: number, sceneId?: number }): void {
     if (obj.parentType === RT.scene && sceneId === undefined) {
       console.error(`Can't paste an element at project level. Please provide a sceneId.`);
       return;
@@ -811,7 +811,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  getAllRecordsForLinkedVariables(this: ProjectFactory, records: RecordNode<RT>[]) {
+  getAllRecordsForLinkedVariables(records: RecordNode<RT>[]) {
     const recordsToAddLinkedVars: RecordNode<RT.element>[] = [];
 
     for (const record of records) {
@@ -839,7 +839,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Overriding this function from base class as there is element specific code.
    * Check base class implementation for reference on function usage and examples
    */
-  reParentRecordsWithAddress(this: ProjectFactory, destParentAddr: string, sourceRecordAddr: { parentAddr: string, recordAddr: string }[], destPosition?: number): [RecordNode<RT>[], RecordNode<RT>[]] {
+  reParentRecordsWithAddress(destParentAddr: string, sourceRecordAddr: { parentAddr: string, recordAddr: string }[], destPosition?: number): [RecordNode<RT>[], RecordNode<RT>[]] {
     const destParentRecord = this.getRecordAtAddress(destParentAddr);
     const reParentedRecords: RecordNode<RT>[] = [];
     const failedReParentedRecords: RecordNode<RT>[] = [];
@@ -908,7 +908,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * If just the scene Id is provided => the address will be starting from the scene instead of the project.
    * If neither scene Id or parent address is provided => the full address will be returned but might be from a different scene
    */
-  getDeepChildRecordAddress(this: ProjectFactory, { id, type, sceneId, parentAddr }: { id: number, type: RT, sceneId?: number, parentAddr?: string }): string | undefined {
+  getDeepChildRecordAddress({ id, type, sceneId, parentAddr }: { id: number, type: RT, sceneId?: number, parentAddr?: string }): string | undefined {
     if (sceneId) {
       const scene = this.getRecord(RT.scene, sceneId);
       if (scene) {
@@ -928,7 +928,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * This method is called from the UI to resolve inconsistencies in the menu records.
    * It is called only if the number of menu entries != number of scene entries
    */
-  syncMenuWithScenes(this: ProjectFactory): void {
+  syncMenuWithScenes(): void {
     const sceneIdsSet = new Set(this.getRecords(RT.scene).map(s => s.id));
     const sceneIdsFroMenuSet = new Set(this.getRecords(RT.menu).map(m => m.props.menu_scene_id as number));
     //If both above sets are equal, return.

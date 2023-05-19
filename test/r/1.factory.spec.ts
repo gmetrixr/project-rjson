@@ -12,12 +12,6 @@ const r = {
 }
 
 describe ("r RecordFactory tests", () => {
-  // it ("should check behaviour of this keyword", () => {
-  //   const project = createRecord(RT.project);
-  //   console.log(project);
-  //   expect(project.type).to.be.equal("project");
-  // });
-
   it ("should create a new project", () => {
     const project = createRecord(RT.project);
     expect(project.type).to.be.equal("project");
