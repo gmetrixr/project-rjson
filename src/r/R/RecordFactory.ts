@@ -224,11 +224,11 @@ export class RecordFactory<T extends RT> {
     return recordMap;
   }
 
-  getRecord<N extends RT>(this: RecordFactory<T>, id: number, type?: N): RecordNode<N> | undefined {
+  getRecord(this: RecordFactory<T>, id: number, type?: RT): RecordNode<RT> | undefined {
     if(type == undefined) {
       return this.getRecordMap()[id];
     } else {
-      return (this._json.records?.[type] as RecordMap<N>)?.[id];
+      return (this._json.records?.[type] as RecordMap<RT>)?.[id];
     }
   }
 
@@ -571,9 +571,9 @@ export class RecordFactory<T extends RT> {
    * And all sub-ids in this new record. 
    * And make sure none overlap.
    */
-  addRecord<N extends RT>(this: RecordFactory<T>, {record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
-    record: RecordNode<N>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
-  }): {id: number, record: RecordNode<N>} | undefined {
+  addRecord<T>(this: RecordFactory<RT>, {record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+    record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
+  }): idAndRecord | undefined {
     if(parentIdOrAddress !== undefined) {
       const parentRecord = this.getDeepRecord(parentIdOrAddress);
       if(parentRecord === undefined) return undefined;
@@ -598,7 +598,7 @@ export class RecordFactory<T extends RT> {
     return {id, record};
   }
 
-  addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number):{id: number, record: RecordNode<N>} | undefined {
+  addBlankRecord<N extends RT>(this: RecordFactory<T>, type: N, position?: number): idAndRecord | undefined {
     const record = createRecord(type);
     return this.addRecord({record, position});
   }

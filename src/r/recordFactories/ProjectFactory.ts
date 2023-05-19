@@ -6,7 +6,7 @@ import {
   VarCategory,
   VariableType,
 } from "../definitions/variables/VariableTypes";
-import { RecordFactory } from "../R/RecordFactory";
+import { RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
 import { ClipboardR, createRecord, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory } from "./SceneFactory";
@@ -49,12 +49,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    *   The corresponding variable is saved in the field var_id (of type string) in lead_gen_field
    *   These variable definitions (like name/type) shouldn't be modifiable by the user (read only = true)
    */
-  addRecord<N extends RT>(this: ProjectFactory, record: RecordNode<N>, position?: number): RecordNode<N> {
-    super.addRecord<N>(record, position);
+  addRecord<T>(this: ProjectFactory, {record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+    record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
+  }): idAndRecord | undefined {
+    super.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
     //Custom Record Types' Code
     switch (record.type) {
       case RT.scene: {
-        this.addMenuAndTourModeRecord(record.id);
+        this.addMenuAndTourModeRecord(id);
         break;
       }
       case RT.lead_gen_field: {
@@ -270,37 +272,40 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   /**
    * Override general variable defaults with the defaults specified for the given variableType
    */
-  addVariableOfType(this: ProjectFactory, variableType: VariableType, id?: number): RecordNode<variable> {
+  addVariableOfType(this: ProjectFactory, variableType: VariableType, id?: number): idAndRecord | undefined {
     const defaults = variableTypeToDefn[variableType];
-    const record = createRecord<RT.variable>(variable, id, defaults.varDefaultName);
+    const record = createRecord<RT.variable>(variable, defaults.varDefaultName);
     record.props.var_default = defaults.varDefaultValue;
     record.props.var_type = variableType;
     record.props.var_category = VarCategory.user_defined;
-    this.addRecord<RT.variable>(record);
-    return record;
+    return this.addRecord<RT.variable>({record, id});
   }
 
   /**
    * Variables linked to specific functions, that need specific fixed ids (and names)
    * Predefined variables cannot be renamed or delted by the user, and are not shown on Variables interface
    */
-  addPredefinedVariable(this: ProjectFactory, predefinedVariableName: PredefinedVariableName): RecordNode<variable> {
+  addPredefinedVariable(this: ProjectFactory, predefinedVariableName: PredefinedVariableName): idAndRecord | undefined {
     const pdvarDefaults = predefinedVariableDefaults[predefinedVariableName];
-    let record = this.getRecord(RT.variable, pdvarDefaults.id);
-    if (record === undefined) {
-      record = this.addVariableOfType(pdvarDefaults.type, pdvarDefaults.id);
-      record.props.var_category = VarCategory.predefined;
-      record.props.var_track = true;
-      record.name = predefinedVariableName;
+    let record = super.getRecord(pdvarDefaults.id, RT.variable);
+    if(record !== undefined) {
+      return {id: pdvarDefaults.id, record};
+    } else {
+      const addedRecordAndId = this.addVariableOfType(pdvarDefaults.type, pdvarDefaults.id);
+      if(addedRecordAndId !== undefined) {
+        addedRecordAndId.record.props.var_category = VarCategory.predefined;
+        addedRecordAndId.record.props.var_track = true;
+        addedRecordAndId.record.name = predefinedVariableName;
+      }
+      return addedRecordAndId;
     }
-    return record;
   }
 
-  addGlobalVariable(this: ProjectFactory, globalVar: RecordNode<RT.variable>): RecordNode<variable> | undefined {
+  addGlobalVariable(this: ProjectFactory, globalVar: RecordNode<RT.variable>, id: number): idAndRecord | undefined {
     const record = deepClone(globalVar);
     record.props.var_category = VarCategory.global;
     record.props.var_track = true;
-    return this.addRecord(globalVar);
+    return this.addRecord({record: globalVar, id});
   }
 
   /**
