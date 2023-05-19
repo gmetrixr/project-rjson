@@ -25,7 +25,7 @@ describe ("r RecordFactory tests", () => {
     const projectF = r.record(projectJson);
     projectF.changeDeepRecordName(1684391763659);
     projectF.changeDeepRecordName(1684391315311, "Variable Name Update");
-    const recordMapOfTypeVar = projectF.getRecordMapOfType(RT.variable);
+    const recordMapOfTypeVar = projectF.getRecordMap(RT.variable);
     expect(recordMapOfTypeVar["1684391763659"].name).to.be.equal(recordTypeDefinitions[RT.variable].defaultName);
     expect(recordMapOfTypeVar["1684391315311"].name).to.be.equal("Variable Name Update");
   });
@@ -82,7 +82,7 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get record map of types for a project", () => {
-    const recordMapOfType = r.record(projectJson).getRecordMapOfType(RT.variable);
+    const recordMapOfType = r.record(projectJson).getRecordMap(RT.variable);
     expect(Object.keys(recordMapOfType).length).to.be.equal(Object.keys(projectJson.records.variable).length);
     for (const rm in recordMapOfType) {
       expect(recordMapOfType[rm].type).to.be.equal(RT.variable);
@@ -94,7 +94,7 @@ describe ("r RecordFactory tests", () => {
     let allRecordMaps = {};
     const recordTypes = projectF.getRecordTypes();
     for (const type of recordTypes) {
-      const recordMap = projectF.getRecordMapOfType(type);
+      const recordMap = projectF.getRecordMap(type);
       allRecordMaps = { ...allRecordMaps, ...recordMap };
     }
     const recordMap = projectF.getRecordMap();
@@ -106,7 +106,7 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get record of type for a project", () => {
-    const record = r.record(projectJson).getRecordOfType(RT.scene, 1684325255018);
+    const record = r.record(projectJson).getRecord(1684325255018, RT.scene);
     expect(record).to.not.be.undefined;
     expect(record?.type).to.be.equal("scene");
   });
