@@ -48,9 +48,9 @@ export interface ClipboardData {
  * 
  * RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
- * getRecordMap / getDeepRecordMap -> record map of one type type or all types when no type is passed / deep record map
- * getDeepRecordMap -> Merged record map of all types in the whole tree
- * getRecord / getDeepRecord -> get subrecord of any type (level 1) - faster if type is passed / get deep record from any level
+ * getRecordMap / getDeepRecordMap -> recordMap of one type (all types when type isn't passed) / deepRecordMap of all types
+ * getRecord -> get subrecord of any type (level 1) - faster if type is passed
+ * getDeepRecord -> get a record from any depth with idOrAddress
  * 
  * SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
