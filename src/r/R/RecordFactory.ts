@@ -69,6 +69,7 @@ export interface ClipboardData {
  * cycleAllRecordIds -> Changes all ids
  * $ private getNewOrders / initializeRecordMap
  * addRecord / addBlankRecord
+ * deleteRecordsLinkedToId -> Delete subrecords at any depth which have any prop value = id
  * duplicateRecord     / deleteRecord     / changeRecordName
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
  * 
@@ -636,14 +637,23 @@ export class RecordFactory<T extends RT> {
     return {id, record: recordToDelete};
   }
 
+  deleteRecordsLinkedToId(id: number) {
+    const allRecords = this.getDeepRecordMap();
+    for(const [recordId, record] of Object.entries(allRecords)) {
+      const rf = new RecordFactory(record);
+      if(Object.values(record.props).includes(id)) {
+        const rAndP = this.getRecordAndParent(recordId);
+        if(rAndP) {
+          new RecordFactory(rAndP.p).deleteRecord(Number(recordId));
+        }
+      }
+    }
+  }
+
   deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
-
-    const recordToDelete = rAndP.r;
-    const parentRecordMapOfType = new RecordFactory(rAndP.p).getRecordMap(recordToDelete.type as RT);
-    delete parentRecordMapOfType[rAndP.id];
-    return {id: rAndP.id, record: recordToDelete};
+    return new RecordFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
   }
 
   changeRecordName<N extends RT>(id: number, newName?: string, type?: N): RecordNode<N> | undefined {

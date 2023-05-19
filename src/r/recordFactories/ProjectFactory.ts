@@ -52,7 +52,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   addRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
     record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord | undefined {
-    super.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
+    const idAndRecord = super.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
     //Custom Record Types' Code
     switch (record.type) {
       case RT.scene: {
@@ -72,7 +72,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         break;
       }
     }
-    return record;
+    return idAndRecord;
   }
 
   /**
@@ -161,64 +161,77 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
+  deleteRecord<N extends RT>(id: number, type?: N): idAndRecord | undefined {
+    const deletedIdAndRecord = super.deleteRecord(id, type);
+    this.deleteRecordsLinkedToId(id);
+    return deletedIdAndRecord;
+  }
+
+  deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord | undefined {
+    const deletedIdAndRecord = super.deleteDeepRecord(idOrAddress);
+    if(deletedIdAndRecord) {
+      this.deleteRecordsLinkedToId(deletedIdAndRecord.id);
+    }
+    return deletedIdAndRecord;
+  }
   /**
    * Ideally elements should get deleted via SceneFactory. But because we want deletion of media_upload element to delete the linked
    * variable, we do this via ProjectFactory (as only ProjectFactory has access to variables).
    */
-  deleteSceneDeepRecord<N extends RT>(sceneId: number, type: N, id: number): RecordNode<N> | undefined {
-    const sceneJson = this.getRecord(RT.scene, sceneId);
-    if (sceneJson !== undefined) {
-      const record = (new SceneFactory(sceneJson)).deleteDeepRecord(type, id);
-      if (record !== undefined) {
-        const recordsWithLinkedVariables = this.getAllRecordsForLinkedVariables([record as RecordNode<N>]);
-        this.deleteLinkedVariables(recordsWithLinkedVariables);
-        return record;
-      }
-    }
-    return;
-  }
+  // deleteSceneDeepRecord<N extends RT>(sceneId: number, type: N, id: number): RecordNode<N> | undefined {
+  //   const sceneJson = this.getRecord(RT.scene, sceneId);
+  //   if (sceneJson !== undefined) {
+  //     const record = (new SceneFactory(sceneJson)).deleteDeepRecord(type, id);
+  //     if (record !== undefined) {
+  //       const recordsWithLinkedVariables = this.getAllRecordsForLinkedVariables([record as RecordNode<N>]);
+  //       this.deleteLinkedVariables(recordsWithLinkedVariables);
+  //       return record;
+  //     }
+  //   }
+  //   return;
+  // }
 
   /** 
    * Update from previous function.
    * This has been written in Project Factory so that we can add linked variables to elements like SCORM and Media Upload
    * since only Project Factory has access to variables. 
    */
-  duplicateSceneDeepRecord<N extends RT>(sceneId: number, type: N, id: number): RecordNode<N> | undefined {
-    const sceneJson = this.getRecord(RT.scene, sceneId);
-    if (sceneJson !== undefined) {
-      const sceneF = (new SceneFactory(sceneJson));
-      const duplicatedRecord = sceneF.duplicateDeepRecord(type, id);
-      if (duplicatedRecord !== undefined) {
-        const recordsWithLinkedVariables = this.getAllRecordsForLinkedVariables([duplicatedRecord as RecordNode<N>]);
-        this.addLinkedVariables(recordsWithLinkedVariables);
-        return duplicatedRecord;
-      }
-    }
-    return;
-  }
+  // duplicateSceneDeepRecord<N extends RT>(sceneId: number, type: N, id: number): RecordNode<N> | undefined {
+  //   const sceneJson = this.getRecord(RT.scene, sceneId);
+  //   if (sceneJson !== undefined) {
+  //     const sceneF = (new SceneFactory(sceneJson));
+  //     const duplicatedRecord = sceneF.duplicateDeepRecord(type, id);
+  //     if (duplicatedRecord !== undefined) {
+  //       const recordsWithLinkedVariables = this.getAllRecordsForLinkedVariables([duplicatedRecord as RecordNode<N>]);
+  //       this.addLinkedVariables(recordsWithLinkedVariables);
+  //       return duplicatedRecord;
+  //     }
+  //   }
+  //   return;
+  // }
 
   /** 
    * Override from record factory
    * Since only Project Factory has access to variables, get the deep records in the override and add the linked variables for SCORM and Media Upload.
    */
-  duplicateDeepRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
-    const duplicatedRecord = super.duplicateDeepRecord(type, id);
+  // duplicateDeepRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
+  //   const duplicatedRecord = super.duplicateDeepRecord(type, id);
 
-    if (duplicatedRecord !== undefined) {
-      switch (type) {
-        case RT.scene: {
-          const sceneF = new SceneFactory(duplicatedRecord);
-          const elements = sceneF.getAllDeepChildrenWithFilter(RT.element, e => en.elementsWithLinkedVariables.includes(e.props.element_type as ElementType));
-          this.addLinkedVariables(elements as RecordNode<N>[]);
-          this.addMenuAndTourModeRecord(duplicatedRecord.id);
-          break;
-        }
-      }
-      return duplicatedRecord;
-    }
+  //   if (duplicatedRecord !== undefined) {
+  //     switch (type) {
+  //       case RT.scene: {
+  //         const sceneF = new SceneFactory(duplicatedRecord);
+  //         const elements = sceneF.getAllDeepChildrenWithFilter(RT.element, e => en.elementsWithLinkedVariables.includes(e.props.element_type as ElementType));
+  //         this.addLinkedVariables(elements as RecordNode<N>[]);
+  //         this.addMenuAndTourModeRecord(duplicatedRecord.id);
+  //         break;
+  //       }
+  //     }
+  //     return duplicatedRecord;
+  //   }
 
-    return;
-  }
+  //   return;
+  // }
 
   /**
    * Adding custom logic for:
@@ -226,47 +239,47 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * scene: Should delete from menu and tour_mode lists also
    * lead_gen_field: Should delete the linked autogenerated variable
    */
-  deleteRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
-    switch (type) {
-      case RT.variable: {
-        for (const scene of this.getRecords(RT.scene)) {
-          (new SceneFactory(scene)).deleteRulesForCoId(id);
-        }
-        break;
-      }
-      case RT.scene: {
-        const scene = this.getRecord(RT.scene, id);
-        if (scene !== undefined) {
-          const sceneF = new SceneFactory(scene);
-          const childrenWithLinkedVariables = sceneF.getAllDeepChildrenWithFilter(RT.element, e => en.elementsWithLinkedVariables.includes(e.props.element_type as ElementType));
-          this.deleteLinkedVariables(childrenWithLinkedVariables);
-          for (const record of this.getRecords(RT.menu)) {
-            if ((new RecordFactory(record)).get(rtp.menu.menu_scene_id) === id) {
-              this.deleteRecord(RT.menu, record.id);
-            }
-          }
-          for (const record of this.getRecords(RT.tour_mode)) {
-            if ((new RecordFactory(record)).get(rtp.tour_mode.tour_mode_scene_id) === id) {
-              this.deleteRecord(RT.tour_mode, record.id);
-            }
-          }
-        }
-        break;
-      }
-      case RT.lead_gen_field: {
-        const leadGenField = this.getRecord(RT.lead_gen_field, id);
-        const varId = leadGenField?.props.var_id as number;
-        if (varId !== undefined) {
-          const variable = this.getRecord(RT.variable, varId);
-          if (variable !== undefined) {
-            this.deleteRecord(RT.variable, varId);
-          }
-        }
-        break;
-      }
-    }
-    return super.deleteRecord(type, id);
-  }
+  // deleteRecord<N extends RT>(type: N, id: number): RecordNode<N> | undefined {
+  //   switch (type) {
+  //     case RT.variable: {
+  //       for (const scene of this.getRecords(RT.scene)) {
+  //         (new SceneFactory(scene)).deleteRulesForCoId(id);
+  //       }
+  //       break;
+  //     }
+  //     case RT.scene: {
+  //       const scene = this.getRecord(RT.scene, id);
+  //       if (scene !== undefined) {
+  //         const sceneF = new SceneFactory(scene);
+  //         const childrenWithLinkedVariables = sceneF.getAllDeepChildrenWithFilter(RT.element, e => en.elementsWithLinkedVariables.includes(e.props.element_type as ElementType));
+  //         this.deleteLinkedVariables(childrenWithLinkedVariables);
+  //         for (const record of this.getRecords(RT.menu)) {
+  //           if ((new RecordFactory(record)).get(rtp.menu.menu_scene_id) === id) {
+  //             this.deleteRecord(RT.menu, record.id);
+  //           }
+  //         }
+  //         for (const record of this.getRecords(RT.tour_mode)) {
+  //           if ((new RecordFactory(record)).get(rtp.tour_mode.tour_mode_scene_id) === id) {
+  //             this.deleteRecord(RT.tour_mode, record.id);
+  //           }
+  //         }
+  //       }
+  //       break;
+  //     }
+  //     case RT.lead_gen_field: {
+  //       const leadGenField = this.getRecord(RT.lead_gen_field, id);
+  //       const varId = leadGenField?.props.var_id as number;
+  //       if (varId !== undefined) {
+  //         const variable = this.getRecord(RT.variable, varId);
+  //         if (variable !== undefined) {
+  //           this.deleteRecord(RT.variable, varId);
+  //         }
+  //       }
+  //       break;
+  //     }
+  //   }
+  //   return super.deleteRecord(type, id);
+  // }
 
   //VARIABLE SPECIFIC FUNCTIONS
   /**
