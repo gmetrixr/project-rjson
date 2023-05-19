@@ -48,13 +48,13 @@ export interface ClipboardData {
  * 
  * RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
+ * getRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
  * getRecordMap / getDeepRecordMap -> recordMap of one type (all types when type isn't passed) / deepRecordMap of all types
- * getRecord -> get subrecord of any type (level 1) - faster if type is passed
- * getDeepRecord -> get a record from any depth with idOrAddress
+ * getRecordEntries / getRecords / getRecordIds -> get list of level 1 records/ids/entries, of an optional type
  * 
  * SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
- * getSortedRecordEntriesOfType / getSortedIdsOfType / getSortedRecordsOfType
+ * getSortedRecordEntries / getSortedIds / getSortedRecords
  * 
  * ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
@@ -192,6 +192,19 @@ export class RecordFactory<T extends RT> {
     }
   }
 
+  getRecordEntries<N extends RT>(this: RecordFactory<T>, type?: N): [number, RecordNode<N>][] {
+    return Object.entries(this.getRecordMap(type))
+            .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+  }
+
+  getRecords<N extends RT>(this: RecordFactory<T>, type?: N): RecordNode<N>[] {
+    return Object.values(this.getRecordMap(type));
+  }
+
+  getRecordIds<N extends RT>(this: RecordFactory<T>, type?: N): number[] {
+    return Object.keys(this.getRecordMap(type)).map(i => Number(i));
+  }
+
   /**
    * A flattened record map of all ids and records in a tree, of all types
    * If there are two records with the same id, this function will fail
@@ -258,7 +271,7 @@ export class RecordFactory<T extends RT> {
   }
 
   /** ORDERED entries of id, records. Returns ids as strings. */
-  getSortedRecordEntriesOfType(this: RecordFactory<T>, type: RT): [number, RecordNode<RT>][] {
+  getSortedRecordEntries(this: RecordFactory<T>, type: RT): [number, RecordNode<RT>][] {
     this.ensureOrderKeyPresentOfType(type);
     const entriesArray = Object.entries(this.getRecordMap(type));
     //We know that at this point order is not undefined. So we just forcefully cast it to a number.
@@ -269,14 +282,14 @@ export class RecordFactory<T extends RT> {
   }
 
   /** ORDERED ids */
-  getSortedRecordIdsOfType(this: RecordFactory<T>, type: RT): number[] {
-    const entriesArray = this.getSortedRecordEntriesOfType(type);
+  getSortedRecordIds(this: RecordFactory<T>, type: RT): number[] {
+    const entriesArray = this.getSortedRecordEntries(type);
     return entriesArray.map(nodeEntry => nodeEntry[0]);
   }
 
   /** ORDERED records */
-  getSortedRecordsOfType<N extends RT>(this: RecordFactory<T>, type: N): RecordNode<N>[] {
-    const entriesArray = this.getSortedRecordEntriesOfType(type);
+  getSortedRecords<N extends RT>(this: RecordFactory<T>, type: N): RecordNode<N>[] {
+    const entriesArray = this.getSortedRecordEntries(type);
     return entriesArray.map(nodeEntry => nodeEntry[1]);
   }
 
@@ -569,7 +582,7 @@ export class RecordFactory<T extends RT> {
     const type = <RT> record.type;
     if(!this.initializeRecordMap(type)) return undefined;
     const recordMap = this.getRecordMap(type);
-    const recordsArray = this.getSortedRecordsOfType(type);
+    const recordsArray = this.getSortedRecords(type);
     record.order = this.getNewOrders(recordsArray, 1, position)[0];
     if(!dontCycleSubRecordIds) {
       //Cycle all ids in the new record being added so that there are no id clashes
@@ -581,7 +594,7 @@ export class RecordFactory<T extends RT> {
     }
     recordMap[id] = record;
     //This fn make sure that the name isn't a duplicate one, and also that its given only if its required
-    this.changeRecordName(type, id, record.name);
+    this.changeRecordName(id, record.name, type);
     return {id, record};
   }
 
@@ -590,13 +603,13 @@ export class RecordFactory<T extends RT> {
     return this.addRecord({record, position});
   }
 
-  duplicateRecord<N extends RT>(this: RecordFactory<T>, type: RT, id: number): idAndRecord | undefined {
+  duplicateRecord<N extends RT>(this: RecordFactory<T>, type: N, id: number): idAndRecord | undefined {
     const orig = this.getRecord(id, type);
     if (orig === undefined) return undefined;
     const clonedJson = deepClone(orig);
 
     //get the position
-    const ids = this.getSortedRecordIdsOfType(<RT> orig.type);
+    const ids = this.getSortedRecordIds(<RT> orig.type);
     const origPositionIndex = ids.indexOf(id);
 
     //addRecord makes sure that the id of the record itself isn't duplicate amongst its siblings
@@ -614,7 +627,7 @@ export class RecordFactory<T extends RT> {
     return rAndP;
   }
 
-  deleteRecord<T>(this: RecordFactory<RT>, type: RT, id: number): idAndRecord | undefined {
+  deleteRecord<N extends RT>(this: RecordFactory<RT>, id: number, type?: N): idAndRecord | undefined {
     const recordToDelete = this.getRecord(id, type);
     if(recordToDelete === undefined) return undefined;
 
@@ -633,12 +646,12 @@ export class RecordFactory<T extends RT> {
     return {id: rAndP.id, record: recordToDelete};
   }
 
-  changeRecordName<N extends RT>(this: RecordFactory<T>, type: N, id: number, newName?: string): RecordNode<N> | undefined {
+  changeRecordName<N extends RT>(this: RecordFactory<T>, id: number, newName?: string, type?: N): RecordNode<N> | undefined {
     const record = this.getRecord(id, type);
     if (record === undefined) {
       return undefined;
     }
-    const defaultName = recordTypeDefinitions[type].defaultName;
+    const defaultName = recordTypeDefinitions[record.type as RT].defaultName;
     if (defaultName === undefined) {
       //This means that this type doesn't use name
       return undefined;
@@ -662,7 +675,7 @@ export class RecordFactory<T extends RT> {
   changeDeepRecordName<N extends RT>(this: RecordFactory<T>, idOrAddress: idOrAddress, newName?: string): RecordNode<N> | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined || rAndP.r === undefined) return undefined;
-    return new RecordFactory(rAndP.p).changeRecordName(rAndP.r.type as RT, rAndP.id, newName);
+    return new RecordFactory(rAndP.p).changeRecordName(rAndP.id, newName, rAndP.r.type as RT);
   }
 
   /**
@@ -680,7 +693,7 @@ export class RecordFactory<T extends RT> {
    * Final Ord:    1,   5.3, 3,   5.6, 5,   6  ] 
    */
   reorderRecords(this: RecordFactory<T>, type: RT, ids: number[], position: number) {
-    const sortedRecords = this.getSortedRecordsOfType(type);
+    const sortedRecords = this.getSortedRecords(type);
     const allOrders = this.getNewOrders(sortedRecords, ids.length, position);
     for(let i=0; i<sortedRecords.length; i++) {
       sortedRecords[i].order = allOrders[i];
@@ -697,7 +710,7 @@ export class RecordFactory<T extends RT> {
     const deletedIdAndRecords: idAndRecord[] = [];
     for(const sourceRAndP of (sourceRAndPArray as rAndP[])) {
       const parentRF = new RecordFactory(sourceRAndP.p);
-      const deletedIdAndRecord = parentRF.deleteRecord(sourceRAndP.r.type as RT, sourceRAndP.id);
+      const deletedIdAndRecord = parentRF.deleteRecord(sourceRAndP.id, sourceRAndP.r.type as RT);
       if(deletedIdAndRecord !== undefined) {
         deletedIdAndRecords.push(deletedIdAndRecord);
       }

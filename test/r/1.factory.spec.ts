@@ -124,7 +124,7 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get sorted record entries of type for a project", () => {
-    const sortedRecordEntries = r.record(projectJson).getSortedRecordEntriesOfType(RT.variable);
+    const sortedRecordEntries = r.record(projectJson).getSortedRecordEntries(RT.variable);
     for (let i = 0; i < sortedRecordEntries.length - 1; i++) {
       expect(sortedRecordEntries[i][1].order).to.be.lessThan(sortedRecordEntries[i+1][1].order as number);
     }
@@ -132,14 +132,14 @@ describe ("r RecordFactory tests", () => {
 
   it ("should get sorted ids of type for a project", () => {
     const projectF = r.record(projectJson);
-    const sortedIds = projectF.getSortedRecordIdsOfType(RT.scene);
+    const sortedIds = projectF.getSortedRecordIds(RT.scene);
     for (let i = 0; i < sortedIds.length - 1; i++) {
       expect(projectF.getRecord(sortedIds[i])?.order).to.be.lessThan(projectF.getRecord(sortedIds[i+1])?.order as number);
     }
   });
 
   it ("should get sorted records of type for a project", () => {
-    const sortedRecords = r.record(projectJson).getSortedRecordsOfType(RT.variable);
+    const sortedRecords = r.record(projectJson).getSortedRecords(RT.variable);
     for (let i = 0; i < sortedRecords.length - 1; i++) {
       expect(sortedRecords[i].order).to.be.lessThan(sortedRecords[i+1].order as number);
     }
