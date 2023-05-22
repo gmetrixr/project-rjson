@@ -1,9 +1,76 @@
 import { expect } from "chai";
-import { RT, RecordFactory, createRecord, recordTypeDefinitions, rtp } from "../../src/r/R";
+import { RT, RecordFactory, RecordNode, createRecord, recordTypeDefinitions, rtp } from "../../src/r/R";
 import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/migratedOldProject.json";
 import deleteRecordsLinkedToIdJson from "./jsons/r3fJsons/project/deleteRecordsLinkedToId.json";
+
+const clipboardData = {
+  nodes: [
+    {
+      id: 8959215053928812,
+      record: {
+        type: 'scene',
+        name: 'Zaphod',
+        order: 1,
+        props: {},
+        records: {
+          element: {
+            '8755535121841602': {
+              type: 'element',
+              name: 'Cube',
+              order: 2,
+              props: { element_type: 'cube', wireframe: true }
+            },
+            '1817839176130281': {
+              type: 'element',
+              name: 'Pano Image',
+              order: 1,
+              props: { element_type: 'pano_image' }
+            },
+            '5107063617281648': {
+              type: 'element',
+              name: 'Polygon',
+              order: 3,
+              props: { element_type: 'polygon' }
+            }
+          },
+          rule: {
+            '1806034342096145': {
+              name: 'Rule the world',
+              type: 'rule',
+              props: { tracked: false },
+              records: {
+                when_event: {
+                  '9952587783980130': {
+                    type: 'when_event',
+                    props: {
+                      co_id: '1684392104132',
+                      event: 'on_click',
+                      co_type: 'cube',
+                      properties: []
+                    }
+                  }
+                },
+                then_action: {
+                  '5855176384035994': {
+                    type: 'then_action',
+                    props: {
+                      co_id: '1684404927844',
+                      co_type: 'polygon',
+                      action: 'toggle_showhide',
+                      properties: []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+};
 
 describe ("r RecordFactory tests", () => {
   it ("should create a new project", () => {
@@ -367,5 +434,53 @@ describe ("r RecordFactory tests", () => {
     projectF.reorderRecords(RT.variable, [1681706075301, 1681707853893, -12], 4);
     const sortedRecords = projectF.getSortedRecordIds(RT.variable);
     console.log("=============> sorted records: ", sortedRecords);
+  });
+
+  it ("should copy deep records for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.copyDeepRecords([1672210242461, 1672209618275], 1672316014426);
+    const record = projectF.getDeepRecord(1672316014426) as RecordNode<RT>;
+    const rF = new RecordFactory(record);
+    const recordMap = rF.getRecordMap();
+    const record1 = projectF.getDeepRecord(1672210242461);
+    const record2 = projectF.getDeepRecord(1672209618275);
+    let found1 = false;
+    let found2 = false;
+    for (const key in recordMap) {
+      if (recordMap[key].name === record1?.name) {
+        found1 = true;
+      }
+
+      if (recordMap[key].name === record2?.name) {
+        found2 = true;
+      }
+    }
+    expect(found1).to.be.equal(true);
+    expect(found2).to.be.equal(true);
+  });
+
+  it ("should move deep records for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.moveDeepRecords([1671081211191], 1670508893305);
+    const rAndP = projectF.getRecordAndParent(1671081211191);
+    const record = projectF.getDeepRecord(1670508893305);
+    expect(rAndP?.p.name).to.be.equal(record?.name);
+    expect(rAndP?.p.type).to.be.equal(record?.type);
+  });
+
+  it ("should copy to clipboard for a project", () => {
+    const projectF = new RecordFactory(projectJson);
+    const recordIds = projectF.getRecordIds(RT.scene);
+    const clipboard = projectF.copyToClipboard([ recordIds[0] ]);
+    const sceneCopied = clipboard.nodes.find(r => r.id === recordIds[0]);
+    console.dir(clipboard, { depth: null });
+    expect(sceneCopied).not.to.equal(null);
+  });
+
+  it ("should past from clipboard for a project", () => {
+    const projectF = new RecordFactory(projectJson);
+    projectF.pasteFromClipboard("", clipboardData);
+    const recordMap = projectF.getRecordMap(RT.scene);
+    console.log("=============> record map: ", recordMap);
   });
 });
