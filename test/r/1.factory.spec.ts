@@ -256,4 +256,16 @@ describe ("r RecordFactory tests", () => {
     expect(record).to.be.undefined;
     expect(updatedRecord).to.not.be.undefined;
   });
+
+  it ("should cycle all record ids for a project", () => {
+    const projectF = new RecordFactory(projectJson);
+    const recordIds = projectF.getRecordIds();
+    console.log("=============> record ids: ", recordIds);
+    projectF.cycleAllSubRecordIds();
+    for (const id of recordIds) {
+      const recordAtId = projectF.getDeepRecord(id);
+      console.log("=============> record at id: ", recordAtId);
+      expect(recordAtId).to.be.undefined;
+    }
+  });
 });
