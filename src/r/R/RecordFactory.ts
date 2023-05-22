@@ -381,12 +381,12 @@ export class RecordFactory<T extends RT> {
     for(const [key, value] of Object.entries(recordMap)) {
       if(id === Number(key)) {
         //Found it!!! return the rAndP object
-        const lastEntry: idAndRecord = {id: Number(key), record: recordMap[id]};
+        const lastEntry: idAndRecord = {id: Number(key), record: value};
         return [lastEntry];
       }
       const breadCrumbArray = new RecordFactory(value).getBreadCrumbsWithId(id);
       if(breadCrumbArray !== undefined) {
-        const currentEntry: idAndRecord = {id: Number(key), record: recordMap[id]};
+        const currentEntry: idAndRecord = {id: Number(key), record: value};
         breadCrumbArray.splice(0, 0, currentEntry);
         return breadCrumbArray;
       }
