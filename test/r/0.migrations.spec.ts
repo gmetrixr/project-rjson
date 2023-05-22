@@ -7,6 +7,7 @@ import deploymentJson from "./jsons/deployment.json";
 import oldProjectJson from "./jsons/oldProject.json";
 import newtonStoreJson from "./jsons/newtonStore.json";
 import manishMalhotraJson from "./jsons/manishMalhotra.json";
+import deleteRecordsLinkedToIdJson from "./jsons/deleteRecordsLinkedToId.json";
 
 describe ("r Migration tests", () => {
   it ("should create new deployment", () => {
@@ -19,6 +20,7 @@ describe ("r Migration tests", () => {
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/newton.json", JSON.stringify(migrateProject(newtonStoreJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/manish.json", JSON.stringify(migrateProject(manishMalhotraJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/old.json", JSON.stringify(migrateProject(oldProjectJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/deleteRecordsLinkedToId.json", JSON.stringify(migrateProject(deleteRecordsLinkedToIdJson)));
     expect(true).to.be.true;
   });
 });

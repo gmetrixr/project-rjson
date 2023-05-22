@@ -3,6 +3,7 @@ import { RT, RecordFactory, createRecord, recordTypeDefinitions, rtp } from "../
 import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/migratedOldProject.json";
+import deleteRecordsLinkedToIdJson from "./jsons/r3fJsons/project/deleteRecordsLinkedToId.json";
 
 describe ("r RecordFactory tests", () => {
   it ("should create a new project", () => {
@@ -239,9 +240,12 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get breadcrumbs at id for a project", () => {
-    const projectF = new RecordFactory(migratedOldProjectJson);
-    const breadcrumbs = projectF.getBreadCrumbs(1672209618275);
-    console.log("=============> breadcrumbs: ", breadcrumbs);
+    const breadcrumbs = new RecordFactory(migratedOldProjectJson).getBreadCrumbs(1672209618275);
+    expect(breadcrumbs?.length).to.be.equal(3);
+  });
+
+  it ("should get breadcrumbs at address for a project", () => {
+    const breadcrumbs = new RecordFactory(migratedOldProjectJson).getBreadCrumbs("scene:1670509178879|element:1672210857929|element:1672209618275");
     expect(breadcrumbs?.length).to.be.equal(3);
   });
 
@@ -250,9 +254,6 @@ describe ("r RecordFactory tests", () => {
     const updatedRecordId = projectF.changeDeepRecordId(1684404927844);
     const record = projectF.getDeepRecord(1684404927844);
     const updatedRecord = projectF.getDeepRecord(updatedRecordId);
-    console.log("=============> updated record: ", updatedRecordId);
-    console.log("=============> record: ", record);
-    console.log("=============> new record: ", updatedRecord);
     expect(record).to.be.undefined;
     expect(updatedRecord).to.not.be.undefined;
   });
@@ -260,12 +261,57 @@ describe ("r RecordFactory tests", () => {
   it ("should cycle all record ids for a project", () => {
     const projectF = new RecordFactory(projectJson);
     const recordIds = projectF.getRecordIds();
-    console.log("=============> record ids: ", recordIds);
     projectF.cycleAllSubRecordIds();
     for (const id of recordIds) {
       const recordAtId = projectF.getDeepRecord(id);
-      console.log("=============> record at id: ", recordAtId);
       expect(recordAtId).to.be.undefined;
     }
+  });
+
+  it ("should add scene for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    const scene1 = createRecord(RT.scene);
+    const idAndRecord = projectF.addRecord({ record: scene1, position: 0 });
+    expect(idAndRecord?.record.type).to.be.equal(RT.scene);
+    const scene2 = createRecord(RT.scene);
+    const idAndRecord2 = projectF.addRecord({ record: scene2, position: 1 });
+    expect(idAndRecord2?.record.type).to.be.equal(RT.scene);
+    const sortedSceneIds = projectF.getSortedRecordIds(RT.scene);
+    expect(sortedSceneIds[0]).to.be.equal(idAndRecord?.id);
+    expect(sortedSceneIds[1]).to.be.equal(idAndRecord2?.id);
+  });
+
+  it ("should add element at parent with id for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    const element = createRecord(RT.element);
+    const idAndRecord = projectF.addRecord({ record: element, parentIdOrAddress: 1670508893305, dontCycleSubRecordIds: true });
+    expect(idAndRecord).to.not.be.undefined;
+    const recordAndParent = projectF.getRecordAndParent(idAndRecord?.id as number);
+    expect(idAndRecord?.id as number).to.be.equal(recordAndParent?.id as number);
+    expect(recordAndParent?.r.type).to.be.equal(RT.element);
+  });
+
+  it ("should add blank record for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    const idAndRecord = projectF.addBlankRecord(RT.variable);
+    const idAndRecord2 = projectF.addBlankRecord(RT.variable, 5);
+    const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
+    expect(sortedRecordIds).to.include(idAndRecord?.id);
+    expect(sortedRecordIds).to.include(idAndRecord?.id);
+    expect(sortedRecordIds[sortedRecordIds.length - 1]).to.be.equal(idAndRecord?.id);
+    expect(sortedRecordIds[5]).to.be.equal(idAndRecord2?.id);
+  });
+
+  it ("should delete records linked to id for a project", () => {
+    const projectF = new RecordFactory(deleteRecordsLinkedToIdJson);
+    projectF.deleteRecordsLinkedToId(1684747381632);
+    const recordMap = projectF.getDeepRecordMap();
+    let found = false;
+    for (const key in recordMap) {
+      if (recordMap[key].type === RT.when_event) {
+        found = true;
+      }
+    }
+    expect(found).to.be.equal(false);
   });
 });

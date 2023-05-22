@@ -14,7 +14,7 @@
     "@comment TEST": "Useful for testing",
     "check": "./node_modules/.bin/tsc --noEmit",
     "lint": "./node_modules/.bin/eslint --ext \".ts,.tsx\" ./src ",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --slow 0",
     "test-debug": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --inspect-brk=0.0.0.0:3601 --color true --timeout 999999",
     "watch-test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -w",
     "circular": "npx madge --circular --extensions ts src/index.ts",
