@@ -480,16 +480,18 @@ export class RecordFactory<T extends RT> {
       }
     }
     
-    const recordMap = this.getRecordMap();
-    for(const [key, value] of Object.entries(recordMap)) {
-      //In case this child is the record whose id is to be changed, change it
-      if(id === Number(key)) {
-        recordMap[newId] = recordMap[id];
-        delete recordMap[id];
+    for (const type of this.getRecordTypes()) {
+      const recordMapOfType = this.getRecordMap(type);
+      for(const [key, value] of Object.entries(recordMapOfType)) {
+        if(id === Number(key)) {
+          recordMapOfType[newId] = recordMapOfType[id];
+          delete recordMapOfType[id];
+        }
+        //Go deeper and change all references in sub-records also (and check if the id exists deeper also)
+        new RecordFactory(value).changeDeepRecordId(id, newId);  
       }
-      //Go deeper and change all references in sub-records also (and check if the id exists deeper also)
-      new RecordFactory(value).changeDeepRecordId(id, newId);
     }
+
     return newId;
   }
 
