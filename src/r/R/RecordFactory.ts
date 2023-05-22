@@ -233,9 +233,12 @@ export class RecordFactory<T extends RT> {
     }
   }
 
+  /** if idOrAddress is "", it refers to the current node */
   getDeepRecord(idOrAddress: idOrAddress): RecordNode<RT> | undefined {
     if(typeof idOrAddress === "number") {
       return this.getDeepRecordMap()[idOrAddress];
+    } else if (idOrAddress === "") { //blank address refers to self record
+      return this._json;
     } else {
       return this.getRecordAndParentWithAddress(idOrAddress)?.r;
     }
@@ -706,13 +709,10 @@ export class RecordFactory<T extends RT> {
   reorderRecords(type: RT, ids: number[], position: number) {
     const sortedRecords = this.getSortedRecords(type);
     const newOrders = this.getNewOrders(sortedRecords, ids.length, position);
-    const sortedRecordEntries = this.getSortedRecordEntries(type);
+    const recordMap = this.getRecordMap(type);
     let n = 0;
-    for(let i=0; i<sortedRecordEntries.length; i++) {
-      const [id, record] = sortedRecordEntries[i];
-      if(ids.includes(id)) {
-        record.order = newOrders[n++];
-      }
+    for(let id of ids) {
+      recordMap[id].order = newOrders[n++]
     }
   }
 
