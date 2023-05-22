@@ -431,11 +431,11 @@ describe ("r RecordFactory tests", () => {
 
   it ("should reorder records for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    projectF.getRecordEntries(RT.variable).forEach(([k,v]) => console.log(k, v.order));
     projectF.reorderRecords(RT.variable, [1681706075301, 1681707853893, -12], 4);
-    projectF.getRecordEntries(RT.variable).forEach(([k,v]) => console.log(k, v.order));
-    const sortedRecords = projectF.getSortedRecordIds(RT.variable);
-    console.log("=============> sorted records: ", sortedRecords);
+    const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
+    expect(sortedRecordIds[3]).to.be.equal(1681706075301);
+    expect(sortedRecordIds[4]).to.be.equal(1681707853893);
+    expect(sortedRecordIds[5]).to.be.equal(-12);
   });
 
   it ("should copy deep records for a project", () => {
@@ -475,14 +475,14 @@ describe ("r RecordFactory tests", () => {
     const recordIds = projectF.getRecordIds(RT.scene);
     const clipboard = projectF.copyToClipboard([ recordIds[0] ]);
     const sceneCopied = clipboard.nodes.find(r => r.id === recordIds[0]);
-    console.dir(clipboard, { depth: null });
     expect(sceneCopied).not.to.equal(null);
   });
 
-  it ("should past from clipboard for a project", () => {
+  it ("should paste from clipboard for a project", () => {
     const projectF = new RecordFactory(projectJson);
+    const scenesBeforePasting = projectF.getRecordIds(RT.scene);
     projectF.pasteFromClipboard("", clipboardData);
-    const recordMap = projectF.getRecordMap(RT.scene);
-    console.log("=============> record map: ", recordMap);
+    const scenesAfterPasting = projectF.getRecordIds(RT.scene);
+    expect(scenesBeforePasting.length + 1).to.be.equal(scenesAfterPasting.length);
   });
 });
