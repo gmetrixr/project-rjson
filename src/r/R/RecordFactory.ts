@@ -514,7 +514,7 @@ export class RecordFactory<T extends RT> {
    * if its inserted at [5], order = order of the last entry + 1 (default, when position is undefined)
    * if its inserted at [x], order = ( order of [x - 1] entry + order of [x] entry ) / 2 
    */
-  private getNewOrders<N extends RT>(sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
+  private getNewOrders(sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
     let order = [];
     let minOrder = sortedRecords[0]?.order ?? 0;
     let maxOrder = sortedRecords[sortedRecords.length - 1]?.order ?? 0;
@@ -705,9 +705,14 @@ export class RecordFactory<T extends RT> {
    */
   reorderRecords(type: RT, ids: number[], position: number) {
     const sortedRecords = this.getSortedRecords(type);
-    const allOrders = this.getNewOrders(sortedRecords, ids.length, position);
-    for(let i=0; i<sortedRecords.length; i++) {
-      sortedRecords[i].order = allOrders[i];
+    const newOrders = this.getNewOrders(sortedRecords, ids.length, position);
+    const sortedRecordEntries = this.getSortedRecordEntries(type);
+    let n = 0;
+    for(let i=0; i<sortedRecordEntries.length; i++) {
+      const [id, record] = sortedRecordEntries[i];
+      if(ids.includes(id)) {
+        record.order = newOrders[n++];
+      }
     }
   }
 

@@ -364,7 +364,9 @@ describe ("r RecordFactory tests", () => {
 
   it ("should reorder records for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.getRecordEntries(RT.variable).forEach(([k,v]) => console.log(k, v.order));
     projectF.reorderRecords(RT.variable, [1681706075301, 1681707853893, -12], 4);
+    projectF.getRecordEntries(RT.variable).forEach(([k,v]) => console.log(k, v.order));
     const sortedRecords = projectF.getSortedRecordIds(RT.variable);
     console.log("=============> sorted records: ", sortedRecords);
   });
