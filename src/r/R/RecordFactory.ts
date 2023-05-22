@@ -634,7 +634,7 @@ export class RecordFactory<T extends RT> {
     const recordToDelete = this.getRecord(id, type);
     if(recordToDelete === undefined) return undefined;
 
-    const recordMapOfType = this.getRecordMap(type);
+    const recordMapOfType = this.getRecordMap(recordToDelete.type as RT);
     delete recordMapOfType[id];
     return {id, record: recordToDelete};
   }
