@@ -49,8 +49,8 @@ export interface ClipboardData {
  * RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
  * getRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
- * getRecordMap / getDeepRecordMap -> recordMap of one type (all types when type isn't passed) / deepRecordMap of all types
- * getRecordEntries / getRecords / getRecordIds -> get list of level 1 records/ids/entries, of an optional type
+ * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
+ * getDeepRecordMap / getDeepRecordEntries
  * 
  * SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
@@ -206,25 +206,40 @@ export class RecordFactory<T extends RT> {
     return Object.keys(this.getRecordMap(type)).map(i => Number(i));
   }
 
-  /**
-   * A flattened record map of all ids and records in a tree, of all types
-   * If there are two records with the same id, this function will fail
-   * Uses BFS within a type, and DFS across types
-   * The optional argument recordMap exists only for its internal functioning
-   */
-  getDeepRecordMap(recordMap?: RecordMapGeneric): RecordMapGeneric {
+  private getDeepRecordMapInternal(recordMap?: RecordMapGeneric): RecordMapGeneric {
     if(recordMap === undefined) recordMap = {};
     for (const type of this.getRecordTypes()) {
       const recordMapOfType = this.getRecordMap(type);
       Object.assign(recordMap, recordMapOfType);
 
       for(const record of Object.values(recordMapOfType)) {
-        new RecordFactory(record).getDeepRecordMap(recordMap); //records get added to the same object
+        new RecordFactory(record).getDeepRecordMapInternal(recordMap); //records get added to the same object
       }
     }
     return recordMap;
   }
 
+  /**
+   * A flattened record map of all ids and records in a tree, of all types
+   * If there are two records with the same id, this function will fail
+   * Uses BFS within a type, and DFS across types
+   * The optional argument recordMap exists only for its internal functioning
+   */
+  getDeepRecordMap(): RecordMapGeneric {
+    return this.getDeepRecordMapInternal();
+  }
+
+  getDeepRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
+    const entries = Object.entries(this.getDeepRecordMap())
+      .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+    if(type === undefined) {
+      return entries;
+    } else {
+      return entries.filter(([key, value]) => (value.type === (type as RT)));
+    }
+  }
+
+  /** Sending type also makes getRecord faster */
   getRecord(id: number, type?: RT): RecordNode<RT> | undefined {
     if(type == undefined) {
       return this.getRecordMap()[id];
@@ -500,9 +515,7 @@ export class RecordFactory<T extends RT> {
 
   /** Change all sub-record ids (of sub-records) in this RecordNode */
   cycleAllSubRecordIds(): void {
-    //Get all record ids
-    const allRecordsMap = this.getDeepRecordMap();
-    for(const key of Object.keys(allRecordsMap)) {
+    for(const [key, value] of this.getDeepRecordEntries()) {
       this.changeDeepRecordId(Number(key));
     }
   }
@@ -643,8 +656,7 @@ export class RecordFactory<T extends RT> {
   }
 
   deleteRecordsLinkedToId(id: number) {
-    const allRecords = this.getDeepRecordMap();
-    for(const [recordId, record] of Object.entries(allRecords)) {
+    for(const [recordId, record] of this.getDeepRecordEntries()) {
       if(Object.values(record.props).includes(id)) {
         const rAndP = this.getRecordAndParent(Number(recordId));
         if(rAndP) {
