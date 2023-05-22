@@ -233,9 +233,12 @@ export class RecordFactory<T extends RT> {
     }
   }
 
+  /** if idOrAddress is "", it refers to the current node */
   getDeepRecord(idOrAddress: idOrAddress): RecordNode<RT> | undefined {
     if(typeof idOrAddress === "number") {
       return this.getDeepRecordMap()[idOrAddress];
+    } else if (idOrAddress === "") { //blank address refers to self record
+      return this._json;
     } else {
       return this.getRecordAndParentWithAddress(idOrAddress)?.r;
     }
