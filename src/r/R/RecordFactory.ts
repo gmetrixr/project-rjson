@@ -642,9 +642,8 @@ export class RecordFactory<T extends RT> {
   deleteRecordsLinkedToId(id: number) {
     const allRecords = this.getDeepRecordMap();
     for(const [recordId, record] of Object.entries(allRecords)) {
-      const rf = new RecordFactory(record);
       if(Object.values(record.props).includes(id)) {
-        const rAndP = this.getRecordAndParent(recordId);
+        const rAndP = this.getRecordAndParent(Number(recordId));
         if(rAndP) {
           new RecordFactory(rAndP.p).deleteRecord(Number(recordId));
         }
