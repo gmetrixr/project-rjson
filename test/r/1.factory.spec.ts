@@ -314,4 +314,51 @@ describe ("r RecordFactory tests", () => {
     }
     expect(found).to.be.equal(false);
   });
+
+  it ("should delete record for a project", () => {
+    const projectF = new RecordFactory(projectJson);
+    const scenes = projectF.getRecordMap(RT.scene);
+    const sceneId = Number(Object.keys(scenes)[1])
+    projectF.deleteRecord(sceneId);
+    const scene = projectF.getRecord(sceneId);
+    expect(scene).to.be.undefined;
+  });
+
+  it ("should delete deep record for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.deleteDeepRecord(1672315364450);
+    projectF.deleteDeepRecord("scene:1670509178879|element:1672316014426|element:1672315601428");
+    const record1 = projectF.getDeepRecord(1672315364450);
+    const record2 = projectF.getDeepRecord(1672315601428);
+    expect(record1).to.be.undefined;
+    expect(record2).to.be.undefined;
+  });
+
+  it ("should duplicate record for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    const duplicatedRecord = projectF.duplicateRecord(RT.scene, 1670509178879);
+    const ogRecord = projectF.getRecord(1670509178879);
+    expect(duplicatedRecord?.record.type).to.be.equal(ogRecord?.type);
+    expect(duplicatedRecord?.record.name).to.include(ogRecord?.name);
+  });
+
+  it ("should duplicate deep record for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    const duplicatedDeepRecord = projectF.duplicateDeepRecord(1672314325487);
+    const rAndP = projectF.getRecordAndParent(1672314325487);
+    expect(rAndP?.p.name).to.be.equal(duplicatedDeepRecord?.p.name);
+    expect(rAndP?.r.type).to.be.equal(duplicatedDeepRecord?.r.type);
+  });
+
+  it ("should change record name for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.changeRecordName(1681706075301, "updated name");
+    expect(projectF.getRecord(1681706075301)?.name).to.be.equal("updated name");
+  });
+
+  it ("should change deep record name for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.changeDeepRecordName(1672313975089, "room updated name");
+    expect(projectF.getRecord(1672313975089)?.name).to.be.equal("room updated name");
+  });
 });
