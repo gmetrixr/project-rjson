@@ -359,6 +359,13 @@ describe ("r RecordFactory tests", () => {
   it ("should change deep record name for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
     projectF.changeDeepRecordName(1672313975089, "room updated name");
-    expect(projectF.getRecord(1672313975089)?.name).to.be.equal("room updated name");
+    expect(projectF.getDeepRecord(1672313975089)?.name).to.be.equal("room updated name");
+  });
+
+  it ("should reorder records for a project", () => {
+    const projectF = new RecordFactory(migratedOldProjectJson);
+    projectF.reorderRecords(RT.variable, [1681706075301, 1681707853893, -12], 4);
+    const sortedRecords = projectF.getSortedRecordIds(RT.variable);
+    console.log("=============> sorted records: ", sortedRecords);
   });
 });
