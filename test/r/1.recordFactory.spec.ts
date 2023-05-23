@@ -10,55 +10,55 @@ const clipboardData = {
     {
       id: 8959215053928812,
       record: {
-        type: 'scene',
-        name: 'Zaphod',
+        type: "scene",
+        name: "Zaphod",
         order: 1,
         props: {},
         records: {
           element: {
-            '8755535121841602': {
-              type: 'element',
-              name: 'Cube',
+            "8755535121841602": {
+              type: "element",
+              name: "Cube",
               order: 2,
-              props: { element_type: 'cube', wireframe: true }
+              props: { element_type: "cube", wireframe: true }
             },
-            '1817839176130281': {
-              type: 'element',
-              name: 'Pano Image',
+            "1817839176130281": {
+              type: "element",
+              name: "Pano Image",
               order: 1,
-              props: { element_type: 'pano_image' }
+              props: { element_type: "pano_image" }
             },
-            '5107063617281648': {
-              type: 'element',
-              name: 'Polygon',
+            "5107063617281648": {
+              type: "element",
+              name: "Polygon",
               order: 3,
-              props: { element_type: 'polygon' }
+              props: { element_type: "polygon" }
             }
           },
           rule: {
-            '1806034342096145': {
-              name: 'Rule the world',
-              type: 'rule',
+            "1806034342096145": {
+              name: "Rule the world",
+              type: "rule",
               props: { tracked: false },
               records: {
                 when_event: {
-                  '9952587783980130': {
-                    type: 'when_event',
+                  "9952587783980130": {
+                    type: "when_event",
                     props: {
-                      co_id: '1684392104132',
-                      event: 'on_click',
-                      co_type: 'cube',
+                      co_id: "1684392104132",
+                      event: "on_click",
+                      co_type: "cube",
                       properties: []
                     }
                   }
                 },
                 then_action: {
-                  '5855176384035994': {
-                    type: 'then_action',
+                  "5855176384035994": {
+                    type: "then_action",
                     props: {
-                      co_id: '1684404927844',
-                      co_type: 'polygon',
-                      action: 'toggle_showhide',
+                      co_id: "1684404927844",
+                      co_type: "polygon",
+                      action: "toggle_showhide",
                       properties: []
                     }
                   }
