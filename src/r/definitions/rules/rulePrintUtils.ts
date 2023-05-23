@@ -1,14 +1,13 @@
 import chalk from "chalk";
 import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from ".";
-import { rn } from "..";
-import { CogObjectType } from "../..";
 import { RecordFactory, RecordMap, RecordNode, RT, rtp } from "../../R";
-
 import { ProjectFactory, SceneFactory } from "../../recordFactories";
 import { ElementUtils } from "../../recordFactories/ElementFactory";
 import { isElementType, ElementType } from "../elements";
 import { isSpecialType, specialElementDisplayNames, SpecialType } from "../special";
 import { ArrayOfValues, isVariableType } from "../variables";
+import { idAndRecord } from "../../R/RecordFactory";
+import { CogObjectType } from "..";
 
 export interface RuleText {
   ruleIdText: string;
@@ -33,8 +32,8 @@ export class rulePrintUtils {
   ): void => {
     let ruleText;
     const sceneF = new SceneFactory(scene);
-    for (const rule of sceneF.getRecords(RT.rule)) {
-      ruleText = rulePrintUtils.crp().generateRuleText(rule, scene, varMap);
+    for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
+      ruleText = rulePrintUtils.crp().generateRuleText({id: ruleId, record: rule}, scene, varMap);
       rulePrintUtils.crp().consoleRuleTextPrinter(ruleText);
     }
   };
@@ -89,18 +88,18 @@ class ConsoleRulePrinter {
   ): void => {
     let ruleText;
     const sceneF = new SceneFactory(scene);
-    for (const rule of sceneF.getRecords(RT.rule)) {
-      ruleText = this.generateRuleText(rule, scene, varMap);
+    for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
+      ruleText = this.generateRuleText({id: ruleId, record: rule}, scene, varMap);
       this.consoleRuleTextPrinter(ruleText);
     }
   };
 
   public generateRuleText = (
-    rule: RecordNode<RT.rule>,
+    rule: idAndRecord<RT.rule>,
     scene: RecordNode<RT.scene>,
     varMap: RecordMap<RT.variable> = {},
   ): RuleText => {
-    const rf = new RecordFactory(rule);
+    const rf = new RecordFactory(rule.record);
     const whenEventsArray: string[] = [];
     const thenActionsArray: string[] = [];
     rf.getRecords(RT.when_event).forEach(whenEvent => {
@@ -132,8 +131,8 @@ class ConsoleRulePrinter {
     }
   };
 
-  public ruleIdText = (rule: RecordNode<RT.rule>): string => {
-    return `${rule.name}(${rule.id}) ${rule.props.comment ?? ""}`;
+  public ruleIdText = (ruleIdAndRecord: idAndRecord<RT.rule>): string => {
+    return `${ruleIdAndRecord.record.name}(${ruleIdAndRecord.id}) ${ruleIdAndRecord.record.props.comment ?? ""}`;
   };
 
   public weText = (
@@ -307,7 +306,7 @@ class FriendlyRulePrinter {
       const properties = ta.props.properties as ArrayOfValues;
       let coIdElement: number, e, coIdScene, propsScene;
       switch (ta.props.action) {
-        case rn.RuleAction.point_to:
+        case RuleAction.point_to:
           //properties[0] is the element id
           coIdElement = properties[0] as number;
           e = new RecordFactory<RT.scene>(scene).getDeepRecordEntries(RT.element).find(([id, element]) => id === coIdElement);
@@ -318,7 +317,7 @@ class FriendlyRulePrinter {
             varMap,
           );
           break;
-        case rn.RuleAction.change_scene:
+        case RuleAction.change_scene:
           //properties[0] is the scene id
           coIdScene = properties[0] as number;
           propsScene = new ProjectFactory(project).getRecord(coIdScene, RT.scene);
