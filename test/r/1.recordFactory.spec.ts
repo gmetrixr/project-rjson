@@ -362,7 +362,7 @@ describe ("r RecordFactory tests", () => {
   it ("should add blank record for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
     const idAndRecord = projectF.addBlankRecord({type: RT.variable});
-    const idAndRecord2 = projectF.addBlankRecord({type: RT.variable, id: 5});
+    const idAndRecord2 = projectF.addBlankRecord({type: RT.variable, position: 5});
     const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
     expect(sortedRecordIds).to.include(idAndRecord?.id);
     expect(sortedRecordIds).to.include(idAndRecord?.id);
