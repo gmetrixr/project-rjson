@@ -318,9 +318,10 @@ describe ("r RecordFactory tests", () => {
 
   it ("should change deep record id for a project", () => {
     const projectF = new RecordFactory(projectJson);
-    const updatedRecordId = projectF.changeDeepRecordId(1684404927844);
+    const newId = 565656565656565;
+    const updatedRecordId = projectF.changeDeepRecordId(1684404927844, newId);
     const record = projectF.getDeepRecord(1684404927844);
-    const updatedRecord = projectF.getDeepRecord(updatedRecordId);
+    const updatedRecord = projectF.getDeepRecord(newId);
     expect(record).to.be.undefined;
     expect(updatedRecord).to.not.be.undefined;
   });
@@ -360,8 +361,8 @@ describe ("r RecordFactory tests", () => {
 
   it ("should add blank record for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    const idAndRecord = projectF.addBlankRecord(RT.variable);
-    const idAndRecord2 = projectF.addBlankRecord(RT.variable, 5);
+    const idAndRecord = projectF.addBlankRecord({type: RT.variable});
+    const idAndRecord2 = projectF.addBlankRecord({type: RT.variable, id: 5});
     const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
     expect(sortedRecordIds).to.include(idAndRecord?.id);
     expect(sortedRecordIds).to.include(idAndRecord?.id);
