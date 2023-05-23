@@ -13,6 +13,12 @@ export enum VariableType {
   string = "string",
 }
 
+export const variableTypeDefaults: Record<VariableType, VarValue> = {
+  [VariableType.number]: 0,
+  [VariableType.boolean]: false,
+  [VariableType.string]: "",
+}
+
 export enum VarCategory {
   user_defined = "user_defined",
   global = "global",

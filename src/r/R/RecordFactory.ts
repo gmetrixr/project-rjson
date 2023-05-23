@@ -248,6 +248,11 @@ export class RecordFactory<T extends RT> {
     }
   }
 
+  getIdAndRecord(id: number, type?: RT): idAndRecord | undefined {
+    const record = this.getRecord(id, type);
+    return record ? {id, record} : undefined;
+  }
+
   /** if idOrAddress is "", it refers to the current node */
   getDeepRecord(idOrAddress: idOrAddress): RecordNode<RT> | undefined {
     if(typeof idOrAddress === "number") {
@@ -593,15 +598,23 @@ export class RecordFactory<T extends RT> {
   addRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
     record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord | undefined {
+    //Call recursively until "this" refers to parent record, and parentIdOrAddress is undefined
     if(parentIdOrAddress !== undefined) {
       const parentRecord = this.getDeepRecord(parentIdOrAddress);
       if(parentRecord === undefined) return undefined;
       return new RecordFactory(parentRecord).addRecord({record, position, id, dontCycleSubRecordIds});
     }
-    const type = <RT> record.type;
-    if(!this.initializeRecordMap(type)) return undefined;
-    const recordMap = this.getRecordMap(type);
-    const recordsArray = this.getSortedRecords(type);
+
+    //Should we add this record? Allow only record additions that conform to treeMap heirarchy
+    const childType = <RT> record.type;
+    if (!isTypeChildOf(this._type, childType)) {
+      console.log(`The type ${this._json.type} doesn't allow addition of ${record.type} records`);
+      return undefined;
+    }
+
+    if(!this.initializeRecordMap(childType)) return undefined;
+    const recordMap = this.getRecordMap(childType);
+    const recordsArray = this.getSortedRecords(childType);
     record.order = this.getNewOrders(recordsArray, 1, position)[0];
     if(!dontCycleSubRecordIds) {
       //Cycle all ids in the new record being added so that there are no id clashes
@@ -613,13 +626,15 @@ export class RecordFactory<T extends RT> {
     }
     recordMap[id] = record;
     //This fn make sure that the name isn't a duplicate one, and also that its given only if its required
-    this.changeRecordName(id, record.name, type);
+    this.changeRecordName(id, record.name, childType);
     return {id, record};
   }
 
-  addBlankRecord<N extends RT>(type: N, position?: number): idAndRecord | undefined {
+  addBlankRecord<T>({type, position, id, parentIdOrAddress}: {
+    type: RT, position?: number, id?: number, parentIdOrAddress?: idOrAddress
+  }): idAndRecord | undefined {
     const record = createRecord(type);
-    return this.addRecord({record, position});
+    return this.addRecord({record, position, id, parentIdOrAddress});
   }
 
   duplicateRecord<N extends RT>(type: N, id: number): idAndRecord | undefined {
