@@ -687,7 +687,7 @@ export class RecordFactory<T extends RT> {
     return new RecordFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
   }
 
-  changeRecordName<N extends RT>(id: number, newName?: string, type?: N): RecordNode<N> | undefined {
+  changeRecordName<N extends RT>(id: number, newName?: string, type?: N): idAndRecord | undefined {
     const record = this.getRecord(id, type);
     if (record === undefined) {
       return undefined;
@@ -710,10 +710,10 @@ export class RecordFactory<T extends RT> {
     } else {
       record.name = newName;
     }
-    return record;
+    return {id, record};
   }
 
-  changeDeepRecordName<N extends RT>(idOrAddress: idOrAddress, newName?: string): RecordNode<N> | undefined {
+  changeDeepRecordName<N extends RT>(idOrAddress: idOrAddress, newName?: string): idAndRecord | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined || rAndP.r === undefined) return undefined;
     return new RecordFactory(rAndP.p).changeRecordName(rAndP.id, newName, rAndP.r.type as RT);
