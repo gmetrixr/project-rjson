@@ -48,7 +48,7 @@ export interface ClipboardData {
  * 
  * RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
- * getRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
+ * getRecord / getIdAndRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
  * getDeepRecordMap / getDeepRecordEntries
  * 
@@ -65,7 +65,7 @@ export interface ClipboardData {
  * getBreadCrumbs -> Returns an array of all sub-records leading to the given idOrAddress
  * 
  * RECORD RELATED
- * changeDeepRecordId -> Updates all references to a recordId in the tree and in properties
+ * changeDeepRecordId / changePropertiesMatchingValue -> Updates all references to a recordId in the tree and in properties
  * cycleAllRecordIds -> Changes all ids
  * $ private getNewOrders / initializeRecordMap
  * addRecord / addBlankRecord
@@ -491,37 +491,45 @@ export class RecordFactory<T extends RT> {
   }
 
   /** 
-   * Updates all references to a recordId in the tree and in properties 
+   * Updates all references to an older value in a tree to a newer one
+   * Used for updating references to any recordId that's changing 
    */
-  changeDeepRecordId(id: number, newId?: number): number {
-    if (newId === undefined) newId = generateIdV2();
-
-    //Change all property values that refer to the older id
+  changePropertiesMatchingValue(oldValue: any, newValue: any): boolean {
     for(const prop of this.getProps()) {
-      if(this._json.props[(prop as RTP[T])] === id) {
-        this._json.props[(prop as RTP[T])] = newId;
+      if(this._json.props[(prop as RTP[T])] === oldValue) {
+        this._json.props[(prop as RTP[T])] = newValue;
       }
     }
-    
     for (const type of this.getRecordTypes()) {
-      const recordMapOfType = this.getRecordMap(type);
-      for(const [key, value] of Object.entries(recordMapOfType)) {
-        if(id === Number(key)) {
-          recordMapOfType[newId] = recordMapOfType[id];
-          delete recordMapOfType[id];
-        }
-        //Go deeper and change all references in sub-records also (and check if the id exists deeper also)
-        new RecordFactory(value).changeDeepRecordId(id, newId);  
+      for(const [key, value] of this.getRecordEntries(type)) {
+        new RecordFactory(value).changePropertiesMatchingValue(oldValue, newValue);  
       }
     }
+    return true;
+  }
 
-    return newId;
+  changeDeepRecordId(oldId: number, newId: number): boolean {
+    const rAndP = this.getRecordAndParentWithId(oldId);
+    if(rAndP) {
+      const parent = rAndP.p;
+      const type = rAndP.r.type as RT;
+      //We need recordMap per record type so that updates work 
+      //only typed recordMaps give us direct json references
+      const recordMapOfType = new RecordFactory(parent).getRecordMap(type);
+      recordMapOfType[newId] = recordMapOfType[oldId];
+      delete recordMapOfType[oldId];
+      return true;
+    }
+    return false;
   }
 
   /** Change all sub-record ids (of sub-records) in this RecordNode */
   cycleAllSubRecordIds(): void {
     for(const [key, value] of this.getDeepRecordEntries()) {
-      this.changeDeepRecordId(Number(key));
+      const oldId = Number(key);
+      const newId = generateIdV2();
+      this.changeDeepRecordId(oldId, newId);
+      this.changePropertiesMatchingValue(oldId, newId);
     }
   }
 

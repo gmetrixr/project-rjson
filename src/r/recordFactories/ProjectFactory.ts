@@ -1,4 +1,4 @@
-import { flatten, uniq } from "ramda";
+import { flatten, uniq, values } from "ramda";
 import { isVariableType, predefinedVariableIdToName, variableTypeToDefn } from "../definitions/variables";
 import {
   predefinedVariableDefaults,
@@ -257,76 +257,42 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord, oldName: string) {
-    //First find list of records that use the oldName in a template
-
-    //Then replace those instances with the new name
-    
-  }
-  /**
-   * Adding custom logic for:
-   * lead_gen_field: Renaming lead_gen_field should rename the linked variable name
-   */
-  changeRecordNameOld<N extends RT>(id: number, newName?: string): RecordNode<N> | undefined {
-    const recordRAndP = this.getRecordAndParent(id);
-    if(recordRAndP === undefined) return undefined;
-    const oldRecordName = recordRAndP.r.name;
-    super.changeRecordName<N>(id, newName);
-    const newRecordName = recordRAndP.r.name; //Don't use newName as the new name, it might have undergone transformation
-    if (oldRecordName === undefined || newRecordName === undefined) return undefined;
-    //Custom Record Types' Code
-    switch (recordRAndP.r.type) {
-      case RT.variable: {
-        const records = ProjectUtils.getAllTemplatedRecords(this._json);
-        ProjectUtils.updateStringTemplates(records, oldRecordName, newRecordName);
-        break;
-      }
-      case RT.lead_gen_field: {
-        const linkedVarId = (recordRAndP.r as RecordNode<RT.lead_gen_field>).props.var_id as number;
-        this.changeRecordName<RT.variable>(linkedVarId, varNameFromOriginName(newRecordName));
-        break;
-      }
-    }
-    return recordRAndP.r;
-  }
-
-  /** 
-   * Ideally elements should be renamed via SceneFactory. But because want media_upload element rename to impact
-   * its linked variable, we do this via ProjectFactory (as only ProjectFactory has access to variables).
-   */
-  changeSceneSubRecordName<N extends RT>(sceneId: number, type: N, id: number, newName?: string): RecordNode<N> | undefined {
-    const sceneJson = this.getRecord(sceneId, RT.scene);
-    if (sceneJson !== undefined) {
-      const record = (new SceneFactory(sceneJson)).changeDeepRecordName(id, newName);
-      const newRecordName = record?.name;
-      if (newRecordName !== undefined && record?.type === RT.element) {
-        const currentRecord = (record as RecordNode<RT.element>);
-        switch (currentRecord.props.element_type) {
-          case ElementType.media_upload: {
-            const linkedVarId = currentRecord.props.media_upload_var_id as number;
-            this.changeRecordName(linkedVarId, varNameFromOriginName(newRecordName));
-            break;
+    const templatableElements = [ElementType.text, ElementType.embed_html];
+    const templatableRulesActions = [RuleAction.open_url];
+    const newName = variableIdAndRecord.record.name;
+    if(newName) {
+      const deepRecords = this.getDeepRecordEntries();
+      for(const [id, record] of deepRecords) {
+        switch(record.type) {
+          case RT.element: {
+            const eType = (record as RecordNode<RT.element>).props.element_type as en.ElementType;
+            if(templatableElements.includes(eType)) {
+              this.updateStringTemplateInRecord(record, oldName, newName);
+            }
           }
-
-          case ElementType.embed_scorm: {
-            const linkedScoreVarId = currentRecord.props.embed_scorm_score_var_id as number;
-            this.changeRecordName(linkedScoreVarId, varNameFromOriginName(newRecordName));
-
-            const linkedSuspendDataVarId = currentRecord.props.embed_scorm_suspend_data_var_id as number;
-            this.changeRecordName(linkedSuspendDataVarId, varNameFromOriginName(newRecordName));
-
-            const linkedProgressVarId = currentRecord.props.embed_scorm_progress_var_id as number;
-            this.changeRecordName(linkedProgressVarId, varNameFromOriginName(newRecordName));
-
-            break;
+          case RT.then_action: {
+            const action = (record as RecordNode<RT.then_action>).props.action as RuleAction;
+            if(templatableRulesActions.includes(action)) {
+              this.updateStringTemplateInRecord(record, oldName, newName);
+            }
           }
+          default:
+            return false;
         }
       }
-      return record;
     }
   }
 
-
-
+  updateStringTemplateInRecord(record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+    const searchValue = new RegExp(`({{[s]*${oldVarName}[s]*}})+`, "gm");
+    const replaceValue = `{{${newVarName}}}`;
+    for(const [prop, oldValue] of Object.entries(record.props)) {
+      if(typeof oldValue === "string") {
+        const newValue = oldValue.replace(searchValue, replaceValue);
+        (record.props as any)[prop] = newValue;
+      }
+    }
+  }
 
   //VARIABLE SPECIFIC FUNCTIONS
   /**
