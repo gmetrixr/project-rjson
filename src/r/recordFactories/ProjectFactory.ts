@@ -325,7 +325,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    */
   addPredefinedVariable(predefinedVariableName: PredefinedVariableName): idAndRecord<RT.variable> | undefined {
     const pdvarDefaults = predefinedVariableDefaults[predefinedVariableName];
-    let record = super.getRecord(pdvarDefaults.id, RT.variable);
+    const record = super.getRecord(pdvarDefaults.id, RT.variable);
     if(record !== undefined) {
       return {id: pdvarDefaults.id, record};
     } else {

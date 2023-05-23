@@ -1,5 +1,5 @@
 import { RecordNode, RecordMap, createRecord, RecordMapGeneric } from "./RecordNode";
-import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes";
+import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
 
 const { deepClone, generateIdV2 } = jsUtils;
@@ -380,7 +380,7 @@ export class RecordFactory<T extends RT> {
     for (let i = 0; i < recordStringArray.length; i++) {
       parentR = childR;
       const [type, id] = recordStringArray[i].split(":"); // [scene, 1]
-      let newChild = new RecordFactory(parentR).getRecord(Number(id), type as RT);
+      const newChild = new RecordFactory(parentR).getRecord(Number(id), type as RT);
       if(newChild === undefined) return undefined;
       childR = newChild;
       childId = Number(id);
@@ -431,7 +431,7 @@ export class RecordFactory<T extends RT> {
     for (let i = 0; i < recordsStringArray.length; i++) {
       parentR = childR;
       const [type, id] = recordsStringArray[i].split(":"); // [scene, 1]
-      let newChild = new RecordFactory(parentR).getRecord(Number(id), type as RT);
+      const newChild = new RecordFactory(parentR).getRecord(Number(id), type as RT);
       if(newChild === undefined) return undefined;
       childR = newChild;
       childId = Number(id);
@@ -544,7 +544,7 @@ export class RecordFactory<T extends RT> {
    * if its inserted at [x], order = ( order of [x - 1] entry + order of [x] entry ) / 2 
    */
   private getNewOrders(sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
-    let order = [];
+    const order = [];
     let minOrder = sortedRecords[0]?.order ?? 0;
     let maxOrder = sortedRecords[sortedRecords.length - 1]?.order ?? 0;
     if(sortedRecords.length === 0) { //return [1, 2, 3 ...]
@@ -580,7 +580,7 @@ export class RecordFactory<T extends RT> {
     }
 
     //We can't use getRecordMap() - as it to replaces undefined with {}, and we don't want that here
-    let recordMap = <RecordMap<RT>> this._json.records?.[type];
+    const recordMap = <RecordMap<RT>> this._json.records?.[type];
     if (recordMap === undefined) {
       //Check if this type of sub-record is supposed to exist in this type
       if (!isTypeChildOf(this._type, type)) {
@@ -746,7 +746,7 @@ export class RecordFactory<T extends RT> {
     const newOrders = this.getNewOrders(sortedRecords, ids.length, position);
     const recordMap = this.getRecordMap(type);
     let n = 0;
-    for(let id of ids) {
+    for(const id of ids) {
       recordMap[id].order = newOrders[n++]
     }
   }

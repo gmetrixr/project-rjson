@@ -3,7 +3,7 @@ import { RuleAction } from "../definitions/rules";
 import { ProjectFactory } from "./ProjectFactory";
 import { SceneFactory } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
-import { flatten, uniq, values } from "ramda";
+import { flatten, uniq } from "ramda";
 
 export class RulesSearch {
   ruleNamesDict: { [key: string]: number[] };
