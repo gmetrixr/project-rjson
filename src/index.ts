@@ -1,4 +1,4 @@
-import { migrations, gv } from "./migrations";
+import { migrations } from "./migrations";
 import { FileType, Source } from "./r/definitions/files";
 import {
   R, r, RF, rUtils,
@@ -6,7 +6,7 @@ import {
   en, sn, vn, rn, pn, fn, CogObjectType, getFactory,
 } from "./r";
 
-export { migrations, gv }
+export { migrations }
 export { FileType, Source };
 export {
   R, r, RF, rUtils,

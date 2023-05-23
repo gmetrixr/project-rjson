@@ -39,3 +39,5 @@ export const migrateDeployment = (deploymentJson: any, uptoVersion?: number): Re
 
   return deploymentJson;
 }
+
+export { getHighestDeploymentVersion };

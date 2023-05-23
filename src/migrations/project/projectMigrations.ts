@@ -9,3 +9,11 @@ export const getHighestProjectVersion = (): number => {
   const unorderedKeys = Object.keys(projectMigrationTree).map(n => parseInt(n)).sort((a,b) => (b - a));
   return unorderedKeys[0] + 1;
 }
+
+import create_first_scene from "./newproject-migration-commands/create_first_scene";
+import create_predefined_vars from "./newproject-migration-commands/create_predefined_vars";
+
+export const newProjectMigrationTree: {[key: number]: IOrder} = {
+  [1]: create_first_scene,
+  [2]: create_predefined_vars,
+};

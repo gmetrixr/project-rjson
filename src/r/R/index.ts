@@ -1,9 +1,9 @@
-import { RecordNode, RecordMap, createRecord, ClipboardR } from "./RecordNode";
+import { RecordNode, RecordMap, createRecord } from "./RecordNode";
 import { RT, RTP, rtp, RTDefinition, SINGLE_RECORD_ID, isRecordType, recordTypeDefinitions, rtHeirarchyTree, getTypeChildren, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes";
-import { RecordFactory } from "./RecordFactory";
+import { RecordFactory, ClipboardData } from "./RecordFactory";
 
 export {
-  RecordNode, RecordMap, createRecord, ClipboardR,
+  RecordNode, RecordMap, createRecord,
   RT, RTP, rtp, RTDefinition, SINGLE_RECORD_ID, isRecordType, recordTypeDefinitions, rtHeirarchyTree, getTypeChildren, isTypeChildOf, isTypeSubChildOf,
-  RecordFactory
+  RecordFactory, ClipboardData,
 }

@@ -35,15 +35,3 @@ export const createRecord = <T extends RT>(type: T, name?: string) :RecordNode<T
   }
   return node;
 };
-
-/** clipboard contains the strigified version of this */
-export interface ClipboardR {
-  /** parentType controls where this object can be pasted */
-  // parentType: RT, Might need to get this back
-  nodes: RecordNode<RT>[]
-}
-
-// export type Clipboard = {
-//   metadata: Record<string, string>,
-//   content: ClipboardR[]
-// };

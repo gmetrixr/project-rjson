@@ -1,5 +1,5 @@
-import { flatten, uniq, values } from "ramda";
-import { isVariableType, predefinedVariableIdToName, variableTypeToDefn } from "../definitions/variables";
+
+import { variableTypeToDefn } from "../definitions/variables";
 import {
   predefinedVariableDefaults,
   PredefinedVariableName,
@@ -8,11 +8,11 @@ import {
   variableTypeDefaults,
 } from "../definitions/variables/VariableTypes";
 import { ClipboardData, RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
-import { ClipboardR, createRecord, RecordMap, RecordNode } from "../R/RecordNode";
+import { createRecord, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
-import { ElementFactory, ElementUtils } from "./ElementFactory";
+import { ElementFactory } from "./ElementFactory";
 import { en, fn } from "../definitions";
 import { ProjectProperty } from "../recordTypes/Project";
 import { ElementProperty } from "../recordTypes/Element";
@@ -21,10 +21,11 @@ import { OptionProperty } from "../recordTypes/Options";
 import { ShoppingProperty } from "../recordTypes/Shopping";
 import { MenuProperty } from "../recordTypes/Menu";
 import { ElementType } from "../definitions/elements/ElementDefinition";
-import { RuleAction, ThenActionProperty } from "../definitions/rules";
 import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
+import { SceneCollisionOptions, SceneType } from "../definitions/special";
+import { sceneEnvironmentOptions } from "../definitions/special/SpecialTypes";
 
-const { deepClone, difference, union, intersection } = jsUtils;
+const { deepClone } = jsUtils;
 type variable = RT.variable;
 const variable = RT.variable;
 
@@ -41,10 +42,13 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     super(json);
   }
 
-  addElementRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress, elementType}: {
-    record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress, elementType: ElementType
+  addElementRecord<T>({record, position, id, dontCycleSubRecordIds, sceneIdOrAddress, elementType}: {
+    record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, sceneIdOrAddress: idOrAddress, elementType: ElementType
   }): idAndRecord | undefined {
-    const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
+    if(!record) {
+      record = createRecord(RT.element);
+    }
+    const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress: sceneIdOrAddress});
     if(idAndRecord) {
       idAndRecord.record.props.element_type = elementType;
     }
@@ -588,295 +592,85 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 }
 
+const varNameFromOriginName = (originName: string | undefined): string => `${originName}_var`;
+
 export class ProjectUtils {
-  ruleNamesDict: { [key: string]: number[] };
-  accentColorsDict: { [key: string]: number[] };
-  elementNamesDict: { [key: string]: number[] };
-  variableNamesDict: { [key: string]: number[] };
-  propsNameDict: { [key: string]: number[] };
-  actionDict: { [key: string]: number[] };
-  eventsDict: { [key: string]: number[] };
-
-  constructor() {
-    this.ruleNamesDict = {};
-    this.accentColorsDict = {};
-    this.elementNamesDict = {};
-    this.variableNamesDict = {};
-    this.propsNameDict = {};
-    this.actionDict = {};
-    this.eventsDict = {};
-  }
-
-  buildRulesDictionary = (project: RecordNode<RT.project>, sceneId: number): void => {
-    this.ruleNamesDict = {};
-    this.accentColorsDict = {};
-    this.elementNamesDict = {};
-    this.variableNamesDict = {};
-    this.propsNameDict = {};
-    this.actionDict = {};
-    this.eventsDict = {};
-
+  static addNewScene(project: RecordNode<RT.project>, sceneType: SceneType) {
     const projectF = new ProjectFactory(project);
-    const scene = projectF.getRecord(RT.scene, sceneId);
+    const sceneIdAndRecord = projectF.addBlankRecord({type: RT.scene});
+    if(!sceneIdAndRecord) return undefined;
+    const sceneF = new SceneFactory(sceneIdAndRecord.record);
+    sceneF.set(rtp.scene.scene_type, sceneType);
+    const sceneId = sceneIdAndRecord.id;
 
-    if (scene) {
-      const sceneF = new SceneFactory(scene);
-      const rules = sceneF.getRecords(RT.rule);
+    // * Add a default pano
+    projectF.addElementRecord({
+      sceneIdOrAddress: sceneId,
+      elementType: ElementType.pano_image
+    });
 
-      for (const rule of rules) {
-        const ruleF = new RecordFactory(rule);
+    if(sceneType === SceneType.six_dof) {
+      sceneF.set(rtp.scene.scene_collision_type, SceneCollisionOptions.advanced_collision);
+      // * Add a default environment
+      const env = projectF.addElementRecord({sceneIdOrAddress: sceneId, elementType: ElementType.object_3d});
 
-        const ruleName = ruleF.getName()?.trim().toLowerCase();
-        const accentColor = (ruleF.getValueOrDefault(rtp.rule.accent_color) as string).trim().toLowerCase();
-        const ruleId = ruleF.getId();
-
-        // rule name entry
-        if (ruleName) {
-          this.ruleNamesDict[ruleName] ?
-            this.ruleNamesDict[ruleName].push(ruleId) :
-            this.ruleNamesDict[ruleName] = [ruleId];
-        }
-
-        // accent colour entry
-        if (accentColor) {
-          this.accentColorsDict[accentColor] ?
-            this.accentColorsDict[accentColor].push(ruleId) :
-            this.accentColorsDict[accentColor] = [ruleId];
-        }
-
-        // element and variable names entries
-        const elements = sceneF.getAllDeepChildren(RT.element);
-        const whenEvents = ruleF.getRecords(RT.when_event);
-
-        for (const we of whenEvents) {
-          const coId = we.props.co_id as number;
-          const element = elements.find(ele => ele.id === coId);
-          const variable = projectF.getRecord(RT.variable, coId);
-          if (element) {
-            const eleName = element.name?.trim().toLowerCase();
-            if (eleName) {
-              this.elementNamesDict[eleName] ?
-                this.elementNamesDict[eleName].push(ruleId) :
-                this.elementNamesDict[eleName] = [ruleId];
-            }
-          }
-
-          const event = we.props.event as string;
-          this.eventsDict[event] ?
-            this.eventsDict[event].push(ruleId) :
-            this.eventsDict[event] = [ruleId];
-
-          if (variable) {
-            const varName = variable.name?.trim().toLowerCase();
-            if (varName) {
-              this.variableNamesDict[varName] ?
-                this.variableNamesDict[varName].push(ruleId) :
-                this.variableNamesDict[varName] = [ruleId];
-            }
-          }
-        }
-
-        const thenActions = ruleF.getRecords(RT.then_action);
-        for (const ta of thenActions) {
-          // const whenEventF = new RecordFactory(we);
-          const coId = ta.props.co_id as number;
-          const element = elements.find(ele => ele.id === coId);
-          const variable = projectF.getRecord(RT.variable, coId);
-
-          if (element) {
-            const eleName = element.name?.trim().toLowerCase();
-            if (eleName) {
-              this.elementNamesDict[eleName] ?
-                this.elementNamesDict[eleName].push(ruleId) :
-                this.elementNamesDict[eleName] = [ruleId];
-            }
-          }
-
-          const action = ta.props.action as string;
-          this.actionDict[action] ?
-            this.actionDict[action].push(ruleId) :
-            this.actionDict[action] = [ruleId];
-
-          switch (ta.props.action) {
-            case RuleAction.open_url:
-            case RuleAction.open_deployment:
-            case RuleAction.call_api:
-            case RuleAction.load_project:
-            case RuleAction.set_to_formula:
-            case RuleAction.set_to_string:
-            case RuleAction.copy_to_clipboard:
-            case RuleAction.replace_screen_reader_text:
-            case RuleAction.set_to_number:
-            case RuleAction.add_number: {
-              if (Array.isArray(ta.props.properties)) {
-                for(const p of ((ta.props.properties ?? []) as string[])) {
-                  this.propsNameDict[p] ?
-                    this.propsNameDict[p].push(ruleId) :
-                    this.propsNameDict[p] = [ruleId];
-                }
-              }
-              break;
-            }
-
-            case RuleAction.point_to:
-            case RuleAction.seek_to_timer:
-            case RuleAction.teleport: {
-              if (Array.isArray(ta.props.properties)) {
-                const elem_id = ta.props.properties[0] as number;
-                const element = elements.find(ele => ele.id === elem_id);
-                const elementName = element?.name?.trim().toLowerCase();
-
-                if (elementName) {
-                  this.propsNameDict[elementName] ?
-                    this.propsNameDict[elementName].push(ruleId) :
-                    this.propsNameDict[elementName] = [ruleId];
-                }
-              }
-
-              break;
-            }
-
-            case RuleAction.change_scene: {
-              if (Array.isArray(ta.props.properties)) {
-                const sceneId = ta.props.properties[0] as number;
-                const scene = projectF.getRecord(RT.scene, sceneId);
-                const sceneName = scene?.name?.trim().toLowerCase();
-                if(sceneName) {
-                  this.propsNameDict[sceneName] ?
-                    this.propsNameDict[sceneName].push(ruleId) :
-                    this.propsNameDict[sceneName] = [ruleId];
-                }
-              }
-              break;
-            }
-            case RuleAction.hide_item:
-            case RuleAction.show_item: {
-              if (Array.isArray(ta.props.properties)) {
-                const itemId = ta.props.properties[0] as number;
-                const items = sceneF.getAllDeepChildrenWithFilter(RT.item, (ele => ele.id === itemId));
-
-                for(const i of items) {
-                  const itemName = i.name?.trim().toLowerCase();
-                  if(itemName) {
-                    this.propsNameDict[itemName] ?
-                      this.propsNameDict[itemName].push(ruleId) :
-                      this.propsNameDict[itemName] = [ruleId];
-                  }
-                }
-              }
-              break;
-            }
-            default:
-              break;
-          }
-
-          if (variable) {
-            const varName = variable.name?.trim().toLowerCase();
-            if (varName) {
-              this.variableNamesDict[varName] ?
-                this.variableNamesDict[varName].push(ruleId) :
-                this.variableNamesDict[varName] = [ruleId];
-            }
-          }
-        }
+      if(env) {
+        const elementF = new ElementFactory(env.record);
+        sceneF.changeRecordName(env.id, "Environment", RT.element);
+        elementF.set(rtp.element.source, sceneEnvironmentOptions[0].source);
+        elementF.set(rtp.element.scale, sceneEnvironmentOptions[0].scale);
+        elementF.set(rtp.element.placer_3d, sceneEnvironmentOptions[0].placer_3d);
+        elementF.set(rtp.element.locked, true);
+        sceneF.set(rtp.scene.scene_bounds, sceneEnvironmentOptions[0].scene_bounds);
       }
+
+      // * Add a spawn zone
+      const zone = projectF.addElementRecord({sceneIdOrAddress: sceneId, elementType: ElementType.zone});
+      // * Reset the placer 3D for this zone element
+      if(zone) {
+        const elementF = new ElementFactory(zone.record);
+        const defaultPlacer3D = elementF.getDefault(rtp.element.placer_3d);
+        elementF.set(rtp.element.placer_3d, defaultPlacer3D);
+      }
+
+      const zoneElementId = zone?.id;
+      const envElementId = env?.id;
+
+      // * Assign the spawn zone to the scene
+      sceneF.set(rtp.scene.scene_spawn_zone_id, zoneElementId);
+      // * Add default light rig
+      ProjectUtils.addDefaultLightRig(project, sceneId, envElementId);
+    } else {
+      // * Add default light rig
+      ProjectUtils.addDefaultLightRig(project, sceneId);
     }
-  };
-
-  simpleSearchInRules({ searchString, accentColor }: {
-    searchString: string;
-    accentColor?: string;
-  }): number[] {
-    // to filter by accent colour
-    const idsForAccentColor: number[] = accentColor ?
-      this.accentColorsDict[accentColor.toLowerCase()] :
-      flatten(Object.values(this.accentColorsDict));
-
-    if (accentColor && !searchString) {
-      return uniq(idsForAccentColor);
-    }
-
-    // search in rule names
-    const matchingRuleNames: string[] = Object.keys(this.ruleNamesDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForRuleNames: number[] = flatten(matchingRuleNames.map((key: string) => this.ruleNamesDict[key]));
-
-    // search in element names
-    const matchingElementNames: string[] = Object.keys(this.elementNamesDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForElementNames: number[] = flatten(matchingElementNames.map((key: string) => this.elementNamesDict[key]));
-
-    // search in variable names
-    const matchingVariableNames: string[] = Object.keys(this.variableNamesDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForVariableNames: number[] = flatten(matchingVariableNames.map((key: string) => this.variableNamesDict[key]));
-
-    const matchingEvents: string[] = Object.keys(this.eventsDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForEvents: number[] = flatten(matchingEvents.map((key: string) => this.eventsDict[key]));
-
-    const matchingAction: string[] = Object.keys(this.actionDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForAction: number[] = flatten(matchingAction.map((key: string) => this.actionDict[key]));
-
-    const matchingProps: string[] = Object.keys(this.propsNameDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForProps: number[] = flatten(matchingProps.map((key: string) => this.propsNameDict[key]));
-
-    const concatenatedRuleIds: number[] = idsForElementNames.concat(idsForRuleNames).concat(idsForVariableNames).concat(idsForEvents).concat(idsForAction).concat(idsForProps);
-    let outputRuleIds: number[] = concatenatedRuleIds;
-    if (searchString && accentColor) {
-      const intersection = jsUtils.intersection(new Set(idsForAccentColor), new Set(concatenatedRuleIds));
-      outputRuleIds = Array.from(intersection);
-    }
-
-    return uniq(outputRuleIds);
   }
 
-  /**
-   * Returns all records in a project that use string templating.
-   * Generally, string templating is used in
-   * 1. Text elements
-   * 2. EmbedHTML elements
-   * 3. Rules -> then_action with `open_url` action
-   */
-  static getAllTemplatedRecords(project: RecordNode<RT.project>): RecordNode<RT.element | RT.then_action>[] {
+  static addDefaultLightRig(project: RecordNode<RT.project>, sceneId: number, envElementId?: number) {
     const projectF = new ProjectFactory(project);
-    const templatableElements = [ElementType.text, ElementType.embed_html];
-    const templatableRulesActions = [RuleAction.open_url];
-    const elementRecords = projectF.getAllDeepChildrenWithFilter(RT.element, e => templatableElements.includes(e.props.element_type as ElementType));
-    const ruleRecords = projectF.getAllDeepChildrenWithFilter(RT.then_action, ta => templatableRulesActions.includes(ta.props.action as RuleAction));
-    return [...elementRecords, ...ruleRecords];
-  }
+    const group = projectF.addElementRecord({sceneIdOrAddress: sceneId, elementType: ElementType.group});
+    const useLegacyColorManagement = projectF.getValueOrDefault(rtp.project.use_legacy_color_management) as boolean;
+    if(group) {
+      group.record.name = `Lights`;
+      const groupF = new ElementFactory(group.record);
+      // add light rig to this groups
+      const ambientLight = groupF.addElementOfType(en.ElementType.light);
+      ambientLight.name = "Ambient Light";
 
-  /**
-   * Given the records from getAllTemplatedRecords, this function actually replaces the older variable name 
-   * with the newer variable name in all the properties of the records that hold string templates
-   */
-  static updateStringTemplates(records: RecordNode<RT>[], oldVarName: string, newVarName: string): void {
-    const searchValue = new RegExp(`({{[s]*${oldVarName}[s]*}})+`, "gm");
-    const replaceValue = `{{${newVarName}}}`;
-    for (const record of records) {
-      switch (record.type) {
-        case RT.element: {
-          const elementRecord = (record as RecordNode<RT.element>);
-          switch (elementRecord.props.element_type) {
-            case ElementType.text: {
-              const oldString = elementRecord.props.text as string;
-              elementRecord.props.text = oldString.replace(searchValue, replaceValue);
-              break;
-            }
-            case ElementType.embed_html: {
-              const oldString = elementRecord.props.embed_string as string;
-              elementRecord.props.embed_string = oldString.replace(searchValue, replaceValue);
-              break;
-            }
-          }
-          break;
-        }
-        case RT.then_action: {
-          const ruleRecord = (record as RecordNode<RT.then_action>);
-          let properties = (ruleRecord.props.properties || []) as string[];
-          properties = properties.map(p => p?.replace(searchValue, replaceValue));
-          ruleRecord.props.properties = properties;
-        }
-      }
+      const ambientLightF = new ElementFactory(ambientLight);
+      ambientLightF.set(rtp.element.light_type, en.lightType.ambient);
+      ambientLightF.set(rtp.element.color, "#FFFFFF");
+      ambientLightF.set(rtp.element.intensity, useLegacyColorManagement? 1: 3);
+
+      const directionalLight = groupF.addElementOfType(en.ElementType.light);
+      directionalLight.name = "Directional Light";
+
+      const directionalLightF = new ElementFactory(directionalLight);
+      directionalLightF.set(rtp.element.light_type, en.lightType.directional);
+      directionalLightF.set(rtp.element.color, "#FFFFFF");
+      directionalLightF.set(rtp.element.intensity, useLegacyColorManagement? 0.6: 3);
+      directionalLightF.set(rtp.element.placer_3d, [0, 12, 4, 0, 0, 0, 1, 1, 1]);
+      directionalLightF.set(rtp.element.target_element_id, envElementId);
     }
   }
 }
-
-const varNameFromOriginName = (originName: string | undefined): string => `${originName}_var`;
