@@ -7,7 +7,7 @@ import {
   VariableType,
   variableTypeDefaults,
 } from "../definitions/variables/VariableTypes";
-import { RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
+import { ClipboardData, RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
 import { ClipboardR, createRecord, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory } from "./SceneFactory";
@@ -21,7 +21,7 @@ import { OptionProperty } from "../recordTypes/Options";
 import { ShoppingProperty } from "../recordTypes/Shopping";
 import { MenuProperty } from "../recordTypes/Menu";
 import { ElementType } from "../definitions/elements/ElementDefinition";
-import { RuleAction } from "../definitions/rules";
+import { RuleAction, ThenActionProperty } from "../definitions/rules";
 import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
 
 const { deepClone, difference, union, intersection } = jsUtils;
@@ -257,28 +257,11 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord, oldName: string) {
-    const templatableElements = [ElementType.text, ElementType.embed_html];
-    const templatableRulesActions = [RuleAction.open_url];
     const newName = variableIdAndRecord.record.name;
     if(newName) {
       const deepRecords = this.getDeepRecordEntries();
       for(const [id, record] of deepRecords) {
-        switch(record.type) {
-          case RT.element: {
-            const eType = (record as RecordNode<RT.element>).props.element_type as en.ElementType;
-            if(templatableElements.includes(eType)) {
-              this.updateStringTemplateInRecord(record, oldName, newName);
-            }
-          }
-          case RT.then_action: {
-            const action = (record as RecordNode<RT.then_action>).props.action as RuleAction;
-            if(templatableRulesActions.includes(action)) {
-              this.updateStringTemplateInRecord(record, oldName, newName);
-            }
-          }
-          default:
-            return false;
-        }
+        this.updateStringTemplateInRecord(record, oldName, newName);
       }
     }
   }
@@ -286,6 +269,31 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   updateStringTemplateInRecord(record: RecordNode<RT>, oldVarName: string, newVarName: string) {
     const searchValue = new RegExp(`({{[s]*${oldVarName}[s]*}})+`, "gm");
     const replaceValue = `{{${newVarName}}}`;
+    switch(record.type) {
+      case RT.element: {
+        const elementRecord = record as RecordNode<RT.element>;
+        switch (elementRecord.props.element_type) {
+          case ElementType.text: {
+            const oldValue = elementRecord.props.text as string;
+            elementRecord.props.text = oldValue.replace(searchValue, replaceValue);
+            break;
+          }
+          case ElementType.embed_html: {
+            const oldValue = elementRecord.props.embed_string as string;
+            elementRecord.props.embed_string = oldValue.replace(searchValue, replaceValue);
+            break;
+          }
+        }
+        break;
+      }
+      case RT.then_action: {
+        const taRecord = record as RecordNode<RT.then_action>;
+        let properties = (taRecord.props.properties || []) as string[];
+        properties = properties.map(p => p?.replace(searchValue, replaceValue));
+        taRecord.props.properties = properties;
+        break;
+      }
+    }
     for(const [prop, oldValue] of Object.entries(record.props)) {
       if(typeof oldValue === "string") {
         const newValue = oldValue.replace(searchValue, replaceValue);
@@ -518,347 +526,64 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   /**
-   * Scene copy logic:
-   * In scene rules, vars can be referenced via ids or via variable names (in templates used in elements)
-   * Copy all variables referenced.
-   * @param ids - list of ids for child records
+   * When scenes are copied, also copy the referenced variables (in rules and templates)
+   * No need to copy predefined variables - as they will be present in destination also
+   * No need to copy global variables - as there's no way to define them at org level
    */
-  copyToClipboardObject(ids: number[]): ClipboardR {
-    const baseClipboardObject = super.copyToClipboardObject(ids);
-    /**
-     * Parse through the extracted records to check if any variable needs to be added to the clipboard object
-     * 1. find all variables used
-     *  1.1 directly in rules (when events and then actions)
-     *  1.2 indirectly as templates in when_events, then_actions and text element
-     */
-
-    // * create a map of all possible variable names to look through in rules
-    const varDefROM = this.getROM(RT.variable) ?? emptyROM<RT.variable>();
-    const idNameMap: { [key: number]: string } = {};
-
-    for (const vDef of Object.values(varDefROM.map)) {
-      //If predefined var, get name from definitions. Predefined vars definitions don't need to be present in the project json
-      if (predefinedVariableIdToName[vDef.id] !== undefined) {
-        idNameMap[vDef.id] = predefinedVariableIdToName[vDef.id]; //Predefined variable type is also the name
-      } {
-        idNameMap[vDef.id] = vDef.name as string;
+  copyToClipboard(selectedIdOrAddrs: idOrAddress[]): ClipboardData {
+    const variableIdsToBeAdded = new Set<number>();
+    //First get a list of variables to be matched
+    const variableEntries = this.getRecordEntries(RT.variable)
+      .filter(([id, value]) => (value.props.var_category === VarCategory.user_defined || value.props.var_category === VarCategory.autogenerated));
+    const variableIds = variableEntries.map(([id, val]) => Number(id));
+    const variableNames = [];
+    for(const [id, value] of variableEntries) {
+      if(value.name) {
+        variableNames.push(value.name);
       }
     }
-
-    // * using a Set here to store var ids since Set handles uniqueness in entries
-    const varsSet = new Set();
-    /**
-     * variable can be used in the following places:
-     * 1. rules on variables - straightforward, find all when events and then actions on variables
-     * 2. when event / then action properties templating - find all when events and then actions with properties.length > 0 and find variables that are templated
-     * 3. text element templating - look through all text elements and find variables used in templating
-     */
-    baseClipboardObject.nodes
-      .filter(rn => rn.type === RT.scene)
-      .forEach((current) => {
-        const recordF = new SceneFactory(current);
-
-        // * get all when events that use variables or have properties defined
-        recordF
-          .getAllDeepChildrenWithFilter(RT.when_event, (r) =>
-            isVariableType(r.props.co_type as VariableType) ||
-            ((r.props.properties || []) as unknown[]).length > 0)
-          .forEach(r => {
-            // * if the cog object is a variable type, blindly add to our list
-            if (isVariableType(r.props.co_type as VariableType)) {
-              varsSet.add(r.props.co_id)
-            }
-
-            /**
-             * * now check if the properties arr contains any variables.
-             * ! NOTE: that this is not an else condition since there can be 2 variables used in a single when event:
-             * ! 1. as cog object
-             * ! 2. as variable name template
-             *
-             * varsSet will take care of unique entries
-             */
-            const properties = (r.props.properties || []) as any[];
-            // * properties = ["{{score}}", "{{number}}+{{string}}"] score, number and string are all variable names
-            // * the loop has to be on the variable names since the names can be used in a formula too and not just plain templating
-            for (const [key, value] of Object.entries(idNameMap)) {
-              // check if any of the names is included in the properties array entries
-              for (const p of properties) {
-                if (p.toString().includes(value)) {
-                  varsSet.add(Number(key));
+  
+    //Then check if any of these need to be added to the copied nodes
+    const clipboardData = super.copyToClipboard(selectedIdOrAddrs);
+    for(const [id, copiedRecord] of Object.entries(clipboardData.nodes)) {
+      if(copiedRecord.record.type === RT.scene) {
+        //Then go over all sub records to check if the variable name or ids exist in properties
+        const sceneFactory = new SceneFactory(copiedRecord.record);
+        for(const [id, subRecord] of sceneFactory.getDeepRecordEntries()) {
+          for(const [propName, propValue] of Object.entries(subRecord.props)) {
+            if(typeof propValue === "number") {
+              if(variableIds.includes(propValue)) {
+                variableIdsToBeAdded.add(propValue);
+                break;
+              }
+            } else if (typeof propValue === "string") {
+              for(const [varId, varValue] of variableEntries) {
+                if(varValue.name && propValue.includes(varValue.name)) {
+                  variableIdsToBeAdded.add(varId);
                 }
               }
             }
-          });
-
-        // * get all then actions that use variables or have properties defined
-        recordF
-          .getAllDeepChildrenWithFilter(RT.then_action, (r) =>
-            isVariableType(r.props.co_type as VariableType) ||
-            ((r.props.properties || []) as unknown[]).length > 0)
-          .forEach(r => {
-            // * if the cog object is a variable type, blindly add to our list
-            if (isVariableType(r.props.co_type as VariableType)) {
-              varsSet.add(r.props.co_id)
-            }
-
-            /**
-             * * now check if the properties arr contains any variables.
-             * ! NOTE: that this is not an else condition since there can be 2 variables used in a single then action:
-             * ! 1. as cog object
-             * ! 2. as variable name template
-             *
-             * varsSet will take care of unique entries
-             */
-            const properties = (r.props.properties || []) as any[];
-            // * properties = ["{{score}}", "{{number}}+{{string}}"] score, number and string are all variable names
-            // * the loop has to be on the variable names since the names can be used in a formula too and not just plain templating
-            for (const [key, value] of Object.entries(idNameMap)) {
-              // check if any of the names is included in the properties array entries
-              for (const p of properties) {
-                if (p.toString().includes(value)) {
-                  varsSet.add(Number(key));
-                }
-              }
-            }
-          });
-
-        // * find all variables templated in text elements. ONLY text ELEMENTS CAN BE TEMPLATED AS OF NOW
-        recordF.getAllDeepChildrenWithFilter(RT.element, (r) => r.props.element_type === ElementType.text)
-          .forEach((r) => {
-            const text = (r.props?.text ?? "") as string;
-            // * text = ["{{score}}", "{{number}}+{{string}}"] score, number and string are all variable names
-            for (const [key, value] of Object.entries(idNameMap)) {
-              if (text.includes(value)) {
-                varsSet.add(Number(key));
-              }
-            }
-          });
-      });
-
-    const varsUsed = Array.from(varsSet);
-    const varsDef = this.getAllDeepChildrenWithFilter(RT.variable, (r) => varsUsed.includes(r.id));
-    baseClipboardObject.nodes.push(...varsDef);
-    return baseClipboardObject;
-  }
-
-  /**
-   * Variable paste logic: [FYI: Variables only get copied when a scene(s) is using them]
-   * For EACH variable which was copied
-   * - If the variable id and name doesn't exist - paste it (1)
-   * - If the variable id exists, but name doesn't - ignore it. (2) (To make this work, we need to go to each string template used in rules
-   * and elements in the new scene, and change the templates to use the new name)
-   * - If the variable id doesn't exist, but name does (3) - replace the variable id in the new scene being pasted (in all rules)
-   * with the new variable id
-   * - If both the variable id and name exist - ignore it (4)
-   * @param obj
-   * @param position
-   */
-  pasteFromClipboardObject({ obj, position, groupElementId, sceneId }: { obj: ClipboardR, position?: number, groupElementId?: number, sceneId?: number }): void {
-    if (obj.parentType === RT.scene && sceneId === undefined) {
-      console.error(`Can't paste an element at project level. Please provide a sceneId.`);
-      return;
-    }
-    const projectVars = this.getRecords(RT.variable);
-    const scenesFromClipboard = obj.nodes.filter(s => s.type === RT.scene);
-    const variablesFromClipboard = obj.nodes.filter(s => s.type === RT.variable);
-    const otherRecordsFromClipboard = obj.nodes.filter(s => s.type !== RT.variable && s.type !== RT.scene && s.type !== RT.element);
-    const elementsFromClipboard = obj.nodes.filter(s => s.type === RT.element)
-
-    for (const rn of variablesFromClipboard) {
-      // This needs to follow the pasting logic above
-      const variable = this.getRecord(RT.variable, rn.id);
-      if (variable === undefined) {
-        // ! variable doesn't exist
-        // * check if one with the same name exists or not.
-        const nameMatchedVariable = projectVars.find(v => v.name === rn.name);
-        if (nameMatchedVariable) {
-          // * (3) there exists a variable with the same name, we replace ids of rn in any new scenes being pasted with the one already present in the project
-          // * Only replace in rules since templating uses names and will continue using them
-          // ! Only replace in the scenes being pasted. If there are no scenes to be pasted, this will be a no-op
-          for (const scene of scenesFromClipboard) {
-            const sceneF = new SceneFactory(scene);
-
-            // ! using getAllDeepChildrenWithFilter here to filter results and avoid unnecessary loops
-            // * find the when event that is using the variable that is being pasted, also ensure that we are modifying only when type of vars match
-            const whenEvents = sceneF.getAllDeepChildrenWithFilter(RT.when_event, we => we.props.co_type === nameMatchedVariable.props.var_type && we.props.co_id === rn.id);
-            // * find the then action that is using the variable that is being pasted, also ensure that we are modifying only when type of vars match
-            const thenActions = sceneF.getAllDeepChildrenWithFilter(RT.then_action, ta => ta.props.co_type === nameMatchedVariable.props.var_type && ta.props.co_id === rn.id);
-
-            for (const we of whenEvents) {
-              we.props.co_id = nameMatchedVariable.id;
-            }
-
-            for (const ta of thenActions) {
-              ta.props.co_id = nameMatchedVariable.id;
-            }
           }
-        } else {
-          // * (1) neither the variable exists nor another variable with same name
-          this.addRecord(rn);
         }
-      } else {
-        // * (4) if copied variable is present and name matches then ignore it.
-        // * (2) When variable exists but names doesn't the ignore
-        // * Both above are dependant on the fact the variable exists. If variable exists, then simply skip
-        // ! this is a no-op
       }
     }
 
-    // * add all scenes
-    for (const scene of scenesFromClipboard) {
-      // ! Only scenes are inserted in place when position is passed. Have to live with this assumption for now
-      // * if position is passed, then keep incrementing to insert in order, else add at the end of the list
-      const addedScene = this.addRecord(scene, position ? position++ : position);
-      const sceneF = new SceneFactory(addedScene);
-      const elements = sceneF.getAllDeepChildrenWithFilter(RT.element, e => en.elementsWithLinkedVariables.includes(e.props.element_type as ElementType));
-      this.addLinkedVariables(elements);
+    //Then add those to copied nodes
+    const variableRecordMap = this.getRecordMap(RT.variable);
+    for(const varId of variableIdsToBeAdded) {
+      clipboardData.nodes.push({id: varId, record: variableRecordMap[varId]});
     }
 
-    // * add all other records
-    for (const other of otherRecordsFromClipboard) {
-      // keep adding to the end of the list
-      this.addRecord(other);
-    }
-
-    if (sceneId !== undefined && elementsFromClipboard.length > 0) {
-      const scene = this.getRecord(RT.scene, sceneId);
-      const sceneF = new SceneFactory(scene as RecordNode<RT.scene>);
-      if (groupElementId !== undefined) {
-        const group = sceneF.getAllDeepChildrenWithFilter(RT.element, el => el.id === groupElementId);
-        if (group !== undefined) {
-          const groupF = new ElementFactory(group[0]);
-          const addedRecords = groupF.pasteFromClipboardObject({ obj, position });
-          const recordsToAddLinkedVars = this.getAllRecordsForLinkedVariables(addedRecords as RecordNode<RT>[]);
-          this.addLinkedVariables(recordsToAddLinkedVars as RecordNode<RT>[]);
-        }
-      } else {
-        const addedRecords = sceneF.pasteFromClipboardObject({ obj, position, groupElementId });
-        const recordsToAddLinkedVars = this.getAllRecordsForLinkedVariables(addedRecords as RecordNode<RT>[]);
-        this.addLinkedVariables(recordsToAddLinkedVars as RecordNode<RT>[]);
-      }
-    }
+    return clipboardData;
   }
 
-  getAllRecordsForLinkedVariables(records: RecordNode<RT>[]) {
-    const recordsToAddLinkedVars: RecordNode<RT.element>[] = [];
-
-    for (const record of records) {
-      switch (record?.props.element_type) {
-        case en.ElementType.group: {
-          const recordGroupF = new ElementFactory(record);
-          const allGroupChildrenWithLinkedVariables = recordGroupF.getAllDeepChildrenWithFilter(RT.element, e => en.elementsWithLinkedVariables.includes(e?.props.element_type as ElementType));
-          recordsToAddLinkedVars.push(...allGroupChildrenWithLinkedVariables);
-          break;
-        }
-
-        default: {
-          if (en.elementsWithLinkedVariables.includes(record?.props.element_type as ElementType)) {
-            recordsToAddLinkedVars.push(record as RecordNode<RT>);
-          }
-          break;
-        }
+  pasteFromClipboard(parentIdOrAddr: idOrAddress, clipboardData: ClipboardData, positionInPlace?: number) {
+    const parentRecord = this.getDeepRecord(parentIdOrAddr);
+    if(parentRecord !== undefined) {
+      const parentRF = new RecordFactory(parentRecord);
+      for(const node of clipboardData.nodes) {
+        parentRF.addRecord({record: node.record, position: positionInPlace});
       }
-    }
-
-    return recordsToAddLinkedVars;
-  }
-
-  /**
-   * Overriding this function from base class as there is element specific code.
-   * Check base class implementation for reference on function usage and examples
-   */
-  reParentRecordsWithAddress(destParentAddr: string, sourceRecordAddr: { parentAddr: string, recordAddr: string }[], destPosition?: number): [RecordNode<RT>[], RecordNode<RT>[]] {
-    const destParentRecord = this.getRecordAtAddress(destParentAddr);
-    const reParentedRecords: RecordNode<RT>[] = [];
-    const failedReParentedRecords: RecordNode<RT>[] = [];
-
-    if (destParentRecord === null) {
-      console.error(`[reParentRecordsWithAddress]: Error in re-parenting. destParentAddr: ${destParentAddr}`);
-      return [reParentedRecords, failedReParentedRecords];
-    }
-
-    const destinationParentRecordF = new RecordFactory(destParentRecord);
-    for (const s of sourceRecordAddr) {
-      const sourceRecord = this.getRecordAtAddress(s.recordAddr);
-      const sourceParentRecord = this.getRecordAtAddress(s.parentAddr);
-      if (sourceRecord === null || sourceParentRecord === null) {
-        console.error(`[delete-sourceRecordAddresses]: can't find record/parent for : recordAddr: ${s.recordAddr} parentAddr: ${s.recordAddr}`);
-        continue;
-      }
-
-      /**
-       * The order of operations here is very important
-       * 1. add the record in the new parent
-       * 2. delete the record from older parent
-       *
-       * We do this in this order and not reverse since there can be records that don't qualify to be child of a parent
-       * for ex: a scene can't be a child of a group
-       * in this case, we don't re-parent the record at all and addRecord function returns undefined.
-       * A better UX for this would be to restrict the user to be able to do that at all in the UI
-       *
-       */
-
-      /**
-       * Almost all operations are generic baring one: re-parenting groups into other groups. We don't support this functionality yet.
-       * So a special check needs to be made when sourceRecord and destParentRecord both have ** type === element **
-       * we need to check that sourceRecord.props.element_type !== group, only then allow re-parenting
-       */
-      if (sourceRecord.type === RT.element && destParentRecord.type === RT.element) {
-        const sourceRecordElementType = sourceRecord.props.element_type;
-        const destParentRecordElementType = sourceRecord.props.element_type;
-        if (destParentRecordElementType === en.ElementType.group && sourceRecordElementType === en.ElementType.group) {
-          failedReParentedRecords.push(sourceRecord);
-          continue;
-        }
-      }
-
-      // * Add to destination parent
-      // * addRecord takes care of name clashes and id clashes
-      const addedRecord = destinationParentRecordF.addRecord(sourceRecord, destPosition);
-      // * Record was added correctly to the appropriate parent
-      if (addedRecord !== undefined) {
-        // * delete the record from resp parents
-        const sourceParentRecordF = new RecordFactory(sourceParentRecord);
-        sourceParentRecordF.deleteRecord(sourceRecord.type as RT, sourceRecord.id);
-        reParentedRecords.push(addedRecord);
-      } else {
-        failedReParentedRecords.push(sourceRecord);
-      }
-    }
-    return [reParentedRecords, failedReParentedRecords];
-  }
-
-  /**
-   * This method is called from the UI to resolve inconsistencies in the menu records.
-   * It is called only if the number of menu entries != number of scene entries
-   */
-  syncMenuWithScenes(): void {
-    const sceneIdsSet = new Set(this.getRecords(RT.scene).map(s => s.id));
-    const sceneIdsFroMenuSet = new Set(this.getRecords(RT.menu).map(m => m.props.menu_scene_id as number));
-    //If both above sets are equal, return.
-    //Set equality test is (union's length = intersection's length)
-    if (union(sceneIdsSet, sceneIdsFroMenuSet).size ===
-      intersection(sceneIdsSet, sceneIdsFroMenuSet).size) {
-      return;
-    }
-    //For scenes in MenuList, but not in SceneList, delete them from menu
-    const toBeRemovedFromMenu = difference(sceneIdsFroMenuSet, sceneIdsSet);
-    //For scenes in SceneList, but not in MenuList, add them to menu
-    const toBeAddedToMenu = difference(sceneIdsSet, sceneIdsFroMenuSet);
-
-    for (const sid of toBeRemovedFromMenu.values()) {
-      //Find which menu record is to be removed
-      const removeMenuRecords = this.getRecords(RT.menu).filter(m => m.props.menu_scene_id === sid);
-      for (const mr of removeMenuRecords) {
-        this.deleteRecord(RT.menu, mr.id);
-      }
-    }
-
-    for (const sid of toBeAddedToMenu.values()) {
-      const menuRecord = super.addBlankRecord(RT.menu, sid + 10001);
-      menuRecord.props.menu_scene_id = sid;
-      //Because this is the fix of an error, don't surprise users with extra menu entries
-      menuRecord.props.menu_show = false;
     }
   }
 }
