@@ -171,7 +171,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
     if(variableIdAndRecord) {
       //Keep the name of the variable same as the lead gen field
-      this.changeRecordName(variableIdAndRecord.id, varNameFromOriginName(idAndRecord.record.name + (nameSuffix ?? "")));
+      super.changeDeepRecordName(variableIdAndRecord.id, varNameFromOriginName(idAndRecord.record.name + (nameSuffix ?? "")));
     }
   }
 
