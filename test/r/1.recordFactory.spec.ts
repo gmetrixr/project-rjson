@@ -336,7 +336,7 @@ describe ("r RecordFactory tests", () => {
   it ("should change properties matching value for a project", () => {
     const projectF = new RecordFactory(projectJson);
     const newId = 565656565656565;
-    projectF.changeDeepPropertiesMatchingValue(1684404927844, newId);
+    projectF.changeDeepRecordIdInProperties(1684404927844, newId);
     const deepRecord = projectF.getDeepRecord(1684409594264);
     //@ts-ignore
     expect(deepRecord?.props.co_id).to.not.be.equal(1684404927844);

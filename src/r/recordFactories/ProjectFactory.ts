@@ -110,7 +110,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     //Add menu entry. Calling super.addBlankRecord and not ProjectFactory.addBlankRecord because internally it call addRecord, 
     //would end up in a cyclic call.
     const menuRecordId = sceneIdAndRecord.id + 10001;
-    const menuRecordPresent = this.getRecord(menuRecordId, RT.menu);
+    const menuRecordPresent = this.getRecord(menuRecordId, RT.menu) as RecordNode<RT.menu>;
     if(menuRecordPresent === undefined) {
       const newMenuRecord = super.addBlankRecord({type: RT.menu, id: menuRecordId});
       if(newMenuRecord) {
@@ -120,14 +120,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
 
     const tourRecordId = sceneIdAndRecord.id + 10002;
-    const tourRecordPresent = this.getRecord(tourRecordId, RT.tour_mode);
+    const tourRecordPresent = this.getRecord(tourRecordId, RT.tour_mode) as RecordNode<RT.tour_mode>;
     if(tourRecordPresent === undefined) {
       // Adding scene details every time to menu prop and making the boolean menu_show true / false based on the value given or default which is true.
       if (this.getValueOrDefault(rtp.project.auto_add_new_scene_to_tour_mode) === true) {
         //Making id deterministic (although not needed) - for testing
         const tourModeRecord = super.addBlankRecord({type: RT.tour_mode, id: tourRecordId});
         if(tourModeRecord) {
-          tourModeRecord.record.props.tour_mode_scene_id = sceneIdAndRecord.id;
+          (tourModeRecord.record as RecordNode<RT.tour_mode>).props.tour_mode_scene_id = sceneIdAndRecord.id;
         }
       }
     }
