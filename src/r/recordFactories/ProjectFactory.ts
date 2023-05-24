@@ -356,7 +356,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const record = deepClone(globalVar);
     record.props.var_category = VarCategory.global;
     record.props.var_track = true;
-    return this.addRecord({record: globalVar, id});
+    return this.addRecord({id, record});
   }
 
   /**
