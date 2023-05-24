@@ -1,5 +1,5 @@
-import { RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
-import { RecordNode } from "../R/RecordNode";
+import { RecordFactory } from "../R/RecordFactory";
+import { RecordNode, idAndRecord, idOrAddress } from "../R/RecordNode";
 import { RT } from "../R/RecordTypes";
 
 export class SceneFactory extends RecordFactory<RT.scene> {

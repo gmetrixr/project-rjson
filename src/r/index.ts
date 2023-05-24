@@ -1,5 +1,5 @@
 import * as R from "./R";
-import { RecordNode, RecordMap, RT, RTP, rtp, createRecord } from "./R";
+import { RecordNode, RecordMap, RT, RTP, rtp, createRecord, ClipboardData, idAndRecord } from "./R";
 import { RecordUtils } from "./R/RecordFactory";
 import { ElementUtils } from "./recordFactories/ElementFactory";
 import { ProjectFactory } from "./recordFactories/ProjectFactory";
@@ -41,6 +41,6 @@ const getFactory = (rJson: RecordNode<RT>): R.RecordFactory<RT> => {
 export {
   R, r, RF, rUtils,
   //Exporting most used classes/types directly
-  RecordNode, RecordMap, RT, RTP, rtp, createRecord, getFactory,
+  RecordNode, RecordMap, RT, RTP, rtp, createRecord, getFactory, ClipboardData, idAndRecord,
   en, sn, vn, rn, pn, fn, CogObjectType
 }

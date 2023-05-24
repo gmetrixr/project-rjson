@@ -1,18 +1,10 @@
-import { RecordNode, RecordMap, createRecord, RecordMapGeneric } from "./RecordNode";
+import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData } from "./RecordNode";
 import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
 
 const { deepClone, generateIdV2 } = jsUtils;
 const { getSafeAndUniqueRecordName } = stringUtils;
 
-/** id: child id, r: child RecordNode, p: parent RecordNode */
-export type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> };
-export type idAndRecord<N extends RT> = {id: number, record: RecordNode<N>};
-export type idOrAddress = number | string;
-/** clipboard contains the strigified version of this */
-export interface ClipboardData {
-  nodes: idAndRecord<RT>[]
-}
 /**
  * A convenient Factory class to maninpulate a RecordNode object of any type
  * This class can be extended to provide any recordType specific funcitonality

@@ -7,8 +7,8 @@ import {
   VariableType,
   variableTypeDefaults,
 } from "../definitions/variables/VariableTypes";
-import { ClipboardData, RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
-import { createRecord, RecordMap, RecordNode } from "../R/RecordNode";
+import { RecordFactory } from "../R/RecordFactory";
+import { ClipboardData, createRecord, idAndRecord, idOrAddress, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
