@@ -4,9 +4,6 @@ import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/migratedOldProject.json";
 import deleteRecordsLinkedToIdJson from "./jsons/r3fJsons/project/deleteRecordsLinkedToId.json";
-import { jsUtils } from "@gmetrixr/gdash";
-
-const { generateIdV2 } = jsUtils;
 
 const clipboardData = {
   nodes: [
