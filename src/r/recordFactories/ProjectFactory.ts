@@ -42,7 +42,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     super(json);
   }
 
-  addElementRecord<T>({record, position, id, dontCycleSubRecordIds, sceneIdOrAddress, elementType}: {
+  addElementRecord({record, position, id, dontCycleSubRecordIds, sceneIdOrAddress, elementType}: {
     record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, sceneIdOrAddress: idOrAddress, elementType: ElementType
   }): idAndRecord<RT.element> | undefined {
     if(!record) {
@@ -68,7 +68,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Just overriding addRecord should take care of paste issues also, as it internally calls this.addRecord
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super#calling_methods_from_super
    */
-  addRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+  addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
     record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord<RT> | undefined {
     //Don't allow adding sub-records to elements that are not groups
@@ -316,7 +316,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     record.props.var_default = defaults.varDefaultValue;
     record.props.var_type = variableType;
     record.props.var_category = VarCategory.user_defined;
-    return this.addRecord<RT.variable>({record, id});
+    return this.addRecord({record, id});
   }
 
   /**
