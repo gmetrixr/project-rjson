@@ -2,18 +2,18 @@ import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R";
 import { IOrder } from "../../IOrder";
 
 class Migration implements IOrder {
-  execute (projectJson: any) {
-    return migrateProject(projectJson);
+  execute (discussionJson: any) {
+    return migrateDiscussion(discussionJson);
   }
 }
 
-const migrateProject = (json: any) => {
+const migrateDiscussion = (json: any) => {
   delete json.id;
   const updatedJson = recursivelyMigrateJson(json);
-  const projectJson = updatedJson as unknown as RecordNode<RT.project>;
-  const projectF = new RecordFactory(projectJson)
-  projectF.set(rtp.project.version, 200);
-  return projectJson;
+  const discussionJson = updatedJson as unknown as RecordNode<RT.discussion>;
+  const discussionF = new RecordFactory(discussionJson)
+  discussionF.set(rtp.discussion.version, 200);
+  return discussionJson;
 }
 
 const recursivelyMigrateJson = (json: any) => {

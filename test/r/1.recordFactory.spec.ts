@@ -4,6 +4,9 @@ import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/migratedOldProject.json";
 import deleteRecordsLinkedToIdJson from "./jsons/r3fJsons/project/deleteRecordsLinkedToId.json";
+import { jsUtils } from "@gmetrixr/gdash";
+
+const { generateIdV2 } = jsUtils;
 
 const clipboardData = {
   nodes: [
@@ -176,6 +179,13 @@ describe ("r RecordFactory tests", () => {
     const record = new RecordFactory(projectJson).getRecord(1684391315311);
     expect(record).to.not.be.undefined;
     expect(record?.type).to.be.equal(RT.variable);
+  });
+
+  it ("should get id and record for a project", () => {
+    const recordAndId = new RecordFactory(projectJson).getIdAndRecord(1684391315311);
+    expect(recordAndId?.id).to.be.equal(1684391315311);
+    expect(recordAndId?.record).to.not.be.undefined;
+    expect(recordAndId?.record?.type).to.be.equal(RT.variable);
   });
 
   it ("should get a deep record for a project", () => {
@@ -371,7 +381,7 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should delete records linked to id for a project", () => {
-    const projectF = new RecordFactory(deleteRecordsLinkedToIdJson);
+    const projectF = new RecordFactory(deleteRecordsLinkedToIdJson as RecordNode<RT.project>);
     projectF.deleteRecordsLinkedToId(1684747381632);
     const recordMap = projectF.getDeepRecordMap();
     let found = false;
