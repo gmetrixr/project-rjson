@@ -9,6 +9,7 @@ import oldProjectJson from "./jsons/oldProject.json";
 import newtonStoreJson from "./jsons/newtonStore.json";
 import manishMalhotraJson from "./jsons/manishMalhotra.json";
 import deleteRecordsLinkedToIdJson from "./jsons/deleteRecordsLinkedToId.json";
+import threeScenesJson from "./jsons/threeScenes.json";
 import discussionJson from "./jsons/discussion.json";
 
 describe ("r Migration tests", () => {
@@ -23,6 +24,7 @@ describe ("r Migration tests", () => {
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/manish.json", JSON.stringify(migrateProject(manishMalhotraJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/old.json", JSON.stringify(migrateProject(oldProjectJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/deleteRecordsLinkedToId.json", JSON.stringify(migrateProject(deleteRecordsLinkedToIdJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/threeScenesJson.json", JSON.stringify(migrateProject(threeScenesJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/discussion/discussion.json", JSON.stringify(migrateDiscussion(discussionJson)));
     expect(true).to.be.true;
   });
