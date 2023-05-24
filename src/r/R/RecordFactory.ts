@@ -494,7 +494,7 @@ export class RecordFactory<T extends RT> {
    * Updates all references to an older value in a tree to a newer one
    * Used for updating references to any recordId that's changing 
    */
-  changePropertiesMatchingValue(oldValue: any, newValue: any): boolean {
+  changeDeepPropertiesMatchingValue(oldValue: any, newValue: any): boolean {
     for(const prop of this.getProps()) {
       if(this._json.props[(prop as RTP[T])] === oldValue) {
         this._json.props[(prop as RTP[T])] = newValue;
@@ -502,7 +502,7 @@ export class RecordFactory<T extends RT> {
     }
     for (const type of this.getRecordTypes()) {
       for(const [key, value] of this.getRecordEntries(type)) {
-        new RecordFactory(value).changePropertiesMatchingValue(oldValue, newValue);  
+        new RecordFactory(value).changeDeepPropertiesMatchingValue(oldValue, newValue);  
       }
     }
     return true;
@@ -529,7 +529,7 @@ export class RecordFactory<T extends RT> {
       const oldId = Number(key);
       const newId = generateIdV2();
       this.changeDeepRecordId(oldId, newId);
-      this.changePropertiesMatchingValue(oldId, newId);
+      this.changeDeepPropertiesMatchingValue(oldId, newId);
     }
   }
 
