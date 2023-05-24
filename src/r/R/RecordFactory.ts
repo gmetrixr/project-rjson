@@ -57,11 +57,11 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * getBreadCrumbs -> Returns an array of all sub-records leading to the given idOrAddress
  * 
  * RECORD RELATED
+ * getLinkedSubRecords -> Get records that are linked to another record via any prop
  * changeDeepRecordId / changePropertiesMatchingValue -> Updates all references to a recordId in the tree and in properties
- * cycleAllRecordIds -> Changes all ids
+ * cycleAllSubRecordIds -> Changes all ids
  * $ private getNewOrders / initializeRecordMap
  * addRecord / addBlankRecord
- * deleteRecordsLinkedToId -> Delete subrecords at any depth which have any prop value = id
  * duplicateRecord     / deleteRecord     / changeRecordName
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
  * 
@@ -482,20 +482,30 @@ export class RecordFactory<T extends RT> {
     return false;
   }
 
+  getLinkedSubRecords<N extends RT>(matchingId: number, type?: N): idAndRecord<N>[] {
+    const matchedIdsAndRecords: idAndRecord<N>[] = [];
+    for(const [id, record] of this.getDeepRecordEntries(type)) {
+      if(Object.values(record.props).includes(matchingId)) {
+        matchedIdsAndRecords.push({id, record});
+      }
+    }
+    return matchedIdsAndRecords;
+  }
+
+
   /** 
    * Updates all references to an older value in a tree to a newer one
    * Used for updating references to any recordId that's changing 
    */
-  changeDeepRecordIdInProperties(oldValue: number, newValue: number): boolean {
-    for(const prop of this.getProps()) {
-      const currentValue = Number(this._json.props[(prop as RTP[T])]);
-      if(currentValue === oldValue) {
-        this._json.props[(prop as RTP[T])] = newValue;
-      }
-    }
-    for (const type of this.getRecordTypes()) {
-      for(const [key, value] of this.getRecordEntries(type)) {
-        new RecordFactory(value).changeDeepRecordIdInProperties(oldValue, newValue);  
+  changeDeepRecordIdInProperties(oldId: number, newId: number): boolean {
+    const linkedIdAndRecords = this.getLinkedSubRecords(oldId);
+    for(const idAndRecord of linkedIdAndRecords) {
+      const record = idAndRecord.record;
+      for(const prop of Object.keys(record.props)) {
+        const currentValue = Number(record.props[(prop as RTP[T])]);
+        if(currentValue === oldId) {
+          (record.props as any)[prop] = newId;
+        }
       }
     }
     return true;
@@ -519,10 +529,12 @@ export class RecordFactory<T extends RT> {
   /** Change all sub-record ids (of sub-records) in this RecordNode */
   cycleAllSubRecordIds(): void {
     for(const [key, value] of this.getDeepRecordEntries()) {
-      const oldId = Number(key);
-      const newId = generateIdV2();
-      this.changeDeepRecordId(oldId, newId);
-      this.changeDeepRecordIdInProperties(oldId, newId);
+      if(value.type !== RT.scene) { //We don't want to change scene ids
+        const oldId = Number(key);
+        const newId = generateIdV2();
+        this.changeDeepRecordId(oldId, newId);
+        this.changeDeepRecordIdInProperties(oldId, newId);
+      }
     }
   }
 
@@ -669,17 +681,6 @@ export class RecordFactory<T extends RT> {
     const recordMapOfType = this.getRecordMap(recordToDelete.type as RT);
     delete recordMapOfType[id];
     return {id, record: recordToDelete};
-  }
-
-  deleteRecordsLinkedToId(id: number) {
-    for(const [recordId, record] of this.getDeepRecordEntries()) {
-      if(Object.values(record.props).includes(id)) {
-        const rAndP = this.getRecordAndParent(Number(recordId));
-        if(rAndP) {
-          new RecordFactory(rAndP.p).deleteRecord(Number(recordId));
-        }
-      }
-    }
   }
 
   deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {

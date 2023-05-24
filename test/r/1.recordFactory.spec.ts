@@ -3,7 +3,6 @@ import { RT, RecordFactory, RecordNode, createRecord, recordTypeDefinitions, rtp
 import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/migratedOldProject.json";
-import deleteRecordsLinkedToIdJson from "./jsons/r3fJsons/project/deleteRecordsLinkedToId.json";
 
 const clipboardData = {
   nodes: [
@@ -386,22 +385,6 @@ describe ("r RecordFactory tests", () => {
     expect(sortedRecordIds).to.include(idAndRecord?.id);
     expect(sortedRecordIds[sortedRecordIds.length - 1]).to.be.equal(idAndRecord?.id);
     expect(sortedRecordIds[5]).to.be.equal(idAndRecord2?.id);
-  });
-
-  it ("should delete records linked to id for a project", () => {
-    const projectF = new RecordFactory(deleteRecordsLinkedToIdJson as RecordNode<RT.project>);
-    projectF.deleteRecordsLinkedToId(1684747381632);
-    const recordMap = projectF.getDeepRecordMap();
-    let found = false;
-    for (const key in recordMap) {
-      if (recordMap[key].type === RT.when_event) {
-        found = true;
-      }
-    }
-    expect(found).to.be.equal(false);
-    projectF.deleteRecordsLinkedToId(1684746656284);
-    const menuRecord = projectF.getRecord(1684746620123, RT.menu);
-    expect(menuRecord).to.be.undefined;
   });
 
   it ("should delete record for a project", () => {

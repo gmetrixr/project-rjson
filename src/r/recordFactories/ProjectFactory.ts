@@ -176,12 +176,15 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   private deleteRecordsLinkedToScene(sceneIdAndRecord: idAndRecord<RT.scene>) {
-    //Add menu entry. Calling super.addBlankRecord and not ProjectFactory.addBlankRecord because internally it call addRecord, 
-    //would end up in a cyclic call.
-    const menuRecordId = sceneIdAndRecord.id + 10001;
-    super.deleteRecord(menuRecordId, RT.menu);
-    const tourRecordId = sceneIdAndRecord.id + 10002;
-    super.deleteRecord(tourRecordId, RT.tour_mode);
+    const linkedIdAndRecords = this.getLinkedSubRecords(sceneIdAndRecord.id);
+    for(const idAndRecord of linkedIdAndRecords) {
+      const record = idAndRecord.record;
+      if(record.type === RT.menu) {
+        super.deleteRecord(idAndRecord.id, RT.menu); //Not using deleteDeepRecord because we know menu is in level 1
+      } else if (record.type === RT.tour_mode) {
+        super.deleteRecord(idAndRecord.id, RT.tour_mode); //Not using deleteDeepRecord because we know menu is in level 1
+      }
+    }
   }
 
   private deleteRecordsLinkedToLeadGen(leadGenIdAndRecord: idAndRecord<RT.lead_gen_field>) {
@@ -213,7 +216,18 @@ export class ProjectFactory extends RecordFactory<RT.project> {
 
   deleteRecord<N extends RT>(id: number, type?: N): idAndRecord<RT> | undefined {
     const idAndRecord = super.deleteRecord(id, type);
-    if(idAndRecord === undefined) return undefined;
+    this.afterDeleteInProjectFactory(idAndRecord);
+    return idAndRecord;
+  }
+
+  deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
+    const idAndRecord = super.deleteDeepRecord(idOrAddress);
+    this.afterDeleteInProjectFactory(idAndRecord);
+    return idAndRecord;
+  }
+
+  private afterDeleteInProjectFactory(idAndRecord?: idAndRecord<RT>) {
+    if(idAndRecord === undefined) return;
     //Custom Record Types' Code
     switch (idAndRecord.record.type) {
       case RT.scene: {
@@ -229,7 +243,6 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         break;
       }
     }
-    return idAndRecord;
   }
 
   changeRecordName<N extends RT>(id: number, newName?: string, type?: N): idAndRecord<RT> | undefined {

@@ -46,7 +46,8 @@ describe ("r ProjectFactory tests", () => {
 
   it ("should delete element from project", () => {
     const projectF = new ProjectFactory(threeScenesJson);
-    projectF.deleteRecord(1684926504379);
+    const deletedRecord = projectF.deleteDeepRecord(1684926504379);
+    console.log(deletedRecord);
     expect(projectF.getDeepRecord(1684926504379)).to.be.undefined;
   });
 
