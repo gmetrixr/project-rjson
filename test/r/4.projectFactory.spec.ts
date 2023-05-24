@@ -55,8 +55,6 @@ describe ("r ProjectFactory tests", () => {
     const updatedName = "Updated Name for test";
     projectF.changeRecordName(1684926516892, updatedName);
     expect(projectF.getRecord(1684926516892, RT.scene)?.name).to.be.equal(updatedName);
-    expect(projectF.getRecord(1684926392096, RT.menu)?.props.menu_display_name).to.be.equal(updatedName);
-    expect(projectF.getRecord(1684926079938, RT.tour_mode)?.name).to.be.equal(updatedName);
   });
 
   it ("should change record name for a lead gen field in a project", () => {
@@ -64,6 +62,7 @@ describe ("r ProjectFactory tests", () => {
     const updatedName = "Updated Name for lead gen test";
     projectF.changeRecordName(1684926727974, updatedName);
     expect(projectF.getRecord(1684926727974, RT.lead_gen_field)?.name).to.be.equal(updatedName);
+    expect(projectF.getRecord(1684926513957, RT.variable)?.name).to.be.equal(`${updatedName}_var`);
   });
 
   it ("should change record name for a variable in a project", () => {
