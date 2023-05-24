@@ -617,18 +617,19 @@ export class ProjectUtils {
     this.eventsDict = {};
 
     const projectF = new ProjectFactory(project);
-    const scene = projectF.getRecord(RT.scene, sceneId);
+    const scene = projectF.getRecord(sceneId, RT.scene);
 
     if (scene) {
       const sceneF = new SceneFactory(scene);
-      const rules = sceneF.getRecords(RT.rule);
+      const rules = sceneF.getRecordMap(RT.rule);
 
-      for (const rule of rules) {
+      for (const rId in rules) {
+        const ruleId = Number(rId);
+        const rule = rules[ruleId];
         const ruleF = new RecordFactory(rule);
 
         const ruleName = ruleF.getName()?.trim().toLowerCase();
         const accentColor = (ruleF.getValueOrDefault(rtp.rule.accent_color) as string).trim().toLowerCase();
-        const ruleId = ruleF.getId();
 
         // rule name entry
         if (ruleName) {
@@ -645,13 +646,16 @@ export class ProjectUtils {
         }
 
         // element and variable names entries
-        const elements = sceneF.getAllDeepChildren(RT.element);
+        const elementEntries = sceneF.getDeepRecordEntries(RT.element);
         const whenEvents = ruleF.getRecords(RT.when_event);
 
         for (const we of whenEvents) {
           const coId = we.props.co_id as number;
-          const element = elements.find(ele => ele.id === coId);
-          const variable = projectF.getRecord(RT.variable, coId);
+
+          const elementEntry = elementEntries.find(ele => ele[0] === coId);
+          if (!elementEntry) return;
+          const element = elementEntry[1];
+          const variable = projectF.getRecord(coId, RT.variable);
           if (element) {
             const eleName = element.name?.trim().toLowerCase();
             if (eleName) {
@@ -680,8 +684,10 @@ export class ProjectUtils {
         for (const ta of thenActions) {
           // const whenEventF = new RecordFactory(we);
           const coId = ta.props.co_id as number;
-          const element = elements.find(ele => ele.id === coId);
-          const variable = projectF.getRecord(RT.variable, coId);
+          const elementEntry = elementEntries.find(ele => ele[0] === coId);
+          if (!elementEntry) return;
+          const element = elementEntry[1];
+          const variable = projectF.getRecord(coId, RT.variable);
 
           if (element) {
             const eleName = element.name?.trim().toLowerCase();
@@ -723,7 +729,9 @@ export class ProjectUtils {
             case RuleAction.teleport: {
               if (Array.isArray(ta.props.properties)) {
                 const elem_id = ta.props.properties[0] as number;
-                const element = elements.find(ele => ele.id === elem_id);
+                const elementEntry = elementEntries.find(ele => ele[0] === elem_id);
+                if (!elementEntry) return;
+                const element = elementEntry[1];
                 const elementName = element?.name?.trim().toLowerCase();
 
                 if (elementName) {
@@ -739,7 +747,7 @@ export class ProjectUtils {
             case RuleAction.change_scene: {
               if (Array.isArray(ta.props.properties)) {
                 const sceneId = ta.props.properties[0] as number;
-                const scene = projectF.getRecord(RT.scene, sceneId);
+                const scene = projectF.getRecord(sceneId, RT.scene);
                 const sceneName = scene?.name?.trim().toLowerCase();
                 if(sceneName) {
                   this.propsNameDict[sceneName] ?
@@ -753,7 +761,10 @@ export class ProjectUtils {
             case RuleAction.show_item: {
               if (Array.isArray(ta.props.properties)) {
                 const itemId = ta.props.properties[0] as number;
-                const items = sceneF.getAllDeepChildrenWithFilter(RT.item, (ele => ele.id === itemId));
+                const itemEntries = sceneF.getDeepRecordEntries(RT.item);
+                const itemEntry = itemEntries.filter(item => item[0] === itemId);
+                if (!itemEntry) return;
+                const items = itemEntry.map(item => item[1]);
 
                 for(const i of items) {
                   const itemName = i.name?.trim().toLowerCase();
@@ -838,8 +849,19 @@ export class ProjectUtils {
     const projectF = new ProjectFactory(project);
     const templatableElements = [ElementType.text, ElementType.embed_html];
     const templatableRulesActions = [RuleAction.open_url];
-    const elementRecords = projectF.getAllDeepChildrenWithFilter(RT.element, e => templatableElements.includes(e.props.element_type as ElementType));
-    const ruleRecords = projectF.getAllDeepChildrenWithFilter(RT.then_action, ta => templatableRulesActions.includes(ta.props.action as RuleAction));
+    const elementMap = projectF.getDeepRecordMap();
+    const elementRecords = [];
+    const ruleRecords = [];
+    for (const id in elementMap) {
+      const element = elementMap[id];
+      if (element.type === RT.element && templatableElements.includes(element.props.element_type as ElementType)) {
+        elementRecords.push(element);
+      }
+
+      if (element.type === RT.then_action && templatableRulesActions.includes(element.props.action as RuleAction)) {
+        ruleRecords.push(element);
+      }
+    }
     return [...elementRecords, ...ruleRecords];
   }
 

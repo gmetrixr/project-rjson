@@ -4,6 +4,9 @@ import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/migratedOldProject.json";
 import deleteRecordsLinkedToIdJson from "./jsons/r3fJsons/project/deleteRecordsLinkedToId.json";
+import { jsUtils } from "@gmetrixr/gdash";
+
+const { generateIdV2 } = jsUtils;
 
 const clipboardData = {
   nodes: [
@@ -178,6 +181,13 @@ describe ("r RecordFactory tests", () => {
     expect(record?.type).to.be.equal(RT.variable);
   });
 
+  it ("should get id and record for a project", () => {
+    const recordAndId = new RecordFactory(projectJson).getIdAndRecord(1684391315311);
+    expect(recordAndId?.id).to.be.equal(1684391315311);
+    expect(recordAndId?.record).to.not.be.undefined;
+    expect(recordAndId?.record?.type).to.be.equal(RT.variable);
+  });
+
   it ("should get a deep record for a project", () => {
     const record = new RecordFactory(projectJson).getDeepRecord(1684392104132);
     expect(record).to.not.be.undefined;
@@ -318,9 +328,11 @@ describe ("r RecordFactory tests", () => {
 
   it ("should change deep record id for a project", () => {
     const projectF = new RecordFactory(projectJson);
-    const updatedRecordId = projectF.changeDeepRecordId(1684404927844);
+    const newId = generateIdV2();
+    const result = projectF.changeDeepRecordId(1684404927844, newId);
+    expect(result).to.be.true;
     const record = projectF.getDeepRecord(1684404927844);
-    const updatedRecord = projectF.getDeepRecord(updatedRecordId);
+    const updatedRecord = projectF.getDeepRecord(newId);
     expect(record).to.be.undefined;
     expect(updatedRecord).to.not.be.undefined;
   });
@@ -360,8 +372,8 @@ describe ("r RecordFactory tests", () => {
 
   it ("should add blank record for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    const idAndRecord = projectF.addBlankRecord(RT.variable);
-    const idAndRecord2 = projectF.addBlankRecord(RT.variable, 5);
+    const idAndRecord = projectF.addBlankRecord({ type: RT.variable });
+    const idAndRecord2 = projectF.addBlankRecord({ type: RT.variable, position: 5 });
     const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
     expect(sortedRecordIds).to.include(idAndRecord?.id);
     expect(sortedRecordIds).to.include(idAndRecord?.id);
@@ -370,7 +382,7 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should delete records linked to id for a project", () => {
-    const projectF = new RecordFactory(deleteRecordsLinkedToIdJson);
+    const projectF = new RecordFactory(deleteRecordsLinkedToIdJson as RecordNode<RT.project>);
     projectF.deleteRecordsLinkedToId(1684747381632);
     const recordMap = projectF.getDeepRecordMap();
     let found = false;

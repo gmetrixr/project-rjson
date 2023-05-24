@@ -1,5 +1,5 @@
 import { RecordNode, RT } from "../../r/R";
-import { getHighestProjectVersion, projectMigrationTree } from "./projectMigrations";
+import { projectMigrationTree } from "./projectMigrations";
 import initialRMigration from "./project-migration-commands/m199_200_initial_migration_from_rjson_to_rjson2_structure";
 
 const projectMigrationVersions: number[] = Object.keys(projectMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
