@@ -393,6 +393,9 @@ describe ("r RecordFactory tests", () => {
       }
     }
     expect(found).to.be.equal(false);
+    projectF.deleteRecordsLinkedToId(1684746656284);
+    const menuRecord = projectF.getRecord(1684746620123, RT.menu);
+    expect(menuRecord).to.be.undefined;
   });
 
   it ("should delete record for a project", () => {

@@ -70,6 +70,37 @@
                   }
                 }
               }
+            },
+            "1684409406448": {
+              "name": "Rule the world (2)",
+              "type": "rule",
+              "props": {
+                "tracked": false
+              },
+              "records": {
+                "when_event": {
+                  "1684409501168": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": "1684392104132",
+                      "event": "on_click",
+                      "co_type": "cube",
+                      "properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1684409594263": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id":  "1684405505170",
+                      "co_type": "polygon",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    }
+                  }
+                }
+              }
             }
           }
         }      
