@@ -2,7 +2,8 @@ import * as R from "./R";
 import { RecordNode, RecordMap, RT, RTP, rtp, createRecord } from "./R";
 import { RecordUtils } from "./R/RecordFactory";
 import { ElementUtils } from "./recordFactories/ElementFactory";
-import { ProjectUtils } from "./recordFactories/ProjectFactory";
+import { ProjectFactory } from "./recordFactories/ProjectFactory";
+import { RulesSearch } from "./recordFactories/RulesSearch";
 import * as RF from "./recordFactories";
 import { en, sn, vn, rn, pn, fn, CogObjectType } from "./definitions";
 
@@ -18,9 +19,10 @@ const r = {
 }
 
 const rUtils = {
-  ElementUtils,
-  ProjectUtils,
   RecordUtils,
+  ElementUtils,
+  ProjectFactory,
+  RulesSearch,
 }
 
 const getFactory = (rJson: RecordNode<RT>): R.RecordFactory<RT> => {

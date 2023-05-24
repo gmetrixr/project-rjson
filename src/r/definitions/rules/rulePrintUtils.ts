@@ -1,15 +1,13 @@
 import chalk from "chalk";
 import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from ".";
-import { rn } from "..";
-import { CogObjectType } from "../..";
-import { emptyROM, RecordFactory, RecordNode, RT, rtp } from "../../R";
-
+import { RecordFactory, RecordMap, RecordNode, RT, rtp } from "../../R";
 import { ProjectFactory, SceneFactory } from "../../recordFactories";
 import { ElementUtils } from "../../recordFactories/ElementFactory";
 import { isElementType, ElementType } from "../elements";
 import { isSpecialType, specialElementDisplayNames, SpecialType } from "../special";
-import { ArrayOfValues, isVariableType, VarDefROM } from "../variables";
-import { rules } from "@typescript-eslint/eslint-plugin";
+import { ArrayOfValues, isVariableType } from "../variables";
+import { idAndRecord } from "../../R/RecordFactory";
+import { CogObjectType } from "..";
 
 export interface RuleText {
   ruleIdText: string;
@@ -30,21 +28,21 @@ export class rulePrintUtils {
 
   static generateRuleTextsAndPrint = (
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): void => {
     let ruleText;
     const sceneF = new SceneFactory(scene);
-    for (const rule of sceneF.getRecords(RT.rule)) {
-      ruleText = rulePrintUtils.crp().generateRuleText(rule, scene, varDefMap);
+    for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
+      ruleText = rulePrintUtils.crp().generateRuleText({id: ruleId, record: rule}, scene, varMap);
       rulePrintUtils.crp().consoleRuleTextPrinter(ruleText);
     }
   };
 
   static generateFriendlyRuleTextsAndPrint = (project: RecordNode<RT.project>, sceneIds: number[]): void => {
     const projectF = new ProjectFactory(project);
-    const varDefROM = projectF.getROM(RT.variable);
+    const varDefROM = projectF.getRecordMap(RT.variable);
     for (const sceneId of sceneIds) {
-      const scene = projectF.getRecord(RT.scene, sceneId);
+      const scene = projectF.getRecord(sceneId, RT.scene);
       if (scene !== undefined) {
         rulePrintUtils.frp().generateRuleTextsAndPrint(project, scene, varDefROM);
       }
@@ -53,11 +51,11 @@ export class rulePrintUtils {
 
   static generateFriendlyRuleTexts = (project: RecordNode<RT.project>, sceneIds: number[]): string => {
     const projectF = new ProjectFactory(project);
-    const varDefROM = projectF.getROM(RT.variable);
+    const varDefROM = projectF.getRecordMap(RT.variable);
     let rulesText = "";
     const frp = rulePrintUtils.frp();
     for (const sceneId of sceneIds) {
-      const scene = projectF.getRecord(RT.scene, sceneId);
+      const scene = projectF.getRecord(sceneId, RT.scene);
       if (scene !== undefined) {
         const sceneF = new SceneFactory(scene);
         for (const rule of sceneF.getRecords(RT.rule)) {
@@ -86,31 +84,31 @@ class ConsoleRulePrinter {
 
   public generateRuleTextsAndPrint = (
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): void => {
     let ruleText;
     const sceneF = new SceneFactory(scene);
-    for (const rule of sceneF.getRecords(RT.rule)) {
-      ruleText = this.generateRuleText(rule, scene, varDefMap);
+    for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
+      ruleText = this.generateRuleText({id: ruleId, record: rule}, scene, varMap);
       this.consoleRuleTextPrinter(ruleText);
     }
   };
 
   public generateRuleText = (
-    rule: RecordNode<RT.rule>,
+    rule: idAndRecord<RT.rule>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): RuleText => {
-    const rf = new RecordFactory(rule);
+    const rf = new RecordFactory(rule.record);
     const whenEventsArray: string[] = [];
     const thenActionsArray: string[] = [];
     rf.getRecords(RT.when_event).forEach(whenEvent => {
       //whenEventsArray.push(`${whenEvent.ce_type}(${whenEvent.ce_id}) ${cEventsDisplayNames[<ConnectionEvent>whenEvent.event]} ${whenEvent.properties}`.trim());
-      whenEventsArray.push(this.weText(whenEvent, scene, varDefMap));
+      whenEventsArray.push(this.weText(whenEvent, scene, varMap));
     });
     rf.getRecords(RT.then_action).forEach(thenAction => {
       //thenActionsArray.push(`${thenAction.ce_type}(${thenAction.ce_id}) should ${cActionsDisplayNames[<ConnectionAction>thenAction.action]} ${thenAction.properties}`.trim());
-      thenActionsArray.push(this.taText(thenAction, scene, varDefMap));
+      thenActionsArray.push(this.taText(thenAction, scene, varMap));
     });
     return {
       ruleIdText: this.ruleIdText(rule),
@@ -133,17 +131,17 @@ class ConsoleRulePrinter {
     }
   };
 
-  public ruleIdText = (rule: RecordNode<RT.rule>): string => {
-    return `${rule.name}(${rule.id}) ${rule.props.comment ?? ""}`;
+  public ruleIdText = (ruleIdAndRecord: idAndRecord<RT.rule>): string => {
+    return `${ruleIdAndRecord.record.name}(${ruleIdAndRecord.id}) ${ruleIdAndRecord.record.props.comment ?? ""}`;
   };
 
   public weText = (
     we: RecordNode<RT.when_event>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(we.props.co_id as number, we.props.co_type as CogObjectType, scene, varDefMap);
+    const displayName = this.coIdToName(we.props.co_id as number, we.props.co_type as CogObjectType, scene, varMap);
     const event = rEventDisplayName[<RuleEvent>we.props.event];
     let propertiesText = "";
     if (we.props.properties !== undefined && (we.props.properties as ArrayOfValues).length !== 0) {
@@ -159,10 +157,10 @@ class ConsoleRulePrinter {
   public taText = (
     ta: RecordNode<RT.then_action>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(ta.props.co_id as number, ta.props.co_type as CogObjectType, scene, varDefMap);
+    const displayName = this.coIdToName(ta.props.co_id as number, ta.props.co_type as CogObjectType, scene, varMap);
     const action = rActionDisplayName[<RuleAction>ta.props.action];
     let propertiesText = "";
     if (ta.props.properties !== undefined && (ta.props.properties as ArrayOfValues).length !== 0) {
@@ -183,7 +181,7 @@ class ConsoleRulePrinter {
     coId: number,
     coType: CogObjectType,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): string => {
     let name = "";
     let type = "UnknownType";
@@ -194,11 +192,11 @@ class ConsoleRulePrinter {
       }
     } else if (isVariableType(coType)) {
       type = coType;
-      name = varDefMap.map[coId]?.name ?? "";
+      name = varMap[coId]?.name ?? "";
     } else if (isElementType(coType)) {
       type = ElementUtils.getElementDefinition(coType)?.elementDefaultName ?? "";
-      const e = new RecordFactory<RT.scene>(scene).getAllDeepChildrenWithFilter(RT.element, e => e.id === coId);
-      name = e[0]?.name ?? "";
+      const e = new RecordFactory<RT.scene>(scene).getDeepRecordEntries(RT.element).find(([eId, e]) => eId === coId);
+      name = e?.[1]?.name ?? "";
     }
     if (name === "") {
       return `${type}(${coId})`;
@@ -223,12 +221,12 @@ class FriendlyRulePrinter {
   public generateRuleTextsAndPrint = (
     project: RecordNode<RT.project>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): void => {
     let ruleText;
     const sceneF = new SceneFactory(scene);
     for (const rule of sceneF.getRecords(RT.rule)) {
-      ruleText = this.generateRuleText(rule, project, scene, varDefMap);
+      ruleText = this.generateRuleText(rule, project, scene, varMap);
       console.log(this.friendlyRuleLine(ruleText));
     }
   };
@@ -237,16 +235,16 @@ class FriendlyRulePrinter {
     rule: RecordNode<RT.rule>,
     project: RecordNode<RT.project>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): RuleText => {
     const rf = new RecordFactory(rule);
     const whenEventsArray: string[] = [];
     const thenActionsArray: string[] = [];
     rf.getRecords(RT.when_event).forEach(whenEvent => {
-      whenEventsArray.push(this.weText(whenEvent, scene, varDefMap));
+      whenEventsArray.push(this.weText(whenEvent, scene, varMap));
     });
     rf.getRecords(RT.then_action).forEach(thenAction => {
-      thenActionsArray.push(this.taText(thenAction, project, scene, varDefMap));
+      thenActionsArray.push(this.taText(thenAction, project, scene, varMap));
     });
     return {
       ruleIdText: `${rule.name}${rule.props.comment ? " " + rule.props.comment : ""}`,
@@ -276,10 +274,10 @@ class FriendlyRulePrinter {
   public weText = (
     we: RecordNode<RT.when_event>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(we.props.co_id as number, we.props.co_type as CogObjectType, scene, varDefMap);
+    const displayName = this.coIdToName(we.props.co_id as number, we.props.co_type as CogObjectType, scene, varMap);
     const event = rEventDisplayName[<RuleEvent>we.props.event];
     let propertiesText = "";
     if (we.props.properties !== undefined && (we.props.properties as ArrayOfValues).length !== 0) {
@@ -297,10 +295,10 @@ class FriendlyRulePrinter {
     ta: RecordNode<RT.then_action>,
     project: RecordNode<RT.project>,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(ta.props.co_id as number, ta.props.co_type as CogObjectType, scene, varDefMap);
+    const displayName = this.coIdToName(ta.props.co_id as number, ta.props.co_type as CogObjectType, scene, varMap);
     const action = rActionDisplayName[<RuleAction>ta.props.action];
     let propertiesText = "";
     //Calculate propertiesText based on the action type
@@ -308,21 +306,21 @@ class FriendlyRulePrinter {
       const properties = ta.props.properties as ArrayOfValues;
       let coIdElement: number, e, coIdScene, propsScene;
       switch (ta.props.action) {
-        case rn.RuleAction.point_to:
+        case RuleAction.point_to:
           //properties[0] is the element id
           coIdElement = properties[0] as number;
-          e = new RecordFactory<RT.scene>(scene).getAllDeepChildrenWithFilter(RT.element, e => e.id === coIdElement);
+          e = new RecordFactory<RT.scene>(scene).getDeepRecordEntries(RT.element).find(([id, element]) => id === coIdElement);
           propertiesText = this.coIdToName(
             properties[0] as number,
-            e[0]?.props.element_type as ElementType,
+            e?.[1]?.props.element_type as ElementType,
             scene,
-            varDefMap,
+            varMap,
           );
           break;
-        case rn.RuleAction.change_scene:
+        case RuleAction.change_scene:
           //properties[0] is the scene id
           coIdScene = properties[0] as number;
-          propsScene = new ProjectFactory(project).getRecord(RT.scene, coIdScene);
+          propsScene = new ProjectFactory(project).getRecord(coIdScene, RT.scene);
           if (propsScene?.name !== undefined) {
             propertiesText = ` ${propsScene.name}`; //need a space before the scene name
           }
@@ -348,7 +346,7 @@ class FriendlyRulePrinter {
     coId: number,
     coType: CogObjectType,
     scene: RecordNode<RT.scene>,
-    varDefMap: VarDefROM = emptyROM<RT.variable>(),
+    varMap: RecordMap<RT.variable> = {},
   ): string => {
     let name = "";
     let type = "UnknownType";
@@ -359,11 +357,11 @@ class FriendlyRulePrinter {
       }
     } else if (isVariableType(coType)) {
       type = coType;
-      name = varDefMap.map[coId]?.name ?? "";
+      name = varMap[coId]?.name ?? "";
     } else if (isElementType(coType)) {
       type = ElementUtils.getElementDefinition(coType)?.elementDefaultName ?? "";
-      const e = new RecordFactory<RT.scene>(scene).getAllDeepChildrenWithFilter(RT.element, e => e.id === coId);
-      name = e[0]?.name ?? "";
+      const e = new RecordFactory<RT.scene>(scene).getDeepRecordEntries(RT.element).find(([id, element]) => id === coId);
+      name = e?.[1]?.name ?? "";
     }
     if (name === "") {
       return `${type}`;
