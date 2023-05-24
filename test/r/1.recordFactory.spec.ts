@@ -326,11 +326,16 @@ describe ("r RecordFactory tests", () => {
   it ("should change deep record id for a project", () => {
     const projectF = new RecordFactory(projectJson);
     const newId = 565656565656565;
-    const updatedRecordId = projectF.changeDeepRecordId(1684404927844, newId);
+    projectF.changeDeepRecordId(1684404927844, newId);
     const record = projectF.getDeepRecord(1684404927844);
     const updatedRecord = projectF.getDeepRecord(newId);
+    const deepRecord = projectF.getDeepRecord(1684409594263);
     expect(record).to.be.undefined;
     expect(updatedRecord).to.not.be.undefined;
+    //@ts-ignore
+    expect(deepRecord?.props.co_id).to.not.be.equal(1684404927844);
+    //@ts-ignore
+    expect(deepRecord?.props.co_id).to.be.equal(565656565656565);
   });
 
   it ("should cycle all record ids for a project", () => {
