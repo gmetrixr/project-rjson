@@ -34,3 +34,13 @@ export const createRecord = <T extends RT>(type: T, name?: string) :RecordNode<T
   }
   return node;
 };
+
+/** id: child id, r: child RecordNode, p: parent RecordNode */
+export type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> };
+export type idAndRecord<N extends RT> = {id: number, record: RecordNode<N>};
+export type idOrAddress = number | string;
+/** clipboard contains the strigified version of this */
+export interface ClipboardData {
+  nodes: idAndRecord<RT>[]
+}
+

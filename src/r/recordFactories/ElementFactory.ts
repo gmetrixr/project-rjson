@@ -135,7 +135,7 @@ export class ElementFactory extends RecordFactory<RT.element> {
     const newElement = createRecord<RT.element>(RT.element, defaultName);
     newElement.props = ElementUtils.getElementTypeDefaults(elementType);
     newElement.props.element_type = elementType;
-    this.addRecord<RT.element>({record: newElement, position});
+    this.addRecord({record: newElement, position});
     return newElement;
   }
 }

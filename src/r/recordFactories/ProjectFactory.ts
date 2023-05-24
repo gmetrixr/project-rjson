@@ -7,8 +7,8 @@ import {
   VariableType,
   variableTypeDefaults,
 } from "../definitions/variables/VariableTypes";
-import { ClipboardData, RecordFactory, idAndRecord, idOrAddress } from "../R/RecordFactory";
-import { createRecord, RecordMap, RecordNode } from "../R/RecordNode";
+import { RecordFactory } from "../R/RecordFactory";
+import { ClipboardData, createRecord, idAndRecord, idOrAddress, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
@@ -42,7 +42,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     super(json);
   }
 
-  addElementRecord<T>({record, position, id, dontCycleSubRecordIds, sceneIdOrAddress, elementType}: {
+  addElementRecord({record, position, id, dontCycleSubRecordIds, sceneIdOrAddress, elementType}: {
     record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, sceneIdOrAddress: idOrAddress, elementType: ElementType
   }): idAndRecord<RT.element> | undefined {
     if(!record) {
@@ -68,7 +68,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Just overriding addRecord should take care of paste issues also, as it internally calls this.addRecord
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super#calling_methods_from_super
    */
-  addRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+  addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
     record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord<RT> | undefined {
     //Don't allow adding sub-records to elements that are not groups
@@ -171,7 +171,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
     if(variableIdAndRecord) {
       //Keep the name of the variable same as the lead gen field
-      this.changeRecordName(variableIdAndRecord.id, varNameFromOriginName(idAndRecord.record.name + (nameSuffix ?? "")));
+      super.changeDeepRecordName(variableIdAndRecord.id, varNameFromOriginName(idAndRecord.record.name + (nameSuffix ?? "")));
     }
   }
 
@@ -179,14 +179,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     //Add menu entry. Calling super.addBlankRecord and not ProjectFactory.addBlankRecord because internally it call addRecord, 
     //would end up in a cyclic call.
     const menuRecordId = sceneIdAndRecord.id + 10001;
-    this.deleteRecord(menuRecordId, RT.menu);
+    super.deleteRecord(menuRecordId, RT.menu);
     const tourRecordId = sceneIdAndRecord.id + 10002;
-    this.deleteRecord(tourRecordId, RT.tour_mode);
+    super.deleteRecord(tourRecordId, RT.tour_mode);
   }
 
   private deleteRecordsLinkedToLeadGen(leadGenIdAndRecord: idAndRecord<RT.lead_gen_field>) {
     const linkedVarId = (leadGenIdAndRecord.record as RecordNode<RT.lead_gen_field>).props[LeadGenFieldProperty.var_id] as number;
-    this.deleteRecord(linkedVarId, RT.variable);
+    super.deleteRecord(linkedVarId, RT.variable);
   }
 
   private deleteRecordsLinkedToElement(elementIdAndRecord: idAndRecord<RT.element>) {
@@ -195,17 +195,17 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       case ElementType.media_upload: {
         ElementProperty.media_upload_var_id
         const linkedVarId = (record as RecordNode<RT.element>).props.media_upload_var_id as number;
-        this.deleteRecord(linkedVarId, RT.variable);
+        super.deleteRecord(linkedVarId, RT.variable);
         break;
       }
 
       case ElementType.embed_scorm: {
         const linkedScoreScoreVarId = (record as RecordNode<RT.element>).props.embed_scorm_score_var_id as number;
-        this.deleteRecord(linkedScoreScoreVarId, RT.variable);
+        super.deleteRecord(linkedScoreScoreVarId, RT.variable);
         const linkedScormSuspendVarId = (record as RecordNode<RT.element>).props.embed_scorm_suspend_data_var_id as number;
-        this.deleteRecord(linkedScormSuspendVarId, RT.variable);
+        super.deleteRecord(linkedScormSuspendVarId, RT.variable);
         const linkedScormProgressVarId = (record as RecordNode<RT.element>).props.embed_scorm_progress_var_id as number;
-        this.deleteRecord(linkedScormProgressVarId, RT.variable);
+        super.deleteRecord(linkedScormProgressVarId, RT.variable);
         break;
       }
     }
@@ -316,7 +316,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     record.props.var_default = defaults.varDefaultValue;
     record.props.var_type = variableType;
     record.props.var_category = VarCategory.user_defined;
-    return this.addRecord<RT.variable>({record, id});
+    return this.addRecord({record, id});
   }
 
   /**

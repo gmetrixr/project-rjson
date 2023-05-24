@@ -1,18 +1,10 @@
-import { RecordNode, RecordMap, createRecord, RecordMapGeneric } from "./RecordNode";
+import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData } from "./RecordNode";
 import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
 
 const { deepClone, generateIdV2 } = jsUtils;
 const { getSafeAndUniqueRecordName } = stringUtils;
 
-/** id: child id, r: child RecordNode, p: parent RecordNode */
-export type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> };
-export type idAndRecord<N extends RT> = {id: number, record: RecordNode<N>};
-export type idOrAddress = number | string;
-/** clipboard contains the strigified version of this */
-export interface ClipboardData {
-  nodes: idAndRecord<RT>[]
-}
 /**
  * A convenient Factory class to maninpulate a RecordNode object of any type
  * This class can be extended to provide any recordType specific funcitonality
@@ -345,7 +337,7 @@ export class RecordFactory<T extends RT> {
   }
   
   /** Find a record and its parent given any record id */
-  private getRecordAndParentWithId<N extends RT>(id: number): rAndP | undefined {
+  private getRecordAndParentWithId(id: number): rAndP | undefined {
     const recordMap = this.getRecordMap();
     for(const [key, value] of Object.entries(recordMap)) {
       if(id === Number(key)) {
@@ -397,7 +389,7 @@ export class RecordFactory<T extends RT> {
     }
   }
 
-  private getBreadCrumbsWithId<N extends RT>(id: number, breadCrumb?: idAndRecord<RT>[]): idAndRecord<RT>[] | undefined {
+  private getBreadCrumbsWithId(id: number, breadCrumb?: idAndRecord<RT>[]): idAndRecord<RT>[] | undefined {
     if(breadCrumb === undefined) breadCrumb = [];
 
     const recordMap = this.getRecordMap();
@@ -494,7 +486,7 @@ export class RecordFactory<T extends RT> {
    * Updates all references to an older value in a tree to a newer one
    * Used for updating references to any recordId that's changing 
    */
-  changeDeepPropertiesMatchingValue(oldValue: any, newValue: any): boolean {
+  changeDeepPropertiesMatchingValue(oldValue: unknown, newValue: unknown): boolean {
     for(const prop of this.getProps()) {
       if(this._json.props[(prop as RTP[T])] === oldValue) {
         this._json.props[(prop as RTP[T])] = newValue;
@@ -603,7 +595,7 @@ export class RecordFactory<T extends RT> {
    * And all sub-ids in this new record. 
    * And make sure none overlap.
    */
-  addRecord<T>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
+  addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
     record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord<RT> | undefined {
     //Call recursively until "this" refers to parent record, and parentIdOrAddress is undefined
@@ -656,10 +648,10 @@ export class RecordFactory<T extends RT> {
 
     //addRecord makes sure that the id of the record itself isn't duplicate amongst its siblings
     //Also makes sure that the cloneJson.order is correct
-    return this.addRecord<N>({record: clonedJson, position: origPositionIndex + 1});
+    return this.addRecord({record: clonedJson, position: origPositionIndex + 1});
   }
 
-  duplicateDeepRecord<T>(idOrAddress: idOrAddress): rAndP | undefined {
+  duplicateDeepRecord(idOrAddress: idOrAddress): rAndP | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
     const duplicatedIdAndRecord = new RecordFactory(rAndP.p).duplicateRecord(rAndP.r.type as RT, rAndP.id);
@@ -721,7 +713,7 @@ export class RecordFactory<T extends RT> {
     return {id, record};
   }
 
-  changeDeepRecordName<N extends RT>(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
+  changeDeepRecordName(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined || rAndP.r === undefined) return undefined;
     return new RecordFactory(rAndP.p).changeRecordName(rAndP.id, newName, rAndP.r.type as RT);
