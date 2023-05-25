@@ -447,9 +447,9 @@ describe ("r RecordFactory tests", () => {
     //   7767365351529164, 1701042133141691, 9934131816677986, 2313132645625314, 1687298848714581, 1842005254934935,
     //   3376938525126812, 5093735591078188, 9846686206358020 ]
     const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
-    expect(sortedRecordIds[3]).to.be.equal(5871994778341256);
-    expect(sortedRecordIds[4]).to.be.equal(7886696536494658);
-    expect(sortedRecordIds[5]).to.be.equal(9554442156169824);
+    expect(sortedRecordIds[2]).to.be.equal(5871994778341256);
+    expect(sortedRecordIds[3]).to.be.equal(7886696536494658);
+    expect(sortedRecordIds[4]).to.be.equal(9554442156169824);
   });
 
   it ("should copy deep records for a project", () => {
