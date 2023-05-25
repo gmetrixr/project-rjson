@@ -1,13 +1,63 @@
 import { expect } from "chai";
-import { RT, RecordFactory, RecordNode, createRecord } from "../../src/r/R";
+import { ClipboardData, RT, RecordFactory, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R";
 import { ElementType } from "../../src/r/definitions/elements";
 import { ProjectFactory } from "../../src/r/recordFactories/ProjectFactory";
+import { PredefinedVariableName, VarCategory, VariableType } from "../../src/r/definitions/variables";
+import { jsUtils, pathUtils } from "@gmetrixr/gdash";
+import { ElementFactory } from "../../src/r/recordFactories/ElementFactory";
+import { fn } from "../../src/r/definitions";
 import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
-import { PredefinedVariableName, VariableType } from "../../src/r/definitions/variables";
-import { jsUtils } from "@gmetrixr/gdash";
+import fs from "fs";
+import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 
 const { generateIdV2 } = jsUtils;
+
+const gvsMap: RecordMap<RT.variable> = {
+  "9605223715681184": {
+    "name": "global_var_1",
+    "type": "variable",
+    "props": {
+      "var_type": "boolean",
+      "var_track": true,
+      "var_default": false,
+      "var_category": "global"
+    }
+  },
+  "4941667907475536": {
+    "name": "global_var_2",
+    "type": "variable",
+    "props": {
+      "var_type": "string",
+      "var_track": true,
+      "var_default": "Hi there! asdfsadf",
+      "var_category": "global"
+    }
+  },
+  "4547323213035995": {
+    "name": "global_var_3",
+    "type": "variable",
+    "props": {
+      "var_type": "string",
+      "var_track": true,
+      "var_default": "kldsajfsdlkf",
+      "var_category": "global"
+    }
+  }
+}
+
+const sourceMap = {
+	230739: {
+		id: 230739,
+		name: "test",
+		file_paths: {},
+		file_urls: {
+			o: "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/330018d4-9c9a-401f-81ca-537677aa1ccc/o/btn_play_2.png",
+			t: "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/330018d4-9c9a-401f-81ca-537677aa1ccc/t/btn_play_2.png"
+		},
+		type: pathUtils.FileType.IMAGE
+	}
+}
 
 describe ("r ProjectFactory tests", () => {
   it ("should add element record to a project", () => {
@@ -119,5 +169,64 @@ describe ("r ProjectFactory tests", () => {
     expect(variableIdAndRecord?.id).to.be.equal(id);
     expect(variableIdAndRecord?.record).to.not.be.undefined;
     expect(variableIdAndRecord?.record.props.var_category).to.be.equal("global");
+  });
+
+  it ("should update global variable properties for a project", () => {
+    const projectF = new ProjectFactory(threeScenesJson);
+    projectF.updateGlobalVariableProperties(gvsMap);
+    const variableRecordMap = projectF.getRecordMap(RT.variable);
+    for (const id in variableRecordMap) {
+      const variable = variableRecordMap[id];
+      if (variable.props.var_category === VarCategory.global) {
+        expect(variable.props.var_default).to.be.equal(gvsMap[id].props.var_default);
+        expect(variable.name).to.be.equal(gvsMap[id].name);
+      }
+    }
+  });
+
+  it ("should get initial scene id for a project", () => {
+    const projectF = new ProjectFactory(threeScenesJson);
+    const initialSceneId = projectF.getInitialSceneId();
+    expect(initialSceneId).to.be.equal(1684926516892);
+  });
+
+  it ("should get project thumbnail for a project", () => {
+    const projectF = new ProjectFactory(threeScenesJson);
+    const projectThumbnail = projectF.getProjectThumbnail();
+    const panoElement = projectF.getDeepRecord(7642315857910271);
+    const elementF = new ElementFactory(panoElement as RecordNode<RT.element>);
+    const source = elementF.getValueOrDefault(rtp.element.source) as fn.Source;
+    expect(projectThumbnail).to.be.equal(source.file_urls?.t);
+  });
+
+  xit ("should get file ids from project", () => {
+    const projectF = new ProjectFactory(threeScenesJson);
+    const fileIds = projectF.getFileIdsFromProject();
+  });
+
+  xit ("should inject source element into project", () => {
+    const projectF = new ProjectFactory(threeScenesJson);
+    projectF.injectSourceIntoProject(sourceMap);
+    const image = projectF.getDeepRecord(1366836342601946);
+    const source = new ElementFactory(image as RecordNode<RT.element>).getValueOrDefault(rtp.element.source) as fn.Source;
+    expect(source.file_urls?.o).to.be.equal(sourceMap[230739].file_urls.o);
+    expect(source.file_urls?.t).to.be.equal(sourceMap[230739].file_urls.t);
+  });
+
+  it ("should get metadata for a project", () => {
+    const projectF = new ProjectFactory(manishJson);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/metadata/metadata.json", JSON.stringify(projectF.getMetadata()));
+  });
+
+  it ("should copy to clipboard for a project", () => {
+    const projectF = new ProjectFactory(threeScenesJson);
+    const clipboard = projectF.copyToClipboard([ 1684926140314, 5364265808415932, 7099775484488106 ]);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/project.json", JSON.stringify(clipboard));
+  });
+
+  it ("should paste from clipboard to project", () => {
+    const projectF = new ProjectFactory(createRecord(RT.project));
+    projectF.pasteFromClipboard("", clipboardData as ClipboardData);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(threeScenesJson));
   });
 });

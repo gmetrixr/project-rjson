@@ -1,1 +1,1965 @@
-{"type":"project","props":{"version":200,"show_lead_gen":true,"lead_gen_heading":"Form"},"records":{"menu":{"7943509642457747":{"type":"menu","props":{"menu_show":false,"menu_scene_id":1684926516892},"order":0},"4999616002501072":{"type":"menu","props":{"menu_scene_id":1684926140314,"menu_show":false},"order":1},"8591652930428468":{"type":"menu","props":{"menu_scene_id":1684926787722,"menu_show":false},"order":2}},"scene":{"1684926516892":{"name":"Scene","type":"scene","props":{"scene_type":"six_dof","scene_bounds":[-15,4.5,0,5,-4.5,15],"scene_spawn_zone_id":1684926504977,"scene_collision_type":"advanced_collision"},"records":{"element":{"7642315857910271":{"name":"Pano Image","type":"element","props":{"hidden":false,"locked":false,"source":{"name":"grid_02_white.jpg","type":"IMAGE","file_urls":{"o":"https://s.vrgmetri.com/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg","t":"https://s.vrgmetri.com/image/w_400,q_90/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg"}},"stereo":false,"opacity":1,"placer_3d":[0,0,-8,0,0,0,1,1,1],"pano_radius":900,"element_type":"pano_image","pano_yaw_correction":0,"pano_pitch_correction":0},"order":0},"9647639940522620":{"name":"Lights","type":"element","props":{"element_type":"group"},"records":{"element":{"6747885763958938":{"name":"Ambient Light","type":"element","props":{"color":"#FFFFFF","hidden":false,"locked":false,"fall_off":10,"intensity":3,"placer_3d":[0,0,-8,0,0,0,1,1,1],"light_type":"ambient","element_type":"light","target_element_id":null},"order":0},"9977847668094658":{"name":"Directional Light","type":"element","props":{"color":"#FFFFFF","hidden":false,"locked":false,"fall_off":10,"intensity":3,"placer_3d":[0,12,4,0,0,0,1,1,1],"light_type":"directional","element_type":"light","target_element_id":5364265808415932},"order":1}}},"order":6},"9408062916307064":{"name":"Zone","type":"element","props":{"color":"#7ED321","scale":1,"height":0.5,"hidden":false,"locked":false,"radius":1,"opacity":1,"placer_3d":[0,0,0,0,0,0,1,1,1],"element_type":"zone","use_proximity_optimization":true},"order":5},"5364265808415932":{"name":"Environment","type":"element","props":{"scale":0.5,"hidden":false,"locked":true,"source":{"id":-1,"name":"Event 1","type":"THREED","file_urls":{"o":"https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb","t":"https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png","glb":"https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"}},"preload":false,"placer_3d":[0,-1.6,0,0,0,0,1,1,1],"wireframe":false,"auto_rotate":false,"pivot_point":"center","element_type":"object_3d","apply_env_map":true,"auto_animation":false,"hover_animation":true,"env_map_intensity":1,"object3d_animations":[],"use_proximity_optimization":true},"order":1},"1101914674003304":{"type":"element","props":{"element_type":"group"},"name":"Group","records":{"element":{"6773622241304474":{"type":"element","props":{"element_type":"polygon","opacity":1,"color":"#FFC1A3","sides":3,"locked":false,"hidden":false,"wireframe":false,"hover_animation":true,"pivot_point":"center","placer_3d":[2.302338857823958,1.5555514556323793,7.6614137148869235,-0.15544041450778345,-163.2742265718321,-5.621899569128224e-16,1,1,1],"scale":1,"animation":{"name":"","speed":1},"billboarding":null,"use_proximity_optimization":true},"name":"Polygon","order":0},"4500168204443053":{"type":"element","props":{"element_type":"cube","opacity":1,"color":"#9FFF8A","hidden":false,"locked":false,"wireframe":false,"hover_animation":true,"pivot_point":"center","placer_3d":[0.5176158567229128,1.6503073838379865,7.983078541014154,-2.875647668393784,182.86287731545784,1.990352987292109e-16,1,1,1],"whd":[1,1,1],"scale":1,"animation":{"name":"","speed":1},"use_proximity_optimization":true},"name":"Cube","order":1},"5640688583895573":{"type":"element","props":{"element_type":"sphere","opacity":1,"color":"#9AF4FF","wireframe":false,"hover_animation":true,"locked":false,"hidden":false,"pivot_point":"center","placer_3d":[-2.359920704438761,1.4727453113510958,7.642943183942826,-0.15544041450777196,-197.15457390172665,-1.5530109306984046e-18,1,1,1],"radius":1,"arc":360,"scale":1,"animation":{"name":"","speed":1},"use_proximity_optimization":true},"name":"Sphere","order":2}}},"order":4},"7099775484488106":{"type":"element","props":{"element_type":"group"},"name":"Group (1)","records":{"element":{"9428326879519510":{"type":"element","props":{"element_type":"character","source":{"id":651501,"name":"Character.glb","file_paths":{"o":"o/Character.glb","t":"t/Character.png","glb":"glb/Character_q_medium.glb","usdz":"usdz/Character.usdz","glb_low":"glb/Character_q_low.glb","glb_high":"glb/Character_q_high.glb","glb_medium":"glb/Character_q_medium.glb"},"file_urls":{"o":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/o/Character.glb","t":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/t/Character.png","glb":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb","usdz":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/usdz/Character.usdz","glb_low":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_low.glb","glb_high":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_high.glb","glb_medium":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb"},"size":"11268196","type":"CHARACTER_RPM"},"hidden":false,"locked":false,"placer_3d":[-6.888182455122631,0.09405093352671368,3.7795581585853357,-2.875647668393784,118.78206861358235,1.990352987292109e-16,1,1,1],"scale":1,"pose":"idle","use_proximity_optimization":true,"use_ai_brain":false,"character_chatbot_trigger_radius":1,"character_chatbot_welcome_dialogue_repeat":"once","ssml_lang":"en-US","ssml_voice":"en-US-Wavenet-A","ssml_pitch":0,"ssml_speed":1,"object3d_animations":[]},"name":"Character","order":0},"3056856615068826":{"type":"element","props":{"element_type":"image_flat","source":{"id":230739,"name":"Moon.jpg","file_paths":{"o":"o/Moon.jpg","t":"t/Moon.jpg"},"file_urls":{"o":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg","t":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/t/Moon.jpg","r":"https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg"},"size":"39892","type":"IMAGE"},"opacity":1,"hidden":false,"locked":false,"hover_animation":true,"placer_3d":[-7.978359483426247,1.8654599495443533,-0.5247008370590538,-5.906735751295338,86.29753750318501,3.9969140643662313e-16,1,1,1],"wh":[3.6,2],"scale":1,"animation":{"name":"","speed":1},"billboarding":null,"use_proximity_optimization":true},"name":"Image","order":1}}},"order":3},"8720042838001644":{"type":"element","props":{"element_type":"text","text":"{{string_var}}","opacity":1,"font_color":"#FFFFFF","font_size":0.6,"font_bold":false,"hidden":false,"locked":false,"hover_animation":true,"placer_3d":[-10.569406610766055,2.0021241753341297,7.922580197171125,-3.963730569948196,183.28193116282782,1.5940903926797469e-15,1,1,1],"wh":[6.5,3],"scale":1,"animation":{"name":"","speed":1},"font_family":"Montserrat","font_weight":400,"billboarding":null,"border_radius":0.2,"border_width":0.02,"border_color":"#FFFFFF","border_opacity":1,"background_color":"#222222","background_opacity":0.9,"padding":0,"vertical_alignment":"middle","horizontal_alignment":"center","text_version":"v2","use_proximity_optimization":true},"name":"Text","order":2}},"rule":{"8776303325071223":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule","records":{"when_event":{"6856161214063120":{"type":"when_event","props":{"co_id":3056856615068826,"co_type":"image_flat","event":"on_click","properties":[]},"order":0}},"then_action":{"8606692769329686":{"type":"then_action","props":{"co_id":9428326879519510,"co_type":"character","action":"clap","properties":[]},"order":0}}},"order":3},"1834234528407552":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (1)","records":{"when_event":{"1697521786172687":{"type":"when_event","props":{"co_id":6773622241304474,"co_type":"polygon","event":"on_click","properties":[]},"order":0}},"then_action":{"1199562579055737":{"type":"then_action","props":{"co_id":4500168204443053,"co_type":"cube","action":"toggle_showhide","properties":[]},"order":0}}},"order":2},"6043223793489602":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (2)","records":{"when_event":{"5818583799126055":{"type":"when_event","props":{"co_id":5640688583895573,"co_type":"sphere","event":"on_click","properties":[]},"order":0}},"then_action":{"1300297456517374":{"type":"then_action","props":{"co_id":6773622241304474,"co_type":"polygon","action":"toggle_showhide","properties":[]},"order":0}}},"order":1},"9710408795324678":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (3)","records":{"when_event":{"3430218447844959":{"type":"when_event","props":{"co_id":1047172807526144,"co_type":"string","event":"on_var_change","properties":[]},"order":0}},"then_action":{"4481722073519981":{"type":"then_action","props":{"co_id":6773622241304474,"co_type":"polygon","action":"toggle_showhide","properties":[]},"order":0}}},"order":0}}},"order":0},"1684926140314":{"name":"Scene (1)","type":"scene","props":{"scene_type":"six_dof","scene_bounds":[-15,4.5,0,5,-4.5,15],"scene_spawn_zone_id":1684926504977,"scene_collision_type":"advanced_collision"},"records":{"element":{"9524525697734668":{"name":"Pano Image","type":"element","props":{"hidden":false,"locked":false,"source":{"name":"grid_02_white.jpg","type":"IMAGE","file_urls":{"o":"https://s.vrgmetri.com/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg","t":"https://s.vrgmetri.com/image/w_400,q_90/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg"}},"stereo":false,"opacity":1,"placer_3d":[0,0,-8,0,0,0,1,1,1],"pano_radius":900,"element_type":"pano_image","pano_yaw_correction":0,"pano_pitch_correction":0},"order":0},"5696039525789005":{"name":"Lights","type":"element","props":{"element_type":"group"},"records":{"element":{"6940759066211983":{"name":"Ambient Light","type":"element","props":{"color":"#FFFFFF","hidden":false,"locked":false,"fall_off":10,"intensity":3,"placer_3d":[0,0,-8,0,0,0,1,1,1],"light_type":"ambient","element_type":"light","target_element_id":null},"order":0},"8778676428726857":{"name":"Directional Light","type":"element","props":{"color":"#FFFFFF","hidden":false,"locked":false,"fall_off":10,"intensity":3,"placer_3d":[0,12,4,0,0,0,1,1,1],"light_type":"directional","element_type":"light","target_element_id":5093842051909827},"order":1}}},"order":5},"7021637410718349":{"name":"Zone","type":"element","props":{"color":"#7ED321","scale":1,"height":0.5,"hidden":false,"locked":false,"radius":1,"opacity":1,"placer_3d":[0,0,0,0,0,0,1,1,1],"element_type":"zone","use_proximity_optimization":true},"order":4},"5093842051909827":{"name":"Environment","type":"element","props":{"scale":0.5,"hidden":false,"locked":true,"source":{"id":-1,"name":"Event 1","type":"THREED","file_urls":{"o":"https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb","t":"https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png","glb":"https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"}},"preload":false,"placer_3d":[0,-1.6,0,0,0,0,1,1,1],"wireframe":false,"auto_rotate":false,"pivot_point":"center","element_type":"object_3d","apply_env_map":true,"auto_animation":false,"hover_animation":true,"env_map_intensity":1,"object3d_animations":[],"use_proximity_optimization":true},"order":1},"9649589949644504":{"type":"element","props":{"element_type":"group"},"name":"Group","records":{"element":{"6034556723651658":{"type":"element","props":{"element_type":"polygon","opacity":1,"color":"#FFC1A3","sides":3,"locked":false,"hidden":false,"wireframe":false,"hover_animation":true,"pivot_point":"center","placer_3d":[2.302338857823958,1.5555514556323793,7.6614137148869235,-0.15544041450778345,-163.2742265718321,-5.621899569128224e-16,1,1,1],"scale":1,"animation":{"name":"","speed":1},"billboarding":null,"use_proximity_optimization":true},"name":"Polygon","order":0},"9988015545915032":{"type":"element","props":{"element_type":"cube","opacity":1,"color":"#9FFF8A","hidden":false,"locked":false,"wireframe":false,"hover_animation":true,"pivot_point":"center","placer_3d":[0.5176158567229128,1.6503073838379865,7.983078541014154,-2.875647668393784,182.86287731545784,1.990352987292109e-16,1,1,1],"whd":[1,1,1],"scale":1,"animation":{"name":"","speed":1},"use_proximity_optimization":true},"name":"Cube","order":1},"8342372969930795":{"type":"element","props":{"element_type":"sphere","opacity":1,"color":"#9AF4FF","wireframe":false,"hover_animation":true,"locked":false,"hidden":false,"pivot_point":"center","placer_3d":[-2.359920704438761,1.4727453113510958,7.642943183942826,-0.15544041450777196,-197.15457390172665,-1.5530109306984046e-18,1,1,1],"radius":1,"arc":360,"scale":1,"animation":{"name":"","speed":1},"use_proximity_optimization":true},"name":"Sphere","order":2}}},"order":3},"6383023019249068":{"type":"element","props":{"element_type":"group"},"name":"Group (1)","records":{"element":{"6430987997611259":{"type":"element","props":{"element_type":"character","source":{"id":651501,"name":"Character.glb","file_paths":{"o":"o/Character.glb","t":"t/Character.png","glb":"glb/Character_q_medium.glb","usdz":"usdz/Character.usdz","glb_low":"glb/Character_q_low.glb","glb_high":"glb/Character_q_high.glb","glb_medium":"glb/Character_q_medium.glb"},"file_urls":{"o":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/o/Character.glb","t":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/t/Character.png","glb":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb","usdz":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/usdz/Character.usdz","glb_low":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_low.glb","glb_high":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_high.glb","glb_medium":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb"},"size":"11268196","type":"CHARACTER_RPM"},"hidden":false,"locked":false,"placer_3d":[-6.888182455122631,0.09405093352671368,3.7795581585853357,-2.875647668393784,118.78206861358235,1.990352987292109e-16,1,1,1],"scale":1,"pose":"idle","use_proximity_optimization":true,"use_ai_brain":false,"character_chatbot_trigger_radius":1,"character_chatbot_welcome_dialogue_repeat":"once","ssml_lang":"en-US","ssml_voice":"en-US-Wavenet-A","ssml_pitch":0,"ssml_speed":1,"object3d_animations":[]},"name":"Character","order":0},"1366836342601946":{"type":"element","props":{"element_type":"image_flat","source":{"id":230739,"name":"Moon.jpg","file_paths":{"o":"o/Moon.jpg","t":"t/Moon.jpg"},"file_urls":{"o":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg","t":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/t/Moon.jpg","r":"https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg"},"size":"39892","type":"IMAGE"},"opacity":1,"hidden":false,"locked":false,"hover_animation":true,"placer_3d":[-7.978359483426247,1.8654599495443533,-0.5247008370590538,-5.906735751295338,86.29753750318501,3.9969140643662313e-16,1,1,1],"wh":[3.6,2],"scale":1,"animation":{"name":"","speed":1},"billboarding":null,"use_proximity_optimization":true},"name":"Image","order":1}}},"order":2}},"rule":{"2101534490147789":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule","records":{"when_event":{"9707688216532072":{"type":"when_event","props":{"co_id":1366836342601946,"co_type":"image_flat","event":"on_click","properties":[]},"order":0}},"then_action":{"7740552967358803":{"type":"then_action","props":{"co_id":6430987997611259,"co_type":"character","action":"clap","properties":[]},"order":0}}},"order":2},"7122953960532655":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (1)","records":{"when_event":{"6741473230253876":{"type":"when_event","props":{"co_id":6034556723651658,"co_type":"polygon","event":"on_click","properties":[]},"order":0}},"then_action":{"3766170012043368":{"type":"then_action","props":{"co_id":9988015545915032,"co_type":"cube","action":"toggle_showhide","properties":[]},"order":0}}},"order":1},"9512449785265320":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (2)","records":{"when_event":{"1814738132708126":{"type":"when_event","props":{"co_id":8342372969930795,"co_type":"sphere","event":"on_click","properties":[]},"order":0}},"then_action":{"9284473212151358":{"type":"then_action","props":{"co_id":6034556723651658,"co_type":"polygon","action":"toggle_showhide","properties":[]},"order":0}}},"order":0}}},"order":1},"1684926787722":{"name":"Scene (2)","type":"scene","props":{"scene_type":"six_dof","scene_bounds":[-15,4.5,0,5,-4.5,15],"scene_spawn_zone_id":1684926504977,"scene_collision_type":"advanced_collision"},"records":{"element":{"2371603216919553":{"name":"Pano Image","type":"element","props":{"hidden":false,"locked":false,"source":{"name":"grid_02_white.jpg","type":"IMAGE","file_urls":{"o":"https://s.vrgmetri.com/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg","t":"https://s.vrgmetri.com/image/w_400,q_90/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg"}},"stereo":false,"opacity":1,"placer_3d":[0,0,-8,0,0,0,1,1,1],"pano_radius":900,"element_type":"pano_image","pano_yaw_correction":0,"pano_pitch_correction":0},"order":0},"2789803736266755":{"name":"Lights","type":"element","props":{"element_type":"group"},"records":{"element":{"9040885699419658":{"name":"Ambient Light","type":"element","props":{"color":"#FFFFFF","hidden":false,"locked":false,"fall_off":10,"intensity":3,"placer_3d":[0,0,-8,0,0,0,1,1,1],"light_type":"ambient","element_type":"light","target_element_id":null},"order":0},"4318672320128114":{"name":"Directional Light","type":"element","props":{"color":"#FFFFFF","hidden":false,"locked":false,"fall_off":10,"intensity":3,"placer_3d":[0,12,4,0,0,0,1,1,1],"light_type":"directional","element_type":"light","target_element_id":2187350781947483},"order":1}}},"order":5},"2942095425699878":{"name":"Zone","type":"element","props":{"color":"#7ED321","scale":1,"height":0.5,"hidden":false,"locked":false,"radius":1,"opacity":1,"placer_3d":[0,0,0,0,0,0,1,1,1],"element_type":"zone","use_proximity_optimization":true},"order":4},"2187350781947483":{"name":"Environment","type":"element","props":{"scale":0.5,"hidden":false,"locked":true,"source":{"id":-1,"name":"Event 1","type":"THREED","file_urls":{"o":"https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb","t":"https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png","glb":"https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"}},"preload":false,"placer_3d":[0,-1.6,0,0,0,0,1,1,1],"wireframe":false,"auto_rotate":false,"pivot_point":"center","element_type":"object_3d","apply_env_map":true,"auto_animation":false,"hover_animation":true,"env_map_intensity":1,"object3d_animations":[],"use_proximity_optimization":true},"order":1},"3241588765293829":{"type":"element","props":{"element_type":"group"},"name":"Group","records":{"element":{"7007541009143739":{"type":"element","props":{"element_type":"polygon","opacity":1,"color":"#FFC1A3","sides":3,"locked":false,"hidden":false,"wireframe":false,"hover_animation":true,"pivot_point":"center","placer_3d":[2.302338857823958,1.5555514556323793,7.6614137148869235,-0.15544041450778345,-163.2742265718321,-5.621899569128224e-16,1,1,1],"scale":1,"animation":{"name":"","speed":1},"billboarding":null,"use_proximity_optimization":true},"name":"Polygon","order":0},"1175448591018562":{"type":"element","props":{"element_type":"cube","opacity":1,"color":"#9FFF8A","hidden":false,"locked":false,"wireframe":false,"hover_animation":true,"pivot_point":"center","placer_3d":[0.5176158567229128,1.6503073838379865,7.983078541014154,-2.875647668393784,182.86287731545784,1.990352987292109e-16,1,1,1],"whd":[1,1,1],"scale":1,"animation":{"name":"","speed":1},"use_proximity_optimization":true},"name":"Cube","order":1},"8363426027300461":{"type":"element","props":{"element_type":"sphere","opacity":1,"color":"#9AF4FF","wireframe":false,"hover_animation":true,"locked":false,"hidden":false,"pivot_point":"center","placer_3d":[-2.359920704438761,1.4727453113510958,7.642943183942826,-0.15544041450777196,-197.15457390172665,-1.5530109306984046e-18,1,1,1],"radius":1,"arc":360,"scale":1,"animation":{"name":"","speed":1},"use_proximity_optimization":true},"name":"Sphere","order":2}}},"order":3},"5178915344008414":{"type":"element","props":{"element_type":"group"},"name":"Group (1)","records":{"element":{"8336103460888331":{"type":"element","props":{"element_type":"character","source":{"id":651501,"name":"Character.glb","file_paths":{"o":"o/Character.glb","t":"t/Character.png","glb":"glb/Character_q_medium.glb","usdz":"usdz/Character.usdz","glb_low":"glb/Character_q_low.glb","glb_high":"glb/Character_q_high.glb","glb_medium":"glb/Character_q_medium.glb"},"file_urls":{"o":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/o/Character.glb","t":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/t/Character.png","glb":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb","usdz":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/usdz/Character.usdz","glb_low":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_low.glb","glb_high":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_high.glb","glb_medium":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb"},"size":"11268196","type":"CHARACTER_RPM"},"hidden":false,"locked":false,"placer_3d":[-6.888182455122631,0.09405093352671368,3.7795581585853357,-2.875647668393784,118.78206861358235,1.990352987292109e-16,1,1,1],"scale":1,"pose":"idle","use_proximity_optimization":true,"use_ai_brain":false,"character_chatbot_trigger_radius":1,"character_chatbot_welcome_dialogue_repeat":"once","ssml_lang":"en-US","ssml_voice":"en-US-Wavenet-A","ssml_pitch":0,"ssml_speed":1,"object3d_animations":[]},"name":"Character","order":0},"5239835889672958":{"type":"element","props":{"element_type":"image_flat","source":{"id":230739,"name":"Moon.jpg","file_paths":{"o":"o/Moon.jpg","t":"t/Moon.jpg"},"file_urls":{"o":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg","t":"https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/t/Moon.jpg","r":"https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg"},"size":"39892","type":"IMAGE"},"opacity":1,"hidden":false,"locked":false,"hover_animation":true,"placer_3d":[-7.978359483426247,1.8654599495443533,-0.5247008370590538,-5.906735751295338,86.29753750318501,3.9969140643662313e-16,1,1,1],"wh":[3.6,2],"scale":1,"animation":{"name":"","speed":1},"billboarding":null,"use_proximity_optimization":true},"name":"Image","order":1}}},"order":2}},"rule":{"1926389607506126":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule","records":{"when_event":{"7027012441329257":{"type":"when_event","props":{"co_id":5239835889672958,"co_type":"image_flat","event":"on_click","properties":[]},"order":0}},"then_action":{"5146304761273744":{"type":"then_action","props":{"co_id":8336103460888331,"co_type":"character","action":"clap","properties":[]},"order":0}}},"order":2},"6120075172972971":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (1)","records":{"when_event":{"2904133341463972":{"type":"when_event","props":{"co_id":7007541009143739,"co_type":"polygon","event":"on_click","properties":[]},"order":0}},"then_action":{"6224945057285046":{"type":"then_action","props":{"co_id":1175448591018562,"co_type":"cube","action":"toggle_showhide","properties":[]},"order":0}}},"order":1},"9794651627719600":{"type":"rule","props":{"accent_color":"#8ED1FC","tracked":false,"events_and":true,"disabled":false},"name":"Rule (2)","records":{"when_event":{"2183306084439028":{"type":"when_event","props":{"co_id":8363426027300461,"co_type":"sphere","event":"on_click","properties":[]},"order":0}},"then_action":{"6644668193304242":{"type":"then_action","props":{"co_id":7007541009143739,"co_type":"polygon","action":"toggle_showhide","properties":[]},"order":0}}},"order":0}}},"order":2}},"variable":{"3301124782740041":{"name":"v_identifier_var","type":"variable","props":{"var_type":"string","var_track":true,"var_default":"Hi there!","var_category":"predefined"},"order":2},"9279249712202512":{"name":"device_var","type":"variable","props":{"var_type":"string","var_track":true,"var_default":"Hi there!","var_category":"predefined"},"order":1},"3239382298433622":{"name":"browser_var","type":"variable","props":{"var_type":"string","var_track":true,"var_default":"Hi there!","var_category":"predefined"},"order":0},"1023397262966303":{"name":"vrmode_var","type":"variable","props":{"var_type":"boolean","var_track":true,"var_default":false,"var_category":"predefined"},"order":4},"1047172807526144":{"name":"firstname_var","type":"variable","props":{"var_type":"string","var_track":true,"var_default":"Hi there!","var_category":"predefined"},"order":3},"1292369406245377":{"name":"scorm_progress","type":"variable","props":{"var_type":"number","var_track":true,"var_default":0,"var_category":"predefined"},"order":5},"1834008345703888":{"name":"scorm_suspend_data","type":"variable","props":{"var_type":"number","var_track":true,"var_default":0,"var_category":"predefined"},"order":6},"8930683725690977":{"name":"scorm_score","type":"variable","props":{"var_type":"number","var_track":true,"var_default":0,"var_category":"predefined"},"order":7},"6458963137473061":{"name":"lastname_var","type":"variable","props":{"var_type":"string","var_track":true,"var_default":"Hi there!","var_category":"predefined"},"order":8},"2555155880021422":{"name":"fullname_var","type":"variable","props":{"var_type":"string","var_track":true,"var_default":"Hi there!","var_category":"predefined"},"order":9},"8150829835324181":{"name":"player_count_var","type":"variable","props":{"var_type":"number","var_track":true,"var_default":0,"var_category":"predefined"},"order":10},"7578584700093195":{"type":"variable","props":{"var_default":"","var_type":"string","var_category":"autogenerated","var_track":true},"name":"Email_var","order":11},"5881574250644182":{"type":"variable","props":{"var_default":"","var_type":"string","var_category":"autogenerated","var_track":true},"name":"Phone number_var","order":12},"7469457607607874":{"type":"variable","props":{"var_category":"user_defined","var_default":"Hi there!","var_type":"string"},"name":"string_var","order":13}},"tour_mode":{"9409655308930914":{"type":"tour_mode","props":{"tour_mode_scene_id":1684926516892},"order":0},"2969695676550048":{"type":"tour_mode","props":{"tour_mode_scene_id":1684926140314},"order":1},"2515056474854200":{"type":"tour_mode","props":{"tour_mode_scene_id":1684926787722},"order":2}},"lead_gen_field":{"5755181695918337":{"type":"lead_gen_field","props":{"var_id":7578584700093195,"type":"email","required":true},"name":"Email","order":0},"8486422448379481":{"type":"lead_gen_field","props":{"var_id":5881574250644182,"type":"phone"},"name":"Phone number","order":1}}}}
+{
+  "type": "project",
+  "props": {
+    "version": 200,
+    "show_lead_gen": true,
+    "lead_gen_heading": "Form"
+  },
+  "records": {
+    "menu": {
+      "7943509642457747": {
+        "type": "menu",
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 1684926516892
+        },
+        "order": 0
+      },
+      "4999616002501072": {
+        "type": "menu",
+        "props": {
+          "menu_scene_id": 1684926140314,
+          "menu_show": false
+        },
+        "order": 1
+      },
+      "8591652930428468": {
+        "type": "menu",
+        "props": {
+          "menu_scene_id": 1684926787722,
+          "menu_show": false
+        },
+        "order": 2
+      }
+    },
+    "scene": {
+      "1684926516892": {
+        "name": "Scene",
+        "type": "scene",
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -15,
+            4.5,
+            0,
+            5,
+            -4.5,
+            15
+          ],
+          "scene_spawn_zone_id": 1684926504977,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "element": {
+            "7642315857910271": {
+              "name": "Pano Image",
+              "type": "element",
+              "props": {
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "name": "grid_02_white.jpg",
+                  "type": "IMAGE",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg",
+                    "t": "https://s.vrgmetri.com/image/w_400,q_90/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg"
+                  }
+                },
+                "stereo": false,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  -8,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "pano_radius": 900,
+                "element_type": "pano_image",
+                "pano_yaw_correction": 0,
+                "pano_pitch_correction": 0
+              },
+              "order": 0
+            },
+            "9647639940522620": {
+              "name": "Lights",
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "6747885763958938": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    },
+                    "order": 0
+                  },
+                  "9977847668094658": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 5364265808415932
+                    },
+                    "order": 1
+                  }
+                }
+              },
+              "order": 6
+            },
+            "9408062916307064": {
+              "name": "Zone",
+              "type": "element",
+              "props": {
+                "color": "#7ED321",
+                "scale": 1,
+                "height": 0.5,
+                "hidden": false,
+                "locked": false,
+                "radius": 1,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone",
+                "use_proximity_optimization": true
+              },
+              "order": 5
+            },
+            "5364265808415932": {
+              "name": "Environment",
+              "type": "element",
+              "props": {
+                "scale": 0.5,
+                "hidden": false,
+                "locked": true,
+                "source": {
+                  "id": -1,
+                  "name": "Event 1",
+                  "type": "THREED",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb",
+                    "t": "https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png",
+                    "glb": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"
+                  }
+                },
+                "preload": false,
+                "placer_3d": [
+                  0,
+                  -1.6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "wireframe": false,
+                "auto_rotate": false,
+                "pivot_point": "center",
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "auto_animation": false,
+                "hover_animation": true,
+                "env_map_intensity": 1,
+                "object3d_animations": [],
+                "use_proximity_optimization": true
+              },
+              "order": 1
+            },
+            "1101914674003304": {
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "name": "Group",
+              "records": {
+                "element": {
+                  "6773622241304474": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "polygon",
+                      "opacity": 1,
+                      "color": "#FFC1A3",
+                      "sides": 3,
+                      "locked": false,
+                      "hidden": false,
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        2.302338857823958,
+                        1.5555514556323793,
+                        7.6614137148869235,
+                        -0.15544041450778345,
+                        -163.2742265718321,
+                        -5.621899569128224e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "billboarding": null,
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Polygon",
+                    "order": 0
+                  },
+                  "4500168204443053": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "cube",
+                      "opacity": 1,
+                      "color": "#9FFF8A",
+                      "hidden": false,
+                      "locked": false,
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        0.5176158567229128,
+                        1.6503073838379865,
+                        7.983078541014154,
+                        -2.875647668393784,
+                        182.86287731545784,
+                        1.990352987292109e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "whd": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Cube",
+                    "order": 1
+                  },
+                  "5640688583895573": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "sphere",
+                      "opacity": 1,
+                      "color": "#9AF4FF",
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "locked": false,
+                      "hidden": false,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        -2.359920704438761,
+                        1.4727453113510958,
+                        7.642943183942826,
+                        -0.15544041450777196,
+                        -197.15457390172665,
+                        -1.5530109306984046e-18,
+                        1,
+                        1,
+                        1
+                      ],
+                      "radius": 1,
+                      "arc": 360,
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Sphere",
+                    "order": 2
+                  }
+                }
+              },
+              "order": 4
+            },
+            "7099775484488106": {
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "name": "Group (1)",
+              "records": {
+                "element": {
+                  "9428326879519510": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "character",
+                      "source": {
+                        "id": 651501,
+                        "name": "Character.glb",
+                        "file_paths": {
+                          "o": "o/Character.glb",
+                          "t": "t/Character.png",
+                          "glb": "glb/Character_q_medium.glb",
+                          "usdz": "usdz/Character.usdz",
+                          "glb_low": "glb/Character_q_low.glb",
+                          "glb_high": "glb/Character_q_high.glb",
+                          "glb_medium": "glb/Character_q_medium.glb"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/o/Character.glb",
+                          "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/t/Character.png",
+                          "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb",
+                          "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/usdz/Character.usdz",
+                          "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_low.glb",
+                          "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_high.glb",
+                          "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb"
+                        },
+                        "size": "11268196",
+                        "type": "CHARACTER_RPM"
+                      },
+                      "hidden": false,
+                      "locked": false,
+                      "placer_3d": [
+                        -6.888182455122631,
+                        0.09405093352671368,
+                        3.7795581585853357,
+                        -2.875647668393784,
+                        118.78206861358235,
+                        1.990352987292109e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "pose": "idle",
+                      "use_proximity_optimization": true,
+                      "use_ai_brain": false,
+                      "character_chatbot_trigger_radius": 1,
+                      "character_chatbot_welcome_dialogue_repeat": "once",
+                      "ssml_lang": "en-US",
+                      "ssml_voice": "en-US-Wavenet-A",
+                      "ssml_pitch": 0,
+                      "ssml_speed": 1,
+                      "object3d_animations": []
+                    },
+                    "name": "Character",
+                    "order": 0
+                  },
+                  "3056856615068826": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "image_flat",
+                      "source": {
+                        "id": 230739,
+                        "name": "Moon.jpg",
+                        "file_paths": {
+                          "o": "o/Moon.jpg",
+                          "t": "t/Moon.jpg"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg",
+                          "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/t/Moon.jpg",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg"
+                        },
+                        "size": "39892",
+                        "type": "IMAGE"
+                      },
+                      "opacity": 1,
+                      "hidden": false,
+                      "locked": false,
+                      "hover_animation": true,
+                      "placer_3d": [
+                        -7.978359483426247,
+                        1.8654599495443533,
+                        -0.5247008370590538,
+                        -5.906735751295338,
+                        86.29753750318501,
+                        3.9969140643662313e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "wh": [
+                        3.6,
+                        2
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "billboarding": null,
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Image",
+                    "order": 1
+                  }
+                }
+              },
+              "order": 3
+            },
+            "8720042838001644": {
+              "type": "element",
+              "props": {
+                "element_type": "text",
+                "text": "{{string_var}}",
+                "opacity": 1,
+                "font_color": "#FFFFFF",
+                "font_size": 0.6,
+                "font_bold": false,
+                "hidden": false,
+                "locked": false,
+                "hover_animation": true,
+                "placer_3d": [
+                  -10.569406610766055,
+                  2.0021241753341297,
+                  7.922580197171125,
+                  -3.963730569948196,
+                  183.28193116282782,
+                  1.5940903926797469e-15,
+                  1,
+                  1,
+                  1
+                ],
+                "wh": [
+                  6.5,
+                  3
+                ],
+                "scale": 1,
+                "animation": {
+                  "name": "",
+                  "speed": 1
+                },
+                "font_family": "Montserrat",
+                "font_weight": 400,
+                "billboarding": null,
+                "border_radius": 0.2,
+                "border_width": 0.02,
+                "border_color": "#FFFFFF",
+                "border_opacity": 1,
+                "background_color": "#222222",
+                "background_opacity": 0.9,
+                "padding": 0,
+                "vertical_alignment": "middle",
+                "horizontal_alignment": "center",
+                "text_version": "v2",
+                "use_proximity_optimization": true
+              },
+              "name": "Text",
+              "order": 2
+            }
+          },
+          "rule": {
+            "8776303325071223": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule",
+              "records": {
+                "when_event": {
+                  "6856161214063120": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 3056856615068826,
+                      "co_type": "image_flat",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "8606692769329686": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 9428326879519510,
+                      "co_type": "character",
+                      "action": "clap",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 3
+            },
+            "1834234528407552": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (1)",
+              "records": {
+                "when_event": {
+                  "1697521786172687": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 6773622241304474,
+                      "co_type": "polygon",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "1199562579055737": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 4500168204443053,
+                      "co_type": "cube",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 2
+            },
+            "6043223793489602": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (2)",
+              "records": {
+                "when_event": {
+                  "5818583799126055": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 5640688583895573,
+                      "co_type": "sphere",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "1300297456517374": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 6773622241304474,
+                      "co_type": "polygon",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 1
+            },
+            "9710408795324678": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (3)",
+              "records": {
+                "when_event": {
+                  "3430218447844959": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 1047172807526144,
+                      "co_type": "string",
+                      "event": "on_var_change",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "4481722073519981": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 6773622241304474,
+                      "co_type": "polygon",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 0
+            }
+          }
+        },
+        "order": 0
+      },
+      "1684926140314": {
+        "name": "Scene (1)",
+        "type": "scene",
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -15,
+            4.5,
+            0,
+            5,
+            -4.5,
+            15
+          ],
+          "scene_spawn_zone_id": 1684926504977,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "element": {
+            "9524525697734668": {
+              "name": "Pano Image",
+              "type": "element",
+              "props": {
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "name": "grid_02_white.jpg",
+                  "type": "IMAGE",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg",
+                    "t": "https://s.vrgmetri.com/image/w_400,q_90/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg"
+                  }
+                },
+                "stereo": false,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  -8,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "pano_radius": 900,
+                "element_type": "pano_image",
+                "pano_yaw_correction": 0,
+                "pano_pitch_correction": 0
+              },
+              "order": 0
+            },
+            "5696039525789005": {
+              "name": "Lights",
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "6940759066211983": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    },
+                    "order": 0
+                  },
+                  "8778676428726857": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 5093842051909827
+                    },
+                    "order": 1
+                  }
+                }
+              },
+              "order": 5
+            },
+            "7021637410718349": {
+              "name": "Zone",
+              "type": "element",
+              "props": {
+                "color": "#7ED321",
+                "scale": 1,
+                "height": 0.5,
+                "hidden": false,
+                "locked": false,
+                "radius": 1,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone",
+                "use_proximity_optimization": true
+              },
+              "order": 4
+            },
+            "5093842051909827": {
+              "name": "Environment",
+              "type": "element",
+              "props": {
+                "scale": 0.5,
+                "hidden": false,
+                "locked": true,
+                "source": {
+                  "id": -1,
+                  "name": "Event 1",
+                  "type": "THREED",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb",
+                    "t": "https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png",
+                    "glb": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"
+                  }
+                },
+                "preload": false,
+                "placer_3d": [
+                  0,
+                  -1.6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "wireframe": false,
+                "auto_rotate": false,
+                "pivot_point": "center",
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "auto_animation": false,
+                "hover_animation": true,
+                "env_map_intensity": 1,
+                "object3d_animations": [],
+                "use_proximity_optimization": true
+              },
+              "order": 1
+            },
+            "9649589949644504": {
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "name": "Group",
+              "records": {
+                "element": {
+                  "6034556723651658": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "polygon",
+                      "opacity": 1,
+                      "color": "#FFC1A3",
+                      "sides": 3,
+                      "locked": false,
+                      "hidden": false,
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        2.302338857823958,
+                        1.5555514556323793,
+                        7.6614137148869235,
+                        -0.15544041450778345,
+                        -163.2742265718321,
+                        -5.621899569128224e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "billboarding": null,
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Polygon",
+                    "order": 0
+                  },
+                  "9988015545915032": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "cube",
+                      "opacity": 1,
+                      "color": "#9FFF8A",
+                      "hidden": false,
+                      "locked": false,
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        0.5176158567229128,
+                        1.6503073838379865,
+                        7.983078541014154,
+                        -2.875647668393784,
+                        182.86287731545784,
+                        1.990352987292109e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "whd": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Cube",
+                    "order": 1
+                  },
+                  "8342372969930795": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "sphere",
+                      "opacity": 1,
+                      "color": "#9AF4FF",
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "locked": false,
+                      "hidden": false,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        -2.359920704438761,
+                        1.4727453113510958,
+                        7.642943183942826,
+                        -0.15544041450777196,
+                        -197.15457390172665,
+                        -1.5530109306984046e-18,
+                        1,
+                        1,
+                        1
+                      ],
+                      "radius": 1,
+                      "arc": 360,
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Sphere",
+                    "order": 2
+                  }
+                }
+              },
+              "order": 3
+            },
+            "6383023019249068": {
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "name": "Group (1)",
+              "records": {
+                "element": {
+                  "6430987997611259": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "character",
+                      "source": {
+                        "id": 651501,
+                        "name": "Character.glb",
+                        "file_paths": {
+                          "o": "o/Character.glb",
+                          "t": "t/Character.png",
+                          "glb": "glb/Character_q_medium.glb",
+                          "usdz": "usdz/Character.usdz",
+                          "glb_low": "glb/Character_q_low.glb",
+                          "glb_high": "glb/Character_q_high.glb",
+                          "glb_medium": "glb/Character_q_medium.glb"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/o/Character.glb",
+                          "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/t/Character.png",
+                          "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb",
+                          "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/usdz/Character.usdz",
+                          "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_low.glb",
+                          "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_high.glb",
+                          "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb"
+                        },
+                        "size": "11268196",
+                        "type": "CHARACTER_RPM"
+                      },
+                      "hidden": false,
+                      "locked": false,
+                      "placer_3d": [
+                        -6.888182455122631,
+                        0.09405093352671368,
+                        3.7795581585853357,
+                        -2.875647668393784,
+                        118.78206861358235,
+                        1.990352987292109e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "pose": "idle",
+                      "use_proximity_optimization": true,
+                      "use_ai_brain": false,
+                      "character_chatbot_trigger_radius": 1,
+                      "character_chatbot_welcome_dialogue_repeat": "once",
+                      "ssml_lang": "en-US",
+                      "ssml_voice": "en-US-Wavenet-A",
+                      "ssml_pitch": 0,
+                      "ssml_speed": 1,
+                      "object3d_animations": []
+                    },
+                    "name": "Character",
+                    "order": 0
+                  },
+                  "1366836342601946": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "image_flat",
+                      "source": {
+                        "id": 230739,
+                        "name": "Moon.jpg",
+                        "file_paths": {
+                          "o": "o/Moon.jpg",
+                          "t": "t/Moon.jpg"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg",
+                          "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/t/Moon.jpg",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg"
+                        },
+                        "size": "39892",
+                        "type": "IMAGE"
+                      },
+                      "opacity": 1,
+                      "hidden": false,
+                      "locked": false,
+                      "hover_animation": true,
+                      "placer_3d": [
+                        -7.978359483426247,
+                        1.8654599495443533,
+                        -0.5247008370590538,
+                        -5.906735751295338,
+                        86.29753750318501,
+                        3.9969140643662313e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "wh": [
+                        3.6,
+                        2
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "billboarding": null,
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Image",
+                    "order": 1
+                  }
+                }
+              },
+              "order": 2
+            }
+          },
+          "rule": {
+            "2101534490147789": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule",
+              "records": {
+                "when_event": {
+                  "9707688216532072": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 1366836342601946,
+                      "co_type": "image_flat",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "7740552967358803": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 6430987997611259,
+                      "co_type": "character",
+                      "action": "clap",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 2
+            },
+            "7122953960532655": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (1)",
+              "records": {
+                "when_event": {
+                  "6741473230253876": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 6034556723651658,
+                      "co_type": "polygon",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "3766170012043368": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 9988015545915032,
+                      "co_type": "cube",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 1
+            },
+            "9512449785265320": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (2)",
+              "records": {
+                "when_event": {
+                  "1814738132708126": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 8342372969930795,
+                      "co_type": "sphere",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "9284473212151358": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 6034556723651658,
+                      "co_type": "polygon",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 0
+            }
+          }
+        },
+        "order": 1
+      },
+      "1684926787722": {
+        "name": "Scene (2)",
+        "type": "scene",
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -15,
+            4.5,
+            0,
+            5,
+            -4.5,
+            15
+          ],
+          "scene_spawn_zone_id": 1684926504977,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "element": {
+            "2371603216919553": {
+              "name": "Pano Image",
+              "type": "element",
+              "props": {
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "name": "grid_02_white.jpg",
+                  "type": "IMAGE",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg",
+                    "t": "https://s.vrgmetri.com/image/w_400,q_90/gb-web/r3f-ui/assets/pano/0_grid_02_white.jpg"
+                  }
+                },
+                "stereo": false,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  -8,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "pano_radius": 900,
+                "element_type": "pano_image",
+                "pano_yaw_correction": 0,
+                "pano_pitch_correction": 0
+              },
+              "order": 0
+            },
+            "2789803736266755": {
+              "name": "Lights",
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "9040885699419658": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    },
+                    "order": 0
+                  },
+                  "4318672320128114": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 2187350781947483
+                    },
+                    "order": 1
+                  }
+                }
+              },
+              "order": 5
+            },
+            "2942095425699878": {
+              "name": "Zone",
+              "type": "element",
+              "props": {
+                "color": "#7ED321",
+                "scale": 1,
+                "height": 0.5,
+                "hidden": false,
+                "locked": false,
+                "radius": 1,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone",
+                "use_proximity_optimization": true
+              },
+              "order": 4
+            },
+            "2187350781947483": {
+              "name": "Environment",
+              "type": "element",
+              "props": {
+                "scale": 0.5,
+                "hidden": false,
+                "locked": true,
+                "source": {
+                  "id": -1,
+                  "name": "Event 1",
+                  "type": "THREED",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb",
+                    "t": "https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png",
+                    "glb": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"
+                  }
+                },
+                "preload": false,
+                "placer_3d": [
+                  0,
+                  -1.6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "wireframe": false,
+                "auto_rotate": false,
+                "pivot_point": "center",
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "auto_animation": false,
+                "hover_animation": true,
+                "env_map_intensity": 1,
+                "object3d_animations": [],
+                "use_proximity_optimization": true
+              },
+              "order": 1
+            },
+            "3241588765293829": {
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "name": "Group",
+              "records": {
+                "element": {
+                  "7007541009143739": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "polygon",
+                      "opacity": 1,
+                      "color": "#FFC1A3",
+                      "sides": 3,
+                      "locked": false,
+                      "hidden": false,
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        2.302338857823958,
+                        1.5555514556323793,
+                        7.6614137148869235,
+                        -0.15544041450778345,
+                        -163.2742265718321,
+                        -5.621899569128224e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "billboarding": null,
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Polygon",
+                    "order": 0
+                  },
+                  "1175448591018562": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "cube",
+                      "opacity": 1,
+                      "color": "#9FFF8A",
+                      "hidden": false,
+                      "locked": false,
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        0.5176158567229128,
+                        1.6503073838379865,
+                        7.983078541014154,
+                        -2.875647668393784,
+                        182.86287731545784,
+                        1.990352987292109e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "whd": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Cube",
+                    "order": 1
+                  },
+                  "8363426027300461": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "sphere",
+                      "opacity": 1,
+                      "color": "#9AF4FF",
+                      "wireframe": false,
+                      "hover_animation": true,
+                      "locked": false,
+                      "hidden": false,
+                      "pivot_point": "center",
+                      "placer_3d": [
+                        -2.359920704438761,
+                        1.4727453113510958,
+                        7.642943183942826,
+                        -0.15544041450777196,
+                        -197.15457390172665,
+                        -1.5530109306984046e-18,
+                        1,
+                        1,
+                        1
+                      ],
+                      "radius": 1,
+                      "arc": 360,
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Sphere",
+                    "order": 2
+                  }
+                }
+              },
+              "order": 3
+            },
+            "5178915344008414": {
+              "type": "element",
+              "props": {
+                "element_type": "group"
+              },
+              "name": "Group (1)",
+              "records": {
+                "element": {
+                  "8336103460888331": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "character",
+                      "source": {
+                        "id": 651501,
+                        "name": "Character.glb",
+                        "file_paths": {
+                          "o": "o/Character.glb",
+                          "t": "t/Character.png",
+                          "glb": "glb/Character_q_medium.glb",
+                          "usdz": "usdz/Character.usdz",
+                          "glb_low": "glb/Character_q_low.glb",
+                          "glb_high": "glb/Character_q_high.glb",
+                          "glb_medium": "glb/Character_q_medium.glb"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/o/Character.glb",
+                          "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/t/Character.png",
+                          "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb",
+                          "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/usdz/Character.usdz",
+                          "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_low.glb",
+                          "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_high.glb",
+                          "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/ee8874fa-c152-40b2-bd2d-bce12db13475/glb/Character_q_medium.glb"
+                        },
+                        "size": "11268196",
+                        "type": "CHARACTER_RPM"
+                      },
+                      "hidden": false,
+                      "locked": false,
+                      "placer_3d": [
+                        -6.888182455122631,
+                        0.09405093352671368,
+                        3.7795581585853357,
+                        -2.875647668393784,
+                        118.78206861358235,
+                        1.990352987292109e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "scale": 1,
+                      "pose": "idle",
+                      "use_proximity_optimization": true,
+                      "use_ai_brain": false,
+                      "character_chatbot_trigger_radius": 1,
+                      "character_chatbot_welcome_dialogue_repeat": "once",
+                      "ssml_lang": "en-US",
+                      "ssml_voice": "en-US-Wavenet-A",
+                      "ssml_pitch": 0,
+                      "ssml_speed": 1,
+                      "object3d_animations": []
+                    },
+                    "name": "Character",
+                    "order": 0
+                  },
+                  "5239835889672958": {
+                    "type": "element",
+                    "props": {
+                      "element_type": "image_flat",
+                      "source": {
+                        "id": 230739,
+                        "name": "Moon.jpg",
+                        "file_paths": {
+                          "o": "o/Moon.jpg",
+                          "t": "t/Moon.jpg"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg",
+                          "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/t/Moon.jpg",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/dcsehw/61564c64-ac71-4329-ba79-89d5087c2eb8/o/Moon.jpg"
+                        },
+                        "size": "39892",
+                        "type": "IMAGE"
+                      },
+                      "opacity": 1,
+                      "hidden": false,
+                      "locked": false,
+                      "hover_animation": true,
+                      "placer_3d": [
+                        -7.978359483426247,
+                        1.8654599495443533,
+                        -0.5247008370590538,
+                        -5.906735751295338,
+                        86.29753750318501,
+                        3.9969140643662313e-16,
+                        1,
+                        1,
+                        1
+                      ],
+                      "wh": [
+                        3.6,
+                        2
+                      ],
+                      "scale": 1,
+                      "animation": {
+                        "name": "",
+                        "speed": 1
+                      },
+                      "billboarding": null,
+                      "use_proximity_optimization": true
+                    },
+                    "name": "Image",
+                    "order": 1
+                  }
+                }
+              },
+              "order": 2
+            }
+          },
+          "rule": {
+            "1926389607506126": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule",
+              "records": {
+                "when_event": {
+                  "7027012441329257": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 5239835889672958,
+                      "co_type": "image_flat",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "5146304761273744": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 8336103460888331,
+                      "co_type": "character",
+                      "action": "clap",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 2
+            },
+            "6120075172972971": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (1)",
+              "records": {
+                "when_event": {
+                  "2904133341463972": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 7007541009143739,
+                      "co_type": "polygon",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "6224945057285046": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 1175448591018562,
+                      "co_type": "cube",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 1
+            },
+            "9794651627719600": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule (2)",
+              "records": {
+                "when_event": {
+                  "2183306084439028": {
+                    "type": "when_event",
+                    "props": {
+                      "co_id": 8363426027300461,
+                      "co_type": "sphere",
+                      "event": "on_click",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                },
+                "then_action": {
+                  "6644668193304242": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 7007541009143739,
+                      "co_type": "polygon",
+                      "action": "toggle_showhide",
+                      "properties": []
+                    },
+                    "order": 0
+                  }
+                }
+              },
+              "order": 0
+            }
+          }
+        },
+        "order": 2
+      }
+    },
+    "variable": {
+      "3301124782740041": {
+        "name": "v_identifier_var",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        },
+        "order": 2
+      },
+      "9279249712202512": {
+        "name": "device_var",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        },
+        "order": 1
+      },
+      "3239382298433622": {
+        "name": "browser_var",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        },
+        "order": 0
+      },
+      "1023397262966303": {
+        "name": "vrmode_var",
+        "type": "variable",
+        "props": {
+          "var_type": "boolean",
+          "var_track": true,
+          "var_default": false,
+          "var_category": "predefined"
+        },
+        "order": 4
+      },
+      "1047172807526144": {
+        "name": "firstname_var",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        },
+        "order": 3
+      },
+      "1292369406245377": {
+        "name": "scorm_progress",
+        "type": "variable",
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        },
+        "order": 5
+      },
+      "1834008345703888": {
+        "name": "scorm_suspend_data",
+        "type": "variable",
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        },
+        "order": 6
+      },
+      "8930683725690977": {
+        "name": "scorm_score",
+        "type": "variable",
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        },
+        "order": 7
+      },
+      "6458963137473061": {
+        "name": "lastname_var",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        },
+        "order": 8
+      },
+      "2555155880021422": {
+        "name": "fullname_var",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        },
+        "order": 9
+      },
+      "8150829835324181": {
+        "name": "player_count_var",
+        "type": "variable",
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        },
+        "order": 10
+      },
+      "7578584700093195": {
+        "type": "variable",
+        "props": {
+          "var_default": "",
+          "var_type": "string",
+          "var_category": "autogenerated",
+          "var_track": true
+        },
+        "name": "Email_var",
+        "order": 11
+      },
+      "5881574250644182": {
+        "type": "variable",
+        "props": {
+          "var_default": "",
+          "var_type": "string",
+          "var_category": "autogenerated",
+          "var_track": true
+        },
+        "name": "Phone number_var",
+        "order": 12
+      },
+      "7469457607607874": {
+        "type": "variable",
+        "props": {
+          "var_category": "user_defined",
+          "var_default": "Hi there!",
+          "var_type": "string"
+        },
+        "name": "string_var",
+        "order": 13
+      },
+      "9605223715681184": {
+        "name": "global_1",
+        "type": "variable",
+        "props": {
+          "var_type": "boolean",
+          "var_track": true,
+          "var_default": false,
+          "var_category": "global"
+        },
+        "order": 14
+      },
+      "4941667907475536": {
+        "name": "global_2",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "global"
+        },
+        "order": 16
+      },
+      "4547323213035995": {
+        "name": "global_3",
+        "type": "variable",
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "global"
+        },
+        "order": 15
+      }
+    },
+    "tour_mode": {
+      "9409655308930914": {
+        "type": "tour_mode",
+        "props": {
+          "tour_mode_scene_id": 1684926516892
+        },
+        "order": 0
+      },
+      "2969695676550048": {
+        "type": "tour_mode",
+        "props": {
+          "tour_mode_scene_id": 1684926140314
+        },
+        "order": 1
+      },
+      "2515056474854200": {
+        "type": "tour_mode",
+        "props": {
+          "tour_mode_scene_id": 1684926787722
+        },
+        "order": 2
+      }
+    },
+    "lead_gen_field": {
+      "5755181695918337": {
+        "type": "lead_gen_field",
+        "props": {
+          "var_id": 7578584700093195,
+          "type": "email",
+          "required": true
+        },
+        "name": "Email",
+        "order": 0
+      },
+      "8486422448379481": {
+        "type": "lead_gen_field",
+        "props": {
+          "var_id": 5881574250644182,
+          "type": "phone"
+        },
+        "name": "Phone number",
+        "order": 1
+      }
+    }
+  }
+}

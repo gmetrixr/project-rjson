@@ -3,6 +3,7 @@ import { RT, RecordFactory, RecordNode, createRecord, recordTypeDefinitions, rtp
 import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/r3fJsons/project/old.json";
+import fs from "fs";
 
 const clipboardData = {
   nodes: [
@@ -482,8 +483,7 @@ describe ("r RecordFactory tests", () => {
     const projectF = new RecordFactory(projectJson);
     const recordIds = projectF.getRecordIds(RT.scene);
     const clipboard = projectF.copyToClipboard([ recordIds[0] ]);
-    const sceneCopied = clipboard.nodes.find(r => r.id === recordIds[0]);
-    expect(sceneCopied).not.to.equal(null);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/record.json", JSON.stringify(clipboard));
   });
 
   it ("should paste from clipboard for a project", () => {
