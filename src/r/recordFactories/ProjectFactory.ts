@@ -42,6 +42,20 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     super(json);
   }
 
+  addSceneRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress, sceneType}: {
+    record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, sceneType: SceneType
+  }): idAndRecord<RT.element> | undefined {
+    if(!record) {
+      record = createRecord(RT.scene);
+    }
+    const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
+    if(idAndRecord) {
+      idAndRecord.record.props.scene_type = sceneType;
+      ProjectUtils.setupNewScene(this._json, idAndRecord);
+    }
+    return idAndRecord;
+  }
+
   addElementRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress, elementType}: {
     record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, elementType: ElementType
   }): idAndRecord<RT.element> | undefined {
@@ -643,14 +657,11 @@ export class ProjectUtils {
     }
   }
 
-  static addNewScene(project: RecordNode<RT.project>, sceneType: SceneType) {
+  static setupNewScene(project: RecordNode<RT.project>, sceneIdAndRecord: idAndRecord<RT.scene>) {
     const projectF = new ProjectFactory(project);
-    const sceneIdAndRecord = projectF.addBlankRecord({type: RT.scene});
-    if(!sceneIdAndRecord) return undefined;
     const sceneF = new SceneFactory(sceneIdAndRecord.record);
-    sceneF.set(rtp.scene.scene_type, sceneType);
     const sceneId = sceneIdAndRecord.id;
-
+    const sceneType = sceneF.get(rtp.scene.scene_type) as SceneType;
     // * Add a default pano
     projectF.addElementRecord({
       parentIdOrAddress: sceneId,
@@ -687,14 +698,14 @@ export class ProjectUtils {
       // * Assign the spawn zone to the scene
       sceneF.set(rtp.scene.scene_spawn_zone_id, zoneElementId);
       // * Add default light rig
-      ProjectUtils.addDefaultLightRig(project, sceneId, envElementId);
+      ProjectUtils.setupDefaultLightRig(project, sceneId, envElementId);
     } else {
       // * Add default light rig
-      ProjectUtils.addDefaultLightRig(project, sceneId);
+      ProjectUtils.setupDefaultLightRig(project, sceneId);
     }
   }
 
-  static addDefaultLightRig(project: RecordNode<RT.project>, sceneId: number, envElementId?: number) {
+  static setupDefaultLightRig(project: RecordNode<RT.project>, sceneId: number, envElementId?: number) {
     const projectF = new ProjectFactory(project);
     const group = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.group});
     const useLegacyColorManagement = projectF.getValueOrDefault(rtp.project.use_legacy_color_management) as boolean;
