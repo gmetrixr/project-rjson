@@ -12,7 +12,7 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * Using arrow functions in Classes has a runtime performance cost. The constructor bloats up.
  * Solution: https://www.typescriptlang.org/docs/handbook/2/classes.html#this-parameters
  * 
- * JSON Structure:
+ *! JSON Structure:
  * 
  * { //RecordNode -> A recordNode doesn't know what it's id is. The id is defined one level above
  *   name: "string" //optional record name
@@ -32,23 +32,23 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  *   }
  * }
  * 
- * PROPS
+ *! PROPS
  * json / getName -> return full json / return name
  * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
  * get/set/reset/delete/getValueOrDefault/getDefault -> prop's values
  * changePropertyName -> used during migrations
  * 
- * RECORDS
+ *! RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
  * getRecord / getIdAndRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
  * getDeepRecordMap / getDeepRecordEntries
  * 
- * SORTED RECORDS (FOR UI)
+ *! SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
- * getSortedRecordEntries / getSortedIds / getSortedRecords
+ * getSortedRecordEntries / getSortedRecordIds / getSortedRecords
  * 
- * ADDRESS RELATED
+ *! ADDRESS RELATED
  * getAddress -> Get address of a subnode (with optional property suffix)
  * getPropertyAtAddress / updatePropertyAtAddress
  * $ private getRecordAndParentWithId / getRecordAndParentWithAddress
@@ -56,7 +56,7 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * $ private getBreadCrumbsWithAddress / getBreadCrumbsWithId
  * getBreadCrumbs -> Returns an array of all sub-records leading to the given idOrAddress
  * 
- * RECORD RELATED
+ *! RECORD RELATED
  * getLinkedSubRecords -> Get records that are linked to another record via any prop
  * changeDeepRecordId / changePropertiesMatchingValue -> Updates all references to a recordId in the tree and in properties
  * cycleAllSubRecordIds -> Changes all ids
@@ -65,7 +65,7 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * duplicateRecord     / deleteRecord     / changeRecordName
  * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
  * 
- * MOVE/COPY/CLIPBOARD
+ *! MOVE/COPY/CLIPBOARD
  * reorderRecords / copyDeepRecords / moveDeepRecords
  * copyToClipboard / pasteFromClipboard
  */
