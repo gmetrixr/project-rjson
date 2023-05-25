@@ -259,9 +259,12 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  changeRecordName<N extends RT>(id: number, newName?: string, type?: N): idAndRecord<RT> | undefined {
-    const oldName = this.getDeepRecord(id)?.name;
-    const idAndRecord = super.changeRecordName(id, newName, type);
+  /** Changes deep record name */
+  changeRecordName(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
+    const idAndRecord = this.getDeepIdAndRecord(idOrAddress);
+    if(!idAndRecord) return undefined;
+    const oldName = idAndRecord.record.name;
+    super.changeDeepRecordName(idAndRecord.id, newName);
     if(idAndRecord === undefined) return undefined;
     //Custom Record Types' Code
     switch (idAndRecord.record.type) {
@@ -286,6 +289,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
     return idAndRecord;
   }
+
+  changeDeepRecordName(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
+    return this.changeRecordName(idOrAddress, newName);
+  }
+
+  // changeDeepRecordName(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
+  //   const rAndP = this.getRecordAndParent(idOrAddress);
+  //   if(rAndP === undefined || rAndP.r === undefined) return undefined;
+  //   return new RecordFactory(rAndP.p).changeRecordName(rAndP.id, newName, rAndP.r.type as RT);
+  // }
 
   updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
     const newName = variableIdAndRecord.record.name;

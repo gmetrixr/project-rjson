@@ -40,7 +40,7 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * 
  * RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
- * getRecord / getIdAndRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
+ * getRecord / getIdAndRecord / getDeepRecord / getDeepIdAndRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
  * getDeepRecordMap / getDeepRecordEntries
  * 
@@ -231,28 +231,34 @@ export class RecordFactory<T extends RT> {
     }
   }
 
+  getIdAndRecord(id: number, type?: RT): idAndRecord<RT> | undefined {
+    const rm = this.getRecordMap(type);
+    return { id, record: rm[id] };
+  }
+  
   /** Sending type also makes getRecord faster */
   getRecord(id: number, type?: RT): RecordNode<RT> | undefined {
-    if(type == undefined) {
-      return this.getRecordMap()[id];
-    } else {
-      return (this._json.records?.[type] as RecordMap<RT>)?.[id];
-    }
+    return this.getIdAndRecord(id, type)?.record;
   }
 
-  getIdAndRecord(id: number, type?: RT): idAndRecord<RT> | undefined {
-    const record = this.getRecord(id, type);
-    return record ? {id, record} : undefined;
+  getDeepIdAndRecord(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
+    if(idOrAddress === "") { //blank address refers to self record. Self record doesn't have an id. So return undefined
+      return undefined
+    } else if(typeof idOrAddress === "number") {
+      const rm = this.getDeepRecordMap();
+      return { id: idOrAddress, record: rm[idOrAddress] };
+    } else {
+      const rAndP = this.getRecordAndParentWithAddress(idOrAddress);
+      return rAndP ? { id: rAndP?.id, record: rAndP?.r } : undefined;
+    }
   }
 
   /** if idOrAddress is "", it refers to the current node */
   getDeepRecord(idOrAddress: idOrAddress): RecordNode<RT> | undefined {
-    if(typeof idOrAddress === "number") {
-      return this.getDeepRecordMap()[idOrAddress];
-    } else if (idOrAddress === "") { //blank address refers to self record
+    if(idOrAddress === "") { //blank address refers to self record
       return this._json;
     } else {
-      return this.getRecordAndParentWithAddress(idOrAddress)?.r;
+      return this.getDeepIdAndRecord(idOrAddress)?.record;
     }
   }
 

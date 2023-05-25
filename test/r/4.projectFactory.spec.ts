@@ -122,7 +122,7 @@ describe ("r ProjectFactory tests", () => {
     expect(projectF.getRecord(7469457607607874, RT.variable)?.name).to.be.equal(updatedName);
   });
 
-  xit ("should change record name for an element in a project", () => {
+  it ("should change record name for an element in a project", () => {
     const projectF = new ProjectFactory(threeScenesJson);
     const updatedName = "Updated Name for element test";
     projectF.changeRecordName(9977847668094658, updatedName);
