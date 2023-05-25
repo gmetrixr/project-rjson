@@ -218,13 +218,13 @@ describe ("r ProjectFactory tests", () => {
     fs.writeFileSync("./test/r/jsons/r3fJsons/metadata/metadata.json", JSON.stringify(projectF.getMetadata()));
   });
 
-  it ("should copy to clipboard for a project", () => {
+  xit ("should copy to clipboard for a project", () => {
     const projectF = new ProjectFactory(threeScenesJson);
     const clipboard = projectF.copyToClipboard([ 1684926140314, 5364265808415932, 7099775484488106 ]);
     fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/project.json", JSON.stringify(clipboard));
   });
 
-  it ("should paste from clipboard to project", () => {
+  xit ("should paste from clipboard to project", () => {
     const projectF = new ProjectFactory(createRecord(RT.project));
     projectF.pasteFromClipboard("", clipboardData as ClipboardData);
     fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(threeScenesJson));

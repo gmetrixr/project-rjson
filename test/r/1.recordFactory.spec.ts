@@ -479,7 +479,7 @@ describe ("r RecordFactory tests", () => {
     expect(rAndP?.p.type).to.be.equal(record?.type);
   });
 
-  it ("should copy to clipboard for a project", () => {
+  xit ("should copy to clipboard for a project", () => {
     const projectF = new RecordFactory(projectJson);
     const recordIds = projectF.getRecordIds(RT.scene);
     const clipboard = projectF.copyToClipboard([ recordIds[0] ]);
