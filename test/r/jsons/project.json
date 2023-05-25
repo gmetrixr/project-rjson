@@ -51,7 +51,7 @@
                   "1684409501169": {
                     "type": "when_event",
                     "props": {
-                      "co_id": "1684392104132",
+                      "co_id": 1684392104132,
                       "event": "on_click",
                       "co_type": "cube",
                       "properties": []
@@ -62,7 +62,7 @@
                   "1684409594264": {
                     "type": "then_action",
                     "props": {
-                      "co_id":  "1684404927844",
+                      "co_id":  1684404927844,
                       "co_type": "polygon",
                       "action": "toggle_showhide",
                       "properties": []
@@ -82,7 +82,7 @@
                   "1684409501168": {
                     "type": "when_event",
                     "props": {
-                      "co_id": "1684392104132",
+                      "co_id": 1684392104132,
                       "event": "on_click",
                       "co_type": "cube",
                       "properties": []
@@ -93,7 +93,7 @@
                   "1684409594263": {
                     "type": "then_action",
                     "props": {
-                      "co_id":  "1684405505170",
+                      "co_id":  1684405505170,
                       "co_type": "polygon",
                       "action": "toggle_showhide",
                       "properties": []

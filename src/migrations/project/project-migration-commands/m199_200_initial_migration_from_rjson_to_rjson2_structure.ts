@@ -11,7 +11,8 @@ const migrateProject = (json: any) => {
   delete json.id;
   const updatedJson = recursivelyMigrateJson(json);
   const projectJson = updatedJson as unknown as RecordNode<RT.project>;
-  const projectF = new RecordFactory(projectJson)
+  const projectF = new RecordFactory(projectJson);
+  projectF.cycleAllSubRecordIds();
   projectF.set(rtp.project.version, 200);
   return projectJson;
 }
