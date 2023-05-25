@@ -12,7 +12,7 @@ const { generateIdV2 } = jsUtils;
 describe ("r ProjectFactory tests", () => {
   it ("should add element record to a project", () => {
     const projectF = new ProjectFactory(threeScenesJson);
-    const idAndRecord = projectF.addElementRecord({ sceneIdOrAddress: 1684926140314, elementType: ElementType.character });
+    const idAndRecord = projectF.addElementRecord({ parentIdOrAddress: 1684926140314, elementType: ElementType.character });
     expect(idAndRecord).to.not.be.undefined;
     const record = projectF.getDeepRecord(idAndRecord?.id as number);
     expect(record).to.not.be.undefined;
