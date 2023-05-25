@@ -259,7 +259,10 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  /** Changes deep record name */
+  /** 
+   * The ProjectFactory implementation of changeRecordName actually functions even for deep records
+   * so in ProjectFactory changeDeepRecordName = changeRecordName
+   **/
   changeRecordName(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
     const idAndRecord = this.getDeepIdAndRecord(idOrAddress);
     if(!idAndRecord) return undefined;
