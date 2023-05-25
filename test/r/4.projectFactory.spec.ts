@@ -11,7 +11,7 @@ import manishJson from "./jsons/r3fJsons/project/manish.json";
 import fs from "fs";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 
-const { generateIdV2 } = jsUtils;
+const { generateIdV2, deepClone } = jsUtils;
 
 const gvsMap: RecordMap<RT.variable> = {
   "9605223715681184": {
@@ -61,7 +61,7 @@ const sourceMap = {
 
 describe ("r ProjectFactory tests", () => {
   it ("should add element record to a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const idAndRecord = projectF.addElementRecord({ parentIdOrAddress: 1684926140314, elementType: ElementType.character });
     expect(idAndRecord).to.not.be.undefined;
     const record = projectF.getDeepRecord(idAndRecord?.id as number);
@@ -70,14 +70,14 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should add record to a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const idAndRecord = projectF.addRecord({ record: createRecord(RT.element), parentIdOrAddress: 1684926516892 });
     expect(idAndRecord).to.not.be.undefined;
     expect(projectF.getDeepRecord(idAndRecord?.id as number)).to.not.be.undefined;
   });
 
   it ("should delete scene record from a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     projectF.deleteRecord(1684926787722);
     const scene = projectF.getRecord(1684926787722, RT.scene);
     expect(scene).to.be.undefined;
@@ -88,27 +88,27 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should delete lead gen record from a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     projectF.deleteRecord(5755181695918337);
     expect(projectF.getRecord(5755181695918337, RT.lead_gen_field)).to.be.undefined;
     expect(projectF.getRecord(7578584700093195, RT.variable)).to.be.undefined;
   });
 
   it ("should delete element from project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     projectF.deleteDeepRecord(5640688583895573);
     expect(projectF.getDeepRecord(5640688583895573)).to.be.undefined;
   });
 
   it ("should change record name for a scene in a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const updatedName = "Updated Name for test";
     projectF.changeRecordName(1684926140314, updatedName);
     expect(projectF.getRecord(1684926140314, RT.scene)?.name).to.be.equal(updatedName);
   });
 
   it ("should change record name for a lead gen field in a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const updatedName = "Updated Name for lead gen test";
     projectF.changeRecordName(8486422448379481, updatedName);
     expect(projectF.getRecord(8486422448379481, RT.lead_gen_field)?.name).to.be.equal(updatedName);
@@ -116,53 +116,48 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should change record name for a variable in a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const updatedName = "variable_name_update_test";
     projectF.changeRecordName(7469457607607874, updatedName);
     expect(projectF.getRecord(7469457607607874, RT.variable)?.name).to.be.equal(updatedName);
-  });
 
-  it ("should change record name for an element in a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
-    const updatedName = "Updated Name for element test";
-    projectF.changeRecordName(9977847668094658, updatedName);
-    expect(projectF.getDeepRecord(9977847668094658)?.name).to.be.equal(updatedName);
-  });
-
-  it ("should update records linked to variable template for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
     const variableIdAndRecord = projectF.getIdAndRecord(7469457607607874);
-    expect(variableIdAndRecord).to.not.be.undefined;
-    expect(variableIdAndRecord?.record.name).to.be.equal("variable_name_update_test");
     if (!variableIdAndRecord) return;
     projectF.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, "string_var");
     const record = projectF.getDeepRecord(8720042838001644);
     expect(record?.props.text).to.be.equal("{{variable_name_update_test}}");
   });
 
+  it ("should change record name for an element in a project", () => {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
+    const updatedName = "Updated Name for element test";
+    projectF.changeRecordName(9977847668094658, updatedName);
+    expect(projectF.getDeepRecord(9977847668094658)?.name).to.be.equal(updatedName);
+  });
+
   it ("should update string template in record for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const record = projectF.getDeepRecord(8720042838001644);
-    projectF.updateStringTemplateInRecord(record as RecordNode<RT>, "variable_name_update_test", "variable_name_update_test_newer");
-    expect(record?.props.text).to.be.equal("{{variable_name_update_test_newer}}");
+    projectF.updateStringTemplateInRecord(record as RecordNode<RT>, "string_var", "string_var3");
+    expect(record?.props.text).to.be.equal("{{string_var3}}");
   });
 
   it ("should add variable of type for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const variableIdAndRecord = projectF.addVariableOfType(VariableType.boolean);
     expect(variableIdAndRecord?.record).to.not.be.undefined;
     expect(variableIdAndRecord?.record.props.var_type).to.be.equal(VariableType.boolean);
   });
 
   it ("should add pre defined variables for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const variableIdAndRecord = projectF.addPredefinedVariable(PredefinedVariableName.scorm_suspend_data);
     expect(variableIdAndRecord?.record).to.not.be.undefined;
     expect(variableIdAndRecord?.record.name).to.be.equal("scorm_suspend_data");
   });
 
   it ("should add global variables for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const variable = createRecord(RT.variable);
     const id = generateIdV2();
     const variableIdAndRecord = projectF.addGlobalVariable(variable, id);
@@ -172,7 +167,7 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should update global variable properties for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     projectF.updateGlobalVariableProperties(gvsMap);
     const variableRecordMap = projectF.getRecordMap(RT.variable);
     for (const id in variableRecordMap) {
@@ -185,13 +180,13 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should get initial scene id for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const initialSceneId = projectF.getInitialSceneId();
     expect(initialSceneId).to.be.equal(1684926516892);
   });
 
   it ("should get project thumbnail for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const projectThumbnail = projectF.getProjectThumbnail();
     const panoElement = projectF.getDeepRecord(7642315857910271);
     const elementF = new ElementFactory(panoElement as RecordNode<RT.element>);
@@ -199,13 +194,14 @@ describe ("r ProjectFactory tests", () => {
     expect(projectThumbnail).to.be.equal(source.file_urls?.t);
   });
 
-  xit ("should get file ids from project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+  it ("should get file ids from project", () => {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const fileIds = projectF.getFileIdsFromProject();
+    console.log(`fileIds`, fileIds);
   });
 
   xit ("should inject source element into project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     projectF.injectSourceIntoProject(sourceMap);
     const image = projectF.getDeepRecord(1366836342601946);
     const source = new ElementFactory(image as RecordNode<RT.element>).getValueOrDefault(rtp.element.source) as fn.Source;
@@ -214,12 +210,12 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should get metadata for a project", () => {
-    const projectF = new ProjectFactory(manishJson);
+    const projectF = new ProjectFactory(deepClone(manishJson));
     fs.writeFileSync("./test/r/jsons/r3fJsons/metadata/metadata.json", JSON.stringify(projectF.getMetadata()));
   });
 
   xit ("should copy to clipboard for a project", () => {
-    const projectF = new ProjectFactory(threeScenesJson);
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const clipboard = projectF.copyToClipboard([ 1684926140314, 5364265808415932, 7099775484488106 ]);
     fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/project.json", JSON.stringify(clipboard));
   });
@@ -227,6 +223,6 @@ describe ("r ProjectFactory tests", () => {
   xit ("should paste from clipboard to project", () => {
     const projectF = new ProjectFactory(createRecord(RT.project));
     projectF.pasteFromClipboard("", clipboardData as ClipboardData);
-    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(threeScenesJson));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(deepClone(threeScenesJson)));
   });
 });
