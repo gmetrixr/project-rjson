@@ -313,12 +313,12 @@ describe ("r RecordFactory tests", () => {
   });
 
   it ("should get breadcrumbs at id for a project", () => {
-    const breadcrumbs = new RecordFactory(migratedOldProjectJson).getBreadCrumbs(8516018403475522);
+    const breadcrumbs = new RecordFactory(migratedOldProjectJson).getBreadCrumbs(3092441630240330);
     expect(breadcrumbs?.length).to.be.equal(3);
   });
 
   it ("should get breadcrumbs at address for a project", () => {
-    const breadcrumbs = new RecordFactory(migratedOldProjectJson).getBreadCrumbs("scene:1670509178879|element:8401190650895881|element:8516018403475522");
+    const breadcrumbs = new RecordFactory(migratedOldProjectJson).getBreadCrumbs("scene:1670509178879|element:6850914842080636|element:3092441630240330");
     expect(breadcrumbs?.length).to.be.equal(3);
   });
 
@@ -371,7 +371,7 @@ describe ("r RecordFactory tests", () => {
   it ("should add element at parent with id for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
     const element = createRecord(RT.element);
-    const idAndRecord = projectF.addRecord({ record: element, parentIdOrAddress: 9321014208146668, dontCycleSubRecordIds: true });
+    const idAndRecord = projectF.addRecord({ record: element, parentIdOrAddress: 5453504512274156, dontCycleSubRecordIds: true });
     expect(idAndRecord).to.not.be.undefined;
     const recordAndParent = projectF.getRecordAndParent(idAndRecord?.id as number);
     expect(idAndRecord?.id as number).to.be.equal(recordAndParent?.id as number);
@@ -399,10 +399,10 @@ describe ("r RecordFactory tests", () => {
 
   it ("should delete deep record for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    projectF.deleteDeepRecord(4742041233016548);
-    projectF.deleteDeepRecord("scene:1670509178879|element:2172911361945326|element:7326548744579684");
-    const record1 = projectF.getDeepRecord(4742041233016548);
-    const record2 = projectF.getDeepRecord(7326548744579684);
+    projectF.deleteDeepRecord(3092441630240330);
+    projectF.deleteDeepRecord("scene:1670509178879|element:6722608092429299");
+    const record1 = projectF.getDeepRecord(3092441630240330);
+    const record2 = projectF.getDeepRecord(6722608092429299);
     expect(record1).to.be.undefined;
     expect(record2).to.be.undefined;
   });
@@ -417,49 +417,42 @@ describe ("r RecordFactory tests", () => {
 
   it ("should duplicate deep record for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    const duplicatedDeepRecord = projectF.duplicateDeepRecord(8606445208455450);
-    const rAndP = projectF.getRecordAndParent(8606445208455450);
+    const duplicatedDeepRecord = projectF.duplicateDeepRecord(5902913384626319);
+    const rAndP = projectF.getRecordAndParent(5902913384626319);
+    expect(rAndP).to.not.be.undefined;
     expect(rAndP?.p.name).to.be.equal(duplicatedDeepRecord?.p.name);
     expect(rAndP?.r.type).to.be.equal(duplicatedDeepRecord?.r.type);
   });
 
   it ("should change record name for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    projectF.changeRecordName(1842005254934935, "updated name");
-    expect(projectF.getRecord(1842005254934935)?.name).to.be.equal("updated name");
+    projectF.changeRecordName(9660974022006364, "updated name");
+    expect(projectF.getRecord(9660974022006364)?.name).to.be.equal("updated name");
   });
 
   it ("should change deep record name for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    projectF.changeDeepRecordName(8606445208455450, "room updated name");
-    expect(projectF.getDeepRecord(8606445208455450)?.name).to.be.equal("room updated name");
+    projectF.changeDeepRecordName(7539392914182061, "room updated name");
+    expect(projectF.getDeepRecord(7539392914182061)?.name).to.be.equal("room updated name");
   });
 
   it ("should reorder records for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    //   console.log(projectF.getSortedRecordIds(RT.variable));
-    // [ (0) 9469448052548118, (1) {9554442156169824}, (2) 7679446522287332, (3) {5871994778341256}, (4) 3039012318667826, 7767365351529164,
-    //   1701042133141691, 9934131816677986, 2313132645625314, {7886696536494658}, 1687298848714581, 1842005254934935,
-    //   3376938525126812, 5093735591078188,9846686206358020 ]
-    projectF.reorderRecords(RT.variable, [5871994778341256, 7886696536494658, 9554442156169824], 4);
-    //   console.log(projectF.getSortedRecordIds(RT.variable));
-    // [ 9469448052548118, 7679446522287332, {5871994778341256, 7886696536494658, 9554442156169824,} 3039012318667826,
-    //   7767365351529164, 1701042133141691, 9934131816677986, 2313132645625314, 1687298848714581, 1842005254934935,
-    //   3376938525126812, 5093735591078188, 9846686206358020 ]
+    projectF.reorderRecords(RT.variable, [8311513741015799, 4798409288286812, 2878541553104889], 4);
     const sortedRecordIds = projectF.getSortedRecordIds(RT.variable);
-    expect(sortedRecordIds[2]).to.be.equal(5871994778341256);
-    expect(sortedRecordIds[3]).to.be.equal(7886696536494658);
-    expect(sortedRecordIds[4]).to.be.equal(9554442156169824);
+    expect(sortedRecordIds[3]).to.be.equal(8311513741015799);
+    expect(sortedRecordIds[4]).to.be.equal(4798409288286812);
+    expect(sortedRecordIds[5]).to.be.equal(2878541553104889);
   });
 
   it ("should copy deep records for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    projectF.copyDeepRecords([1498187110798464, 8516018403475522], 2172911361945326);
-    const record = projectF.getDeepRecord(2172911361945326) as RecordNode<RT>;
+    projectF.copyDeepRecords([5115679091884973, 3120265219185915], 5453504512274156);
+    const record = projectF.getDeepRecord(5453504512274156) as RecordNode<RT>;
     const rF = new RecordFactory(record);
     const recordMap = rF.getRecordMap();
-    const record1 = projectF.getDeepRecord(1498187110798464);
-    const record2 = projectF.getDeepRecord(8516018403475522);
+    const record1 = projectF.getDeepRecord(5115679091884973);
+    const record2 = projectF.getDeepRecord(3120265219185915);
     let found1 = false;
     let found2 = false;
     for (const key in recordMap) {
@@ -477,9 +470,10 @@ describe ("r RecordFactory tests", () => {
 
   it ("should move deep records for a project", () => {
     const projectF = new RecordFactory(migratedOldProjectJson);
-    projectF.moveDeepRecords([3939288792756008], 9321014208146668);
-    const rAndP = projectF.getRecordAndParent(3939288792756008);
-    const record = projectF.getDeepRecord(9321014208146668);
+    projectF.moveDeepRecords([8934053429076108], 5453504512274156);
+    const rAndP = projectF.getRecordAndParent(8934053429076108);
+    expect(rAndP).to.not.be.undefined;
+    const record = projectF.getDeepRecord(5453504512274156);
     expect(rAndP?.p.name).to.be.equal(record?.name);
     expect(rAndP?.p.type).to.be.equal(record?.type);
   });

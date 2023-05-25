@@ -1,5 +1,7 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R";
+import { RecordNode, rtp, RT } from "../../../r/R";
 import { IOrder } from "../../IOrder";
+import { ProjectUtils } from "../../../r/recordFactories/ProjectFactory";
+import { ProjectFactory } from "../../../r/recordFactories";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -11,7 +13,8 @@ const migrateProject = (json: any) => {
   delete json.id;
   const updatedJson = recursivelyMigrateJson(json);
   const projectJson = updatedJson as unknown as RecordNode<RT.project>;
-  const projectF = new RecordFactory(projectJson);
+  ProjectUtils.ensureNoDuplicateIdsInProject(projectJson);
+  const projectF = new ProjectFactory(projectJson);
   projectF.cycleAllSubRecordIds();
   projectF.set(rtp.project.version, 200);
   return projectJson;
