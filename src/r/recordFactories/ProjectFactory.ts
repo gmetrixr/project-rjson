@@ -25,7 +25,7 @@ import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
 import { SceneCollisionOptions, SceneType } from "../definitions/special";
 import { sceneEnvironmentOptions } from "../definitions/special/SpecialTypes";
 
-const { deepClone } = jsUtils;
+const { deepClone, generateIdV2 } = jsUtils;
 type variable = RT.variable;
 const variable = RT.variable;
 
@@ -600,6 +600,39 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       const parentRF = new RecordFactory(parentRecord);
       for(const node of clipboardData.nodes) {
         parentRF.addRecord({record: node.record, position: positionInPlace});
+      }
+    }
+  }
+
+  /** 
+   * Change all sub-record ids (of sub-records) in this RecordNode 
+   * Cannot use getDeepRecordxxxxx here :P 
+   * getDeepRecordxxxx depends on uniqueness of ids. This is function that ensures that there no duplicates.
+   */
+  ensureNoDuplicateIdsInProject(): void {
+    const replacementMap: {[oldId: number]: number} = {};
+    for (const type of this.getRecordTypes()) {
+      for(const recordEntry of this.getRecordEntries(type)) {
+        if(type !== RT.scene) {
+          const oldId = recordEntry[0];
+          const newId = generateIdV2();
+          this.changeDeepRecordId(oldId, newId);
+          this.changeDeepRecordIdInProperties(oldId, newId);
+        } else { //We don't want to change ids of scenes
+          //Scenes are self contained (mostly), so this works
+          const newReplacementMap = new RecordFactory(recordEntry[1]).cycleAllSubRecordIds()
+          Object.assign(replacementMap, newReplacementMap);
+        }
+      }
+    }
+    //For all non-scene records in the project, apply the element level changes (like in ecommerce)
+    for (const type of this.getRecordTypes()) {
+      if(type !== RT.scene) {
+        for(const recordEntry of this.getRecordEntries(type)) {
+          for(const [oldId, newId] of Object.entries(replacementMap)) {
+            new RecordFactory(recordEntry[1]).changeDeepRecordIdInProperties(Number(oldId), newId);
+          }
+        }
       }
     }
   }

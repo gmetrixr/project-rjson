@@ -526,16 +526,22 @@ export class RecordFactory<T extends RT> {
     return false;
   }
 
-  /** Change all sub-record ids (of sub-records) in this RecordNode */
-  cycleAllSubRecordIds(): void {
+  /** 
+   * Change all sub-record ids (of sub-records) in this RecordNode 
+   * Used for copy pasting record nodes - to ensure none of the subrecords end up having a duplicate id
+   */
+  cycleAllSubRecordIds(): {[oldId: number]: number} {
+    const replacementMap: {[oldId: number]: number} = {};
     for(const [key, value] of this.getDeepRecordEntries()) {
       if(value.type !== RT.scene) { //We don't want to change scene ids
         const oldId = Number(key);
         const newId = generateIdV2();
+        replacementMap[oldId] = newId;
         this.changeDeepRecordId(oldId, newId);
         this.changeDeepRecordIdInProperties(oldId, newId);
       }
     }
+    return replacementMap;
   }
 
   /**
