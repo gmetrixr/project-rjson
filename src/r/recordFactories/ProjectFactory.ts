@@ -42,13 +42,13 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     super(json);
   }
 
-  addElementRecord({record, position, id, dontCycleSubRecordIds, sceneIdOrAddress, elementType}: {
-    record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, sceneIdOrAddress: idOrAddress, elementType: ElementType
+  addElementRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress, elementType}: {
+    record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, elementType: ElementType
   }): idAndRecord<RT.element> | undefined {
     if(!record) {
       record = createRecord(RT.element);
     }
-    const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress: sceneIdOrAddress});
+    const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
     if(idAndRecord) {
       idAndRecord.record.props.element_type = elementType;
     }
@@ -618,14 +618,14 @@ export class ProjectUtils {
 
     // * Add a default pano
     projectF.addElementRecord({
-      sceneIdOrAddress: sceneId,
+      parentIdOrAddress: sceneId,
       elementType: ElementType.pano_image
     });
 
     if(sceneType === SceneType.six_dof) {
       sceneF.set(rtp.scene.scene_collision_type, SceneCollisionOptions.advanced_collision);
       // * Add a default environment
-      const env = projectF.addElementRecord({sceneIdOrAddress: sceneId, elementType: ElementType.object_3d});
+      const env = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.object_3d});
 
       if(env) {
         const elementF = new ElementFactory(env.record);
@@ -638,7 +638,7 @@ export class ProjectUtils {
       }
 
       // * Add a spawn zone
-      const zone = projectF.addElementRecord({sceneIdOrAddress: sceneId, elementType: ElementType.zone});
+      const zone = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.zone});
       // * Reset the placer 3D for this zone element
       if(zone) {
         const elementF = new ElementFactory(zone.record);
@@ -661,7 +661,7 @@ export class ProjectUtils {
 
   static addDefaultLightRig(project: RecordNode<RT.project>, sceneId: number, envElementId?: number) {
     const projectF = new ProjectFactory(project);
-    const group = projectF.addElementRecord({sceneIdOrAddress: sceneId, elementType: ElementType.group});
+    const group = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.group});
     const useLegacyColorManagement = projectF.getValueOrDefault(rtp.project.use_legacy_color_management) as boolean;
     if(group) {
       group.record.name = `Lights`;

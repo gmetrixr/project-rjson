@@ -1,12 +1,11 @@
 import chalk from "chalk";
 import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from ".";
-import { RecordFactory, RecordMap, RecordNode, RT, rtp } from "../../R";
+import { idAndRecord, RecordFactory, RecordMap, RecordNode, RT, rtp } from "../../R";
 import { ProjectFactory, SceneFactory } from "../../recordFactories";
 import { ElementUtils } from "../../recordFactories/ElementFactory";
 import { isElementType, ElementType } from "../elements";
 import { isSpecialType, specialElementDisplayNames, SpecialType } from "../special";
 import { ArrayOfValues, isVariableType } from "../variables";
-import { idAndRecord } from "../../R/RecordFactory";
 import { CogObjectType } from "..";
 
 export interface RuleText {
