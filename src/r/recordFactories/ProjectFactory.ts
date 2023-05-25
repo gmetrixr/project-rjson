@@ -603,21 +603,27 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
     }
   }
+}
 
+const varNameFromOriginName = (originName: string | undefined): string => `${originName}_var`;
+
+export class ProjectUtils {
   /** 
-   * Change all sub-record ids (of sub-records) in this RecordNode 
-   * Cannot use getDeepRecordxxxxx here :P 
-   * getDeepRecordxxxx depends on uniqueness of ids. This is function that ensures that there no duplicates.
+   * Used while migration v5 project v6
+   * v5 ensures uniqueness of all ids within a scene
+   * v6 ensures uniquess overall
+   * Cannot use getDeepRecordxxxxx here :P as getDeepRecordxxxx depends on uniqueness of ids.
    */
-  ensureNoDuplicateIdsInProject(): void {
+  static ensureNoDuplicateIdsInProject(project: RecordNode<RT.project>): void {
+    const pf = new ProjectFactory(project);
     const replacementMap: {[oldId: number]: number} = {};
-    for (const type of this.getRecordTypes()) {
-      for(const recordEntry of this.getRecordEntries(type)) {
+    for (const type of pf.getRecordTypes()) {
+      for(const recordEntry of pf.getRecordEntries(type)) {
         if(type !== RT.scene) {
           const oldId = recordEntry[0];
           const newId = generateIdV2();
-          this.changeDeepRecordId(oldId, newId);
-          this.changeDeepRecordIdInProperties(oldId, newId);
+          pf.changeDeepRecordId(oldId, newId);
+          pf.changeDeepRecordIdInProperties(oldId, newId);
         } else { //We don't want to change ids of scenes
           //Scenes are self contained (mostly), so this works
           const newReplacementMap = new RecordFactory(recordEntry[1]).cycleAllSubRecordIds()
@@ -626,9 +632,9 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
     }
     //For all non-scene records in the project, apply the element level changes (like in ecommerce)
-    for (const type of this.getRecordTypes()) {
+    for (const type of pf.getRecordTypes()) {
       if(type !== RT.scene) {
-        for(const recordEntry of this.getRecordEntries(type)) {
+        for(const recordEntry of pf.getRecordEntries(type)) {
           for(const [oldId, newId] of Object.entries(replacementMap)) {
             new RecordFactory(recordEntry[1]).changeDeepRecordIdInProperties(Number(oldId), newId);
           }
@@ -636,11 +642,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
     }
   }
-}
 
-const varNameFromOriginName = (originName: string | undefined): string => `${originName}_var`;
-
-export class ProjectUtils {
   static addNewScene(project: RecordNode<RT.project>, sceneType: SceneType) {
     const projectF = new ProjectFactory(project);
     const sceneIdAndRecord = projectF.addBlankRecord({type: RT.scene});
