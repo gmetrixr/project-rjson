@@ -71,6 +71,7 @@ describe ("r ProjectFactory tests", () => {
 
   it ("should add record to a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
+    //Note: Adding an element like this, and not specifying its props.element_type, will cause it to be rejected by ElementRecord
     const idAndRecord = projectF.addRecord({ record: createRecord(RT.element), parentIdOrAddress: 1684926516892 });
     expect(idAndRecord).to.not.be.undefined;
     expect(projectF.getDeepRecord(idAndRecord?.id as number)).to.not.be.undefined;
