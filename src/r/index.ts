@@ -1,5 +1,6 @@
 import * as R from "./R";
 import { RecordNode, RecordMap, RT, RTP, rtp, createRecord, ClipboardData, idAndRecord } from "./R";
+import { ProjectUtils } from "./recordFactories/ProjectFactory";
 import { RecordUtils } from "./R/RecordFactory";
 import { ElementUtils } from "./recordFactories/ElementFactory";
 import { ProjectFactory } from "./recordFactories/ProjectFactory";
@@ -19,6 +20,7 @@ const r = {
 }
 
 const rUtils = {
+  ProjectUtils,
   RecordUtils,
   ElementUtils,
   ProjectFactory,
