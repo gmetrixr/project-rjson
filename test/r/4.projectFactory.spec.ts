@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ClipboardData, RT, RecordFactory, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R";
+import { ClipboardData, RT, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R";
 import { ElementType } from "../../src/r/definitions/elements";
 import { ProjectFactory } from "../../src/r/recordFactories/ProjectFactory";
 import { PredefinedVariableName, VarCategory, VariableType } from "../../src/r/definitions/variables";
@@ -198,10 +198,10 @@ describe ("r ProjectFactory tests", () => {
   it ("should get file ids from project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const fileIds = projectF.getFileIdsFromProject();
-    console.log(`fileIds`, fileIds);
+    expect(fileIds.length).to.be.equal(3);
   });
 
-  xit ("should inject source element into project", () => {
+  it ("should inject source element into project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     projectF.injectSourceIntoProject(sourceMap);
     const image = projectF.getDeepRecord(1366836342601946);
