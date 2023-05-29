@@ -15,6 +15,15 @@ export const Character: IElementDefinition = {
     ElementProperty.scale,
     ElementProperty.pose,
     ElementProperty.use_proximity_optimization,
+    ElementProperty.use_ai_brain,
+    ElementProperty.character_brain_slug,
+    ElementProperty.character_chatbot_trigger_radius,
+    ElementProperty.character_chatbot_welcome_dialogue,
+    ElementProperty.character_chatbot_welcome_dialogue_repeat,
+    ElementProperty.ssml_lang,
+    ElementProperty.ssml_voice,
+    ElementProperty.ssml_pitch,
+    ElementProperty.ssml_speed,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
