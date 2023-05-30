@@ -205,10 +205,10 @@ export class RulesSearch {
   }): number[] {
     // to filter by accent colour
     const idsForAccentColor: number[] = accentColor ?
-      this.accentColorsDict[accentColor.toLowerCase()] :
+      this.accentColorsDict[accentColor.toLowerCase()] || [] :
       flatten(Object.values(this.accentColorsDict));
 
-    if (accentColor && !searchString) {
+    if (accentColor && idsForAccentColor && !searchString) {
       return uniq(idsForAccentColor);
     }
 
