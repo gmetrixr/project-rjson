@@ -33,10 +33,10 @@ export class SceneFactory extends RecordFactory<RT.scene> {
     for(const [ruleId, rule] of this.getRecordEntries(RT.rule)) {
       const ruleF = new RecordFactory(rule);
       ruleF.getRecordEntries(RT.when_event)
-        .filter(([weId, we]) => (we.props.co_id === id))
+        .filter(([weId, we]) => (we.props.we_co_id === id))
         .forEach(([weId, we]) => ruleF.deleteRecord(weId, RT.when_event));
       ruleF.getRecordEntries(RT.then_action)
-        .filter(([taId, ta]) => (ta.props.co_id === id))
+        .filter(([taId, ta]) => (ta.props.ta_co_id === id))
         .forEach(([taId, ta]) => ruleF.deleteRecord(taId, RT.then_action));
       if(ruleF.getRecords(RT.when_event).length === 0 && ruleF.getRecords(RT.then_action).length === 0) {
         this.deleteRecord(ruleId, RT.rule);

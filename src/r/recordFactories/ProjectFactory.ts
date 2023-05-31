@@ -335,9 +335,9 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
       case RT.then_action: {
         const taRecord = record as RecordNode<RT.then_action>;
-        let properties = (taRecord.props.properties || []) as string[];
+        let properties = (taRecord.props.ta_properties || []) as string[];
         properties = properties.map(p => p?.replace(searchValue, replaceValue));
-        taRecord.props.properties = properties;
+        taRecord.props.ta_properties = properties;
         break;
       }
     }

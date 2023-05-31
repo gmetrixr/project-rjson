@@ -140,11 +140,11 @@ class ConsoleRulePrinter {
     varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(we.props.co_id as number, we.props.co_type as CogObjectType, scene, varMap);
+    const displayName = this.coIdToName(we.props.we_co_id as number, we.props.we_co_type as CogObjectType, scene, varMap);
     const event = rEventDisplayName[<RuleEvent>we.props.event];
     let propertiesText = "";
-    if (we.props.properties !== undefined && (we.props.properties as ArrayOfValues).length !== 0) {
-      propertiesText = `[${(we.props.properties as ArrayOfValues)?.join(",")}]`;
+    if (we.props.we_properties !== undefined && (we.props.we_properties as ArrayOfValues).length !== 0) {
+      propertiesText = `[${(we.props.we_properties as ArrayOfValues)?.join(",")}]`;
     }
     let valuesText = "";
     if (values !== undefined && values.length !== 0) {
@@ -159,19 +159,19 @@ class ConsoleRulePrinter {
     varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(ta.props.co_id as number, ta.props.co_type as CogObjectType, scene, varMap);
+    const displayName = this.coIdToName(ta.props.ta_co_id as number, ta.props.ta_co_type as CogObjectType, scene, varMap);
     const action = rActionDisplayName[<RuleAction>ta.props.action];
     let propertiesText = "";
-    if (ta.props.properties !== undefined && (ta.props.properties as ArrayOfValues).length !== 0) {
-      propertiesText = `[${(ta.props.properties as ArrayOfValues)?.join(",")}]`;
+    if (ta.props.ta_properties !== undefined && (ta.props.ta_properties as ArrayOfValues).length !== 0) {
+      propertiesText = `[${(ta.props.ta_properties as ArrayOfValues)?.join(",")}]`;
     }
     let valuesText = "";
     if (values !== undefined && values.length !== 0) {
       valuesText = ` values[${values.join(",")}]`;
     }
     let delayText = "";
-    if (ta.props.delay !== undefined && ta.props.delay !== 0) {
-      delayText = ` after ${ta.props.delay}s`;
+    if (ta.props.ta_delay !== undefined && ta.props.ta_delay !== 0) {
+      delayText = ` after ${ta.props.ta_delay}s`;
     }
     return `${displayName} should ${action}${propertiesText}${valuesText}${delayText}`;
   };
@@ -276,11 +276,11 @@ class FriendlyRulePrinter {
     varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(we.props.co_id as number, we.props.co_type as CogObjectType, scene, varMap);
+    const displayName = this.coIdToName(we.props.we_co_id as number, we.props.we_co_type as CogObjectType, scene, varMap);
     const event = rEventDisplayName[<RuleEvent>we.props.event];
     let propertiesText = "";
-    if (we.props.properties !== undefined && (we.props.properties as ArrayOfValues).length !== 0) {
-      propertiesText = `[${(we.props.properties as ArrayOfValues)?.join(",")}]`;
+    if (we.props.we_properties !== undefined && (we.props.we_properties as ArrayOfValues).length !== 0) {
+      propertiesText = `[${(we.props.we_properties as ArrayOfValues)?.join(",")}]`;
     }
     let valuesText = "";
     if (values !== undefined && values.length !== 0) {
@@ -297,12 +297,12 @@ class FriendlyRulePrinter {
     varMap: RecordMap<RT.variable> = {},
     values?: ArrayOfValues,
   ): string => {
-    const displayName = this.coIdToName(ta.props.co_id as number, ta.props.co_type as CogObjectType, scene, varMap);
+    const displayName = this.coIdToName(ta.props.ta_co_id as number, ta.props.ta_co_type as CogObjectType, scene, varMap);
     const action = rActionDisplayName[<RuleAction>ta.props.action];
     let propertiesText = "";
     //Calculate propertiesText based on the action type
-    if (ta.props.properties !== undefined && (ta.props.properties as ArrayOfValues).length !== 0) {
-      const properties = ta.props.properties as ArrayOfValues;
+    if (ta.props.ta_properties !== undefined && (ta.props.ta_properties as ArrayOfValues).length !== 0) {
+      const properties = ta.props.ta_properties as ArrayOfValues;
       let coIdElement: number, e, coIdScene, propsScene;
       switch (ta.props.action) {
         case RuleAction.point_to:
@@ -335,8 +335,8 @@ class FriendlyRulePrinter {
       valuesText = ` values[${values.join(",")}]`;
     }
     let delayText = "";
-    if (ta.props.delay !== undefined && ta.props.delay !== 0) {
-      delayText = ` after ${ta.props.delay}s`;
+    if (ta.props.ta_delay !== undefined && ta.props.ta_delay !== 0) {
+      delayText = ` after ${ta.props.ta_delay}s`;
     }
     return `${displayName} should ${action}${propertiesText}${valuesText}${delayText}`;
   };

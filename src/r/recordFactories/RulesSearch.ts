@@ -63,7 +63,7 @@ export class RulesSearch {
         const whenEvents = ruleF.getRecords(RT.when_event);
 
         for (const we of whenEvents) {
-          const coId = we.props.co_id as number;
+          const coId = we.props.we_co_id as number;
           const element = elementEntries.find(([eId, ele]) => eId === coId);
           const variable = projectF.getRecord(coId, RT.variable);
           if (element) {
@@ -93,7 +93,7 @@ export class RulesSearch {
         const thenActions = ruleF.getRecords(RT.then_action);
         for (const ta of thenActions) {
           // const whenEventF = new RecordFactory(we);
-          const coId = ta.props.co_id as number;
+          const coId = ta.props.ta_co_id as number;
           const element = elementEntries.find(([eId, ele]) => eId === coId);
           const variable = projectF.getRecord(coId, RT.variable);
 
@@ -122,8 +122,8 @@ export class RulesSearch {
             case RuleAction.replace_screen_reader_text:
             case RuleAction.set_to_number:
             case RuleAction.add_number: {
-              if (Array.isArray(ta.props.properties)) {
-                for(const p of ((ta.props.properties ?? []) as string[])) {
+              if (Array.isArray(ta.props.ta_properties)) {
+                for(const p of ((ta.props.ta_properties ?? []) as string[])) {
                   this.propsNameDict[p] ?
                     this.propsNameDict[p].push(ruleId) :
                     this.propsNameDict[p] = [ruleId];
@@ -135,8 +135,8 @@ export class RulesSearch {
             case RuleAction.point_to:
             case RuleAction.seek_to_timer:
             case RuleAction.teleport: {
-              if (Array.isArray(ta.props.properties)) {
-                const elem_id = ta.props.properties[0] as number;
+              if (Array.isArray(ta.props.ta_properties)) {
+                const elem_id = ta.props.ta_properties[0] as number;
                 const element = elementEntries.find(([eId, ele]) => eId === elem_id);
                 if(element) {
                   const elementName = element[1]?.name?.trim().toLowerCase();
@@ -153,8 +153,8 @@ export class RulesSearch {
             }
 
             case RuleAction.change_scene: {
-              if (Array.isArray(ta.props.properties)) {
-                const sceneId = ta.props.properties[0] as number;
+              if (Array.isArray(ta.props.ta_properties)) {
+                const sceneId = ta.props.ta_properties[0] as number;
                 const scene = projectF.getRecord(sceneId, RT.scene);
                 const sceneName = scene?.name?.trim().toLowerCase();
                 if(sceneName) {
@@ -167,8 +167,8 @@ export class RulesSearch {
             }
             case RuleAction.hide_item:
             case RuleAction.show_item: {
-              if (Array.isArray(ta.props.properties)) {
-                const itemId = ta.props.properties[0] as number;
+              if (Array.isArray(ta.props.ta_properties)) {
+                const itemId = ta.props.ta_properties[0] as number;
                 const itemEntries = sceneF.getDeepRecordEntries(RT.item).filter(([id, item]) => id === itemId);
                 
                 for(const [id, item] of itemEntries) {
