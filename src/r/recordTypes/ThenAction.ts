@@ -1,19 +1,19 @@
 export enum ThenActionProperty {
-  co_id = "co_id",
-  co_type = "co_type",
+  ta_co_id = "ta_co_id",
+  ta_co_type = "ta_co_type",
   action = "action",
-  properties = "properties",
-  delay = "delay",
+  ta_properties = "ta_properties",
+  ta_delay = "ta_delay",
 }
 
 export const thenActionPropertyDefaults: Record<ThenActionProperty, unknown> = {
-  [ThenActionProperty.co_id]: -99,
-  [ThenActionProperty.co_type]: "scene",
+  [ThenActionProperty.ta_co_id]: -99,
+  [ThenActionProperty.ta_co_type]: "scene",
   /** Of the type rn.RuleAction */
   [ThenActionProperty.action]: "do_nothing",
   /** These are the additional optional properties for the RuleAciton */
-  [ThenActionProperty.properties]: [], 
-  [ThenActionProperty.delay]: 0,
+  [ThenActionProperty.ta_properties]: [], 
+  [ThenActionProperty.ta_delay]: 0,
 } 
 
 /**

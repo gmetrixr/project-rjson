@@ -7,19 +7,19 @@
  * When an event is described, it has an event_id too (just event & ce_id aren't enough for tracking uniqueness)
  */
 export enum WhenEventProperty {
-  co_id = "co_id",
-  co_type = "co_type",
+  we_co_id = "we_co_id",
+  we_co_type = "we_co_type",
   /** Store rn.RuleEvent */
   event = "event",
   /** Stores vn.ArrayOfValues */
-  properties = "properties",
+  we_properties = "we_properties",
 }
 
 export const whenEventPropertyDefaults: Record<WhenEventProperty, unknown> = {
-  [WhenEventProperty.co_id]: -99,
-  [WhenEventProperty.co_type]: "scene",
+  [WhenEventProperty.we_co_id]: -99,
+  [WhenEventProperty.we_co_type]: "scene",
   [WhenEventProperty.event]: "on_load",
-  [WhenEventProperty.properties]: [],
+  [WhenEventProperty.we_properties]: [],
 };
 
 // export interface IWhenEvent {

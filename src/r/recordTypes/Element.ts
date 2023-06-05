@@ -131,6 +131,13 @@ export enum ElementProperty {
   pose = "pose",
   use_proximity_optimization = "use_proximity_optimization",
   linked_element_id = "linked_element_id",
+
+  // Intelligence
+  use_ai_brain = "use_ai_brain",
+  character_brain_slug = "brain_slug",
+  character_chatbot_trigger_radius = "character_chatbot_trigger_radius",
+  character_chatbot_welcome_dialogue = "character_chatbot_welcome_dialogue",
+  character_chatbot_welcome_dialogue_repeat = "character_chatbot_welcome_dialogue_repeat",
 }
 
 export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
@@ -282,5 +289,10 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.visible]: false,
   [ElementProperty.pose]: "idle",
   [ElementProperty.use_proximity_optimization]: true,
-  [ElementProperty.linked_element_id]: undefined
+  [ElementProperty.linked_element_id]: undefined,
+  [ElementProperty.use_ai_brain]: false,
+  [ElementProperty.character_brain_slug]: undefined,
+  [ElementProperty.character_chatbot_trigger_radius]: 1,
+  [ElementProperty.character_chatbot_welcome_dialogue]: undefined,
+  [ElementProperty.character_chatbot_welcome_dialogue_repeat]: "once", // once | always
 }
