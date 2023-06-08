@@ -34,7 +34,8 @@ export const Character: IElementDefinition = {
       name: "gmetri_character.glb",
       type: FileType.THREED
     },
-    [ElementProperty.billboarding]: null
+    [ElementProperty.billboarding]: null,
+    [ElementProperty.scale]: 0.9
   },
   events: [
     ...BasicElement.events
