@@ -87,7 +87,8 @@ export enum RuleAction {
   // character element
   wave = "wave",
   clap = "clap",
-  talk = "talk"
+  talk = "talk",
+  speak = "speak",
 }
 
 export enum ThenActionProperty {
@@ -200,6 +201,7 @@ export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | un
   wave: [],
   clap: [],
   talk: [ThenActionProperty.duration],
+  speak: [ThenActionProperty.string_value]
 };
 
 export const rActionPropertyDefaults: Record<ThenActionProperty, string | number | null> =  {
@@ -303,5 +305,6 @@ export const rActionDisplayName: Record<RuleAction, string> = {
   [RuleAction.teleport]: "teleport to",
   [RuleAction.wave]: "wave",
   [RuleAction.clap]: "clap",
-  [RuleAction.talk]: "talk for x seconds"
+  [RuleAction.talk]: "talk for x seconds",
+  [RuleAction.speak]: "speak",
 };

@@ -1,7 +1,7 @@
-import { FileType } from "../../files";
-import { ElementProperty } from "../../../recordTypes/Element";
-import { RuleAction, RuleEvent } from "../../rules";
-import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition";
+import {FileType} from "../../files";
+import {ElementProperty} from "../../../recordTypes/Element";
+import {RuleAction} from "../../rules";
+import {BasicElement, ElementType, IElementDefinition} from "../ElementDefinition";
 
 export const Character: IElementDefinition = {
   element_type: ElementType.character,
@@ -24,6 +24,7 @@ export const Character: IElementDefinition = {
     ElementProperty.ssml_voice,
     ElementProperty.ssml_pitch,
     ElementProperty.ssml_speed,
+    ElementProperty.billboarding,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
@@ -44,6 +45,7 @@ export const Character: IElementDefinition = {
     ...BasicElement.actions,
     RuleAction.wave,
     RuleAction.clap,
-    RuleAction.talk
+    RuleAction.talk,
+    RuleAction.speak
   ],
 }
