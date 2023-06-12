@@ -207,9 +207,6 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.short_description]: "",
   [ElementProperty.description]: "",
   [ElementProperty.price]: "",
-  //@ts-ignore
-  [ElementProperty.image_sources]: [],
-  [ElementProperty.threed_source]: { uri: "" },
   [ElementProperty.price_color]: "#484848CC",
   [ElementProperty.show_add_to_cart_button]: false,
   [ElementProperty.add_to_cart_button_text]: "Add to cart",
