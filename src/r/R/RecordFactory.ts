@@ -24,7 +24,7 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  *       "7878789089": { //record id 1
  *          //Sub RecordNode 1
  *       },
- * *     "7878789777": { //record id 2
+ *       "7878789777": { //record id 2
  *          //Sub RecordNode 2
  *       }
  *     }
@@ -262,57 +262,19 @@ export class RecordFactory<T extends RT> {
     }
   }
 
-  /**
-   * Ensures that all records of a given type have the ".order" key in them. 
-   * This function finds the max order, and increments the order by 1 for each new entry
-   */
-  private ensureOrderKeyPresentOfType(type: RT) {
-    const valuesArray = Object.values(this.getRecordMap(type));
-
-    let undefinedFound = false;
-    let maxOrder = 0;
-    for(const v of valuesArray) {
-      if(v.order === undefined) {
-        undefinedFound = true;
-        break;
-      } else {
-        if(v.order > maxOrder) {
-          maxOrder = v.order;
-        }
-      }
-    }
-    if(undefinedFound === false) return;
-
-    for(const v of valuesArray) {
-      if(v.order === undefined) {
-        //create an order key in the record if it doesn't exist
-        v.order = maxOrder + 1;
-        maxOrder++;
-      }
-    }
-  }
-
   /** ORDERED entries of id, records. Returns ids as strings. */
   getSortedRecordEntries(type: RT): [number, RecordNode<RT>][] {
-    this.ensureOrderKeyPresentOfType(type);
-    const entriesArray = Object.entries(this.getRecordMap(type));
-    //We know that at this point order is not undefined. So we just forcefully cast it to a number.
-    const numberEntriesArray = entriesArray
-      .sort((a,b) => {return <number>a[1].order - <number>b[1].order})
-      .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
-    return numberEntriesArray;
+    return RecordUtils.getSortedRecordEntries(this.getRecordMap(type));
   }
 
   /** ORDERED ids */
   getSortedRecordIds(type: RT): number[] {
-    const entriesArray = this.getSortedRecordEntries(type);
-    return entriesArray.map(nodeEntry => nodeEntry[0]);
+    return RecordUtils.getSortedRecordIds(this.getRecordMap(type));
   }
 
   /** ORDERED records */
   getSortedRecords<N extends RT>(type: N): RecordNode<N>[] {
-    const entriesArray = this.getSortedRecordEntries(type);
-    return entriesArray.map(nodeEntry => nodeEntry[1]);
+    return RecordUtils.getSortedRecords(this.getRecordMap(type));
   }
 
   /**
@@ -833,4 +795,57 @@ export class RecordFactory<T extends RT> {
 
 export class RecordUtils {
   static getDefaultValues = <T extends RT>(type: T): Record<string, unknown> => recordTypeDefinitions[type].defaultValues;
+
+  /** ORDERED entries of id, records. Returns ids as strings. */
+  static getSortedRecordEntries <T extends RT>(rm: RecordMap<T>): [number, RecordNode<T>][] {
+    RecordUtils.ensureOrderKeyPresentOfType(rm);
+    const entriesArray = Object.entries(rm);
+    //We know that at this point order is not undefined. So we just forcefully cast it to a number.
+    const numberEntriesArray = entriesArray
+      .sort((a,b) => {return <number>a[1].order - <number>b[1].order})
+      .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+    return numberEntriesArray;
+  }
+ 
+  /** ORDERED ids */
+  static getSortedRecordIds <T extends RT>(rm: RecordMap<T>): number[] {
+    const entriesArray = RecordUtils.getSortedRecordEntries(rm);
+    return entriesArray.map(nodeEntry => nodeEntry[0]);
+  }
+  
+  /** ORDERED records */
+  static getSortedRecords <T extends RT>(rm: RecordMap<T>): RecordNode<T>[] {
+    const entriesArray = RecordUtils.getSortedRecordEntries(rm);
+    return entriesArray.map(nodeEntry => nodeEntry[1]);
+  }
+
+  /**
+   * Ensures that all records of a given type have the ".order" key in them. 
+   * This function finds the max order, and increments the order by 1 for each new entry
+   */
+  private static ensureOrderKeyPresentOfType(rm: RecordMap<RT>) {
+    const valuesArray = Object.values(rm);
+
+    let undefinedFound = false;
+    let maxOrder = 0;
+    for(const v of valuesArray) {
+      if(v.order === undefined) {
+        undefinedFound = true;
+        break;
+      } else {
+        if(v.order > maxOrder) {
+          maxOrder = v.order;
+        }
+      }
+    }
+    if(undefinedFound === false) return;
+
+    for(const v of valuesArray) {
+      if(v.order === undefined) {
+        //create an order key in the record if it doesn't exist
+        v.order = maxOrder + 1;
+        maxOrder++;
+      }
+    }
+  }
 }
