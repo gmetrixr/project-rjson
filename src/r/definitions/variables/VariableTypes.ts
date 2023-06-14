@@ -34,19 +34,6 @@ export enum VarCategory {
   return VariableType[(type as VariableType)] !== undefined;
 }
 
-/** 
- * VariableDefinition RecordOrderedMap
- * This is the type of the outout of r.project(projectJson).getRecordOrderedMap(RT.variable)
- */
-// export type VarDefROM = ROM<RT.variable>;
-
-/**
- * The shape of the object used to store the values of all variables in memory and in database
- */
-export interface ViewerStateStructure {
-  [key: string]: VarValue
-}
-
 export type VarValue = number | boolean | string;
 export type ArrayOfValues = Array<VarValue>;
 
