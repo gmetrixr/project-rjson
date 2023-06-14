@@ -57,8 +57,8 @@ export enum ProjectProperty {
   "viewer_camera_mode" = "viewer_camera_mode",
   "use_legacy_color_management" = "use_legacy_color_management",
   viewer_language = "viewer_language",
-  mouse_jump = "mouse_jump",
-  viewer_jump = "viewer_jump"
+  enable_mouse_jump = "enable_mouse_jump",
+  allow_viewer_jump = "allow_viewer_jump"
 }
 
 //https://s.vrgmetri.com/gb-web/common/images/blackPixel-000000-1.png
@@ -124,6 +124,6 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.viewer_camera_mode]: ViewerCameraMode.third_person,
   [ProjectProperty.use_legacy_color_management]: false,
   [ProjectProperty.viewer_language]: Language.en,
-  [ProjectProperty.mouse_jump]: true,
-  [ProjectProperty.viewer_jump]: true,
+  [ProjectProperty.enable_mouse_jump]: true,
+  [ProjectProperty.allow_viewer_jump]: true,
 };
