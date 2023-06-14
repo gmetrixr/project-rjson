@@ -25,6 +25,8 @@ export const Character: IElementDefinition = {
     ElementProperty.ssml_pitch,
     ElementProperty.ssml_speed,
     ElementProperty.billboarding,
+    ElementProperty.env_map_intensity,
+    ElementProperty.apply_env_map,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
