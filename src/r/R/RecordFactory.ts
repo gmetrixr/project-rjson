@@ -186,16 +186,15 @@ export class RecordFactory<T extends RT> {
   }
 
   getRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
-    return Object.entries(this.getRecordMap(type))
-            .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+    return RecordUtils.getRecordEntries(this.getRecordMap(type));
   }
 
   getRecords<N extends RT>(type?: N): RecordNode<N>[] {
-    return Object.values(this.getRecordMap(type));
+    return RecordUtils.getRecords(this.getRecordMap(type));
   }
 
   getRecordIds<N extends RT>(type?: N): number[] {
-    return Object.keys(this.getRecordMap(type)).map(i => Number(i));
+    return RecordUtils.getRecordIds(this.getRecordMap(type));
   }
 
   private getDeepRecordMapInternal(recordMap?: RecordMapGeneric): RecordMapGeneric {
@@ -795,6 +794,19 @@ export class RecordFactory<T extends RT> {
 
 export class RecordUtils {
   static getDefaultValues = <T extends RT>(type: T): Record<string, unknown> => recordTypeDefinitions[type].defaultValues;
+
+  static getRecordEntries <T extends RT>(rm: RecordMap<T>): [number, RecordNode<T>][] {
+    return Object.entries(rm)
+            .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+  }
+
+  static getRecords <T extends RT>(rm: RecordMap<T>): RecordNode<T>[] {
+    return Object.values(rm);
+  }
+
+  static getRecordIds <T extends RT>(rm: RecordMap<T>): number[] {
+    return Object.keys(rm).map(i => Number(i));
+  }
 
   /** ORDERED entries of id, records. Returns ids as strings. */
   static getSortedRecordEntries <T extends RT>(rm: RecordMap<T>): [number, RecordNode<T>][] {

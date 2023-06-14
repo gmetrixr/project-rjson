@@ -228,7 +228,12 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
+  /** Doesn't allow deletion of the last scene. If that is needed, go via RecordFactory */
   deleteRecord<N extends RT>(id: number, type?: N): idAndRecord<RT> | undefined {
+    if(this.getRecord(id, type)?.type === RT.scene && this.getRecordEntries(RT.scene).length === 1) {
+      //Don't allow deletion of last scene
+      return undefined;
+    }
     const idAndRecord = super.deleteRecord(id, type);
     this.afterDeleteInProjectFactory(idAndRecord);
     return idAndRecord;
