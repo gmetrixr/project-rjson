@@ -2,6 +2,7 @@ import { RecordNode, RT } from "../../r/R";
 import { getHighestProjectVersion, projectMigrationTree, newProjectMigrationTree } from "./projectMigrations";
 import initialRMigration from "./project-migration-commands/m199_200_initial_migration_from_rjson_to_rjson2_structure";
 import { createRecord, r, rtp } from "../../r";
+import { healthCheckMigration } from "./healthcheck-migration-commands/check_properties";
 
 const projectMigrationVersions: number[] = Object.keys(projectMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
 const newProjectMigrationVersions: number[] = Object.keys(newProjectMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
@@ -33,16 +34,15 @@ export const migrateProject = (projectJson: any, uptoVersion?: number): RecordNo
   return projectJson;
 }
 
+
 /**
- * Migrations to be run only on a new project (once)
+ * Healthcheck migrations that are supposed to be run many times, ideally on the server
  */
-export const migrationsForNewProject = (projectJson: any): RecordNode<RT.project> => {
+export const runHealthCheckMigrations = (projectJson: RecordNode<RT.project>): {projectJson: RecordNode<RT.project>, corrections: string[]} => {
   const rProjectJson = projectJson as RecordNode<RT.project>;
-  for(const key of newProjectMigrationVersions) {
-    newProjectMigrationTree[key].execute(rProjectJson);
-  }
-  return rProjectJson;
-}
+  const {corrections} = healthCheckMigration.execute(rProjectJson);
+  return {projectJson: rProjectJson, corrections};
+} 
 
 export const createNewProject = (): RecordNode<RT.project> => {
   const project = createRecord(RT.project);
@@ -53,5 +53,17 @@ export const createNewProject = (): RecordNode<RT.project> => {
 
   return project;
 }
+
+/**
+ * Migrations to be run only on a new project (once)
+ */
+function migrationsForNewProject(projectJson: any): RecordNode<RT.project> {
+  const rProjectJson = projectJson as RecordNode<RT.project>;
+  for(const key of newProjectMigrationVersions) {
+    newProjectMigrationTree[key].execute(rProjectJson);
+  }
+  return rProjectJson;
+}
+
 
 export { getHighestProjectVersion };

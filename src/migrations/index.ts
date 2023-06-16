@@ -1,9 +1,11 @@
-import { createNewProject, migrationsForNewProject, migrateProject, getHighestProjectVersion } from "./project";
 import { createNewDeployment, migrateDeployment, getHighestDeploymentVersion } from "./deployment";
+import { migrateDiscussion } from "./discussion";
+import { createNewProject, migrateProject, getHighestProjectVersion, runHealthCheckMigrations } from "./project";
 
 const migrations = {
-  createNewProject, migrationsForNewProject, migrateProject, getHighestProjectVersion,
   createNewDeployment, migrateDeployment, getHighestDeploymentVersion,
+  migrateDiscussion,
+  createNewProject, migrateProject, getHighestProjectVersion, runHealthCheckMigrations
 }
 
 export { migrations };
