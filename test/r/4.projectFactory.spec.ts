@@ -226,4 +226,15 @@ describe ("r ProjectFactory tests", () => {
     projectF.pasteFromClipboard("", clipboardData as ClipboardData);
     fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(deepClone(threeScenesJson)));
   });
+
+  it ("should not delete last scene from a project", () => {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
+    const sceneIds = projectF.getRecordIds(RT.scene);
+    projectF.deleteRecord(sceneIds[0], RT.scene);
+    projectF.deleteRecord(sceneIds[1], RT.scene);
+    projectF.deleteRecord(sceneIds[2], RT.scene);
+    const sceneIdsRemaining = projectF.getRecordIds(RT.scene);
+    expect(sceneIdsRemaining.length).to.be.equal(1);
+    expect(sceneIdsRemaining[0]).to.be.equal(sceneIds[2]);
+  })
 });
