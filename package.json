@@ -1,10 +1,10 @@
 {
-  "name": "@gmetrixr/rjson2",
-  "version": "2.0.29",
-  "description": "(R)ecursive Json 2",
+  "name": "@gmetrixr/project-rjson",
+  "version": "2.1.0",
+  "description": "(R)ecursive Json for Project/Deployment/Discussions",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
-  "repository": "https://github.com/gmetrixr/rjson2",
+  "repository": "https://github.com/gmetrixr/project-rjson",
   "author": "Sahil Ahuja <sahil@gmetri.com>",
   "sideEffects": false,
   "files": [
