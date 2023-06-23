@@ -37,6 +37,11 @@ export enum VarCategory {
 export type VarValue = number | boolean | string;
 export type ArrayOfValues = Array<VarValue>;
 
+/** Here the keys can be variable id OR variable names */
+export interface VarsMap {
+  [key: string]: VarValue
+}
+
 /** These are the values that get store in the device var auto variable */
 export enum DeviceVar {
   d = "d", //desktop
