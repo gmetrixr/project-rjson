@@ -1,5 +1,4 @@
 import { ICogObjectDefinition } from "../BaseCogObject";
-import { RT } from "../../R";
 
 export interface IVariableDefinition extends ICogObjectDefinition {
   variable_type: VariableType;
