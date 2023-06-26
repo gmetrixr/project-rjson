@@ -302,6 +302,10 @@ export class RecordFactory<T extends RT> {
     }
     return address;
   }
+
+  // getDeepAddress<N extends RT>({id, selfAddr, property, index}: {
+
+  // }
   
   /** Find a record and its parent given any record id */
   private getRecordAndParentWithId(id: number): rAndP | undefined {
