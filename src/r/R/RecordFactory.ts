@@ -6,6 +6,13 @@ const { deepClone, generateIdV2 } = jsUtils;
 const { getSafeAndUniqueRecordName } = stringUtils;
 
 /**
+ * If record.orders come this close, it is time to reset all orders
+ * For testing,   use Number.MIN_VALUE * 10E300 (~ 23 zeros after decimal). 
+ * After testing, use Number.MIN_VALUE * 10E3   (~ 320 zeros after decimal). 
+ */
+const MIN_SAFE_ORDER_DISTANCE = Number.MIN_VALUE * 10E300
+
+/**
  * A convenient Factory class to maninpulate a RecordNode object of any type
  * This class can be extended to provide any recordType specific funcitonality
  *
@@ -546,24 +553,25 @@ export class RecordFactory<T extends RT> {
    * if its inserted at [x], order = ( order of [x - 1] entry + order of [x] entry ) / 2 
    */
   private getNewOrders(sortedRecords: RecordNode<T>[], newRecordsCount: number, position?: number): number[] {
+    this.ensureMinDistanceOfOrders(sortedRecords);
     const order = [];
     let minOrder = sortedRecords[0]?.order ?? 0;
     let maxOrder = sortedRecords[sortedRecords.length - 1]?.order ?? 0;
-    if(sortedRecords.length === 0) { //return [1, 2, 3 ...]
+    if(sortedRecords.length === 0) { //return [1, 2, 3 ...] //these are the first records being inserted
       for(let i=0; i<newRecordsCount; i++) {
         order[i] = i+1;
       }
-    } else if(position === 0) {
+    } else if(position === 0) { //insert at beginning
       for(let i=0; i<newRecordsCount; i++) {
         minOrder = minOrder-1;
         order[i] = minOrder;
       }
-    } else if(position === sortedRecords.length || position === undefined) {
+    } else if(position === sortedRecords.length || position === undefined) { //insert at end
       for(let i=0; i<newRecordsCount; i++) {
         maxOrder = maxOrder+1;
         order[i] = maxOrder;
       }
-    } else {
+    } else { //insert somewhere in the middle
       const prevOrder = sortedRecords[position - 1].order ?? 0;
       const nextOrder = sortedRecords[position].order ?? 0;
       let segment = 0;
@@ -573,6 +581,24 @@ export class RecordFactory<T extends RT> {
       }
     }
     return order;
+  }
+
+  /** In case the difference in order gets dangerously close the JS's Number.MIN_VALUE, reset orders */
+  private ensureMinDistanceOfOrders(sortedRecords: RecordNode<T>[]): void {
+    //Applicable only if number of records > 2
+    if(sortedRecords.length <= 2) return;
+    //Get the minimum distance between two order - orders are sorted, so we always do a(n) - a(n-1)
+    for(let i=1; i<sortedRecords.length; i++) { //starting at index 1. n-1 subtractions.
+      //ensureOrderKeyPresentOfType is already called in getSortedEntries. So we are sure record(n).order always exists.
+      let currentDistance = <number>sortedRecords[i].order - <number>sortedRecords[i-1].order;
+      if(currentDistance < MIN_SAFE_ORDER_DISTANCE) {
+        let order = 1;
+        for(const r of sortedRecords) {
+          r.order = order++;
+        }
+        return;
+      }
+    }
   }
 
   private initializeRecordMap(type:RT): boolean {
