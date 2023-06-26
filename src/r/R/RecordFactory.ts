@@ -7,10 +7,9 @@ const { getSafeAndUniqueRecordName } = stringUtils;
 
 /**
  * If record.orders come this close, it is time to reset all orders
- * For testing,   use Number.MIN_VALUE * 10E300 (~ 23 zeros after decimal). 
- * After testing, use Number.MIN_VALUE * 10E3   (~ 320 zeros after decimal). 
+ * Number.MIN_VALUE * 10E3   (~ 320 zeros after decimal)
  */
-const MIN_SAFE_ORDER_DISTANCE = Number.MIN_VALUE * 10E300
+const MIN_SAFE_ORDER_DISTANCE = Number.MIN_VALUE * 10E3
 
 /**
  * A convenient Factory class to maninpulate a RecordNode object of any type
@@ -583,15 +582,18 @@ export class RecordFactory<T extends RT> {
     return order;
   }
 
-  /** In case the difference in order gets dangerously close the JS's Number.MIN_VALUE, reset orders */
-  private ensureMinDistanceOfOrders(sortedRecords: RecordNode<T>[]): void {
+  /** 
+   * In case the difference in order gets dangerously close the JS's Number.MIN_VALUE, reset orders
+   * The second argument is optional, and provided only for testing
+   */
+  private ensureMinDistanceOfOrders(sortedRecords: RecordNode<T>[], minSafeOrderDistanceOverride = MIN_SAFE_ORDER_DISTANCE): void {
     //Applicable only if number of records > 2
     if(sortedRecords.length <= 2) return;
     //Get the minimum distance between two order - orders are sorted, so we always do a(n) - a(n-1)
     for(let i=1; i<sortedRecords.length; i++) { //starting at index 1. n-1 subtractions.
       //ensureOrderKeyPresentOfType is already called in getSortedEntries. So we are sure record(n).order always exists.
       let currentDistance = <number>sortedRecords[i].order - <number>sortedRecords[i-1].order;
-      if(currentDistance < MIN_SAFE_ORDER_DISTANCE) {
+      if(currentDistance < minSafeOrderDistanceOverride) {
         let order = 1;
         for(const r of sortedRecords) {
           r.order = order++;
