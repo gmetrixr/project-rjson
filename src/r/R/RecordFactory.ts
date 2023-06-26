@@ -49,7 +49,7 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * getSortedRecordEntries / getSortedRecordIds / getSortedRecords
  * 
  *! ADDRESS RELATED
- * getAddress -> Get address of a subnode (with optional property suffix)
+ * getAddress / getDeepAddress -> Get address of a subnode (with optional property suffix)
  * getPropertyAtAddress / updatePropertyAtAddress
  * $ private getRecordAndParentWithId / getRecordAndParentWithAddress
  * getRecordAndParent -> Find record and its parent with either id or address
@@ -292,10 +292,10 @@ export class RecordFactory<T extends RT> {
     if(record === undefined) return "";
     //If type isn't given, get the type from the record
     if(!type) { type = <N> record.type; }
-    //Get record address
     const childPartialAddress = `${type}:${id}`;
+    
+    //Get full address including property and selfAddress
     let address = selfAddr ? `${selfAddr}|${childPartialAddress}`: childPartialAddress;
-    //If property is given, append that
     if(property) {
       const propertySuffix = (typeof index === "number") ? `${property}>${index}` : `${property}`
       address = `${address}!${propertySuffix}`;
@@ -303,9 +303,29 @@ export class RecordFactory<T extends RT> {
     return address;
   }
 
-  // getDeepAddress<N extends RT>({id, selfAddr, property, index}: {
+  getDeepAddress({id, selfAddr, property, index}: {
+    id: number, selfAddr?: string, property?: RTP[T], index?: number
+  }): string {
+    const breadCrumbsArray = this.getBreadCrumbsWithId(id);
 
-  // }
+    //If record isn't present, return;
+    if(breadCrumbsArray === undefined || breadCrumbsArray.length === 0) return "";
+
+    let childPartialAddress = "";
+    for(const idAndRecord of breadCrumbsArray) {
+      //build address from left to right
+      const {id: crumbId, record: crumbRecord} = idAndRecord;
+      childPartialAddress += `${crumbRecord.type}:${crumbId}`
+    }
+
+    //Get full address including property and selfAddress
+    let address = selfAddr ? `${selfAddr}|${childPartialAddress}`: childPartialAddress;
+    if(property) {
+      const propertySuffix = (typeof index === "number") ? `${property}>${index}` : `${property}`
+      address = `${address}!${propertySuffix}`;
+    }
+    return address;
+  }
   
   /** Find a record and its parent given any record id */
   private getRecordAndParentWithId(id: number): rAndP | undefined {
