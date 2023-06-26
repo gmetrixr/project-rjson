@@ -63,6 +63,7 @@ export enum ElementType {
   workspace_logo = "workspace_logo",
   screenshare = "screenshare",
   character = "character",
+  embed_3d = "embed_3d",
 }
 
 export const elementDisplayNames: Record<ElementType, string> = {
@@ -115,6 +116,7 @@ export const elementDisplayNames: Record<ElementType, string> = {
   workspace_logo: "Workspace Logo",
   screenshare: "Screenshare",
   character: "Character",
+  embed_3d: "Embed 3D",
 };
 
 export enum ElementCategory {

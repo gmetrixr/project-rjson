@@ -289,7 +289,7 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.linked_element_id]: undefined,
   [ElementProperty.use_ai_brain]: false,
   [ElementProperty.character_brain_slug]: undefined,
-  [ElementProperty.character_chatbot_trigger_radius]: 1,
+  [ElementProperty.character_chatbot_trigger_radius]: 3,
   [ElementProperty.character_chatbot_welcome_dialogue]: undefined,
   [ElementProperty.character_chatbot_welcome_dialogue_repeat]: "once", // once | always
 }
