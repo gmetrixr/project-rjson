@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ClipboardData, RT, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R";
+import { ClipboardData, RT, RecordFactory, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R";
 import { ElementType } from "../../src/r/definitions/elements";
 import { ProjectFactory } from "../../src/r/recordFactories/ProjectFactory";
 import { PredefinedVariableName, VarCategory, VariableType } from "../../src/r/definitions/variables";
@@ -236,5 +236,20 @@ describe ("r ProjectFactory tests", () => {
     const sceneIdsRemaining = projectF.getRecordIds(RT.scene);
     expect(sceneIdsRemaining.length).to.be.equal(1);
     expect(sceneIdsRemaining[0]).to.be.equal(sceneIds[2]);
-  })
+  });
+
+  it ("should reorder upon reaching dangerous exponential value", function () {
+    this.timeout(30000);
+    const projectF = new RecordFactory(deepClone(threeScenesJson));
+    for (let i = 0; i < 1100; i++) {
+      const scene = createRecord(RT.scene);
+      projectF.addRecord({ record: scene, position: 1 });
+    }
+
+    const sortedRecords = projectF.getSortedRecordEntries(RT.scene);
+
+    for (let i = 0; i < 20; i++) {
+      console.log("=============> ", sortedRecords[i][0], String(sortedRecords[i][1].order));
+    }
+  });
 });
