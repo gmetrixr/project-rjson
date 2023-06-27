@@ -8,8 +8,13 @@ const { getSafeAndUniqueRecordName } = stringUtils;
 /**
  * If record.orders come this close, it is time to reset all orders
  * Number.MIN_VALUE * 10E3   (~ 320 zeros after decimal)
+ * 
+ * JSON.stringify loses precision after 15 digits
+ * console.log(JSON.stringify({a: 1.123456789123456789123456789})); --> '{"a":1.1234567891234568}'
+ * 
+ * So we limit MIN_SAFE_ORDER_DISTANCE to 10E-15
  */
-const MIN_SAFE_ORDER_DISTANCE = Number.MIN_VALUE * 10E3
+const MIN_SAFE_ORDER_DISTANCE = 10E-15; //Number.MIN_VALUE * 10E3
 
 /**
  * A convenient Factory class to maninpulate a RecordNode object of any type
