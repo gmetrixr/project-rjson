@@ -597,9 +597,9 @@ export class RecordFactory<T extends RT> {
     //Get the minimum distance between two order - orders are sorted, so we always do a(n) - a(n-1)
     for(let i=1; i<sortedRecords.length; i++) { //starting at index 1. n-1 subtractions.
       //ensureOrderKeyPresentOfType is already called in getSortedEntries. So we are sure record(n).order always exists.
-      let currentDistance = <number>sortedRecords[i].order - <number>sortedRecords[i-1].order;
+      const currentDistance = <number>sortedRecords[i].order - <number>sortedRecords[i-1].order;
       if(currentDistance < minSafeOrderDistanceOverride) {
-        let order = 1;
+        let order = 0;
         for(const r of sortedRecords) {
           r.order = order++;
         }
