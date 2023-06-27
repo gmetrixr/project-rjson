@@ -317,8 +317,8 @@ export class RecordFactory<T extends RT> {
     return address;
   }
 
-  getDeepAddress({id, selfAddr, property, index}: {
-    id: number, selfAddr?: string, property?: RTP[T], index?: number
+  getDeepAddress<N extends RT>({id, selfAddr, property, index}: {
+    id: number, selfAddr?: string, property?: RTP[N], index?: number
   }): string {
     const breadCrumbsArray = this.getBreadCrumbsWithId(id);
 
