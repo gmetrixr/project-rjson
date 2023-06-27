@@ -297,6 +297,8 @@ export class RecordFactory<T extends RT> {
    * Eg 2. scene:1|element:2!wh>1
    * If property is given, it adds property suffix
    * If selfAddr is given (from root), it prefixes that to the address, otherwise returns a partial child address
+   * 
+   * property needs to a prop of the be same RT.type as "type" argument
    */
   getAddress<N extends RT>({id, type, selfAddr, property, index}: {
     id: number, type?: N, selfAddr?: string, property?: RTP[T], index?: number
@@ -317,6 +319,10 @@ export class RecordFactory<T extends RT> {
     return address;
   }
 
+  /**
+   * property can be a prop of any RT.type
+   * (That's why we use RTP[N] and not RTP[T] (T is the type used in this class, N is any type within RT))
+   */
   getDeepAddress<N extends RT>({id, selfAddr, property, index}: {
     id: number, selfAddr?: string, property?: RTP[N], index?: number
   }): string {
