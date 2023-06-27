@@ -241,15 +241,15 @@ describe ("r ProjectFactory tests", () => {
   it ("should reorder upon reaching dangerous exponential value", function () {
     this.timeout(30000);
     const projectF = new RecordFactory(deepClone(threeScenesJson));
-    for (let i = 0; i < 1100; i++) {
+    for (let i = 0; i < 1080; i++) { //at 1081 it reorders
       const scene = createRecord(RT.scene);
       projectF.addRecord({ record: scene, position: 1 });
     }
 
     const sortedRecords = projectF.getSortedRecordEntries(RT.scene);
 
-    for (let i = 0; i < 20; i++) {
-      console.log("=============> ", sortedRecords[i][0], String(sortedRecords[i][1].order));
+    for (let i = 0; i < 200; i++) {
+      console.log("[id, order]:", sortedRecords[i][0], String(sortedRecords[i][1].order));
     }
   });
 });

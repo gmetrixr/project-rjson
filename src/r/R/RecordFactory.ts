@@ -13,8 +13,11 @@ const { getSafeAndUniqueRecordName } = stringUtils;
  * console.log(JSON.stringify({a: 1.123456789123456789123456789})); --> '{"a":1.1234567891234568}'
  * 
  * So we limit MIN_SAFE_ORDER_DISTANCE to 10E-15
+ * 
+ * However, 15 includes digits before and after decimal point. So we randomly choose 7.
+ * At 10 million records, order will start failing.
  */
-const MIN_SAFE_ORDER_DISTANCE = 10E-15; //Number.MIN_VALUE * 10E3
+const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
 
 /**
  * A convenient Factory class to maninpulate a RecordNode object of any type
@@ -599,7 +602,7 @@ export class RecordFactory<T extends RT> {
       //ensureOrderKeyPresentOfType is already called in getSortedEntries. So we are sure record(n).order always exists.
       const currentDistance = <number>sortedRecords[i].order - <number>sortedRecords[i-1].order;
       if(currentDistance < minSafeOrderDistanceOverride) {
-        let order = 0;
+        let order = 1;
         for(const r of sortedRecords) {
           r.order = order++;
         }
