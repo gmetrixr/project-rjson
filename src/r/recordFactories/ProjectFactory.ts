@@ -20,7 +20,7 @@ import { ItemProperty } from "../recordTypes/Item";
 import { OptionProperty } from "../recordTypes/Options";
 import { ShoppingProperty } from "../recordTypes/Shopping";
 import { MenuProperty } from "../recordTypes/Menu";
-import { ElementType } from "../definitions/elements/ElementDefinition";
+import { elementDisplayNames, ElementType } from "../definitions/elements/ElementDefinition";
 import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
 import { SceneCollisionOptions, SceneType } from "../definitions/special";
 import { sceneEnvironmentOptions } from "../definitions/special/SpecialTypes";
@@ -65,6 +65,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
     if(idAndRecord) {
       idAndRecord.record.props.element_type = elementType;
+      idAndRecord.record.name = elementDisplayNames[elementType];
     }
     return idAndRecord;
   }

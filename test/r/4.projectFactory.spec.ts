@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ClipboardData, RT, RecordFactory, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R";
-import { ElementType } from "../../src/r/definitions/elements";
+import { ElementType, elementDisplayNames } from "../../src/r/definitions/elements";
 import { ProjectFactory } from "../../src/r/recordFactories/ProjectFactory";
 import { PredefinedVariableName, VarCategory, VariableType } from "../../src/r/definitions/variables";
 import { jsUtils, pathUtils } from "@gmetrixr/gdash";
@@ -67,6 +67,7 @@ describe ("r ProjectFactory tests", () => {
     const record = projectF.getDeepRecord(idAndRecord?.id as number);
     expect(record).to.not.be.undefined;
     expect(record?.props.element_type).to.be.equal(ElementType.character);
+    expect(record?.name).to.be.equal(elementDisplayNames[ElementType.character]);
   });
 
   it ("should add record to a project", () => {
