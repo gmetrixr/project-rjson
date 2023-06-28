@@ -61,12 +61,10 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }): idAndRecord<RT.element> | undefined {
     if(!record) {
       record = createRecord(RT.element);
+      record.props.element_type = elementType;
+      record.name = elementDisplayNames[elementType];
     }
     const idAndRecord = this.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
-    if(idAndRecord) {
-      idAndRecord.record.props.element_type = elementType;
-      idAndRecord.record.name = elementDisplayNames[elementType];
-    }
     return idAndRecord;
   }
 
