@@ -332,10 +332,10 @@ export class RecordFactory<T extends RT> {
     if(breadCrumbsArray === undefined || breadCrumbsArray.length === 0) return "";
 
     let childPartialAddress = "";
-    for(const idAndRecord of breadCrumbsArray) {
-      //build address from left to right
-      const {id: crumbId, record: crumbRecord} = idAndRecord;
-      childPartialAddress += `${crumbRecord.type}:${crumbId}`
+
+    for (let i = 0; i < breadCrumbsArray.length; i++) {
+      const {id: crumbId, record: crumbRecord} = breadCrumbsArray[i];
+      childPartialAddress += `${crumbRecord.type}:${crumbId}${(i < breadCrumbsArray.length - 1) ? "|" : ""}`;
     }
 
     //Get full address including property and selfAddress

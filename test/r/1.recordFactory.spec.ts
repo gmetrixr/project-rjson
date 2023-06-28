@@ -287,12 +287,14 @@ describe ("r RecordFactory tests", () => {
     const addressWithProperty = projectF.getAddress({ id: 1684405505170, property: rtp.scene.scene_allow_zooming });
     const addressWithPropertyAndIndex = projectF.getAddress({ id: 1684405505170, property: rtp.scene.scene_allow_zooming, index: 2 });
     const addressWithEverything = projectF.getAddress({ id: 1684405505170, type: RT.scene, selfAddr: "project", property: rtp.scene.scene_allow_zooming, index: 2 });
+    const deepAddress = projectF.getDeepAddress({ id: 1684409501169 });
     expect(address).to.be.equal("scene:1684405505170");
     expect(addressWithType).to.be.equal("scene:1684405505170");
     expect(addressWithSelfAddress).to.be.equal("project|scene:1684405505170");
     expect(addressWithProperty).to.be.equal("scene:1684405505170!scene_allow_zooming");
     expect(addressWithPropertyAndIndex).to.be.equal("scene:1684405505170!scene_allow_zooming>2");
     expect(addressWithEverything).to.be.equal("project|scene:1684405505170!scene_allow_zooming>2");
+    expect(deepAddress).to.be.equal("scene:1684325255018|rule:1684409406445|when_event:1684409501169");
   });
 
   it ("should get record and parent with id for a project", () => {
