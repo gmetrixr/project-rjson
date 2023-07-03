@@ -1,6 +1,7 @@
 
 import { variableTypeToDefn } from "../definitions/variables";
 import {
+  ArrayOfValues,
   predefinedVariableDefaults,
   PredefinedVariableName,
   VarCategory,
@@ -301,13 +302,12 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return this.changeRecordName(idOrAddress, newName);
   }
 
-  // changeDeepRecordName(idOrAddress: idOrAddress, newName?: string): idAndRecord<RT> | undefined {
-  //   const rAndP = this.getRecordAndParent(idOrAddress);
-  //   if(rAndP === undefined || rAndP.r === undefined) return undefined;
-  //   return new RecordFactory(rAndP.p).changeRecordName(rAndP.id, newName, rAndP.r.type as RT);
-  // }
+  // ! ONLY TO BE USED FOR TESTING
+  updateRecordsLinkedToVariableTemplatePublic (variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
+    this.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, oldName);
+  }
 
-  updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
+  private updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
     const newName = variableIdAndRecord.record.name;
     if(newName) {
       const deepRecords = this.getDeepRecordEntries();
@@ -317,7 +317,12 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-  updateStringTemplateInRecord(record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+  // ! ONLY TO BE USED FOR TESTING
+  updateStringTemplateInRecordPublic (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+    this.updateStringTemplateInRecord (record, oldVarName, newVarName);
+  }
+
+  private updateStringTemplateInRecord(record: RecordNode<RT>, oldVarName: string, newVarName: string) {
     const searchValue = new RegExp(`({{[s]*${oldVarName}[s]*}})+`, "gm");
     const replaceValue = `{{${newVarName}}}`;
     switch(record.type) {
@@ -339,9 +344,15 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
       case RT.then_action: {
         const taRecord = record as RecordNode<RT.then_action>;
-        let properties = (taRecord.props.ta_properties || []) as string[];
-        properties = properties.map(p => p?.replace(searchValue, replaceValue));
-        taRecord.props.ta_properties = properties;
+        if (taRecord.props.ta_properties !== undefined) {
+          const properties = taRecord.props.ta_properties as ArrayOfValues;
+          for (const p of properties) {
+            if (typeof p === "string") {
+              p.replace(searchValue, replaceValue);
+            }
+          }
+          taRecord.props.ta_properties = properties;
+        }
         break;
       }
     }

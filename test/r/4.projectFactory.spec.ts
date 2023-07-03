@@ -125,7 +125,7 @@ describe ("r ProjectFactory tests", () => {
 
     const variableIdAndRecord = projectF.getIdAndRecord(7469457607607874);
     if (!variableIdAndRecord) return;
-    projectF.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, "string_var");
+    projectF.updateRecordsLinkedToVariableTemplatePublic(variableIdAndRecord, "string_var");
     const record = projectF.getDeepRecord(8720042838001644);
     expect(record?.props.text).to.be.equal("{{variable_name_update_test}}");
   });
@@ -140,7 +140,7 @@ describe ("r ProjectFactory tests", () => {
   it ("should update string template in record for a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const record = projectF.getDeepRecord(8720042838001644);
-    projectF.updateStringTemplateInRecord(record as RecordNode<RT>, "string_var", "string_var3");
+    projectF.updateStringTemplateInRecordPublic(record as RecordNode<RT>, "string_var", "string_var3");
     expect(record?.props.text).to.be.equal("{{string_var3}}");
   });
 
@@ -253,4 +253,15 @@ describe ("r ProjectFactory tests", () => {
       console.log("[id, order]:", sortedRecords[i][0], String(sortedRecords[i][1].order));
     }
   });
+
+  it ("should not update ta_properties when a variable is added", function () {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
+    const variable = createRecord(RT.variable);
+    projectF.addRecord({ record: variable });
+
+    const rulesAfterAdding = projectF.getDeepRecordEntries(RT.then_action);
+    for (const rule of rulesAfterAdding) {
+      expect(rule[1].props.ta_properties).to.be.undefined;
+    }
+  })
 });
