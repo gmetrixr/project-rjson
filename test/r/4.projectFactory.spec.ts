@@ -125,7 +125,7 @@ describe ("r ProjectFactory tests", () => {
 
     const variableIdAndRecord = projectF.getIdAndRecord(7469457607607874);
     if (!variableIdAndRecord) return;
-    projectF.updateRecordsLinkedToVariableTemplatePublic(variableIdAndRecord, "string_var");
+    projectF.TEST_CASE_updateRecordsLinkedToVariableTemplate(variableIdAndRecord, "string_var");
     const record = projectF.getDeepRecord(8720042838001644);
     expect(record?.props.text).to.be.equal("{{variable_name_update_test}}");
   });
@@ -140,7 +140,7 @@ describe ("r ProjectFactory tests", () => {
   it ("should update string template in record for a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const record = projectF.getDeepRecord(8720042838001644);
-    projectF.updateStringTemplateInRecordPublic(record as RecordNode<RT>, "string_var", "string_var3");
+    projectF.TEST_CASE_updateStringTemplateInRecord(record as RecordNode<RT>, "string_var", "string_var3");
     expect(record?.props.text).to.be.equal("{{string_var3}}");
   });
 

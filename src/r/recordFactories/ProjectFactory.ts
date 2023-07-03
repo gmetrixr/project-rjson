@@ -303,7 +303,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   // ! ONLY TO BE USED FOR TESTING
-  updateRecordsLinkedToVariableTemplatePublic (variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
+  TEST_CASE_updateRecordsLinkedToVariableTemplate (variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
     this.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, oldName);
   }
 
@@ -318,7 +318,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   // ! ONLY TO BE USED FOR TESTING
-  updateStringTemplateInRecordPublic (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+  TEST_CASE_updateStringTemplateInRecord (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
     this.updateStringTemplateInRecord (record, oldVarName, newVarName);
   }
 
