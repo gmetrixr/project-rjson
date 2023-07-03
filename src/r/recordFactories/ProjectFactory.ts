@@ -318,7 +318,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   // ! ONLY TO BE USED FOR TESTING
-  TEST_CASE_updateStringTemplateInRecord (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+  TEST_CASE_updateStringTemplateInRecordPublic (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
     this.updateStringTemplateInRecord (record, oldVarName, newVarName);
   }
 
@@ -642,7 +642,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   pasteFromClipboard(parentIdOrAddr: idOrAddress, clipboardData: ClipboardData, positionInPlace?: number) {
     const parentRecord = this.getDeepRecord(parentIdOrAddr);
     if(parentRecord !== undefined) {
-      const parentRF = new RecordFactory(parentRecord);
+      const parentRF = getFactory(parentRecord);
       for(const node of clipboardData.nodes) {
         parentRF.addRecord({record: node.record, position: positionInPlace});
       }
@@ -762,5 +762,18 @@ export class ProjectUtils {
       directionalLightF.set(rtp.element.placer_3d, [0, 12, 4, 0, 0, 0, 1, 1, 1]);
       directionalLightF.set(rtp.element.target_element_id, envElementId);
     }
+  }
+}
+
+export const getFactory = (rJson: RecordNode<RT>): RecordFactory<RT> => {
+  switch(rJson.type) {
+    case RT.project:
+      return new ProjectFactory(rJson);
+    case RT.scene:
+      return new SceneFactory(rJson);
+    case RT.element:
+      return new ElementFactory(rJson);
+    default:
+      return new RecordFactory(rJson);
   }
 }

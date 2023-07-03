@@ -1,6 +1,6 @@
 import * as R from "./R";
 import { RecordNode, RecordMap, RT, RTP, rtp, createRecord, ClipboardData, idAndRecord } from "./R";
-import { ProjectUtils } from "./recordFactories/ProjectFactory";
+import { ProjectUtils, getFactory } from "./recordFactories/ProjectFactory";
 import { RecordUtils } from "./R/RecordFactory";
 import { ElementUtils } from "./recordFactories/ElementFactory";
 import { ProjectFactory } from "./recordFactories/ProjectFactory";
@@ -25,19 +25,6 @@ const rUtils = {
   ElementUtils,
   ProjectFactory,
   RulesSearch,
-}
-
-const getFactory = (rJson: RecordNode<RT>): R.RecordFactory<RT> => {
-  switch(rJson.type) {
-    case RT.project:
-      return new RF.ProjectFactory(rJson);
-    case RT.scene:
-      return new RF.SceneFactory(rJson);
-    case RT.element:
-      return new RF.ElementFactory(rJson);
-    default:
-      return new R.RecordFactory(rJson);
-  }
 }
 
 export {
