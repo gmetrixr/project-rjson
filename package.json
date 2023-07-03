@@ -25,6 +25,12 @@
     "publish:version-notag": "N=$(node -p \"require('./package.json').name\") && pnpm version --no-git-tag-version patch && git commit -am \"trigger: $N [no skip]\"",
     "publish:npm": "V=$(node -p \"require('./package.json').version\") && pnpm publish --no-git-check"
   },
+  "peerDependencies": {
+    "@gmetrixr/gdash": "1.x.x"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1"
+  },
   "devDependencies": {
     "@gmetrixr/gdash": "^1.3.26",
     "@types/chai": "^4.2.15",
@@ -37,7 +43,6 @@
     "chalk": "^4.1.0",
     "eslint": "^8.34.0",
     "mocha": "^8.3.2",
-    "ramda": "^0.27.1",
     "source-map-support": "^0.5.19",
     "ts-node": "^9.1.1",
     "typescript": "^5.1.3"
