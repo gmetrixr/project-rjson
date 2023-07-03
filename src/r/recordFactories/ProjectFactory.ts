@@ -318,7 +318,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   // ! ONLY TO BE USED FOR TESTING
-  TEST_CASE_updateStringTemplateInRecordPublic (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+  TEST_CASE_updateStringTemplateInRecord (record: RecordNode<RT>, oldVarName: string, newVarName: string) {
     this.updateStringTemplateInRecord (record, oldVarName, newVarName);
   }
 
