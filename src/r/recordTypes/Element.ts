@@ -37,7 +37,6 @@ export enum ElementProperty {
   inner_radius = "inner_radius",
   outer_radius = "outer_radius",
   auto_rotate = "auto_rotate",
-  overlay_elements = "overlay_elements",
   icon_type = "icon_type",
   icon_family = "icon_family",
   icon_name = "icon_name",
@@ -178,8 +177,6 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.wireframe]: false,
   [ElementProperty.auto_rotate]: false,
   [ElementProperty.object3d_animations]: [],
-  //@ts-ignore
-  [ElementProperty.overlay_elements]: [],
   [ElementProperty.icon_type]: "",
   [ElementProperty.icon_family]: "",
   [ElementProperty.icon_name]: "",
