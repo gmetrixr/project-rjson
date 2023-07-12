@@ -15,7 +15,6 @@ const migrateProject = (json: any) => {
   const projectJson = updatedJson as unknown as RecordNode<RT.project>;
   ProjectUtils.ensureNoDuplicateIdsInProject(projectJson);
   const projectF = new ProjectFactory(projectJson);
-  projectF.cycleAllSubRecordIds();
   projectF.set(rtp.project.version, 200);
   return projectJson;
 }
