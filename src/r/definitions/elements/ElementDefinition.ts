@@ -64,6 +64,7 @@ export enum ElementType {
   screenshare = "screenshare",
   character = "character",
   embed_3d = "embed_3d",
+  seat = "seat",
 }
 
 export const elementDisplayNames: Record<ElementType, string> = {
@@ -117,6 +118,7 @@ export const elementDisplayNames: Record<ElementType, string> = {
   screenshare: "Screenshare",
   character: "Character",
   embed_3d: "Embed 3D",
+  seat: "Seat"
 };
 
 export enum ElementCategory {
@@ -182,6 +184,7 @@ export const elementTypeByCategory: Record<ElementCategory, ElementType[]> = {
     ElementType.collider_mesh,
     ElementType.screenshare,
     ElementType.character,
+    ElementType.seat
   ],
   spatial: [
     ElementType.ar,
