@@ -11,7 +11,9 @@ export const Seat: IElementDefinition = {
     ElementProperty.locked,
     ElementProperty.placer_3d,
   ],
-  defaultOverrides: {},
+  defaultOverrides: {
+    [ElementProperty.placer_3d]: [0, 0, -8, 90, 0, 0, 1, 1, 1],
+  },
   events: [],
   actions: []
 }
