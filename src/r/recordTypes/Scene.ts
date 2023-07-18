@@ -27,8 +27,10 @@ export enum SceneProperty {
   scene_enable_collisions = "scene_enable_collisions",
   scene_viewer_height = "scene_viewer_height",
   scene_env_map_custom_source = "scene_env_map_custom_source",
-  "enable_proximity_optimization" = "enable_proximity_optimization",
-  "proximity_radius" = "proximity_radius"
+  enable_proximity_optimization = "enable_proximity_optimization",
+  proximity_radius = "proximity_radius",
+  linked_menu_id = "linked_menu_id",
+  linked_tour_mode_id = "linked_tour_mode_id",
 }
 
 export const scenePropertyDefaults: Record<SceneProperty, unknown> = {
@@ -55,4 +57,6 @@ export const scenePropertyDefaults: Record<SceneProperty, unknown> = {
   [SceneProperty.scene_env_map_custom_source]: undefined,
   [SceneProperty.enable_proximity_optimization]: false,
   [SceneProperty.proximity_radius]: 8,// 8M
+  [SceneProperty.linked_menu_id]: undefined,
+  [SceneProperty.linked_tour_mode_id]: undefined,
 };
