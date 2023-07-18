@@ -7,7 +7,6 @@ export const Seat: IElementDefinition = {
   properties: [
     ...BasicElement.properties,
     ElementProperty.opacity,
-    ElementProperty.color,
     ElementProperty.hidden,
     ElementProperty.locked,
     ElementProperty.placer_3d,
