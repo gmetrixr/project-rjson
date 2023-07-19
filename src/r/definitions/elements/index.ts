@@ -42,6 +42,7 @@ import { WorkspaceLogo } from "./types/WorkspaceLogo";
 import { Screenshare } from "./types/Screenshare";
 import { Character } from "./types/Character";
 import { Embed3D } from "./types/Embed3D";
+import { Seat } from "./types/Seat";
 import { IElementDefinition } from "./ElementDefinition";
 
 import { 
@@ -100,7 +101,8 @@ export const elementList: IElementDefinition[] = [
   WorkspaceLogo,
   Screenshare,
   Character,
-  Embed3D
+  Embed3D,
+  Seat,
 ];
 
 /**
