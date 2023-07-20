@@ -56,7 +56,7 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
  * getRecord / getIdAndRecord / getDeepRecord / getDeepIdAndRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
- * getDeepRecordMap / getDeepRecordEntries
+ * getDeepRecordMap / getDeepRecordEntries / RecordUtils.getDeepRecordAndParentArray
  * 
  *! SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
@@ -522,6 +522,30 @@ export class RecordFactory<T extends RT> {
     return true;
   }
 
+  changeRecordIdInProperties(replacementMap: {[oldId: number]: number}): boolean {
+    for(const prop of Object.keys(this._json.props)) {
+      const currentValue = this._json.props[(prop as RTP[T])];
+      if(Array.isArray(currentValue)) {
+        for(let i = 0; i < currentValue.length; i++) {
+          if(Number(currentValue[i]) in replacementMap) {
+            const oldId = Number(currentValue[i]);
+            const newId = replacementMap[oldId];
+            currentValue[i] = newId;
+          }
+        }
+      } else if(typeof currentValue === "number") {
+        if(currentValue in replacementMap) {
+          this._json.props[(prop as RTP[T])] = replacementMap[currentValue];
+        }
+      } else if(typeof currentValue === "string") {
+        if(Number(currentValue) in replacementMap) {
+          this._json.props[(prop as RTP[T])] = replacementMap[Number(currentValue)];
+        }
+      }
+    }
+    return true;
+  }
+
   changeDeepRecordId(oldId: number, newId: number): boolean {
     const rAndP = this.getRecordAndParentWithId(oldId);
     if(rAndP) {
@@ -547,9 +571,26 @@ export class RecordFactory<T extends RT> {
       const oldId = Number(key);
       const newId = generateIdV2();
       replacementMap[oldId] = newId;
-      this.changeDeepRecordId(oldId, newId);
-      this.changeDeepRecordIdInProperties(oldId, newId);
+      //Instead of going deeper, we write another for loop to recduce time complexity
+      // this.changeDeepRecordId(oldId, newId);
+      // this.changeDeepRecordIdInProperties(oldId, newId);
     }
+    const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
+    for(const pAndR of allPAndRs) {
+      const {id, p, r} = pAndR;
+      const oldId = id;
+      //Change Record Id
+      if(oldId in replacementMap) {
+        const newId = replacementMap[id];
+        const type = r.type as RT;
+        const recordMapOfType = new RecordFactory(p).getRecordMap(type);
+        recordMapOfType[newId] = recordMapOfType[oldId];
+        delete recordMapOfType[oldId];
+      }
+      //Change Property if it contains an old record id
+      new RecordFactory(r).changeRecordIdInProperties(replacementMap);
+    }
+    this.changeRecordIdInProperties(replacementMap);
     return replacementMap;
   }
 
@@ -893,6 +934,15 @@ export class RecordUtils {
   static getSortedRecords <N extends RT>(rm: RecordMap<N>): RecordNode<N>[] {
     const entriesArray = RecordUtils.getSortedRecordEntries(rm);
     return entriesArray.map(nodeEntry => nodeEntry[1]);
+  }
+
+  static getDeepRecordAndParentArray(record: RecordNode<RT>, rAndPArray: rAndP[]): rAndP[] {
+    for(const [id, r] of new RecordFactory(record).getRecordEntries()) {
+      const rAndP: rAndP = {id, p: record, r};
+      rAndPArray.push(rAndP);
+      this.getDeepRecordAndParentArray(r, rAndPArray);
+    }
+    return rAndPArray;
   }
 
   /**

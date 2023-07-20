@@ -665,17 +665,17 @@ export class ProjectUtils {
     const pf = new ProjectFactory(project);
     const replacementMap: {[oldId: number]: number} = {};
     for (const type of pf.getRecordTypes()) {
-      for(const recordEntry of pf.getRecordEntries(type)) {
+      for(const [id, record] of pf.getRecordEntries(type)) {
         if(type !== RT.scene) {
-          const oldId = recordEntry[0];
+          const oldId = id;
           const newId = generateIdV2();
           pf.changeDeepRecordId(oldId, newId);
           pf.changeDeepRecordIdInProperties(oldId, newId);
-        } else { //We don't want to change ids of scenes
-          //Scenes are self contained (mostly), so this works
-          const newReplacementMap = new RecordFactory(recordEntry[1]).cycleAllSubRecordIds()
-          Object.assign(replacementMap, newReplacementMap);
         }
+        //We don't want to change ids of scenes
+        //Scenes are self contained (mostly), so this works
+        const newReplacementMap = new RecordFactory(record).cycleAllSubRecordIds();
+        Object.assign(replacementMap, newReplacementMap);
       }
     }
     //For all non-scene records in the project, apply the element level changes (like in ecommerce)
