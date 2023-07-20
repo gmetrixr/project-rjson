@@ -343,19 +343,20 @@ describe ("r RecordFactory tests", () => {
 
   it ("should change deep record id for a project", () => {
     const projectF = new RecordFactory(deepClone(projectJson));
-    const newId = 565656565656565;
-    projectF.changeDeepRecordId(1684404927844, newId);
-    const record = projectF.getDeepRecord(1684404927844);
-    const updatedRecord = projectF.getDeepRecord(newId);
-    expect(record).to.be.undefined;
-    expect(updatedRecord).to.not.be.undefined;
+    const oldId = 1684404927844;
+    const newId = 565656565656565;    
+    projectF.replaceAllSubRecordIds({[1684404927844]: newId});
+    const recordOldId = projectF.getDeepRecord(oldId);
+    const recordNewId = projectF.getDeepRecord(newId);
+    expect(recordOldId).to.be.undefined;
+    expect(recordNewId).to.not.be.undefined;
   });
 
   it ("should change properties matching value for a project", () => {
     const projectF = new RecordFactory(deepClone(projectJson));
     const newId = 565656565656565;
-    projectF.changeDeepRecordIdInProperties(1684404927844, newId);
     const deepRecord = projectF.getDeepRecord(1684409594264);
+    new RecordFactory(deepRecord as RecordNode<RT>).changeRecordIdInProperties({[1684404927844]: newId});
     //@ts-ignore
     expect(deepRecord?.props.co_id).to.not.be.equal(1684404927844);
     //@ts-ignore

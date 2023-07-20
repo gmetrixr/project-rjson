@@ -72,8 +72,7 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * 
  *! RECORD RELATED
  * getLinkedSubRecords -> Get records that are linked to another record via any prop
- * changeDeepRecordId / changePropertiesMatchingValue -> Updates all references to a recordId in the tree and in properties
- * cycleAllSubRecordIds -> Changes all ids
+ * cycleAllSubRecordIds  / changeRecordIdInProperties -> Updates ids and their references in the tree
  * $ private getNewOrders / initializeRecordMap
  * addRecord / addBlankRecord
  * duplicateRecord     / deleteRecord     / changeRecordName
@@ -503,25 +502,11 @@ export class RecordFactory<T extends RT> {
     return matchedIdsAndRecords;
   }
 
-
   /** 
-   * Updates all references to an older value in a tree to a newer one
-   * Used for updating references to any recordId that's changing 
+   * When we cycle record ids, all their references in the props of other records also need
+   * to be updated. This function takes a replacementMap, and using that ensure that for "this"
+   * record all props are updated
    */
-  changeDeepRecordIdInProperties(oldId: number, newId: number): boolean {
-    const linkedIdAndRecords = this.getLinkedSubRecords(oldId);
-    for(const idAndRecord of linkedIdAndRecords) {
-      const record = idAndRecord.record;
-      for(const prop of Object.keys(record.props)) {
-        const currentValue = Number(record.props[(prop as RTP[T])]);
-        if(currentValue === oldId) {
-          (record.props as any)[prop] = newId;
-        }
-      }
-    }
-    return true;
-  }
-
   changeRecordIdInProperties(replacementMap: {[oldId: number]: number}): boolean {
     for(const prop of Object.keys(this._json.props)) {
       const currentValue = this._json.props[(prop as RTP[T])];
@@ -546,26 +531,11 @@ export class RecordFactory<T extends RT> {
     return true;
   }
 
-  changeDeepRecordId(oldId: number, newId: number): boolean {
-    const rAndP = this.getRecordAndParentWithId(oldId);
-    if(rAndP) {
-      const parent = rAndP.p;
-      const type = rAndP.r.type as RT;
-      //We need recordMap per record type so that updates work 
-      //only typed recordMaps give us direct json references
-      const recordMapOfType = new RecordFactory(parent).getRecordMap(type);
-      recordMapOfType[newId] = recordMapOfType[oldId];
-      delete recordMapOfType[oldId];
-      return true;
-    }
-    return false;
-  }
-
   /** 
    * Change all sub-record ids (of sub-records) in this RecordNode 
    * Used for copy pasting record nodes - to ensure none of the subrecords end up having a duplicate id
    */
-  cycleAllSubRecordIds(): {[oldId: number]: number} {
+  cycleAllSubRecordIds(): void {
     const replacementMap: {[oldId: number]: number} = {};
     for(const [key, value] of this.getDeepRecordEntries()) {
       const oldId = Number(key);
@@ -575,6 +545,12 @@ export class RecordFactory<T extends RT> {
       // this.changeDeepRecordId(oldId, newId);
       // this.changeDeepRecordIdInProperties(oldId, newId);
     }
+    this.replaceAllSubRecordIds(replacementMap);
+  }
+
+  replaceAllSubRecordIds(replacementMap: {[oldId: number]: number}) {
+    this.changeRecordIdInProperties(replacementMap);
+
     const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
     for(const pAndR of allPAndRs) {
       const {id, p, r} = pAndR;
@@ -587,11 +563,9 @@ export class RecordFactory<T extends RT> {
         recordMapOfType[newId] = recordMapOfType[oldId];
         delete recordMapOfType[oldId];
       }
-      //Change Property if it contains an old record id
+      //Change properties if it contains an old record id
       new RecordFactory(r).changeRecordIdInProperties(replacementMap);
     }
-    this.changeRecordIdInProperties(replacementMap);
-    return replacementMap;
   }
 
   /**
