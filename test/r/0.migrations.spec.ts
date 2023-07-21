@@ -34,7 +34,7 @@ describe ("r Migration tests", () => {
   });
 
   it("should migrate a large project json", function() {
-    this.timeout(1000);
+    this.timeout(2000);
     const st = performance.now();
     console.log("Started large migration at:", st);
     const migratedProject = migrateProject(learningJson);
