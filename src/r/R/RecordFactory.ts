@@ -370,6 +370,7 @@ export class RecordFactory<T extends RT> {
    * 4. scene:1|element:2!wh>1
    */
   private getRecordAndParentWithAddress(addr: string): rAndP | undefined {
+    if(addr === null || addr === undefined) return undefined;
     // Sanitize and remove and unwanted cases
     // Replace everything after a ! with a blank string
     const recordStringArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
