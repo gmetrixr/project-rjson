@@ -1,5 +1,5 @@
-import { RecordNode, RT } from "../../r/R";
-import { discussionMigrationTree } from "./discussionMigration";
+import { createRecord, RecordFactory, RecordNode, RT, rtp } from "../../r/R";
+import { discussionMigrationTree, getHighestDiscussionVersion } from "./discussionMigration";
 import initialRMigration from "./discussion-migration-commands/dc199_200_initial_migration_from_rjson_to_rjson2_structure";
 
 const discussionMigrationVersions: number[] = Object.keys(discussionMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
@@ -30,3 +30,13 @@ export const migrateDiscussion = (discussionJson: any, uptoVersion?: number): Re
 
   return discussionJson;
 }
+
+export const createNewDiscussion = (): RecordNode<RT.discussion> => {
+  const discussion = createRecord(RT.discussion);
+  const recordF = new RecordFactory(discussion);
+
+  recordF.set(rtp.discussion.version, getHighestDiscussionVersion());
+  return discussion;
+}
+
+export { getHighestDiscussionVersion };
