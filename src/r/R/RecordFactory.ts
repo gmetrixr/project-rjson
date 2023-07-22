@@ -61,6 +61,7 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  *! SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
  * getSortedRecordEntries / getSortedRecordIds / getSortedRecords
+ * getSortedDeepRecordEntries
  * 
  *! ADDRESS RELATED
  * getAddress / getDeepAddress -> Get address of a subnode (with optional property suffix)
@@ -208,6 +209,26 @@ export class RecordFactory<T extends RT> {
 
   getRecordIds<N extends RT>(type?: N): number[] {
     return RecordUtils.getRecordIds(this.getRecordMap(type));
+  }
+
+  private getSortedDeepRecordEntriesInternal(recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
+    if(recordEntries === undefined) recordEntries = [];
+    for (const type of this.getRecordTypes()) {
+      const recordEntriesOfType = this.getSortedRecordEntries(type);
+      for (const record of recordEntriesOfType) {
+        recordEntries.push(record);
+        new RecordFactory(record[1]).getSortedDeepRecordEntriesInternal(recordEntries);
+      }
+    }
+    return recordEntries;
+  }
+
+  /**
+   * A Pure DFS of the tree
+   * An array that goes depth first, then breadth
+   */
+  getSortedDeepRecordEntries(): [number, RecordNode<RT>][] {
+    return this.getSortedDeepRecordEntriesInternal();
   }
 
   private getDeepRecordMapInternal(recordMap?: RecordMapGeneric): RecordMapGeneric {
@@ -370,6 +391,7 @@ export class RecordFactory<T extends RT> {
    * 4. scene:1|element:2!wh>1
    */
   private getRecordAndParentWithAddress(addr: string): rAndP | undefined {
+    if(addr === null || addr === undefined) return undefined;
     // Sanitize and remove and unwanted cases
     // Replace everything after a ! with a blank string
     const recordStringArray = addr.replace(/!.*/, "").split("|"); // [scene:1, element:2]
