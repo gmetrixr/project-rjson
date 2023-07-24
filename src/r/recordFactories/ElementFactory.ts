@@ -174,6 +174,7 @@ export class ElementUtils {
    * Given a property of type Array<Source>, takes file id out of it in an array and returns it
    */
     static getFileIdsFromElementArrayPropertyValue = (value: unknown): number[] => {
+      if(value === undefined) return [];
       const imageSources = <fn.Source[]> value;
       return imageSources.map(source => source?.id).filter(s => s); // filter out undefined and null values
     } 
