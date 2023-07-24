@@ -333,12 +333,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         switch (elementRecord.props.element_type) {
           case ElementType.text: {
             const oldValue = elementRecord.props.text as string;
-            elementRecord.props.text = oldValue.replace(searchValue, replaceValue);
+            if (typeof oldValue === "string") {
+              elementRecord.props.text = oldValue.replace(searchValue, replaceValue);
+            }
             break;
           }
           case ElementType.embed_html: {
             const oldValue = elementRecord.props.embed_string as string;
-            elementRecord.props.embed_string = oldValue.replace(searchValue, replaceValue);
+            if (typeof oldValue === "string") {
+              elementRecord.props.embed_string = oldValue.replace(searchValue, replaceValue);
+            }
             break;
           }
         }
@@ -360,8 +364,10 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
     for(const [prop, oldValue] of Object.entries(record.props)) {
       if(typeof oldValue === "string") {
-        const newValue = oldValue.replace(searchValue, replaceValue);
-        (record.props as any)[prop] = newValue;
+        if (typeof oldValue === "string") {
+          const newValue = oldValue.replace(searchValue, replaceValue);
+          (record.props as any)[prop] = newValue;
+        }
       }
     }
   }
