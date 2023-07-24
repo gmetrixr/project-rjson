@@ -325,6 +325,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   private updateStringTemplateInRecord(record: RecordNode<RT>, oldVarName: string, newVarName: string) {
+    if(oldVarName === newVarName) return;
     const searchValue = new RegExp(`({{[s]*${oldVarName}[s]*}})+`, "gm");
     const replaceValue = `{{${newVarName}}}`;
     switch(record.type) {
@@ -332,14 +333,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         const elementRecord = record as RecordNode<RT.element>;
         switch (elementRecord.props.element_type) {
           case ElementType.text: {
-            const oldValue = elementRecord.props.text as string;
+            const oldValue = elementRecord.props.text;
             if (typeof oldValue === "string") {
               elementRecord.props.text = oldValue.replace(searchValue, replaceValue);
             }
             break;
           }
           case ElementType.embed_html: {
-            const oldValue = elementRecord.props.embed_string as string;
+            const oldValue = elementRecord.props.embed_string;
             if (typeof oldValue === "string") {
               elementRecord.props.embed_string = oldValue.replace(searchValue, replaceValue);
             }
@@ -364,10 +365,8 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
     for(const [prop, oldValue] of Object.entries(record.props)) {
       if(typeof oldValue === "string") {
-        if (typeof oldValue === "string") {
-          const newValue = oldValue.replace(searchValue, replaceValue);
-          (record.props as any)[prop] = newValue;
-        }
+        const newValue = oldValue.replace(searchValue, replaceValue);
+        (record.props as any)[prop] = newValue;
       }
     }
   }
