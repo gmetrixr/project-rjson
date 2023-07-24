@@ -122,11 +122,10 @@ export class SceneUtils {
     return true;
   }
 
-  static propertiesWhitelist = [ElementProperty.target_element_id,
+  static propertiesWhitelist = [
+    ElementProperty.target_element_id,
     ElementProperty.media_upload_var_id,
     ElementProperty.target_scene_id,
-    ElementProperty.text_version,
-    ElementProperty.start_time,
     ElementProperty.embed_scorm_score_var_id,
     ElementProperty.embed_scorm_suspend_data_var_id,
     ElementProperty.embed_scorm_progress_var_id,
