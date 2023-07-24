@@ -197,8 +197,9 @@ export class ElementUtils {
    * The multiple returns type don't matter, because the logic of the calling function doesn't care about return type
    */
   static getNewSourceValueArray = (value: unknown, sourceMap: {[id: number]: fn.Source}): fn.Source[] => {
-      const originalSources = <fn.Source[]> value;
-      return originalSources.map(source => sourceMap[source?.id]);
+    if(value === undefined) return [];
+    const originalSources = <fn.Source[]> value;
+    return originalSources.map(source => sourceMap[source?.id]);
   }
 
   static getNewSourceValue = (value: unknown, sourceMap: {[id: number]: fn.Source}): fn.Source | undefined => {
