@@ -11,7 +11,7 @@ import {
 import { RecordFactory, RecordUtils } from "../R/RecordFactory";
 import { ClipboardData, createRecord, idAndRecord, idOrAddress, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
-import { SceneFactory } from "./SceneFactory";
+import { SceneFactory, SceneUtils } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
 import { ElementFactory } from "./ElementFactory";
 import { en, fn } from "../definitions";
@@ -436,10 +436,10 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       if (scene) {
         return Number(initialSceneId);
       } else {
-        return this.getRecordIds(RT.scene)[0];
+        return this.getSortedRecordIds(RT.scene)[0];
       }
     } else {
-      return this.getRecordIds(RT.scene)[0];
+      return this.getSortedRecordIds(RT.scene)[0];
     }
   }
 
@@ -543,6 +543,26 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
     }
     this.replaceAllSubRecordIds(replacementMap);
+  }
+
+  replaceAllSubRecordIds(replacementMap: {[oldId: number]: number}) {
+    this.changeRecordIdInProperties(replacementMap);
+
+    const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
+    for(const pAndR of allPAndRs) {
+      const {id, p, r} = pAndR;
+      const oldId = id;
+      //Change Record Id
+      if(oldId in replacementMap) {
+        const newId = replacementMap[id];
+        const type = r.type as RT;
+        const recordMapOfType = new RecordFactory(p).getRecordMap(type);
+        recordMapOfType[newId] = recordMapOfType[oldId];
+        delete recordMapOfType[oldId];
+      }
+      //Change properties if it contains an old record id
+      SceneUtils.changeRecordIdInProperties(r, replacementMap);
+    }
   }
 
   getMetadata(): string[] {

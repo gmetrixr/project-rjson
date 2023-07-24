@@ -2,6 +2,13 @@ import { jsUtils } from "@gmetrixr/gdash";
 import { RecordFactory, RecordUtils } from "../R/RecordFactory";
 import { RecordNode, idAndRecord, idOrAddress } from "../R/RecordNode";
 import { RT } from "../R/RecordTypes";
+import { ThenActionProperty } from "../recordTypes/ThenAction";
+import { WhenEventProperty } from "../recordTypes/WhenEvent";
+import { TopicProperty } from "../recordTypes/Topic";
+import { SceneProperty } from "../recordTypes/Scene";
+import { TourModeProperty } from "../recordTypes/TourMode";
+import { ElementProperty } from "../recordTypes/Element";
+import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
 
 const { generateIdV2 } = jsUtils;
 
@@ -65,4 +72,77 @@ export class SceneFactory extends RecordFactory<RT.scene> {
     }
     this.replaceAllSubRecordIds(replacementMap);
   }
+
+  replaceAllSubRecordIds(replacementMap: {[oldId: number]: number}) {
+    this.changeRecordIdInProperties(replacementMap);
+
+    const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
+    for(const pAndR of allPAndRs) {
+      const {id, p, r} = pAndR;
+      const oldId = id;
+      //Change Record Id
+      if(oldId in replacementMap) {
+        const newId = replacementMap[id];
+        const type = r.type as RT;
+        const recordMapOfType = new RecordFactory(p).getRecordMap(type);
+        recordMapOfType[newId] = recordMapOfType[oldId];
+        delete recordMapOfType[oldId];
+      }
+      //Change properties if it contains an old record id
+      SceneUtils.changeRecordIdInProperties(r, replacementMap);
+    }
+  }
+}
+
+export class SceneUtils {
+  static changeRecordIdInProperties(record: RecordNode<RT>, replacementMap: {[oldId: number]: number}): boolean {
+    for(const prop of Object.keys(record.props)) {
+      const currentValue = (record.props as unknown as any)[prop];
+      if(!SceneUtils.propertiesWhitelist.includes(prop)) {
+        continue;
+      }
+      if(Array.isArray(currentValue)) {
+        for(let i = 0; i < currentValue.length; i++) {
+          if(Number(currentValue[i]) in replacementMap) {
+            const oldId = Number(currentValue[i]);
+            const newId = replacementMap[oldId];
+            currentValue[i] = newId;
+          }
+        }
+      } else if(typeof currentValue === "number") {
+        if(currentValue in replacementMap) {
+          (record.props as unknown as any)[prop] = replacementMap[currentValue];
+        }
+      } else if(typeof currentValue === "string") {
+        if(Number(currentValue) in replacementMap) {
+          (record.props as unknown as any)[prop] = replacementMap[Number(currentValue)];
+        }
+      }
+    }
+    return true;
+  }
+
+  static propertiesWhitelist = [ElementProperty.target_element_id,
+    ElementProperty.media_upload_var_id,
+    ElementProperty.target_scene_id,
+    ElementProperty.text_version,
+    ElementProperty.start_time,
+    ElementProperty.embed_scorm_score_var_id,
+    ElementProperty.embed_scorm_suspend_data_var_id,
+    ElementProperty.embed_scorm_progress_var_id,
+    ElementProperty.linked_element_id,
+    ThenActionProperty.ta_co_id,
+    ThenActionProperty.ta_properties,
+    WhenEventProperty.we_co_id,
+    WhenEventProperty.we_properties,
+    SceneProperty.scene_orbit_target_element_id,
+    SceneProperty.scene_spawn_zone_id,
+    SceneProperty.linked_menu_id,
+    SceneProperty.linked_tour_mode_id,
+    LeadGenFieldProperty.var_id,
+    TourModeProperty.tour_mode_scene_id,
+    TopicProperty.topic_scene_id,
+    "co_id", //The id cycle migration runs before the when event and then action properties were renamed
+    "properties"
+  ]
 }
