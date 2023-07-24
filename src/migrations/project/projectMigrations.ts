@@ -3,12 +3,14 @@ import m199_200 from "./project-migration-commands/m199_200_initial_migration_fr
 import m200_201 from "./project-migration-commands/m200_201_ta_we_prefix";
 import m201_202 from "./project-migration-commands/m201_202_menu_tour_mode";
 import m202_203 from "./project-migration-commands/m202_203_cycle_all_rule_ids";
+import m203_204 from "./project-migration-commands/m203_204_fix_opacity_and_placer_3d";
 
 export const projectMigrationTree: {[key: number]: IOrder} = {
   [199]: m199_200,
   [200]: m200_201,
   [201]: m201_202,
   [202]: m202_203,
+  [203]: m203_204,
 };
 
 export const getHighestProjectVersion = (): number => {
