@@ -1,6 +1,5 @@
 import { RecordNode, rtp, RT } from "../../../r/R";
 import { IOrder } from "../../IOrder";
-import { ProjectUtils } from "../../../r/recordFactories/ProjectFactory";
 import { ProjectFactory } from "../../../r/recordFactories";
 
 class Migration implements IOrder {
@@ -14,7 +13,7 @@ const migrateProject = (json: any) => {
   const updatedJson = recursivelyMigrateJson(json);
   const projectJson = updatedJson as unknown as RecordNode<RT.project>;
   const projectF = new ProjectFactory(projectJson);
-  projectF.cycleAllSubRecordIds();
+  projectF.cycleAllSubRecordIdsForRulesFix();
   projectF.set(rtp.project.version, 200);
   return projectJson;
 }

@@ -5,6 +5,7 @@ import { migrateDiscussion } from "./../../src/migrations/discussion";
 import { RT } from "../../src/r/R";
 import fs from "fs";
 import deploymentJson from "./jsons/deployment.json";
+import campusJson from "./jsons/campus.json";
 import oldProjectJson from "./jsons/oldProject.json";
 import newtonStoreJson from "./jsons/newtonStore.json";
 import manishMalhotraJson from "./jsons/manishMalhotra.json";
@@ -41,5 +42,15 @@ describe ("r Migration tests", () => {
     const et = performance.now();
     console.log("Ended large migration at:", et);
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/learning.json", JSON.stringify(migratedProject));
+  })
+
+  it("Testing if rule ids cycle correctly", function() {
+    this.timeout(4000);
+    const st = performance.now();
+    console.log("Started large migration at:", st);
+    const migratedProject = migrateProject(campusJson, 200);
+    const et = performance.now();
+    console.log("Ended large migration at:", et);
+    //fs.writeFileSync("./test/r/jsons/r3fJsons/project/campus.json", JSON.stringify(migratedProject));
   })
 });

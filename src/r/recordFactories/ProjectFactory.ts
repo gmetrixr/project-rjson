@@ -525,7 +525,42 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
   }
 
-    /** 
+  cycleAllSubRecordIdsForRulesFix(): void {
+    //Change all rule, we, ta ids. Rules ids are not referenced from anywhere so this is a safe operaion.
+    for(const [sceneId, scene] of this.getRecordEntries(RT.scene)) {
+      const sceneF = new RecordFactory(scene)
+      const recordMapOfRules = sceneF.getRecordMap(RT.rule);
+      for(const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
+        const oldId = ruleId;
+        const newId = generateIdV2();
+        recordMapOfRules[newId] = recordMapOfRules[oldId];
+        delete recordMapOfRules[oldId];
+
+        const ruleF = new RecordFactory(rule);
+
+        const recordMapOfWE = ruleF.getRecordMap(RT.when_event);
+        for(const [weId, we] of ruleF.getRecordEntries(RT.when_event)) {
+          const oldId = weId;
+          const newId = generateIdV2();
+          recordMapOfWE[newId] = recordMapOfWE[oldId];
+          delete recordMapOfWE[oldId];
+        }
+
+        const recordMapOfTA = ruleF.getRecordMap(RT.then_action);
+        for(const [taId, ta] of ruleF.getRecordEntries(RT.then_action)) {
+          const oldId = taId;
+          const newId = generateIdV2();
+          recordMapOfTA[newId] = recordMapOfTA[oldId];
+          delete recordMapOfTA[oldId];
+        }
+      }
+    }
+    
+    this.cycleAllSubRecordIds();
+  }
+
+
+  /** 
    * Used while migration v5 project v6
    * v5 ensures uniqueness of all ids within a scene
    * v6 ensures uniquess overall

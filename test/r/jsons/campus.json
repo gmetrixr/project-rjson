@@ -1,0 +1,788 @@
+{
+  "id": 1,
+  "type": "project",
+  "props": {
+    "version": 155,
+    "show_menu": true,
+    "description": "",
+    "enable_chat": false,
+    "enable_gyro": true,
+    "show_logout": false,
+    "api_templates": [],
+    "avatar_system": "basic",
+    "custom_script": "",
+    "show_lead_gen": false,
+    "enforce_chrome": false,
+    "show_offlining": true,
+    "show_vr_button": true,
+    "zoom_level_fov": 60,
+    "allow_offlining": false,
+    "enforce_vr_mode": false,
+    "optimize_images": false,
+    "user_state_vars": {},
+    "enable_tour_mode": false,
+    "initial_scene_id": 0,
+    "optimize_for_seo": false,
+    "json_substitution": {},
+    "show_screen_reset": true,
+    "show_splash_screen": true,
+    "show_zoom_controls": false,
+    "viewer_camera_mode": "first_person",
+    "show_click_to_start": false,
+    "autotrack_connection": true,
+    "show_language_screen": false,
+    "show_vr_instructions": true,
+    "enforce_landscape_mode": false,
+    "show_fullscreen_button": true,
+    "show_powered_by_gmetri": true,
+    "contact_support_message": "",
+    "enforce_fullscreen_mode": false,
+    "project_end_description": "",
+    "initial_graphics_setting": "high",
+    "project_start_description": "",
+    "auto_add_new_scene_to_menu": true,
+    "enforce_supported_browsers": true,
+    "use_legacy_color_management": true,
+    "tour_mode_inactivity_seconds": 10,
+    "viewer_control_panel_position": "top_right",
+    "auto_add_new_scene_to_tour_mode": true
+  },
+  "records": {
+    "menu": {
+      "map": {
+        "100000": {
+          "id": 100000,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 0,
+            "menu_display_name": ""
+          }
+        },
+        "100009": {
+          "id": 100009,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 9,
+            "menu_display_name": ""
+          }
+        },
+        "100011": {
+          "id": 100011,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 11,
+            "menu_display_name": ""
+          }
+        },
+        "100033": {
+          "id": 100033,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 33,
+            "menu_display_name": ""
+          }
+        },
+        "100060": {
+          "id": 100060,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 60,
+            "menu_display_name": ""
+          }
+        },
+        "100061": {
+          "id": 100061,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 61,
+            "menu_display_name": ""
+          }
+        },
+        "100069": {
+          "id": 100069,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 69,
+            "menu_display_name": ""
+          }
+        },
+        "100076": {
+          "id": 100076,
+          "type": "menu",
+          "props": {
+            "menu_show": false,
+            "menu_scene_id": 76,
+            "menu_display_name": ""
+          }
+        }
+      },
+      "order": [
+        100033,
+        100000,
+        100060,
+        100061,
+        100009,
+        100011,
+        100069,
+        100076
+      ]
+    },
+    "scene": {
+      "map": {
+        "0": {
+          "id": 0,
+          "name": "Welcome",
+          "type": "scene",
+          "props": {
+            "scene_gyro_lock": false,
+            "scene_yaw_start": 0,
+            "scene_pitch_start": 0,
+            "scene_reset_rotation": true
+          },
+          "records": {
+            "rule": {
+              "map": {
+                "1567611273747": {
+                  "id": 1567611273747,
+                  "name": "Connection_747",
+                  "type": "rule",
+                  "props": {
+                    "sticky": true,
+                    "tracked": false,
+                    "disabled": false,
+                    "events_and": true,
+                    "accent_color": "#8ED1FC"
+                  },
+                  "records": {
+                    "when_event": {
+                      "map": {
+                        "1567611273747": {
+                          "id": 1567611273747,
+                          "type": "when_event",
+                          "props": {
+                            "co_id": 1568039394543,
+                            "event": "on_been_clicked",
+                            "co_type": "image_flat",
+                            "properties": []
+                          }
+                        }
+                      },
+                      "order": [
+                        1567611273747
+                      ]
+                    },
+                    "then_action": {
+                      "map": {
+                        "1567611273747": {
+                          "id": 1567611273747,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": -102,
+                            "delay": 0,
+                            "action": "change_scene",
+                            "co_type": "viewer",
+                            "properties": [
+                              60
+                            ]
+                          }
+                        }
+                      },
+                      "order": [
+                        1567611273747
+                      ]
+                    }
+                  }
+                },
+                "1573214377401": {
+                  "id": 1573214377401,
+                  "name": "Connection_401",
+                  "type": "rule",
+                  "props": {
+                    "sticky": true,
+                    "tracked": false,
+                    "disabled": false,
+                    "events_and": true,
+                    "accent_color": "#8ED1FC"
+                  },
+                  "records": {
+                    "when_event": {
+                      "map": {
+                        "1573214442940": {
+                          "id": 1573214442940,
+                          "type": "when_event",
+                          "props": {
+                            "co_id": -99,
+                            "event": "on_load",
+                            "co_type": "scene",
+                            "properties": []
+                          }
+                        }
+                      },
+                      "order": [
+                        1573214442940
+                      ]
+                    },
+                    "then_action": {
+                      "map": {
+                        "1573214474867": {
+                          "id": 1573214474867,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": -101,
+                            "delay": 0,
+                            "action": "var_reset",
+                            "co_type": "all_variables",
+                            "properties": []
+                          }
+                        },
+                        "1573222928368": {
+                          "id": 1573222928368,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": 1573222108308,
+                            "delay": 0,
+                            "action": "set_to_number",
+                            "co_type": "number",
+                            "properties": [
+                              "1"
+                            ]
+                          }
+                        },
+                        "1573223985196": {
+                          "id": 1573223985196,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": 1573222791230,
+                            "delay": 0,
+                            "action": "set_to_number",
+                            "co_type": "number",
+                            "properties": [
+                              "1"
+                            ]
+                          }
+                        },
+                        "1573229071227": {
+                          "id": 1573229071227,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": 1573229081677,
+                            "delay": 0,
+                            "action": "set_false",
+                            "co_type": "boolean",
+                            "properties": []
+                          }
+                        },
+                        "1573229089948": {
+                          "id": 1573229089948,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": 1573222706766,
+                            "delay": 0,
+                            "action": "set_false",
+                            "co_type": "boolean",
+                            "properties": []
+                          }
+                        },
+                        "1573229150299": {
+                          "id": 1573229150299,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": 1573222807913,
+                            "delay": 0,
+                            "action": "set_true",
+                            "co_type": "boolean",
+                            "properties": []
+                          }
+                        },
+                        "1573229570614": {
+                          "id": 1573229570614,
+                          "type": "then_action",
+                          "props": {
+                            "co_id": 1573222403092,
+                            "delay": 0,
+                            "action": "set_false",
+                            "co_type": "boolean",
+                            "properties": []
+                          }
+                        }
+                      },
+                      "order": [
+                        1573214474867,
+                        1573222928368,
+                        1573223985196,
+                        1573229150299,
+                        1573229089948,
+                        1573229071227,
+                        1573229570614
+                      ]
+                    }
+                  }
+                }
+              },
+              "order": [
+                1573214377401,
+                1567611273747
+              ]
+            },
+            "element": {
+              "map": {
+                "1567596136762": {
+                  "id": 1567596136762,
+                  "name": "Background",
+                  "type": "element",
+                  "props": {
+                    "hidden": false,
+                    "locked": false,
+                    "source": {
+                      "id": 108943,
+                      "name": "innovationHub_blur.jpg",
+                      "size": 169128,
+                      "type": "IMAGE",
+                      "metadata": {
+                        "ext": "jpg",
+                        "mimeType": "image/jpeg",
+                        "resolution": {
+                          "x": 4096,
+                          "y": 2048
+                        }
+                      },
+                      "file_urls": {
+                        "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/b37fad4a-97c9-4506-b83d-72ff1e5df709/o/innovationHub_blur.jpg",
+                        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/acampus/b37fad4a-97c9-4506-b83d-72ff1e5df709/o/innovationHub_blur.jpg",
+                        "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/b37fad4a-97c9-4506-b83d-72ff1e5df709/t/innovationHub_blur.jpg"
+                      },
+                      "file_paths": {
+                        "o": "o/innovationHub_blur.jpg",
+                        "t": "t/innovationHub_blur.jpg"
+                      }
+                    },
+                    "opacity": 1,
+                    "pano_type": "image",
+                    "mouse_jump": true,
+                    "pano_radius": 1100,
+                    "billboarding": null,
+                    "element_type": "pano_image",
+                    "pano_yaw_correction": 0
+                  }
+                },
+                "1567601590657": {
+                  "id": 1567601590657,
+                  "name": "banner",
+                  "type": "element",
+                  "props": {
+                    "wh": [
+                      3.6,
+                      2
+                    ],
+                    "scale": 2.6,
+                    "hidden": false,
+                    "locked": false,
+                    "source": {
+                      "id": 107349,
+                      "name": "banner.png",
+                      "size": 116417,
+                      "type": "IMAGE",
+                      "metadata": {
+                        "ext": "png",
+                        "mimeType": "image/png",
+                        "resolution": {
+                          "x": 1184,
+                          "y": 672
+                        }
+                      },
+                      "file_urls": {
+                        "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/a704669e-73bd-4b27-a41b-1be219abcf18/o/banner.png",
+                        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/acampus/a704669e-73bd-4b27-a41b-1be219abcf18/o/banner.png",
+                        "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/a704669e-73bd-4b27-a41b-1be219abcf18/t/banner.jpg"
+                      },
+                      "file_paths": {
+                        "o": "o/banner.png",
+                        "t": "t/banner.jpg"
+                      }
+                    },
+                    "opacity": 1,
+                    "animation": {
+                      "name": "",
+                      "speed": 1
+                    },
+                    "placer_3d": [
+                      0,
+                      0.2742051722923473,
+                      -8,
+                      0,
+                      0,
+                      0,
+                      1,
+                      1,
+                      1
+                    ],
+                    "mouse_jump": true,
+                    "billboarding": null,
+                    "element_type": "image_flat",
+                    "hover_animation": true
+                  }
+                },
+                "1568039394543": {
+                  "id": 1568039394543,
+                  "name": "btn_start",
+                  "type": "element",
+                  "props": {
+                    "wh": [
+                      8,
+                      2
+                    ],
+                    "scale": 0.5,
+                    "hidden": false,
+                    "locked": false,
+                    "source": {
+                      "id": 107356,
+                      "name": "btn_start.png",
+                      "size": 24246,
+                      "type": "IMAGE",
+                      "metadata": {
+                        "ext": "png",
+                        "mimeType": "image/png",
+                        "resolution": {
+                          "x": 715,
+                          "y": 177
+                        }
+                      },
+                      "file_urls": {
+                        "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/86afb95b-8883-4044-9222-6ce48bfdab8d/o/btn_start.png",
+                        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/acampus/86afb95b-8883-4044-9222-6ce48bfdab8d/o/btn_start.png",
+                        "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/86afb95b-8883-4044-9222-6ce48bfdab8d/t/btn_start.jpg"
+                      },
+                      "file_paths": {
+                        "o": "o/btn_start.png",
+                        "t": "t/btn_start.jpg"
+                      }
+                    },
+                    "opacity": 0.8,
+                    "animation": {
+                      "name": "",
+                      "speed": 1
+                    },
+                    "placer_3d": [
+                      -0.1483988175959238,
+                      -2.3782299544982615,
+                      -7,
+                      0,
+                      0,
+                      0,
+                      1,
+                      1,
+                      1
+                    ],
+                    "mouse_jump": true,
+                    "billboarding": null,
+                    "element_type": "image_flat",
+                    "hover_animation": true
+                  }
+                },
+                "1570712038954": {
+                  "id": 1570712038954,
+                  "name": "Pano",
+                  "type": "element",
+                  "props": {
+                    "hidden": false,
+                    "locked": false,
+                    "source": {
+                      "id": 107392,
+                      "name": "philippines_Blurred.jpg",
+                      "size": 404373,
+                      "type": "IMAGE",
+                      "metadata": {
+                        "ext": "jpg",
+                        "mimeType": "image/jpeg",
+                        "resolution": {
+                          "x": 4096,
+                          "y": 2048
+                        }
+                      },
+                      "file_urls": {
+                        "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/87a91db5-f316-459c-9834-0c7be3a11d9f/o/philippines_Blurred.jpg",
+                        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/acampus/87a91db5-f316-459c-9834-0c7be3a11d9f/o/philippines_Blurred.jpg",
+                        "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/acampus/87a91db5-f316-459c-9834-0c7be3a11d9f/t/philippines_Blurred.jpg"
+                      },
+                      "file_paths": {
+                        "o": "o/philippines_Blurred.jpg",
+                        "t": "t/philippines_Blurred.jpg"
+                      }
+                    },
+                    "stereo": false,
+                    "opacity": 0.9999999999999999,
+                    "mouse_jump": true,
+                    "pano_radius": 900,
+                    "billboarding": null,
+                    "element_type": "pano_image",
+                    "pano_yaw_correction": 55
+                  }
+                }
+              },
+              "order": [
+                1570712038954,
+                1567601590657,
+                1568039394543,
+                1567596136762
+              ]
+            }
+          }
+        }
+      },
+      "order": [
+        0
+      ]
+    },
+    "shopping": {
+      "map": {
+        "1": {
+          "id": 1,
+          "type": "shopping",
+          "props": {
+            "plugin": null,
+            "endpoint": null,
+            "show_cart": true,
+            "store_name": null,
+            "currency_prefix": ""
+          }
+        }
+      },
+      "order": [
+        1
+      ]
+    },
+    "variable": {
+      "map": {
+        "-8": {
+          "id": -8,
+          "name": "v_identifier_var",
+          "type": "variable",
+          "props": {
+            "var_type": "string",
+            "var_track": true,
+            "var_default": "",
+            "var_category": "predefined"
+          }
+        },
+        "-9": {
+          "id": -9,
+          "name": "device_var",
+          "type": "variable",
+          "props": {
+            "var_type": "string",
+            "var_track": true,
+            "var_default": "",
+            "var_category": "predefined"
+          }
+        },
+        "-10": {
+          "id": -10,
+          "name": "browser_var",
+          "type": "variable",
+          "props": {
+            "var_type": "string",
+            "var_track": true,
+            "var_default": "",
+            "var_category": "predefined"
+          }
+        },
+        "-11": {
+          "id": -11,
+          "name": "vrmode_var",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": false,
+            "var_category": "predefined"
+          }
+        },
+        "-12": {
+          "id": -12,
+          "name": "firstname_var",
+          "type": "variable",
+          "props": {
+            "var_type": "string",
+            "var_track": true,
+            "var_default": "Hi there!",
+            "var_category": "predefined"
+          }
+        },
+        "-13": {
+          "id": -13,
+          "name": "scorm_progress",
+          "type": "variable",
+          "props": {
+            "var_type": "number",
+            "var_track": true,
+            "var_default": 0,
+            "var_category": "predefined"
+          }
+        },
+        "-14": {
+          "id": -14,
+          "name": "scorm_suspend_data",
+          "type": "variable",
+          "props": {
+            "var_type": "number",
+            "var_track": true,
+            "var_default": 0,
+            "var_category": "predefined"
+          }
+        },
+        "-15": {
+          "id": -15,
+          "name": "scorm_score",
+          "type": "variable",
+          "props": {
+            "var_type": "number",
+            "var_track": true,
+            "var_default": 0,
+            "var_category": "predefined"
+          }
+        },
+        "-16": {
+          "id": -16,
+          "name": "lastname_var",
+          "type": "variable",
+          "props": {
+            "var_type": "string",
+            "var_track": true,
+            "var_default": "Hi there!",
+            "var_category": "predefined"
+          }
+        },
+        "-17": {
+          "id": -17,
+          "name": "fullname_var",
+          "type": "variable",
+          "props": {
+            "var_type": "string",
+            "var_track": true,
+            "var_default": "Hi there!",
+            "var_category": "predefined"
+          }
+        },
+        "-18": {
+          "id": -18,
+          "name": "player_count_var",
+          "type": "variable",
+          "props": {
+            "var_type": "number",
+            "var_track": true,
+            "var_default": 0,
+            "var_category": "predefined"
+          }
+        },
+        "1573222108308": {
+          "id": 1573222108308,
+          "name": "num_badge_buf",
+          "type": "variable",
+          "props": {
+            "var_type": "number",
+            "var_track": true,
+            "var_default": "0"
+          }
+        },
+        "1573222403092": {
+          "id": 1573222403092,
+          "name": "faurecia",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": false
+          }
+        },
+        "1573222706766": {
+          "id": 1573222706766,
+          "name": "carnival",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": false
+          }
+        },
+        "1573222791230": {
+          "id": 1573222791230,
+          "name": "num_badge",
+          "type": "variable",
+          "props": {
+            "var_type": "number",
+            "var_track": true,
+            "var_default": "0"
+          }
+        },
+        "1573222807913": {
+          "id": 1573222807913,
+          "name": "first_run",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": true
+          }
+        },
+        "1573229081677": {
+          "id": 1573229081677,
+          "name": "tech4good",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": false
+          }
+        },
+        "1574665825951": {
+          "id": 1574665825951,
+          "name": "quit",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": false
+          }
+        },
+        "1574767741600": {
+          "id": 1574767741600,
+          "name": "last",
+          "type": "variable",
+          "props": {
+            "var_type": "boolean",
+            "var_track": true,
+            "var_default": false
+          }
+        }
+      },
+      "order": [
+        1573222791230,
+        1573222706766,
+        1573229081677,
+        1573222807913,
+        1573222403092,
+        1573222108308,
+        1574665825951,
+        1574767741600,
+        -8,
+        -9,
+        -10,
+        -12,
+        -11,
+        -13,
+        -14,
+        -15,
+        -16,
+        -17,
+        -18
+      ]
+    }
+  }
+}
