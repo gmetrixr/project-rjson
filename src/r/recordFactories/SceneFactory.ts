@@ -1,6 +1,9 @@
-import { RecordFactory } from "../R/RecordFactory";
+import { jsUtils } from "@gmetrixr/gdash";
+import { RecordFactory, RecordUtils } from "../R/RecordFactory";
 import { RecordNode, idAndRecord, idOrAddress } from "../R/RecordNode";
 import { RT } from "../R/RecordTypes";
+
+const { generateIdV2 } = jsUtils;
 
 export class SceneFactory extends RecordFactory<RT.scene> {
   constructor(json: RecordNode<RT.scene>) {
@@ -42,5 +45,24 @@ export class SceneFactory extends RecordFactory<RT.scene> {
         this.deleteRecord(ruleId, RT.rule);
       }
     }
+  }
+
+  /** 
+   * Using this only to cycle rule ids
+   */
+  cycleAllSubRecordIdsForRulesFix(): void {
+    const replacementMap: {[oldId: number]: number} = {};
+    //Contains all rule ids, and we and ta ids present in this scene
+    for(const [id, ruleJson] of this.getRecordEntries(RT.rule)) {
+      const oldId = Number(id);
+      const newId = generateIdV2();
+      replacementMap[oldId] = newId;
+      for(const [key, value] of new RecordFactory(ruleJson).getRecordEntries()) { //This will get when event and then actions
+        const oldId = Number(key);
+        const newId = generateIdV2();
+        replacementMap[oldId] = newId;
+      }
+    }
+    this.replaceAllSubRecordIds(replacementMap);
   }
 }

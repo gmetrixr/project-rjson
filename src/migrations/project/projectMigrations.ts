@@ -2,11 +2,13 @@ import { IOrder } from "../IOrder";
 import m199_200 from "./project-migration-commands/m199_200_initial_migration_from_rjson_to_rjson2_structure";
 import m200_201 from "./project-migration-commands/m200_201_ta_we_prefix";
 import m201_202 from "./project-migration-commands/m201_202_menu_tour_mode";
+import m202_203 from "./project-migration-commands/m202_203_cycle_all_rule_ids";
 
 export const projectMigrationTree: {[key: number]: IOrder} = {
   [199]: m199_200,
   [200]: m200_201,
   [201]: m201_202,
+  [202]: m202_203,
 };
 
 export const getHighestProjectVersion = (): number => {
