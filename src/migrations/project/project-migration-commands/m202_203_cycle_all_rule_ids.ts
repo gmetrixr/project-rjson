@@ -24,6 +24,7 @@ const migrateProject = (json: any) => {
     scenef.cycleAllSubRecordIdsForRulesFix();
   }
 
+  //In migration 200 a few rules got missed out because getDeepRecordEntries can't select two rules with the same id
   for(const [rId, record] of pf.getDeepRecordEntries()) {
     switch(record.type) {
       case RT.then_action: {
