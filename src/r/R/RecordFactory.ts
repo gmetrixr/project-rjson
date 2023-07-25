@@ -442,6 +442,7 @@ export class RecordFactory<T extends RT> {
   }
 
   private getBreadCrumbsWithAddress(addr: string): idAndRecord<RT>[] | undefined {
+    if(addr === null || addr === undefined) return undefined;
     const breadCrumbs: idAndRecord<RT>[] = []
     // Sanitize and remove and unwanted cases
     // Replace everything after a ! with a blank string
