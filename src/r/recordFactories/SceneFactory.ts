@@ -71,11 +71,10 @@ export class SceneFactory extends RecordFactory<RT.scene> {
       }
     }
     this.replaceAllSubRecordIds(replacementMap);
+    this.replaceAllSubRecordIdsInProperties(replacementMap);
   }
 
   replaceAllSubRecordIds(replacementMap: {[oldId: number]: number}) {
-    this.changeRecordIdInProperties(replacementMap);
-
     const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
     for(const pAndR of allPAndRs) {
       const {id, p, r} = pAndR;
@@ -88,8 +87,14 @@ export class SceneFactory extends RecordFactory<RT.scene> {
         recordMapOfType[newId] = recordMapOfType[oldId];
         delete recordMapOfType[oldId];
       }
-      //Change properties if it contains an old record id
-      SceneUtils.changeRecordIdInProperties(r, replacementMap);
+    }
+  }
+
+  replaceAllSubRecordIdsInProperties(replacementMap: {[oldId: number]: number}) {
+    this.changeRecordIdInProperties(replacementMap);
+    const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
+    for(const pAndR of allPAndRs) {
+      SceneUtils.changeRecordIdInProperties(pAndR.r, replacementMap);
     }
   }
 }

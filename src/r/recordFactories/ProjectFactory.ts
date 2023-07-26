@@ -576,18 +576,17 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     //First create replacementMap
     for(const [id, record] of this.getDeepRecordEntries()) {
       //CANNOT change ids of scenes and variables already present
-      if(record.type !== RT.scene && record.type !== RT.variable) {
+      if(record.type !== RT.scene && record.type !== RT.variable && record.type !== RT.lead_gen_field) {
         const oldId = id;
         const newId = generateIdV2();
         replacementMap[oldId] = newId;
       }
     }
     this.replaceAllSubRecordIds(replacementMap);
+    this.replaceAllSubRecordIdsInProperties(replacementMap);
   }
 
   replaceAllSubRecordIds(replacementMap: {[oldId: number]: number}) {
-    this.changeRecordIdInProperties(replacementMap);
-
     const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
     for(const pAndR of allPAndRs) {
       const {id, p, r} = pAndR;
@@ -600,8 +599,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         recordMapOfType[newId] = recordMapOfType[oldId];
         delete recordMapOfType[oldId];
       }
-      //Change properties if it contains an old record id
-      SceneUtils.changeRecordIdInProperties(r, replacementMap);
+    }
+  }
+
+  replaceAllSubRecordIdsInProperties(replacementMap: {[oldId: number]: number}) {
+    this.changeRecordIdInProperties(replacementMap);
+    const allPAndRs = RecordUtils.getDeepRecordAndParentArray(this._json, []);
+    for(const pAndR of allPAndRs) {
+      SceneUtils.changeRecordIdInProperties(pAndR.r, replacementMap);
     }
   }
 
