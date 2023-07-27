@@ -9,7 +9,7 @@ import {
   variableTypeDefaults,
 } from "../definitions/variables/VariableTypes";
 import { RecordFactory, RecordUtils } from "../R/RecordFactory";
-import { ClipboardData, createRecord, idAndRecord, idOrAddress, RecordMap, RecordNode } from "../R/RecordNode";
+import { ClipboardData, createRecord, idAndRecord, idOrAddress, rAndP, RecordMap, RecordNode } from "../R/RecordNode";
 import { RT, rtp } from "../R/RecordTypes";
 import { SceneFactory, SceneUtils } from "./SceneFactory";
 import { jsUtils } from "@gmetrixr/gdash";
@@ -211,6 +211,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       //Keep the name of the variable same as the lead gen field
       super.changeDeepRecordName(variableIdAndRecord.id, varNameFromOriginName(idAndRecord.record.name + (nameSuffix ?? "")));
     }
+  }
+
+  duplicateDeepRecord(idOrAddress: idOrAddress): rAndP | undefined {
+    const rAndP = this.getRecordAndParent(idOrAddress);
+    if(rAndP === undefined) return undefined;
+    const duplicatedIdAndRecord = getFactory(rAndP.p).duplicateRecord(rAndP.r.type as RT, rAndP.id);
+    if(duplicatedIdAndRecord === undefined) return undefined;
+    rAndP.id = duplicatedIdAndRecord?.id;
+    rAndP.r = duplicatedIdAndRecord.record;
+    return rAndP;
   }
 
   private deleteRecordsLinkedToScene(sceneIdAndRecord: idAndRecord<RT.scene>) {
