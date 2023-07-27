@@ -126,7 +126,18 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const sceneF = new SceneFactory(sceneIdAndRecord.record);
 
     const menuRecordId = sceneF.get(rtp.scene.linked_menu_id) as undefined | number;
+    let addNewMenu = false;
     if(menuRecordId === undefined) {
+      addNewMenu = true;
+    }  else {
+      //Does the menu link back?
+      const menu = this.getRecord(menuRecordId, RT.menu);
+      const linkedSceneId = menu?.props.menu_scene_id;
+      if(linkedSceneId !== sceneIdAndRecord.id) {
+        addNewMenu = true;
+      }
+    }
+    if(addNewMenu === true) {
       const newMenuIdAndRecord = super.addBlankRecord({type: RT.menu});
       if(newMenuIdAndRecord) {
         newMenuIdAndRecord.record.props.menu_scene_id = sceneIdAndRecord.id;
@@ -136,7 +147,18 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
 
     const tourRecordId = sceneF.get(rtp.scene.linked_tour_mode_id) as undefined | number;
+    let addNewTour = false;
     if(tourRecordId === undefined) {
+      addNewTour = true;
+    }  else {
+      //Does the tour mode link back?
+      const tour = this.getRecord(tourRecordId, RT.tour_mode);
+      const linkedSceneId = tour?.props.tour_mode_scene_id;
+      if(linkedSceneId !== sceneIdAndRecord.id) {
+        addNewTour = true;
+      }
+    }
+    if(addNewTour === true) {
       // Adding scene details every time to menu prop and making the boolean menu_show true / false based on the value given or default which is true.
       if (this.getValueOrDefault(rtp.project.auto_add_new_scene_to_tour_mode) === true) {
         //Making id deterministic (although not needed) - for testing
