@@ -762,8 +762,15 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const parentRecord = this.getDeepRecord(parentIdOrAddr);
     if(parentRecord !== undefined) {
       const parentRF = getFactory(parentRecord);
-      for(const node of clipboardData.nodes) {
-        parentRF.addRecord({record: node.record, position: positionInPlace});
+      for(const nodeIdAndRecord of clipboardData.nodes) {
+        if(nodeIdAndRecord.record.type === RT.variable) {
+          //if the same id exists here don't copy it. Just reuse it. If not present, add it, but don't change its id.
+          if(this.getRecord(nodeIdAndRecord.id, RT.variable) === undefined) {
+            parentRF.addRecord({record: nodeIdAndRecord.record, id: nodeIdAndRecord.id});  
+          } // else, the same variable id exists, so don't add it
+        } else {
+          parentRF.addRecord({record: nodeIdAndRecord.record, position: positionInPlace});
+        }
       }
     }
   }
