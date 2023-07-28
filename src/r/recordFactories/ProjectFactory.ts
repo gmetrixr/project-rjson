@@ -274,9 +274,9 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
-    const idAndRecord = super.deleteDeepRecord(idOrAddress);
-    this.afterDeleteInProjectFactory(idAndRecord);
-    return idAndRecord;
+    const rAndP = this.getRecordAndParent(idOrAddress);
+    if(rAndP === undefined) return undefined;
+    return getFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
   }
 
   private afterDeleteInProjectFactory(idAndRecord?: idAndRecord<RT>) {
