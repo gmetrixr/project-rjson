@@ -18,7 +18,7 @@ export class SceneFactory extends RecordFactory<RT.scene> {
   }
 
   /** Overriding delete element: Deleting an element/variable (any CogObject) should also delete its rules */
-  deleteRecord<T>(id: number, type?: RT): idAndRecord<RT> | undefined {
+  deleteRecord <N extends RT>(id: number, type?: N): idAndRecord<N> | undefined {
     if(type === RT.element) {
       this.deleteRulesForCoId(id);
     }
@@ -26,7 +26,7 @@ export class SceneFactory extends RecordFactory<RT.scene> {
   }
 
   /** Overriding delete deep element: Deleting an element/variable (any CogObject) should also delete its rules */
-  deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
+  deleteDeepRecord <N extends RT>(idOrAddress: idOrAddress): idAndRecord<N> | undefined {
     const recordToDeleteRAndP = this.getRecordAndParent(idOrAddress);
     if(recordToDeleteRAndP !== undefined) {
       if(recordToDeleteRAndP.r.type === RT.element) {

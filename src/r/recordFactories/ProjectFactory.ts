@@ -284,7 +284,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   /** Doesn't allow deletion of the last scene. If that is needed, go via RecordFactory */
-  deleteRecord<N extends RT>(id: number, type?: N): idAndRecord<RT> | undefined {
+  deleteRecord <N extends RT>(id: number, type?: N): idAndRecord<N> | undefined {
     if(this.getRecord(id, type)?.type === RT.scene && this.getRecordEntries(RT.scene).length === 1) {
       //Don't allow deletion of last scene
       return undefined;
@@ -294,11 +294,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return idAndRecord;
   }
 
-  deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
+  deleteDeepRecord <N extends RT>(idOrAddress: idOrAddress): idAndRecord<N> | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
-    //We always want project factory to delete anything. So instead of using getFactory(rAndP.p) we use "this"
-    return this.deleteRecord(rAndP.id, rAndP.r.type as RT);
+    if(rAndP.p === this._json) { //Parent is this project. In this case this.afterDeleteInProjectFactory is already run
+      return this.deleteRecord(rAndP.id, rAndP.r.type as RT);
+    } else {
+      const idAndRecord = new RecordFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
+      this.afterDeleteInProjectFactory(idAndRecord);
+      return idAndRecord;
+    }
   }
 
   private afterDeleteInProjectFactory(idAndRecord?: idAndRecord<RT>) {
