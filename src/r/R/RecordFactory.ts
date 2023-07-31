@@ -831,7 +831,7 @@ export class RecordFactory<T extends RT> {
     const sourceRAndPArray = source
       .map(s => this.getRecordAndParent(s))
       .filter(s => s !== undefined && isTypeChildOf(destRecord.type as RT, s.r.type as RT));
-    if(sourceRAndPArray === undefined) return false;
+    if(sourceRAndPArray === undefined || sourceRAndPArray.length === 0) return false;
 
     //Delete all sources:
     const deletedIdAndRecords: idAndRecord<RT>[] = [];
@@ -866,7 +866,7 @@ export class RecordFactory<T extends RT> {
     const sourceRAndPArray = source
       .map(s => this.getRecordAndParent(s))
       .filter(s => s !== undefined && isTypeChildOf(destRecord.type as RT, s.r.type as RT));
-    if(sourceRAndPArray === undefined) return false;
+    if(sourceRAndPArray === undefined || sourceRAndPArray.length === 0) return false;
 
     //Inserted in reverse order because we keep inserting in the same position.
     //If we don't reverse, a,b,c will get inserted into 1,2,3 as 1,2,3,c,b,a
