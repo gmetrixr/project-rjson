@@ -82,9 +82,9 @@ export class ProjectFactory extends RecordFactory<RT.project> {
    * Just overriding addRecord should take care of paste issues also, as it internally calls this.addRecord
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super#calling_methods_from_super
    */
-  addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
-    record: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
-  }): idAndRecord<RT> | undefined {
+  addRecord <N extends RT>({record, position, id, dontCycleSubRecordIds, dontPosition, parentIdOrAddress}: {
+    record: RecordNode<N>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, dontPosition?: boolean, parentIdOrAddress?: idOrAddress
+  }): idAndRecord<N> | undefined {
     //Don't allow adding sub-records to elements that are not groups
     if(parentIdOrAddress) {
       const parentRecord = this.getDeepRecord(parentIdOrAddress);
@@ -96,7 +96,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
     }
 
-    const idAndRecord = super.addRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress});
+    const idAndRecord = super.addRecord({record, position, id, dontCycleSubRecordIds, dontPosition, parentIdOrAddress});
     if(idAndRecord === undefined) return undefined;
     //Custom Record Types' Code
     switch (record.type) {

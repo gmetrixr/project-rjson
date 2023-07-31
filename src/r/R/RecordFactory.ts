@@ -686,14 +686,14 @@ export class RecordFactory<T extends RT> {
    * And all sub-ids in this new record. 
    * And make sure none overlap.
    */
-  addRecord <N extends RT>({record, position, id, dontCycleSubRecordIds, parentIdOrAddress}: {
-    record: RecordNode<N>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress?: idOrAddress
+  addRecord <N extends RT>({record, position, id, dontCycleSubRecordIds, dontPosition, parentIdOrAddress}: {
+    record: RecordNode<N>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, dontPosition?: boolean, parentIdOrAddress?: idOrAddress
   }): idAndRecord<N> | undefined {
     //Call recursively until "this" refers to parent record, and parentIdOrAddress is undefined
     if(parentIdOrAddress !== undefined) {
       const parentRecord = this.getDeepRecord(parentIdOrAddress);
       if(parentRecord === undefined) return undefined;
-      return new RecordFactory(parentRecord).addRecord({record, position, id, dontCycleSubRecordIds});
+      return new RecordFactory(parentRecord).addRecord({record, position, id, dontCycleSubRecordIds, dontPosition});
     }
 
     //Should we add this record? Allow only record additions that conform to treeMap heirarchy
@@ -705,8 +705,12 @@ export class RecordFactory<T extends RT> {
 
     if(!this.initializeRecordMap(childType)) return undefined;
     const recordMap = this.getRecordMap(childType);
-    const recordsArray = this.getSortedRecords(childType);
-    record.order = this.getNewOrders(recordsArray, 1, position)[0];
+
+    if(!dontPosition) {
+      const recordsArray = this.getSortedRecords(childType);
+      record.order = this.getNewOrders(recordsArray, 1, position)[0];
+    }
+    
     if(!dontCycleSubRecordIds) {
       //Cycle all ids in the new record being added so that there are no id clashes
       new RecordFactory(record).cycleAllSubRecordIds();
@@ -823,7 +827,10 @@ export class RecordFactory<T extends RT> {
     }
   }
 
-  /** Keeps ids intact */
+  /** 
+   * Keeps ids intact
+   * To check destPosition logic check reorderRecords
+   */
   moveDeepRecords(source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
     const destRecord = this.getDeepRecord(dest);
     if(destRecord === undefined) return false;
@@ -832,14 +839,25 @@ export class RecordFactory<T extends RT> {
       .map(s => this.getRecordAndParent(s))
       .filter(s => s !== undefined && isTypeChildOf(destRecord.type as RT, s.r.type as RT));
     if(sourceRAndPArray === undefined || sourceRAndPArray.length === 0) return false;
+    const firstSourceRecord = sourceRAndPArray[0]?.r;
+    if(firstSourceRecord === undefined) return false;
+
+    //To decide order. Position 2 is between items 2 and 3 (at indices 1 and 2)
+    // * Input:     [  1,   2,   3,   4,   5,   6  ]
+    // * Positions: [0,   1,   2,   3,   4,   5,  6]
+    //This is different from reorder because here the destPosition is pre-deletion
+    const sortedRecords = this.getSortedRecords(firstSourceRecord.type as RT);
+    const newOrders = this.getNewOrders(sortedRecords, sourceRAndPArray.length, destPosition);
 
     //Delete all sources:
+    let orderIndex = 0;
     const deletedIdAndRecords: idAndRecord<RT>[] = [];
     for(const sourceRAndP of (sourceRAndPArray as rAndP[])) {
       const parentRF = new RecordFactory(sourceRAndP.p);
       const deletedIdAndRecord = parentRF.deleteRecord(sourceRAndP.id, sourceRAndP.r.type as RT);
       if(deletedIdAndRecord !== undefined) {
         deletedIdAndRecords.push(deletedIdAndRecord);
+        deletedIdAndRecord.record.order = newOrders[orderIndex++];
       }
     }
 
@@ -852,6 +870,7 @@ export class RecordFactory<T extends RT> {
         id: idAndRecord.id, 
         position: destPosition, 
         dontCycleSubRecordIds: true,
+        dontPosition: true,
         parentIdOrAddress: dest,
       })
     }
