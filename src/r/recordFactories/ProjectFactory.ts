@@ -116,6 +116,17 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return idAndRecord;
   }
 
+  getSceneOfDeepRecord(idOrAddress: idOrAddress): idAndRecord<RT.scene> | undefined {
+    const breadCrumbs = this.getBreadCrumbs(idOrAddress);
+    if(!breadCrumbs) return undefined;
+    for(const breadCrumb of breadCrumbs) {
+      if(breadCrumb.record.type === RT.scene) {
+        return breadCrumb;
+      }
+    }
+    return undefined;
+  }
+
   /** 
    * Adds menu and tourMode records 
    * Keeps record ids deterministic, so even if this function is called twice, there are no side effects
@@ -260,6 +271,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         break;
       }
     }
+    const sceneIdAndRecord = this.getSceneOfDeepRecord(elementIdAndRecord.id);
+    if(sceneIdAndRecord) {
+      new SceneFactory(sceneIdAndRecord?.record).deleteRulesForCoId(elementIdAndRecord.id);
+    }
+  }
+
+  private deleteRecordsLinkedToVariable(variableIdAndRecord: idAndRecord<RT.variable>) {
+    for(const scene of this.getRecords(RT.scene)) {
+      new SceneFactory(scene).deleteRulesForCoId(variableIdAndRecord.id);
+    }
   }
 
   /** Doesn't allow deletion of the last scene. If that is needed, go via RecordFactory */
@@ -276,7 +297,8 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   deleteDeepRecord<T>(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
-    return getFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
+    //We always want project factory to delete anything. So instead of using getFactory(rAndP.p) we use "this"
+    return this.deleteRecord(rAndP.id, rAndP.r.type as RT);
   }
 
   private afterDeleteInProjectFactory(idAndRecord?: idAndRecord<RT>) {
@@ -293,6 +315,10 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
       case RT.element: {
         this.deleteRecordsLinkedToElement(idAndRecord);
+        break;
+      }
+      case RT.variable: {
+        this.deleteRecordsLinkedToVariable(idAndRecord);
         break;
       }
     }
