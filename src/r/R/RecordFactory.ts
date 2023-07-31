@@ -825,9 +825,13 @@ export class RecordFactory<T extends RT> {
 
   /** Keeps ids intact */
   moveDeepRecords(source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
-    const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
     const destRecord = this.getDeepRecord(dest);
-    if(sourceRAndPArray === undefined || destRecord === undefined) return false;
+    if(destRecord === undefined) return false;
+
+    const sourceRAndPArray = source
+      .map(s => this.getRecordAndParent(s))
+      .filter(s => s !== undefined && isTypeChildOf(destRecord.type as RT, s.r.type as RT));
+    if(sourceRAndPArray === undefined) return false;
 
     //Delete all sources:
     const deletedIdAndRecords: idAndRecord<RT>[] = [];
@@ -856,9 +860,13 @@ export class RecordFactory<T extends RT> {
 
   /** Changes ids */
   copyDeepRecords(source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
-    const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
     const destRecord = this.getDeepRecord(dest);
-    if(sourceRAndPArray === undefined || destRecord === undefined) return false;
+    if(destRecord === undefined) return false;
+
+    const sourceRAndPArray = source
+      .map(s => this.getRecordAndParent(s))
+      .filter(s => s !== undefined && isTypeChildOf(destRecord.type as RT, s.r.type as RT));
+    if(sourceRAndPArray === undefined) return false;
 
     //Inserted in reverse order because we keep inserting in the same position.
     //If we don't reverse, a,b,c will get inserted into 1,2,3 as 1,2,3,c,b,a
