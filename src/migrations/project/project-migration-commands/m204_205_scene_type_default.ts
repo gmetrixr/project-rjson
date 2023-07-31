@@ -1,7 +1,7 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R";
+import { RecordNode, rtp, RT } from "../../../r/R";
 import { IOrder } from "../../IOrder";
 import { ProjectFactory, SceneFactory } from "../../../r/recordFactories";
-import { RecordUtils } from "../../../r/R/RecordFactory";
+import { SceneType } from "../../../r/definitions/special";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -10,17 +10,17 @@ class Migration implements IOrder {
 }
 
 /**
- * Makes sure all element ids in all scenes are unique
- * In the previous migration a, because of running migration at project level, there are still 
- * duplicate element ids across scenes
+ * If scene_type is not present, make it first_person (360 scene)
  */
 const migrateProject = (json: any) => {
   const pf = new ProjectFactory(json as RecordNode<RT.project>);
 
   for(const scene of pf.getRecords(RT.scene)) {
     const scenef = new SceneFactory(scene);
-    //TODO: Do this only for affected scenes, not all scenes. Don't want it to impact all projects
-    scenef.cycleAllSubRecordIds();
+    const sceneTypeInProps = scenef.get(rtp.scene.scene_type);
+    if(sceneTypeInProps === undefined) {
+      scenef.set(rtp.scene.scene_type, SceneType.first_person);
+    }
   }
   
   pf.set(rtp.project.version, 205);
