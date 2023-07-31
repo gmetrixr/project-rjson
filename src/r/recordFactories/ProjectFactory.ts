@@ -799,6 +799,30 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     return clipboardData;
   }
 
+  /** 
+   * Don't allow copying/moving into elements that are not groups
+   */
+  moveDeepRecords(source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+    const destRecord = this.getDeepRecord(dest);
+    if(destRecord === undefined) return false;
+    if(destRecord.type === RT.element && destRecord.props.element_type !== ElementType.group) {
+      return false;
+    }
+    return super.moveDeepRecords(source, dest, destPosition);
+  }
+
+  /** 
+   * Don't allow copying/moving into elements that are not groups
+   */
+  copyDeepRecords(source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
+    const destRecord = this.getDeepRecord(dest);
+    if(destRecord === undefined) return false;
+    if(destRecord.type === RT.element && destRecord.props.element_type !== ElementType.group) {
+      return false;
+    }
+    return super.copyDeepRecords(source, dest, destPosition);
+  }
+
   pasteFromClipboard(parentIdOrAddr: idOrAddress, clipboardData: ClipboardData, positionInPlace?: number) {
     const parentRecord = this.getDeepRecord(parentIdOrAddr);
     if(parentRecord !== undefined) {
