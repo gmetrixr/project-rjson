@@ -270,6 +270,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         super.deleteRecord(linkedScormProgressVarId, RT.variable);
         break;
       }
+
+      case ElementType.group: {
+        //For each sub element, run these checks and actions again
+        const subRecords = new RecordFactory(record).getRecordEntries();
+        for(const [subId, subRecord] of subRecords) {
+          this.beforeDeleteInProjectFactory({id: subId, record: subRecord});
+        }
+      }
     }
     const sceneIdAndRecord = this.getSceneOfDeepRecord(elementIdAndRecord.id);
     if(sceneIdAndRecord) {
@@ -285,12 +293,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
 
   /** Doesn't allow deletion of the last scene. If that is needed, go via RecordFactory */
   deleteRecord <N extends RT>(id: number, type?: N): idAndRecord<N> | undefined {
-    if(this.getRecord(id, type)?.type === RT.scene && this.getRecordEntries(RT.scene).length === 1) {
+    const record = this.getRecord(id, type);
+    if(!record) return undefined;
+    if(record?.type === RT.scene && this.getRecordEntries(RT.scene).length === 1) {
       //Don't allow deletion of last scene
       return undefined;
     }
+    this.beforeDeleteInProjectFactory({id, record});
     const idAndRecord = super.deleteRecord(id, type);
-    this.afterDeleteInProjectFactory(idAndRecord);
     return idAndRecord;
   }
 
@@ -300,13 +310,13 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     if(rAndP.p === this._json) { //Parent is this project. In this case this.afterDeleteInProjectFactory is already run
       return this.deleteRecord(rAndP.id, rAndP.r.type as RT);
     } else {
+      this.beforeDeleteInProjectFactory({id: rAndP.id, record: rAndP.r});
       const idAndRecord = new RecordFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
-      this.afterDeleteInProjectFactory(idAndRecord);
       return idAndRecord;
     }
   }
 
-  private afterDeleteInProjectFactory(idAndRecord?: idAndRecord<RT>) {
+  private beforeDeleteInProjectFactory(idAndRecord?: idAndRecord<RT>) {
     if(idAndRecord === undefined) return;
     //Custom Record Types' Code
     switch (idAndRecord.record.type) {
