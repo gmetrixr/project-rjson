@@ -826,8 +826,8 @@ export class RecordFactory<T extends RT> {
   /** Keeps ids intact */
   moveDeepRecords(source: idOrAddress[], dest: idOrAddress, destPosition?: number): boolean {
     const sourceRAndPArray = source.map(s => this.getRecordAndParent(s));
-    const destRAndP = this.getRecordAndParent(dest);
-    if(sourceRAndPArray === undefined || destRAndP === undefined) return false;
+    const destRecord = this.getDeepRecord(dest);
+    if(sourceRAndPArray === undefined || destRecord === undefined) return false;
 
     //Delete all sources:
     const deletedIdAndRecords: idAndRecord<RT>[] = [];
