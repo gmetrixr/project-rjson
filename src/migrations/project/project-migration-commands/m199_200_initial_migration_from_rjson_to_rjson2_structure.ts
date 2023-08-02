@@ -31,7 +31,7 @@ const migrateProject = (json: any) => {
 const changeLeadGenAndShoppingIds = (projectJson: RecordNode<RT.project>) => {
   const projectF = new ProjectFactory(projectJson);
   const shoppingRecords = projectF.getRecords(RT.shopping);
-  if(shoppingRecords.length > 1) {
+  if(shoppingRecords.length > 0) {
     const shoppingRM = projectF.getRecordMap(RT.shopping);
     for(const [id, record] of projectF.getRecordEntries(RT.shopping)) {
       const oldId = id;
@@ -41,7 +41,7 @@ const changeLeadGenAndShoppingIds = (projectJson: RecordNode<RT.project>) => {
     }
   }
   const leadgenRecords = projectF.getRecords(RT.lead_gen_field);
-  if(leadgenRecords.length > 1) {
+  if(leadgenRecords.length > 0) {
     const leadgenRM = projectF.getRecordMap(RT.lead_gen_field);
     for(const [id, record] of projectF.getRecordEntries(RT.lead_gen_field)) {
       const oldId = id;
