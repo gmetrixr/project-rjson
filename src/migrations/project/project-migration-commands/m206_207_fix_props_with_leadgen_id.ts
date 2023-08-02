@@ -36,8 +36,7 @@ const migrateProject = (json: any) => {
       i++;
     }
 
-    const allTypesInProject = pf.getRecordTypes();
-    for(const type of allTypesInProject) {
+    for(const type of pf.getRecordTypes()) {
       for(const [id, record] of pf.getDeepRecordEntries(type)) { 
         new RecordFactory(record).changeRecordIdInProperties(replacementMap);
       }
