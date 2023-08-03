@@ -36,8 +36,15 @@ const migrateProject = (json: any) => {
       i++;
     }
 
-    for(const type of pf.getRecordTypes()) {
+    for(const type of pf.getRecordTypes()) { //This doesn't contain the type element
       for(const [id, record] of pf.getDeepRecordEntries(type)) { 
+        new RecordFactory(record).changeRecordIdInProperties(replacementMap);
+      }
+    }
+
+    for(const [sceneId, scene] of pf.getRecordEntries(RT.scene)) {
+      const sf = new RecordFactory(scene);
+      for(const [id, record] of sf.getDeepRecordEntries()) { 
         new RecordFactory(record).changeRecordIdInProperties(replacementMap);
       }
     }
