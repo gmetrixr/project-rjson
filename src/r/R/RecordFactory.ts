@@ -529,6 +529,7 @@ export class RecordFactory<T extends RT> {
    * record all props are updated
    */
   changeRecordIdInProperties(replacementMap: {[oldId: number]: number}): boolean {
+    let changed = false;
     for(const prop of Object.keys(this._json.props)) {
       const currentValue = this._json.props[(prop as RTP[T])];
       if(Array.isArray(currentValue)) {
@@ -537,19 +538,22 @@ export class RecordFactory<T extends RT> {
             const oldId = Number(currentValue[i]);
             const newId = replacementMap[oldId];
             currentValue[i] = newId;
+            changed = true;
           }
         }
       } else if(typeof currentValue === "number") {
         if(currentValue in replacementMap) {
           this._json.props[(prop as RTP[T])] = replacementMap[currentValue];
+          changed = true;
         }
       } else if(typeof currentValue === "string") {
         if(Number(currentValue) in replacementMap) {
           this._json.props[(prop as RTP[T])] = replacementMap[Number(currentValue)];
+          changed = true;
         }
       }
     }
-    return true;
+    return changed;
   }
 
   /** 
