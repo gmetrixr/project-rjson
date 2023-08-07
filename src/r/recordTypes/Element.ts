@@ -130,7 +130,8 @@ export enum ElementProperty {
   pose = "pose",
   use_proximity_optimization = "use_proximity_optimization",
   linked_element_id = "linked_element_id",
-  use_html_audio = "use_html_audio",
+  //Runtime property
+  use_html5_audio = "use_html5_audio",
 
   // Intelligence
   use_ai_brain = "use_ai_brain",
@@ -285,10 +286,10 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.pose]: "idle",
   [ElementProperty.use_proximity_optimization]: true,
   [ElementProperty.linked_element_id]: undefined,
+  [ElementProperty.use_html5_audio]: false,
   [ElementProperty.use_ai_brain]: false,
   [ElementProperty.character_brain_slug]: undefined,
   [ElementProperty.character_chatbot_trigger_radius]: 3,
   [ElementProperty.character_chatbot_welcome_dialogue]: undefined,
   [ElementProperty.character_chatbot_welcome_dialogue_repeat]: "once", // once | always
-  [ElementProperty.use_html_audio]: true,
 }
