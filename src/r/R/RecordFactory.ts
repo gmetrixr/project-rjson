@@ -1,3 +1,4 @@
+import { ArrayOfValues } from "../definitions/variables";
 import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData } from "./RecordNode";
 import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
@@ -48,7 +49,7 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * 
  *! PROPS
  * json / getName -> return full json / return name
- * getProps/getAllPossibleProps -> what this json has/what this json can have (based on type)
+ * getProps/getAllPossibleProps/getAllPropValues -> what this json has/what this json can have (based on type)
  * get/set/reset/delete/getValueOrDefault/getDefault -> prop's values
  * changePropertyName -> used during migrations
  * 
@@ -554,6 +555,21 @@ export class RecordFactory<T extends RT> {
       }
     }
     return changed;
+  }
+
+  getAllPropValues(): ArrayOfValues {
+    const values: ArrayOfValues = [];
+    for(const prop of Object.keys(this._json.props)) {
+      const currentValue = this._json.props[(prop as RTP[T])];
+      if(Array.isArray(currentValue)) {
+        values.push(...currentValue);
+      } else if(typeof currentValue === "number") {
+        values.push(currentValue);
+      } else if(typeof currentValue === "string") {
+        values.push(currentValue);
+      }
+    }
+    return values;
   }
 
   /** 
