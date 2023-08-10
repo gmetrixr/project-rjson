@@ -50,7 +50,7 @@ const migrateProject = (json: any) => {
     for(const [taId, ta] of thenActionEntries) {
       const taF = new RecordFactory(ta);
       if(taF.get(rtp.then_action.action) === RuleAction.change_scene) {
-        const destinationSceneId = (taF.get(rtp.then_action.ta_properties) as Number[])[0];
+        const destinationSceneId = (taF.get(rtp.then_action.ta_properties) as number[])[0];
         if(typeof destinationSceneId === "number") {
           keepScene(destinationSceneId);
         }
