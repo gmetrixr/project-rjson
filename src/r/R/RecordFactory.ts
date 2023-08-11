@@ -300,7 +300,7 @@ export class RecordFactory<T extends RT> {
         return this.getRecord(id, currentType);
       }
       for(const record of this.getRecords(currentType)) {
-        const found = new RecordFactory(record).getDeepRecordWithIdInternal(id); //records get added to the same object
+        const found = new RecordFactory(record).getDeepRecordWithIdInternal(id, type); //records get added to the same object
         if(found !== undefined) { //match!
           return found;
         }
