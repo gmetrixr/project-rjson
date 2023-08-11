@@ -1,4 +1,3 @@
-import { ArrayOfValues } from "../definitions/variables";
 import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData } from "./RecordNode";
 import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
@@ -557,8 +556,8 @@ export class RecordFactory<T extends RT> {
     return changed;
   }
 
-  getAllPropValues(): ArrayOfValues {
-    const values: ArrayOfValues = [];
+  getAllPropValues(): Array<unknown> {
+    const values: Array<unknown> = [];
     for(const prop of Object.keys(this._json.props)) {
       const currentValue = this._json.props[(prop as RTP[T])];
       if(Array.isArray(currentValue)) {

@@ -49,13 +49,13 @@ const migrateProject = (json: any) => {
     const thenActionEntries = sceneF.getDeepRecordEntries(RT.then_action);
     for(const [taId, ta] of thenActionEntries) {
       const taF = new RecordFactory(ta);
-      allPropValues.push(...taF.getAllPropValues());
+      allPropValues.push(...taF.getAllPropValues() as ArrayOfValues);
     }
     
     const whenEventEntries = sceneF.getDeepRecordEntries(RT.when_event);
     for(const [weId, we] of whenEventEntries) {
       const weF = new RecordFactory(we);
-      allPropValues.push(...weF.getAllPropValues());
+      allPropValues.push(...weF.getAllPropValues() as ArrayOfValues);
     }
     
     const allPropValuesSet = new Set(allPropValues);
