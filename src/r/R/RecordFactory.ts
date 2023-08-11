@@ -54,7 +54,7 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * 
  *! RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
- * getRecord / getIdAndRecord / getDeepRecord / getDeepIdAndRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
+ * getRecord / getRecordFromPath / getIdAndRecord / getDeepRecord / getDeepIdAndRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
  * getDeepRecordMap / getDeepRecordEntries / RecordUtils.getDeepRecordAndParentArray
  * 
@@ -270,6 +270,19 @@ export class RecordFactory<T extends RT> {
   /** Sending type also makes getRecord faster */
   getRecord(id: number, type?: RT): RecordNode<RT> | undefined {
     return this.getIdAndRecord(id, type)?.record;
+  }
+
+  /** Accepts an array of ids to get deeper and get a record */
+  getRecordFromPath(path: Array<number>): RecordNode<RT> | undefined {
+    const id = path.shift(); //mutates the array
+    if(id === undefined) return undefined;
+    const currentRecord = this.getRecord(id);
+    if(currentRecord === undefined) return undefined;
+    if(path.length === 0) { //we have reached the end of ids in path
+      return currentRecord;
+    } else {
+      return new RecordFactory(currentRecord).getRecordFromPath(path);
+    }
   }
 
   getDeepIdAndRecord(idOrAddress: idOrAddress, type?: RT): idAndRecord<RT> | undefined {
