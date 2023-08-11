@@ -272,24 +272,49 @@ export class RecordFactory<T extends RT> {
     return this.getIdAndRecord(id, type)?.record;
   }
 
-  getDeepIdAndRecord(idOrAddress: idOrAddress): idAndRecord<RT> | undefined {
+  getDeepIdAndRecord(idOrAddress: idOrAddress, type?: RT): idAndRecord<RT> | undefined {
     if(idOrAddress === "") { //blank address refers to self record. Self record doesn't have an id. So return undefined
       return undefined
     } else if(typeof idOrAddress === "number") {
-      const rm = this.getDeepRecordMap();
-      return { id: idOrAddress, record: rm[idOrAddress] };
+      const record = this.getDeepRecordWithIdInternal(idOrAddress, type);
+      return record ? { id: idOrAddress, record } : undefined;
     } else {
       const rAndP = this.getRecordAndParentWithAddress(idOrAddress);
       return rAndP ? { id: rAndP?.id, record: rAndP?.r } : undefined;
     }
   }
 
+  /**
+   * This function works faster if type is passed
+   */
+  private getDeepRecordWithIdInternal(id: number, type?: RT): RecordNode<RT> | undefined {
+    for (const currentType of this.getRecordTypes()) {
+      if(type) {
+        const typesToConsider = recordTypeDefinitions[type].typesInRootPath;
+        if(!typesToConsider.includes(currentType)) {
+          continue;
+        }
+      }
+      const recordIdsOfType = this.getRecordIds(currentType);
+      if(recordIdsOfType.includes(id)) { //match!
+        return this.getRecord(id, currentType);
+      }
+      for(const record of this.getRecords(currentType)) {
+        const found = new RecordFactory(record).getDeepRecordWithIdInternal(id); //records get added to the same object
+        if(found !== undefined) { //match!
+          return found;
+        }
+      }
+    }
+    return undefined;
+  }
+
   /** if idOrAddress is "", it refers to the current node */
-  getDeepRecord(idOrAddress: idOrAddress): RecordNode<RT> | undefined {
+  getDeepRecord(idOrAddress: idOrAddress, type?: RT): RecordNode<RT> | undefined {
     if(idOrAddress === "") { //blank address refers to self record
       return this._json;
     } else {
-      return this.getDeepIdAndRecord(idOrAddress)?.record;
+      return this.getDeepIdAndRecord(idOrAddress, type)?.record;
     }
   }
 
