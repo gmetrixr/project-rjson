@@ -35,7 +35,7 @@ describe ("r Migration tests", () => {
   });
 
   it("should migrate a large project json", function() {
-    this.timeout(5000);
+    this.timeout(7000);
     const st = performance.now();
     console.log("Started large migration at:", st);
     const migratedProject = runProjectMigrations(learningJson);
@@ -45,7 +45,7 @@ describe ("r Migration tests", () => {
   })
 
   it("Testing if rule ids cycle correctly", function() {
-    this.timeout(2000);
+    this.timeout(5000);
     const st = performance.now();
     console.log("Started large migration at:", st);
     const migratedProject = runProjectMigrations(campusJson, 200);

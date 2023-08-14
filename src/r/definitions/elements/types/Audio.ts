@@ -14,6 +14,7 @@ export const Audio: IElementDefinition = {
     ElementProperty.volume,
     ElementProperty.muted,
     ElementProperty.loop,
+    ElementProperty.use_html5_audio,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
