@@ -25,7 +25,8 @@ export const AudioSSML: IElementDefinition = {
     [ElementProperty.audio_type]: "ssml",
   },
   events: [
-    RuleEvent.on_end
+    RuleEvent.on_end,
+    RuleEvent.on_duration_match
   ],
   actions: [
     RuleAction.play_resume,
