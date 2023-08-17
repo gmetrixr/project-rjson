@@ -4,7 +4,7 @@ import { IOrder } from "../../IOrder";
 import v1 from "./v1_removeDormantRules";
 import v2 from "./v2_removeDormantElements";
 import v3 from "./v3_removeDormantScenes";
-import v4 from "./v4_removeDormantAudiosAndAddHtml5";
+import v4 from "./v4_removeDormantAudios";
 import v5 from "./v5_addLinkedPopupRules";
 
 const viewerRuntimeMigrationTree: {[key: number]: IOrder} = {
