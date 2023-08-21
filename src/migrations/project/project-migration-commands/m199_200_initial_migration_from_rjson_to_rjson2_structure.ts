@@ -63,7 +63,9 @@ const recursivelyMigrateJson = (json: any) => {
     const record = records[key];
 
     for (let i = 0; i < record.order.length; i++) {
-      record.map[record.order[i]].order = i;
+      if(record.map[record.order[i]] !== undefined) {
+        record.map[record.order[i]].order = i;
+      }
     }
 
     delete record.order;

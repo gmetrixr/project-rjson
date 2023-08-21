@@ -14,6 +14,7 @@ import threeScenesJson from "./jsons/threeScenes.json";
 import discussionJson from "./jsons/discussion.json";
 import myMetaverseJson from "./jsons/myMetaverse.json";
 import learningJson from "./jsons/learning.json";
+import safeHandsJson from "./jsons/safeHands.json";
 
 describe ("r Migration tests", () => {
   it ("should create new deployment", () => {
@@ -24,6 +25,7 @@ describe ("r Migration tests", () => {
   xit ("migrate elements", function () {
     this.timeout(30000);
     fs.writeFileSync("./test/r/jsons/r3fJsons/deployment/deployment.json", JSON.stringify(migrateDeployment(deploymentJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/safeHands.json", JSON.stringify(runProjectMigrations(safeHandsJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/newton.json", JSON.stringify(runProjectMigrations(newtonStoreJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/manish.json", JSON.stringify(runProjectMigrations(manishMalhotraJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/old.json", JSON.stringify(runProjectMigrations(oldProjectJson)));
