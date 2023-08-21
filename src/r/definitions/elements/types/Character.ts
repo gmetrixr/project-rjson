@@ -27,6 +27,7 @@ export const Character: IElementDefinition = {
     ElementProperty.billboarding,
     ElementProperty.env_map_intensity,
     ElementProperty.apply_env_map,
+    ElementProperty.character_chatbot_initial_prompt,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
