@@ -211,12 +211,15 @@ export class RecordFactory<T extends RT> {
     return RecordUtils.getRecordIds(this.getRecordMap(type));
   }
 
-  private getSortedDFSRecordEntriesInternal<N extends RT>(type: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
+  private getSortedDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
     if(recordEntries === undefined) recordEntries = [];
-    const recordEntriesOfType = this.getSortedRecordEntries(type);
-    for (const record of recordEntriesOfType) {
-      recordEntries.push(record);
-      new RecordFactory(record[1]).getSortedDFSRecordEntriesInternal(type, recordEntries);
+    const typesToIterate = type ? [type] : this.getRecordTypes();
+    for (const currentType of typesToIterate) {
+      const recordEntriesOfType = this.getSortedRecordEntries(currentType);
+      for (const record of recordEntriesOfType) {
+        recordEntries.push(record);
+        new RecordFactory(record[1]).getSortedDFSRecordEntriesInternal(type, recordEntries);
+      }
     }
     return recordEntries;
   }
@@ -225,41 +228,35 @@ export class RecordFactory<T extends RT> {
    * A Pure DFS of the tree
    * An array that goes depth first, then breadth
    */
-  getSortedDFSRecordEntries<N extends RT>(type: N): [number, RecordNode<N>][] {
+  getSortedDFSRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
     return this.getSortedDFSRecordEntriesInternal(type);
   }
 
-  private getDeepRecordMapInternal(recordMap?: RecordMapGeneric): RecordMapGeneric {
-    if(recordMap === undefined) recordMap = {};
-    for (const type of this.getRecordTypes()) {
-      const recordMapOfType = this.getRecordMap(type);
-      Object.assign(recordMap, recordMapOfType);
-
-      for(const record of Object.values(recordMapOfType)) {
-        new RecordFactory(record).getDeepRecordMapInternal(recordMap); //records get added to the same object
+  private getDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
+    if(recordEntries === undefined) recordEntries = [];
+    const typesToIterate = type ? [type] : this.getRecordTypes();
+    for (const currentType of typesToIterate) {
+      const recordEntriesOfType = this.getRecordEntries(currentType); 
+      for (const record of recordEntriesOfType) {
+        recordEntries.push(record);
+        new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
       }
     }
-    return recordMap;
+    return recordEntries;
+  }
+
+  getDeepRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
+    return this.getDFSRecordEntriesInternal(type);
   }
 
   /**
    * A flattened record map of all ids and records in a tree, of all types
    * If there are two records with the same id, this function will fail
-   * Uses BFS within a type, and DFS across types
+   * Uses DFS
    * The optional argument recordMap exists only for its internal functioning
    */
-  getDeepRecordMap(): RecordMapGeneric {
-    return this.getDeepRecordMapInternal();
-  }
-
-  getDeepRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
-    const entries = Object.entries(this.getDeepRecordMap())
-      .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
-    if(type === undefined) {
-      return entries;
-    } else {
-      return entries.filter(([key, value]) => (value.type === (type as RT)));
-    }
+  getDeepRecordMap<N extends RT>(type?: N): RecordMapGeneric {
+    return Object.fromEntries(this.getDeepRecordEntries(type));
   }
 
   getIdAndRecord(id: number, type?: RT): idAndRecord<RT> | undefined {
