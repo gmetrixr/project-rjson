@@ -33,7 +33,7 @@ export const getHighestProjectVersion = (): number => {
 /**
  * Applies migrations for "r" type and returns a new project reference
  */
-export const runProjectMigrations = (projectJson: any, uptoVersion?: number): RecordNode<RT.project> => {
+export const migrateProject = (projectJson: any, uptoVersion?: number): RecordNode<RT.project> => {
   // Check if project hasn't been converted to recordNode yet
   if(projectJson?.props?.version === undefined || projectJson?.props?.version < 199) {
     //The following step converts the json to "r" type and makes the version number 1

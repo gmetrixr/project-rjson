@@ -14,16 +14,31 @@ const viewerRuntimeMigrationTree: {[key: number]: IOrder} = {
   [4]: v4,
   [5]: v5,
 };
+const previewerRuntimeMigrationTree: {[key: number]: IOrder} = {
+  [1]: v1,
+  [2]: v2,
+  //DO NOT delete dormant scenes for previews. Only views. As the editor might create unreachable scenes and test
+  //[3]: v3,
+  [4]: v4,
+  [5]: v5,
+};
 
 const viewerMigrationVersions: number[] = Object.keys(viewerRuntimeMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
-
-/**
- * Migrations to be run only on a new project (once)
- */
-export const runViewerRuntimeMigrations = (projectJson: any): RecordNode<RT.project> => {
+ 
+/** Migrations to be run just before viewing a project */
+export const projectViewerRuntimeMigrations = (projectJson: any): RecordNode<RT.project> => {
   const rProjectJson = projectJson as RecordNode<RT.project>;
   for(const key of viewerMigrationVersions) {
     viewerRuntimeMigrationTree[key].execute(rProjectJson);
+  }
+  return rProjectJson;
+}
+
+/** Migrations to be run just before viewing a project */
+export const projectPreviewerRuntimeMigrations = (projectJson: any): RecordNode<RT.project> => {
+  const rProjectJson = projectJson as RecordNode<RT.project>;
+  for(const key of viewerMigrationVersions) {
+    previewerRuntimeMigrationTree[key].execute(rProjectJson);
   }
   return rProjectJson;
 }

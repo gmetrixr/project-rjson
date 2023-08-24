@@ -1,9 +1,9 @@
-import { runHealthCheckMigrations } from "./healthcheck-migration-commands";
+import { projecHealthCheckMigrations } from "./healthcheck-migration-commands";
 import { createNewProject } from "./newproject-migration-commands";
-import { getHighestProjectVersion, runProjectMigrations } from "./project-migration-commands";
-import { runViewerRuntimeMigrations } from "./viewer-runtime-migration-commands"
+import { getHighestProjectVersion, migrateProject } from "./project-migration-commands";
+import { projectViewerRuntimeMigrations, projectPreviewerRuntimeMigrations } from "./viewer-runtime-migration-commands"
 
-export { runHealthCheckMigrations };
+export { projecHealthCheckMigrations };
 export { createNewProject };
-export { getHighestProjectVersion, runProjectMigrations };
-export { runViewerRuntimeMigrations };
+export { getHighestProjectVersion, migrateProject };
+export { projectViewerRuntimeMigrations, projectPreviewerRuntimeMigrations };

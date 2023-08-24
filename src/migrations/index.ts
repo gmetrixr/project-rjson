@@ -2,9 +2,9 @@ import { createNewDeployment, migrateDeployment, getHighestDeploymentVersion } f
 import { createNewDiscussion, migrateDiscussion, getHighestDiscussionVersion } from "./discussion";
 import { migrateGlobalVarsDefitions } from "./globalVariables";
 import { createNewProject, 
-  getHighestProjectVersion, runProjectMigrations, 
-  runHealthCheckMigrations, 
-  runViewerRuntimeMigrations } from "./project";
+  getHighestProjectVersion, migrateProject, 
+  projecHealthCheckMigrations, 
+  projectViewerRuntimeMigrations, projectPreviewerRuntimeMigrations } from "./project";
 
 const migrations = {
   //deployment
@@ -12,10 +12,9 @@ const migrations = {
   //discussion
   createNewDiscussion, migrateDiscussion, getHighestDiscussionVersion,
   //project
-  createNewProject, 
-  getHighestProjectVersion, runProjectMigrations, 
-  runHealthCheckMigrations,
-  runViewerRuntimeMigrations,
+  createNewProject, migrateProject, getHighestProjectVersion,
+  projecHealthCheckMigrations, projectViewerRuntimeMigrations, projectPreviewerRuntimeMigrations,
+  //glbal vars
   migrateGlobalVarsDefitions,
 }
 
