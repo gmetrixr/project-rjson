@@ -66,9 +66,9 @@ export const sceneCategoryDisplayNames: Record<SceneCategory, string> = {
 
 export const sceneTypeByCategory: Record<SceneCategory, SceneType[]> = {
 	scene: [
+    SceneType.six_dof,
     SceneType.first_person,
     SceneType.orbit,
-    SceneType.six_dof
   ]
 };
 
