@@ -54,7 +54,8 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * 
  *! RECORDS
  * getRecordTypes -> list of subrecord types ["scene", "variable"]
- * getRecord / getRecordWithPath / getIdAndRecord / getDeepRecord / getDeepIdAndRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
+ * getRecord / getRecordWithPath / getIdAndRecord / getDeepRecord -> get subrecord of any type (level 1), faster if type is passed / deepRecord using idOrAddress
+ * getDeepIdAndRecord -> works with idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
  * getDeepRecordMap / getDeepRecordEntries / RecordUtils.getDeepRecordAndParentArray
  * 
@@ -223,7 +224,7 @@ export class RecordFactory<T extends RT> {
         }
       }
     } else { //Go deeper in types where there is a possibility that our type is a subChild of this type
-      const typesToIterate = this.getRecordTypes().filter(t => isTypeSubChildOf(t, type)); 
+      const typesToIterate = this.getRecordTypes(); 
       for (const currentType of typesToIterate) {
         if(currentType === type) {
           const recordEntriesOfType = this.getSortedRecordEntries(currentType);   
@@ -262,7 +263,7 @@ export class RecordFactory<T extends RT> {
         }
       }
     } else { //Go deeper in types where there is a possibility that our type is a subChild of this type
-      const typesToIterate = this.getRecordTypes().filter(t => isTypeSubChildOf(t, type)); 
+      const typesToIterate = this.getRecordTypes(); 
       for (const currentType of typesToIterate) {
         if(currentType === type) {
           const recordEntriesOfType = this.getRecordEntries(currentType);   

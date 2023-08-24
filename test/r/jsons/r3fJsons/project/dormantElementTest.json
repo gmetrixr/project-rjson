@@ -1,0 +1,365 @@
+{
+  "type": "project",
+  "props": {
+    "version": 209
+  },
+  "records": {
+    "menu": {
+      "2985192932469235": {
+        "type": "menu",
+        "order": 1,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 1635355744993740
+        }
+      }
+    },
+    "scene": {
+      "1635355744993740": {
+        "name": "Scene",
+        "type": "scene",
+        "order": 1,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -15,
+            4.5,
+            0,
+            5,
+            -4.5,
+            15
+          ],
+          "linked_menu_id": 2985192932469235,
+          "linked_tour_mode_id": 6960005240028164,
+          "scene_spawn_zone_id": 2914898498196943,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "element": {
+            "1371627147525494": {
+              "name": "Image 360",
+              "type": "element",
+              "order": 1,
+              "props": {
+                "element_type": "pano_image"
+              }
+            },
+            "2914898498196943": {
+              "name": "Zone",
+              "type": "element",
+              "order": 3,
+              "props": {
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "8386371370738577": {
+              "name": "Lights",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "3969312595570394": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 9992967637098268
+                    }
+                  },
+                  "4680073970399831": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    }
+                  }
+                }
+              }
+            },
+            "9992967637098268": {
+              "name": "Environment",
+              "type": "element",
+              "order": 2,
+              "props": {
+                "scale": 0.5,
+                "locked": true,
+                "source": {
+                  "id": -1,
+                  "name": "Event 1",
+                  "type": "THREED",
+                  "file_urls": {
+                    "o": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb",
+                    "t": "https://s.vrgmetri.com/image/w_260,h_120/gb-web/z5-edge/6DOF/environments/Event/event_preview.png",
+                    "glb": "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/environments/Event/eventModel_v11.glb"
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  -1.6,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d"
+              }
+            },
+            "2353489588758041": {
+              "type": "element",
+              "props": {
+                "element_type": "capture_input",
+                "hidden": true
+              },
+              "name": "Capture Input",
+              "order": 2.5
+            },
+            "3511930745208576": {
+              "type": "element",
+              "props": {
+                "element_type": "cube",
+                "placer_3d": [
+                  -0.07739790744136583,
+                  0.6669565988181594,
+                  7.94502609029289,
+                  -6.69767441860467,
+                  179.44186046511635,
+                  2.2767132871537193e-15,
+                  1,
+                  1,
+                  1
+                ]
+              },
+              "name": "Cube",
+              "order": 2.75
+            }
+          },
+          "rule": {
+            "4129935193475664": {
+              "type": "rule",
+              "props": {
+                "accent_color": "#8ED1FC",
+                "tracked": false,
+                "events_and": true,
+                "disabled": false
+              },
+              "name": "Rule",
+              "order": 1,
+              "records": {
+                "when_event": {
+                  "2354640253078206": {
+                    "type": "when_event",
+                    "props": {
+                      "we_co_id": 3511930745208576,
+                      "we_co_type": "cube",
+                      "event": "on_click",
+                      "we_properties": []
+                    },
+                    "order": 1
+                  }
+                },
+                "then_action": {
+                  "3504009722931219": {
+                    "type": "then_action",
+                    "props": {
+                      "ta_co_id": 2353489588758041,
+                      "ta_co_type": "capture_input",
+                      "action": "show",
+                      "ta_properties": []
+                    },
+                    "order": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "variable": {
+      "-8": {
+        "name": "v_identifier_var",
+        "type": "variable",
+        "order": 3,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-9": {
+        "name": "device_var",
+        "type": "variable",
+        "order": 2,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-10": {
+        "name": "browser_var",
+        "type": "variable",
+        "order": 1,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-11": {
+        "name": "vrmode_var",
+        "type": "variable",
+        "order": 5,
+        "props": {
+          "var_type": "boolean",
+          "var_track": true,
+          "var_default": false,
+          "var_category": "predefined"
+        }
+      },
+      "-12": {
+        "name": "firstname_var",
+        "type": "variable",
+        "order": 4,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-13": {
+        "name": "scorm_progress",
+        "type": "variable",
+        "order": 6,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-14": {
+        "name": "scorm_suspend_data",
+        "type": "variable",
+        "order": 7,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-15": {
+        "name": "scorm_score",
+        "type": "variable",
+        "order": 8,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-16": {
+        "name": "lastname_var",
+        "type": "variable",
+        "order": 9,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-17": {
+        "name": "fullname_var",
+        "type": "variable",
+        "order": 10,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-18": {
+        "name": "player_count_var",
+        "type": "variable",
+        "order": 11,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      }
+    },
+    "tour_mode": {
+      "6960005240028164": {
+        "type": "tour_mode",
+        "order": 1,
+        "props": {
+          "tour_mode_scene_id": 1635355744993740
+        }
+      }
+    }
+  }
+}
