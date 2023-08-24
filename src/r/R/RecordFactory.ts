@@ -1,5 +1,5 @@
 import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData } from "./RecordNode";
-import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf } from "./RecordTypes";
+import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
 
 const { deepClone, generateIdV2 } = jsUtils;
@@ -213,12 +213,30 @@ export class RecordFactory<T extends RT> {
 
   private getSortedDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
     if(recordEntries === undefined) recordEntries = [];
-    const typesToIterate = type ? [type] : this.getRecordTypes();
-    for (const currentType of typesToIterate) {
-      const recordEntriesOfType = this.getSortedRecordEntries(currentType);
-      for (const record of recordEntriesOfType) {
-        recordEntries.push(record);
-        new RecordFactory(record[1]).getSortedDFSRecordEntriesInternal(type, recordEntries);
+    if(type === undefined) { //Just return all types
+      const typesToIterate = this.getRecordTypes();
+      for (const currentType of typesToIterate) {
+        const recordEntriesOfType = this.getSortedRecordEntries(currentType); 
+        for (const record of recordEntriesOfType) {
+          recordEntries.push(record);
+          new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+        }
+      }
+    } else { //Go deeper in types where there is a possibility that our type is a subChild of this type
+      const typesToIterate = this.getRecordTypes().filter(t => isTypeSubChildOf(t, type)); 
+      for (const currentType of typesToIterate) {
+        if(currentType === type) {
+          const recordEntriesOfType = this.getSortedRecordEntries(currentType);   
+          for (const record of recordEntriesOfType) {
+            recordEntries.push(record);
+            new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+          }
+        } else if (isTypeSubChildOf(currentType, type)) {
+          const recordEntriesOfType = this.getSortedRecordEntries(currentType); 
+          for (const record of recordEntriesOfType) {
+            new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+          }
+        }
       }
     }
     return recordEntries;
@@ -234,12 +252,30 @@ export class RecordFactory<T extends RT> {
 
   private getDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
     if(recordEntries === undefined) recordEntries = [];
-    const typesToIterate = type ? [type] : this.getRecordTypes();
-    for (const currentType of typesToIterate) {
-      const recordEntriesOfType = this.getRecordEntries(currentType); 
-      for (const record of recordEntriesOfType) {
-        recordEntries.push(record);
-        new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+    if(type === undefined) { //Just return all types
+      const typesToIterate = this.getRecordTypes();
+      for (const currentType of typesToIterate) {
+        const recordEntriesOfType = this.getRecordEntries(currentType); 
+        for (const record of recordEntriesOfType) {
+          recordEntries.push(record);
+          new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+        }
+      }
+    } else { //Go deeper in types where there is a possibility that our type is a subChild of this type
+      const typesToIterate = this.getRecordTypes().filter(t => isTypeSubChildOf(t, type)); 
+      for (const currentType of typesToIterate) {
+        if(currentType === type) {
+          const recordEntriesOfType = this.getRecordEntries(currentType);   
+          for (const record of recordEntriesOfType) {
+            recordEntries.push(record);
+            new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+          }
+        } else if (isTypeSubChildOf(currentType, type)) {
+          const recordEntriesOfType = this.getRecordEntries(currentType); 
+          for (const record of recordEntriesOfType) {
+            new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+          }
+        }
       }
     }
     return recordEntries;
