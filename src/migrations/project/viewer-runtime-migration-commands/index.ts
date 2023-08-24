@@ -24,6 +24,7 @@ const previewerRuntimeMigrationTree: {[key: number]: IOrder} = {
 };
 
 const viewerMigrationVersions: number[] = Object.keys(viewerRuntimeMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
+const previewerMigrationVersions: number[] = Object.keys(previewerRuntimeMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
  
 /** Migrations to be run just before viewing a project */
 export const projectViewerRuntimeMigrations = (projectJson: any): RecordNode<RT.project> => {
@@ -37,7 +38,7 @@ export const projectViewerRuntimeMigrations = (projectJson: any): RecordNode<RT.
 /** Migrations to be run just before viewing a project */
 export const projectPreviewerRuntimeMigrations = (projectJson: any): RecordNode<RT.project> => {
   const rProjectJson = projectJson as RecordNode<RT.project>;
-  for(const key of viewerMigrationVersions) {
+  for(const key of previewerMigrationVersions) {
     previewerRuntimeMigrationTree[key].execute(rProjectJson);
   }
   return rProjectJson;
