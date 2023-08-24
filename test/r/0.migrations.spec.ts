@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { createNewDeployment, migrateDeployment } from "../../src/migrations/deployment/index";
-import { runProjectMigrations } from "./../../src/migrations/project";
+import { migrateProject } from "./../../src/migrations/project";
 import { migrateDiscussion } from "./../../src/migrations/discussion";
 import { RT } from "../../src/r/R";
 import fs from "fs";
@@ -25,12 +25,12 @@ describe ("r Migration tests", () => {
   xit ("migrate elements", function () {
     this.timeout(30000);
     fs.writeFileSync("./test/r/jsons/r3fJsons/deployment/deployment.json", JSON.stringify(migrateDeployment(deploymentJson)));
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/safeHands.json", JSON.stringify(runProjectMigrations(safeHandsJson)));
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/newton.json", JSON.stringify(runProjectMigrations(newtonStoreJson)));
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/manish.json", JSON.stringify(runProjectMigrations(manishMalhotraJson)));
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/old.json", JSON.stringify(runProjectMigrations(oldProjectJson)));
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/deleteRecordsLinkedToId.json", JSON.stringify(runProjectMigrations(deleteRecordsLinkedToIdJson)));
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/threeScenesJson.json", JSON.stringify(runProjectMigrations(threeScenesJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/safeHands.json", JSON.stringify(migrateProject(safeHandsJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/newton.json", JSON.stringify(migrateProject(newtonStoreJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/manish.json", JSON.stringify(migrateProject(manishMalhotraJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/old.json", JSON.stringify(migrateProject(oldProjectJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/deleteRecordsLinkedToId.json", JSON.stringify(migrateProject(deleteRecordsLinkedToIdJson)));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/threeScenesJson.json", JSON.stringify(migrateProject(threeScenesJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/myMetaverse.json", JSON.stringify(migrateDiscussion(myMetaverseJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/discussion/discussion.json", JSON.stringify(migrateDiscussion(discussionJson)));
     expect(true).to.be.true;
@@ -40,7 +40,7 @@ describe ("r Migration tests", () => {
     this.timeout(7000);
     const st = performance.now();
     console.log("Started large migration at:", st);
-    const migratedProject = runProjectMigrations(learningJson);
+    const migratedProject = migrateProject(learningJson);
     const et = performance.now();
     console.log("Ended large migration at:", et);
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/learning.json", JSON.stringify(migratedProject));
@@ -50,7 +50,7 @@ describe ("r Migration tests", () => {
     this.timeout(5000);
     const st = performance.now();
     console.log("Started large migration at:", st);
-    const migratedProject = runProjectMigrations(campusJson, 200);
+    const migratedProject = migrateProject(campusJson, 200);
     const et = performance.now();
     console.log("Ended large migration at:", et);
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/campus.json", JSON.stringify(migratedProject));
