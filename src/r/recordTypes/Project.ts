@@ -5,6 +5,7 @@ import {
   InitialGraphicsSetting, ViewerCameraMode,
   ViewerControlPanelPosition,
   Language,
+  SceneTransitionType,
 } from "../definitions/project";
 
 export enum ProjectProperty {
@@ -54,11 +55,12 @@ export enum ProjectProperty {
   initial_graphics_setting = "initial_graphics_setting",
   avatar_system = "avatar_system",
   avatar_system_body_type = "avatar_system_body_type",
-  "viewer_camera_mode" = "viewer_camera_mode",
-  "use_legacy_color_management" = "use_legacy_color_management",
+  viewer_camera_mode = "viewer_camera_mode",
+  use_legacy_color_management = "use_legacy_color_management",
   viewer_language = "viewer_language",
   enable_cursor_movement = "enable_cursor_movement",
-  enable_viewer_jump = "enable_viewer_jump"
+  enable_viewer_jump = "enable_viewer_jump",
+  scene_transition_type = "scene_transition_type",
 }
 
 //https://s.vrgmetri.com/gb-web/common/images/blackPixel-000000-1.png
@@ -126,4 +128,5 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.viewer_language]: Language.en,
   [ProjectProperty.enable_cursor_movement]: true,
   [ProjectProperty.enable_viewer_jump]: true,
+  [ProjectProperty.scene_transition_type]: SceneTransitionType.fade_to_black,
 };

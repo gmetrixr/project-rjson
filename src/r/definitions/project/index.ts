@@ -31,3 +31,8 @@ export enum Language {
   en = "en",
   ja = "ja"
 }
+
+export enum SceneTransitionType { 
+  fade_to_black = "fade_to_black", //default, optimized
+  blend = "blend" //Older transition for 360 scenes only, takes more memory
+}
