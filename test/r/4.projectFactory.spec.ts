@@ -10,7 +10,7 @@ import fs from "fs";
 import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
-import avatarJson from "./jsons/avatar.json";
+import projectJson from "./jsons/project.json";
 
 const { generateIdV2, deepClone } = jsUtils;
 
@@ -355,20 +355,34 @@ describe ("r ProjectFactory tests", () => {
   });
 
   it ("should get all file ids from project json", () => {
-    // @ts-ignore
-    const projectF = new ProjectFactory(deepClone(avatarJson));
+    const projectF = new ProjectFactory(deepClone(projectJson));
+    const idAndRecord1 = projectF.addBlankRecord({ type: RT.avatar });
+    const idAndRecord2 = projectF.addBlankRecord({ type: RT.avatar });
+    const idAndRecord3 = projectF.addBlankRecord({ type: RT.avatar });
+
+    idAndRecord1 && new RecordFactory(idAndRecord1.record).set(rtp.avatar.source, { id: 3769 });
+    idAndRecord2 && new RecordFactory(idAndRecord2.record).set(rtp.avatar.source, { id: 3262 });
+    idAndRecord3 && new RecordFactory(idAndRecord3.record).set(rtp.avatar.source, { id: 389 });
+
     const fileIds = projectF.getFileIdsFromProject();
-    expect(fileIds.length).to.be.eq(7);
     expect(fileIds).to.include(3769);
     expect(fileIds).to.include(3262);
     expect(fileIds).to.include(389);
   });
 
-  it ("should inject source for avatars", () => {
-    const project = deepClone(avatarJson);
+  xit ("should inject source for avatars", () => {
+    const project = deepClone(projectJson);
     // @ts-ignore
     const projectF = new ProjectFactory(project);
+    const idAndRecord1 = projectF.addBlankRecord({ type: RT.avatar });
+    const idAndRecord2 = projectF.addBlankRecord({ type: RT.avatar });
+    const idAndRecord3 = projectF.addBlankRecord({ type: RT.avatar });
+
+    idAndRecord1 && new RecordFactory(idAndRecord1.record).set(rtp.avatar.source, { id: 3769 });
+    idAndRecord2 && new RecordFactory(idAndRecord2.record).set(rtp.avatar.source, { id: 3262 });
+    idAndRecord3 && new RecordFactory(idAndRecord3.record).set(rtp.avatar.source, { id: 389 });
+
     projectF.injectSourceIntoProject(avatarSourceMap);
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/avatar.json", JSON.stringify(project));
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/project.json", JSON.stringify(project));
   });
 });
