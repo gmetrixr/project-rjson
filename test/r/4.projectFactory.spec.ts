@@ -6,10 +6,11 @@ import { PredefinedVariableName, VarCategory, VariableType } from "../../src/r/d
 import { jsUtils, pathUtils } from "@gmetrixr/gdash";
 import { ElementFactory } from "../../src/r/recordFactories/ElementFactory";
 import { fn } from "../../src/r/definitions";
+import fs from "fs";
 import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
-import fs from "fs";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
+import avatarJson from "./jsons/avatar.json";
 
 const { generateIdV2, deepClone } = jsUtils;
 
@@ -57,6 +58,94 @@ const sourceMap = {
 		},
 		type: pathUtils.FileType.IMAGE
 	}
+}
+
+const avatarSourceMap = {
+  3769: {
+    id: 3769,
+    name: "Character (22).glb",
+    file_paths: {
+      "o": "o/Character.glb",
+      "t": "t/Character.png",
+      "glb": "glb/Character_q_medium.glb",
+      "glb_low": "glb/Character_q_low.glb",
+      "glb_high": "glb/Character_q_high.glb",
+      "glb_medium": "glb/Character_q_medium.glb"
+    },
+    file_urls: {
+      "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/395d5583-8087-4e1f-bd71-67d7d0390f43/o/Character.glb",
+      "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/395d5583-8087-4e1f-bd71-67d7d0390f43/t/Character.png",
+      "glb": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/395d5583-8087-4e1f-bd71-67d7d0390f43/glb/Character_q_medium.glb",
+      "glb_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/395d5583-8087-4e1f-bd71-67d7d0390f43/glb/Character_q_low.glb",
+      "glb_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/395d5583-8087-4e1f-bd71-67d7d0390f43/glb/Character_q_high.glb",
+      "glb_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/395d5583-8087-4e1f-bd71-67d7d0390f43/glb/Character_q_medium.glb"
+    },
+    size: 10059744,
+    type: pathUtils.FileType.CHARACTER_RPM,
+    metadata: {
+      "ext": "glb",
+      "isRPM": true,
+      "mimeType": "model/gltf-binary",
+      "rpmAvatarGender": "feminine"
+    }
+  },
+  3262: {
+    id: 3262,
+    name: "Character (19).glb",
+    file_paths: {
+      "o": "o/Character.glb",
+      "t": "t/Character.png",
+      "glb": "glb/Character_q_medium.glb",
+      "glb_low": "glb/Character_q_low.glb",
+      "glb_high": "glb/Character_q_high.glb",
+      "glb_medium": "glb/Character_q_medium.glb"
+    },
+    file_urls: {
+      "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/faa4c719-c0c4-4049-bf96-4739548051cb/o/Character.glb",
+      "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/faa4c719-c0c4-4049-bf96-4739548051cb/t/Character.png",
+      "glb": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/faa4c719-c0c4-4049-bf96-4739548051cb/glb/Character_q_medium.glb",
+      "glb_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/faa4c719-c0c4-4049-bf96-4739548051cb/glb/Character_q_low.glb",
+      "glb_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/faa4c719-c0c4-4049-bf96-4739548051cb/glb/Character_q_high.glb",
+      "glb_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/faa4c719-c0c4-4049-bf96-4739548051cb/glb/Character_q_medium.glb"
+    },
+    size: 11586460,
+    type: pathUtils.FileType.CHARACTER_RPM,
+    metadata: {
+      "ext": "glb",
+      "mimeType": "model/gltf-binary",
+      "vertices": 10327,
+      "triangles": 18176,
+      "rpmAvatarGender": "masculine",
+      "numberOfTextures": 3,
+      "totalTextureSize": 1.88,
+      "isRPM": true,
+    }
+  },
+  389: {
+    id: 389,
+    name: "Books.zip",
+    file_paths: {
+      "o": "o/Books.zip",
+      "t": "t/Books.jpeg",
+      "gltf": "gltf/scene.gltf"
+    },
+    file_urls: {
+      "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/543d8a86-60e2-49a0-98ab-b40299ab6ea6/o/Books.zip",
+      "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/543d8a86-60e2-49a0-98ab-b40299ab6ea6/t/Books.jpeg",
+      "gltf": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/543d8a86-60e2-49a0-98ab-b40299ab6ea6/gltf/scene.gltf"
+    },
+    size: 1073720,
+    type: pathUtils.FileType.THREED,
+    metadata: {
+      "ext": "zip",
+      "mimeType": "application/zip",
+      "vertices": 2033,
+      "triangles": 2485,
+      "numOfFiles": 5,
+      "numberOfTextures": 2,
+      "totalTextureSize": 0.99
+    }
+  }
 }
 
 describe ("r ProjectFactory tests", () => {
@@ -263,5 +352,23 @@ describe ("r ProjectFactory tests", () => {
     for (const rule of rulesAfterAdding) {
       expect(rule[1].props.ta_properties).to.be.undefined;
     }
-  })
+  });
+
+  it ("should get all file ids from project json", () => {
+    // @ts-ignore
+    const projectF = new ProjectFactory(deepClone(avatarJson));
+    const fileIds = projectF.getFileIdsFromProject();
+    expect(fileIds.length).to.be.eq(7);
+    expect(fileIds).to.include(3769);
+    expect(fileIds).to.include(3262);
+    expect(fileIds).to.include(389);
+  });
+
+  xit ("should inject source for avatars", () => {
+    const project = deepClone(avatarJson);
+    // @ts-ignore
+    const projectF = new ProjectFactory(project);
+    projectF.injectSourceIntoProject(avatarSourceMap);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/avatar.json", JSON.stringify(project));
+  });
 });
