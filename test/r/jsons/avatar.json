@@ -651,6 +651,12 @@
                         "processing_timestamp": "2023-06-15T08:32:22.408Z"
                     }
                 }
+            },
+            "8079237220438650": {
+                "type": "avatar",
+                "props": {},
+                "name": "Avatar (3)",
+                "order": 4
             }
         },
         "variable": {

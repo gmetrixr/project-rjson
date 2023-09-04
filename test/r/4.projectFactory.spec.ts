@@ -364,7 +364,7 @@ describe ("r ProjectFactory tests", () => {
     expect(fileIds).to.include(389);
   });
 
-  xit ("should inject source for avatars", () => {
+  it ("should inject source for avatars", () => {
     const project = deepClone(avatarJson);
     // @ts-ignore
     const projectF = new ProjectFactory(project);

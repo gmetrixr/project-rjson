@@ -568,7 +568,9 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
 
     for (const avatar of this.getRecords(RT.avatar)) {
-      fileIds.push((avatar.props.source as fn.Source).id);
+      if (avatar.props.source) {
+        fileIds.push((avatar.props.source as fn.Source).id);
+      }
     }
 
     const projectLogo = <fn.Source>this.get(rtp.project.project_logo_source);
@@ -593,9 +595,11 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     }
 
     for (const avatar of this.getRecords(RT.avatar)) {
-      const avatarF = new RecordFactory(avatar);
-      const newValue = sourceMap[(avatar.props.source as fn.Source).id];
-      avatarF.set(rtp.avatar.source, newValue);
+      if (avatar.props.source) {
+        const avatarF = new RecordFactory(avatar);
+        const newValue = sourceMap[(avatar.props.source as fn.Source).id];
+        avatarF.set(rtp.avatar.source, newValue);
+      }
     }
 
     const projectLogo = <fn.Source>this.get(rtp.project.project_logo_source);
