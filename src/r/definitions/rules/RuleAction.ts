@@ -117,6 +117,7 @@ export enum ThenActionProperty {
   new = "new",
   var_id = "var_id",
   duration = "duration",
+  animation = "animation"
 }
 
 export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | unknown>> = {
@@ -200,7 +201,7 @@ export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | un
   teleport: [ThenActionProperty.element_id],
   wave: [],
   clap: [],
-  talk: [ThenActionProperty.duration],
+  talk: [ThenActionProperty.animation, ThenActionProperty.duration],
   speak: [ThenActionProperty.string_value]
 };
 
@@ -230,6 +231,7 @@ export const rActionPropertyDefaults: Record<ThenActionProperty, string | number
   new: "",
   var_id: 0,
   duration: 0,
+  animation: "TALK_001"
 }
 
 export const rActionDisplayName: Record<RuleAction, string> = {
