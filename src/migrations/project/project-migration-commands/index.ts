@@ -11,6 +11,7 @@ import m206_207 from "./m206_207_fix_props_with_leadgen_id";
 import m207_208 from "./m207_208_remove_voice_recognition";
 import m208_209 from "./m208_209_remove_ghost_menu";
 import m209_210 from "./m209_210_legacy_scene_transition_type";
+import m210_211 from "./m210_211_add_animation_to_talk_then_action";
 
 const projectMigrationTree: {[key: number]: IOrder} = {
   [200]: m200_201,
@@ -23,6 +24,7 @@ const projectMigrationTree: {[key: number]: IOrder} = {
   [207]: m207_208,
   [208]: m208_209,
   [209]: m209_210,
+  [210]: m210_211,
 };
 
 const projectMigrationVersions: number[] = Object.keys(projectMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));

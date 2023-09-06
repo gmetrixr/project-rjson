@@ -3,6 +3,7 @@ import { createNewDeployment, migrateDeployment } from "../../src/migrations/dep
 import { migrateProject, projectViewerRuntimeMigrations } from "./../../src/migrations/project";
 import { migrateDiscussion } from "./../../src/migrations/discussion";
 import { RT } from "../../src/r/R";
+import { ProjectFactory } from "../../src/r/recordFactories";
 import fs from "fs";
 import deploymentJson from "./jsons/deployment.json";
 import campusJson from "./jsons/campus.json";
@@ -16,7 +17,6 @@ import myMetaverseJson from "./jsons/myMetaverse.json";
 import learningJson from "./jsons/learning.json";
 import safeHandsJson from "./jsons/safeHands.json";
 import dormantElementJson from "./jsons/r3fJsons/project/dormantElementTest.json";
-import { ProjectFactory } from "../../src/r/recordFactories";
 
 describe ("r Migration tests", () => {
   it ("should create new deployment", () => {
@@ -63,5 +63,5 @@ describe ("r Migration tests", () => {
     const idAndRecord = new ProjectFactory(migratedProject).getDeepIdAndRecord(2353489588758041);
     expect(idAndRecord).not.to.be.undefined;
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/dormantElementTestMigrated.json", JSON.stringify(migratedProject));
-  })
+  });
 });
