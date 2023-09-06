@@ -22,7 +22,6 @@ const migrateProject = (json: any) => {
       const taF = r.record(taRecord);
       const properties = taF.get(rtp.then_action.ta_properties) as VarValue[];
       properties.unshift("TALK_001");
-      taF.set(rtp.then_action.ta_properties, properties);
     }
   }
 
