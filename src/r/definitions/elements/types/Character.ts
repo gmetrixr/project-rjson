@@ -1,7 +1,7 @@
-import {FileType} from "../../files";
-import {ElementProperty} from "../../../recordTypes/Element";
-import {RuleAction} from "../../rules";
-import {BasicElement, ElementType, IElementDefinition} from "../ElementDefinition";
+import { FileType } from "../../files";
+import { ElementProperty } from "../../../recordTypes/Element";
+import { RuleAction } from "../../rules";
+import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition";
 
 export const Character: IElementDefinition = {
   element_type: ElementType.character,
@@ -34,7 +34,10 @@ export const Character: IElementDefinition = {
       file_urls: {
         o: "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/avatars/2023-01-06-avatars/glb/rpm_avatar_default_1.glb",
         glb: "https://s.vrgmetri.com/gb-web/z5-edge/6DOF/avatars/2023-01-06-avatars/glb/rpm_avatar_default_1.glb",
-       },
+      },
+      metadata: {
+        from_rpm: true,
+      },
       name: "gmetri_character.glb",
       type: FileType.THREED
     },
