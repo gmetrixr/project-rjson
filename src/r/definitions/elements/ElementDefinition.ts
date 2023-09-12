@@ -3,6 +3,7 @@ import { ItemProperty } from "../../recordTypes/Item";
 import { RuleAction } from "../rules";
 import { RuleEvent } from "../rules";
 import { ICogObjectDefinition } from "../BaseCogObject";
+import { SubstituteProperty } from "../../recordTypes/Substitute";
 
 export interface IElementDefinition extends ICogObjectDefinition {
   element_type: ElementType;
@@ -11,6 +12,8 @@ export interface IElementDefinition extends ICogObjectDefinition {
   defaultOverrides: Partial<Record<ElementProperty, unknown>>;
   itemProperties?: Array<ItemProperty>;
   itemDefaultOverrides?: Partial<Record<ItemProperty, unknown>>;
+  substituteProperties?: Array<SubstituteProperty>;
+  substituteDefaultOverrides?: Partial<Record<SubstituteProperty, unknown>>;
 }
 
 export enum ElementType {
@@ -252,5 +255,7 @@ export const sourcePropertyNames = {
   elementArrayProperties: [ElementProperty.image_sources],
   /** A list of all ItemProperties that end with the word "source". Use to understand which properties contain file source objects */  
   itemProperties: [ItemProperty.item_source],
+  /** A list of all SubstituteProperties that end with the word "source". Use to understand which properties contain file source objects */  
+  substituteProperties: [SubstituteProperty.substitute_source],
 }
 

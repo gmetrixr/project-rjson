@@ -3,6 +3,7 @@ import { ElementProperty } from "../../../recordTypes/Element";
 import { RuleAction } from "../../rules";
 import { RuleEvent } from "../../rules";
 import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { SubstituteProperty } from "../../../recordTypes/Substitute";
 
 export const Audio: IElementDefinition = {
   element_type: ElementType.audio,
@@ -15,6 +16,7 @@ export const Audio: IElementDefinition = {
     ElementProperty.muted,
     ElementProperty.loop,
     ElementProperty.use_html5_audio,
+    ElementProperty.linked_substitute_variable,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
@@ -28,6 +30,8 @@ export const Audio: IElementDefinition = {
     [ElementProperty.muted]: false,
     [ElementProperty.audio_type]: "upload",
   },
+  substituteProperties: [SubstituteProperty.substitute_variable, SubstituteProperty.substitute_source],
+  substituteDefaultOverrides: {},
   events: [
     RuleEvent.on_end,
     RuleEvent.on_duration_match

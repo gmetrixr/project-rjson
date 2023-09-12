@@ -13,6 +13,7 @@ import { OptionProperty, optionPropertyDefaults } from "../recordTypes/Options";
 import { ShoppingProperty, shoppingPropertyDefaults } from "../recordTypes/Shopping";
 import { ProductProperty, productPropertyDefaults } from "../recordTypes/Product";
 import { ItemProperty, itemPropertyDefaults } from "../recordTypes/Item";
+import { SubstituteProperty, substitutePropertyDefaults } from "../recordTypes/Substitute";
 import { TourModeProperty, tourModePropertyDefaults } from "../recordTypes/TourMode";
 import { LanguageProperty, languagePropertyDefaults } from "../recordTypes/Language";
 import { AvatarProperty, avatarPropertyDefaults } from "../recordTypes/Avatar";
@@ -42,6 +43,7 @@ export enum RT {
   "then_action" = "then_action",
   "element" = "element",
   "item" = "item",
+  "substitute" = "substitute",
   "option" = "option",
   "shopping" = "shopping",
   "product" = "product",
@@ -81,6 +83,7 @@ export const rtHeirarchyTree = {
           "item": {
             "option": {},
           },
+          "substitute": {}
         },
       },
     },
@@ -114,6 +117,7 @@ export interface RTP {
   [RT.then_action]: ThenActionProperty,
   [RT.element]: ElementProperty,
   [RT.item]: ItemProperty,
+  [RT.substitute]: SubstituteProperty,
   [RT.option]: OptionProperty,
   [RT.shopping]: ShoppingProperty,
   [RT.product]: ProductProperty,
@@ -142,6 +146,7 @@ export const rtp = {
   [RT.then_action]: ThenActionProperty,
   [RT.element]: ElementProperty,
   [RT.item]: ItemProperty,
+  [RT.substitute]: SubstituteProperty,
   [RT.option]: OptionProperty,
   [RT.shopping]: ShoppingProperty,
   [RT.product]: ProductProperty,
@@ -248,6 +253,12 @@ export const recordTypeDefinitions: Record<RT, RTDefinition> = {
     typesInRootPath: [RT.project, RT.scene, RT.element],
     defaultValues: itemPropertyDefaults,
     defaultName: "Item",
+  },
+  [RT.substitute]: {
+    treeRef: rtHeirarchyTree.project.scene.element.element.substitute,
+    typesInRootPath: [RT.project, RT.scene, RT.element],
+    defaultValues: substitutePropertyDefaults,
+    defaultName: "Substitute",
   },
   [RT.option]: {
     treeRef: rtHeirarchyTree.project.scene.element.element.item.option,
