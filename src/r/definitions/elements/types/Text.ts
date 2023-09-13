@@ -36,6 +36,7 @@ export const Text: IElementDefinition = {
     ElementProperty.horizontal_alignment,
     ElementProperty.text_version,
     ElementProperty.use_proximity_optimization,
+    ElementProperty.enable_substitutes,
     ElementProperty.linked_substitute_variable,
   ],
   defaultOverrides: {
