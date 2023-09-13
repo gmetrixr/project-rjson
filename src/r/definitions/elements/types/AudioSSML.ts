@@ -1,4 +1,5 @@
 import { ElementProperty } from "../../../recordTypes/Element";
+import { SubstituteProperty } from "../../../recordTypes/Substitute";
 import { RuleAction } from "../../rules";
 import { RuleEvent } from "../../rules";
 import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
@@ -17,13 +18,17 @@ export const AudioSSML: IElementDefinition = {
     ElementProperty.ssml_speed,
     ElementProperty.ssml_lang,
     ElementProperty.ssml_voice,
-    ElementProperty.ssml_pitch
+    ElementProperty.ssml_pitch,
+    ElementProperty.enable_substitutes,
+    ElementProperty.linked_substitute_variable,
   ],
   defaultOverrides: {
     [ElementProperty.loop]: false,
     [ElementProperty.muted]: false,
     [ElementProperty.audio_type]: "ssml",
   },
+  substituteProperties: [SubstituteProperty.substitute_variable, SubstituteProperty.substitute_source],
+  substituteDefaultOverrides: {},
   events: [
     RuleEvent.on_end,
     RuleEvent.on_duration_match
