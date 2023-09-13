@@ -142,6 +142,7 @@ export enum ElementProperty {
   character_chatbot_initial_prompt = "character_chatbot_initial_prompt",
 
   // Substitute
+  enable_substitutes = "enable_substitutes",
   linked_substitute_variable = "linked_substitute_variable",
 }
 
@@ -297,5 +298,6 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.character_chatbot_welcome_dialogue]: undefined,
   [ElementProperty.character_chatbot_welcome_dialogue_repeat]: "once", // once | always
   [ElementProperty.character_chatbot_initial_prompt]: "",
+  [ElementProperty.enable_substitutes]: false,
   [ElementProperty.linked_substitute_variable]: undefined,
 }

@@ -21,6 +21,7 @@ export const ImageFlat: IElementDefinition = {
     ElementProperty.billboarding,
     ElementProperty.use_proximity_optimization,
     ElementProperty.linked_element_id,
+    ElementProperty.enable_substitutes,
     ElementProperty.linked_substitute_variable,
   ],
   defaultOverrides: {
