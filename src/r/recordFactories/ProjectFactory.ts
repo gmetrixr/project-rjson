@@ -25,6 +25,7 @@ import { elementDisplayNames, ElementType } from "../definitions/elements/Elemen
 import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
 import { SceneCollisionOptions, SceneType } from "../definitions/special";
 import { sceneEnvironmentOptions } from "../definitions/special/SpecialTypes";
+import { SubstituteProperty } from "../recordTypes/Substitute";
 
 const { deepClone, generateIdV2 } = jsUtils;
 type variable = RT.variable;
@@ -735,6 +736,12 @@ export class ProjectFactory extends RecordFactory<RT.project> {
             const optionF = new RecordFactory(optionRecord);
             metaArray.push(optionF.get(OptionProperty.option_text));
           }
+        }
+
+        // 4. Substitutes meta fields
+        for (const substituteRecord of elementF.getRecords(RT.substitute)) {
+          const substituteF = new RecordFactory(substituteRecord);
+          metaArray.push(substituteF.get(SubstituteProperty.substitute_text));
         }
       }
     }

@@ -1,4 +1,5 @@
 import { ElementProperty } from "../../../recordTypes/Element";
+import { SubstituteProperty } from "../../../recordTypes/Substitute";
 import { RuleEvent } from "../../rules";
 import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
 
@@ -35,6 +36,7 @@ export const Text: IElementDefinition = {
     ElementProperty.horizontal_alignment,
     ElementProperty.text_version,
     ElementProperty.use_proximity_optimization,
+    ElementProperty.linked_substitute_variable,
   ],
   defaultOverrides: {
     [ElementProperty.text]: "welcome to the metaverse",
@@ -42,6 +44,8 @@ export const Text: IElementDefinition = {
     [ElementProperty.font_color]: "#FFFFFF",
     [ElementProperty.font_size]: 0.6,
   },
+  substituteProperties: [SubstituteProperty.substitute_variable, SubstituteProperty.substitute_text],
+  substituteDefaultOverrides: {},
   events: [
     ...BasicElement.events,
     RuleEvent.on_press, 

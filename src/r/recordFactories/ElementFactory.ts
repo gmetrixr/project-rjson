@@ -86,6 +86,16 @@ export class ElementFactory extends RecordFactory<RT.element> {
         }
       }
     }
+
+    //Get file ids from substitute properties
+    for(const sourceProp of en.sourcePropertyNames.substituteProperties) {
+      for(const substitute of Object.values(this.getRecordMap(RT.substitute))) {
+        const substituteProps = Object.keys(substitute.props);
+        if(substituteProps.includes(sourceProp)) { //Not checking for image_source, as it isn't used in substitutes
+          fileIds.push(...ElementUtils.getFileIdsFromValue(substitute.props[sourceProp]));
+        }
+      }
+    }
     
     //return _.uniq(fileIds); Unique not needed here, done at project level
     return fileIds;
@@ -124,6 +134,20 @@ export class ElementFactory extends RecordFactory<RT.element> {
           const newValue = ElementUtils.getNewSourceValue(currentValue, sourceMap);
           if(newValue !== undefined) {
             item.props[sourceProp] = deepClone(newValue);
+          }
+        }
+      }
+    }
+
+    //Get file ids from substitute properties
+    for(const sourceProp of en.sourcePropertyNames.substituteProperties) {
+      for(const substitute of Object.values(this.getRecordMap(RT.substitute))) {
+        const substituteProps = Object.keys(substitute.props);
+        if(substituteProps.includes(sourceProp)) { //Not checking for image_source, as it isn't used in substitutes
+          const currentValue = substitute.props[sourceProp];
+          const newValue = ElementUtils.getNewSourceValue(currentValue, sourceMap);
+          if(newValue !== undefined) {
+            substitute.props[sourceProp] = deepClone(newValue);
           }
         }
       }

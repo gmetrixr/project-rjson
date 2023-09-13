@@ -11,6 +11,7 @@ import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 import projectJson from "./jsons/project.json";
+import { r } from "../../src/r";
 
 const { generateIdV2, deepClone } = jsUtils;
 
@@ -384,5 +385,21 @@ describe ("r ProjectFactory tests", () => {
 
     projectF.injectSourceIntoProject(avatarSourceMap);
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/project.json", JSON.stringify(project));
+  });
+
+  it ("should create a substitute entry for image", () => {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
+    const imageElement = projectF.getDeepRecord(3056856615068826) as RecordNode<RT.element>;
+    const elementF = r.element(imageElement);
+
+    const substituteRecord = createRecord(RT.substitute);
+    const idAndRecord = elementF.addRecord({ record: substituteRecord });
+
+    expect(idAndRecord?.record.type).to.be.equal("substitute");
+    expect(elementF.getRecords(RT.substitute).length).to.be.equal(1);
+
+    const substituteF = r.record(idAndRecord?.record as RecordNode<RT.substitute>);
+    substituteF.set(rtp.substitute.substitute_variable, 1);
+    expect(substituteF.getValueOrDefault(rtp.substitute.substitute_variable)).to.be.equal(1);
   });
 });

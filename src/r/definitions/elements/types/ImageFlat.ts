@@ -2,6 +2,7 @@ import { FileType } from "../../files";
 import { ElementProperty } from "../../../recordTypes/Element";
 import { RuleEvent } from "../../rules";
 import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { SubstituteProperty } from "../../../recordTypes/Substitute";
 
 export const ImageFlat: IElementDefinition = {
   element_type: ElementType.image_flat,
@@ -20,6 +21,7 @@ export const ImageFlat: IElementDefinition = {
     ElementProperty.billboarding,
     ElementProperty.use_proximity_optimization,
     ElementProperty.linked_element_id,
+    ElementProperty.linked_substitute_variable,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {
@@ -31,6 +33,8 @@ export const ImageFlat: IElementDefinition = {
       type: FileType.IMAGE
     }
   },
+  substituteProperties: [SubstituteProperty.substitute_variable, SubstituteProperty.substitute_source],
+  substituteDefaultOverrides: {},
   events: [
     ...BasicElement.events,
     RuleEvent.on_press,

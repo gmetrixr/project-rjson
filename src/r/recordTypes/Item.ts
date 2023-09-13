@@ -22,7 +22,6 @@ export enum ItemProperty {
 }
 
 export const itemPropertyDefaults: Record<ItemProperty, unknown> = {
-
   [ItemProperty.item_heading]: "",
   [ItemProperty.item_text]: "",
   [ItemProperty.item_hidden]: false,
