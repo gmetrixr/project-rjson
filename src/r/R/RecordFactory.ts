@@ -77,8 +77,9 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * cycleAllSubRecordIds  / changeRecordIdInProperties -> Updates ids and their references in the tree
  * $ private getNewOrders / initializeRecordMap
  * addRecord / addBlankRecord
- * duplicateRecord     / deleteRecord     / changeRecordName
- * duplicateDeepRecord / deleteDeepRecord / changeDeepRecordName
+ * duplicateRecord       / deleteRecord       / changeRecordName
+ * duplicateDeepRecord   / deleteDeepRecord   / changeDeepRecordName
+ * duplicateDeepRecords  / deleteDeepRecords  
  * 
  *! MOVE/COPY/CLIPBOARD
  * reorderRecords / copyDeepRecords / moveDeepRecords
@@ -785,6 +786,14 @@ export class RecordFactory<T extends RT> {
     return rAndP;
   }
 
+  duplicateDeepRecords (idOrAddresses: idOrAddress[]): Array<rAndP | undefined> {
+    const duplicatedRecords: Array<rAndP | undefined> = [];
+    for(const idOrAddress of idOrAddresses) {
+      duplicatedRecords.push(this.duplicateDeepRecord(idOrAddress));
+    }
+    return duplicatedRecords;
+  }
+
   deleteRecord <N extends RT>(id: number, type?: N): idAndRecord<N> | undefined {
     const recordToDelete = this.getRecord(id, type);
     if(recordToDelete === undefined) return undefined;
@@ -798,6 +807,14 @@ export class RecordFactory<T extends RT> {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
     return new RecordFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
+  }
+
+  deleteDeepRecords (idOrAddresses: idOrAddress[]): Array<idAndRecord<RT> | undefined> {
+    const deletedRecords: Array<idAndRecord<RT> | undefined> = [];
+    for(const idOrAddress of idOrAddresses) {
+      deletedRecords.push(this.deleteDeepRecord(idOrAddress));
+    }
+    return deletedRecords;
   }
 
   changeRecordName <N extends RT>(id: number, newName?: string, type?: N): idAndRecord<RT> | undefined {
