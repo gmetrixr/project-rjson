@@ -21,6 +21,7 @@ export enum RuleAction {
   reset_all_vars = "reset_all_vars", 
   change_scene = "change_scene", //additional property sno
   open_url = "open_url", //additional property url and target (new_page, same_page)
+  change_view_mode = "change_view_mode",
   open_deployment = "open_deployment", // to open another gmetri deployment
   call_api = "call_api", //to make API calls when clicked,
   award_score = "award_score", //for score
@@ -117,7 +118,8 @@ export enum ThenActionProperty {
   new = "new",
   var_id = "var_id",
   duration = "duration",
-  animation = "animation"
+  animation = "animation",
+  view_mode = "view_mode"
 }
 
 export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | unknown>> = {
@@ -148,6 +150,7 @@ export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | un
   reset_all_vars: [],
 
   open_url: [ThenActionProperty.uri, ThenActionProperty.target], //uri_type is either template or direct
+  change_view_mode: [ThenActionProperty.view_mode],
   open_deployment: [ThenActionProperty.string_value],
   call_api: [ThenActionProperty.uri], //uri_type is either template or direct
   award_score: [ThenActionProperty.score],
@@ -231,7 +234,8 @@ export const rActionPropertyDefaults: Record<ThenActionProperty, string | number
   new: "",
   var_id: 0,
   duration: 0,
-  animation: "TALK_001"
+  animation: "TALK_001",
+  view_mode: "third_person"
 }
 
 export const rActionDisplayName: Record<RuleAction, string> = {
@@ -257,6 +261,7 @@ export const rActionDisplayName: Record<RuleAction, string> = {
   [RuleAction.change_scene]: "change to scene",
   [RuleAction.reset_all_vars]: "reset all variables",
   [RuleAction.open_url]: "open URL",
+  [RuleAction.change_view_mode]: "change view mode",
   [RuleAction.open_deployment]: "open deployment",
   [RuleAction.call_api]: "make API call",
   [RuleAction.award_score]: "award",
