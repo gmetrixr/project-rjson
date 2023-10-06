@@ -119,7 +119,7 @@ export const elementDisplayNames: Record<ElementType, string> = {
   collider_volume: "Collider Volume",
   workspace_logo: "Workspace Logo",
   screenshare: "Screenshare",
-  character: "Character",
+  character: "AI Character",
   embed_3d: "Embed 3D",
   seat: "Seat"
 };
