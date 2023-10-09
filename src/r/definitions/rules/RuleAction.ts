@@ -1,3 +1,4 @@
+import { ViewerCameraMode } from "../project";
 
 export enum RuleAction {
   do_nothing = "do_nothing",
@@ -235,7 +236,7 @@ export const rActionPropertyDefaults: Record<ThenActionProperty, string | number
   var_id: 0,
   duration: 0,
   animation: "TALK_001",
-  view_mode: "third_person"
+  view_mode: ViewerCameraMode.third_person,
 }
 
 export const rActionDisplayName: Record<RuleAction, string> = {
