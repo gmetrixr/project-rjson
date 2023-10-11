@@ -221,7 +221,7 @@ export class RecordFactory<T extends RT> {
         const recordEntriesOfType = this.getSortedRecordEntries(currentType); 
         for (const record of recordEntriesOfType) {
           recordEntries.push(record);
-          new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+          new RecordFactory(record[1]).getSortedDFSRecordEntriesInternal(type, recordEntries);
         }
       }
     } else { //Go deeper in types where there is a possibility that our type is a subChild of this type
@@ -231,12 +231,12 @@ export class RecordFactory<T extends RT> {
           const recordEntriesOfType = this.getSortedRecordEntries(currentType);   
           for (const record of recordEntriesOfType) {
             recordEntries.push(record);
-            new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+            new RecordFactory(record[1]).getSortedDFSRecordEntriesInternal(type, recordEntries);
           }
         } else if (isTypeSubChildOf(currentType, type)) {
           const recordEntriesOfType = this.getSortedRecordEntries(currentType); 
           for (const record of recordEntriesOfType) {
-            new RecordFactory(record[1]).getDFSRecordEntriesInternal(type, recordEntries);
+            new RecordFactory(record[1]).getSortedDFSRecordEntriesInternal(type, recordEntries);
           }
         }
       }
