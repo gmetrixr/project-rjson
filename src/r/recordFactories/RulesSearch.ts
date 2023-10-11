@@ -121,6 +121,7 @@ export class RulesSearch {
             case RuleAction.copy_to_clipboard:
             case RuleAction.replace_screen_reader_text:
             case RuleAction.set_to_number:
+            case RuleAction.change_view_mode:
             case RuleAction.add_number: {
               if (Array.isArray(ta.props.ta_properties)) {
                 for(const p of ((ta.props.ta_properties ?? []) as string[])) {

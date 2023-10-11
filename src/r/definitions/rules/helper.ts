@@ -57,6 +57,7 @@ export function isRuleValid(rule: RecordNode<RT.rule>): boolean {
       case RuleAction.copy_to_clipboard:
       case RuleAction.play_seek:
       case RuleAction.talk:
+      case RuleAction.change_view_mode:
       case RuleAction.change_scene: {
         const properties = ta.props.ta_properties as string[];
         if (properties?.[0] === undefined) {
