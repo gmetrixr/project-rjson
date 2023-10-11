@@ -258,7 +258,7 @@ export const recordTypeDefinitions: Record<RT, RTDefinition> = {
     treeRef: rtHeirarchyTree.project.scene.element.element.substitute,
     typesInRootPath: [RT.project, RT.scene, RT.element],
     defaultValues: substitutePropertyDefaults,
-    defaultName: "Substitute",
+    defaultName: "Variant",
   },
   [RT.option]: {
     treeRef: rtHeirarchyTree.project.scene.element.element.item.option,
