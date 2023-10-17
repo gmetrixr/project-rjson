@@ -6,6 +6,7 @@ export const Minimap: IElementDefinition = {
   elementDefaultName: "Minimap",
   properties: [
     ...BasicElement.properties,
+    ElementProperty.source,
     ElementProperty.hidden,
     ElementProperty.locked,
     ElementProperty.placer_3d,
