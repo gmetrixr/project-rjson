@@ -38,3 +38,12 @@ export enum CharacterPoseTypes {
   t_pose = "t_pose",
   i_pose = "i_pose"
 }
+
+export enum MinimapAlignment {
+ "top-left" = "top-left",
+ "top-right" = "top-right",
+ "bottom-left" = "bottom-left",
+ "bottom-right" = "bottom-right",
+ "bottom-center" = "bottom-center",
+ "top-center" = "top-center",
+}

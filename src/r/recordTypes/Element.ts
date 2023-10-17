@@ -144,6 +144,9 @@ export enum ElementProperty {
   // Substitute
   enable_substitutes = "enable_substitutes",
   linked_substitute_variable = "linked_substitute_variable",
+
+  // minimap
+  minimap_alignment = "minimap_alignment"
 }
 
 export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
@@ -300,4 +303,5 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.character_chatbot_initial_prompt]: "",
   [ElementProperty.enable_substitutes]: false,
   [ElementProperty.linked_substitute_variable]: undefined,
+  [ElementProperty.minimap_alignment]: "bottom-left",
 }

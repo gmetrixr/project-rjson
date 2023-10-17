@@ -43,19 +43,20 @@ import { Screenshare } from "./types/Screenshare";
 import { Character } from "./types/Character";
 import { Embed3D } from "./types/Embed3D";
 import { Seat } from "./types/Seat";
+import { Minimap } from "./types/Minimap";
 import { IElementDefinition } from "./ElementDefinition";
 
 import { 
   ElementType, elementDisplayNames, ElementCategory, elementCategoryDisplayNames, elementTypeByCategory, 
-  isElementType, sourcePropertyNames, elementsWithLinkedVariables, BasicElement 
+  isElementType, sourcePropertyNames, elementsWithLinkedVariables, BasicElement
 } from "./ElementDefinition";
 export { 
   ElementType, elementDisplayNames, ElementCategory, elementCategoryDisplayNames, elementTypeByCategory, 
   isElementType, sourcePropertyNames, elementsWithLinkedVariables, BasicElement 
 };
 
-import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes } from "./ElementTypes";
-export { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes };
+import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment } from "./ElementTypes";
+export { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment };
 
 export const elementList: IElementDefinition[] = [
   ActionBar,
@@ -103,6 +104,7 @@ export const elementList: IElementDefinition[] = [
   Character,
   Embed3D,
   Seat,
+  Minimap
 ];
 
 /**
