@@ -12,7 +12,7 @@ export const Minimap: IElementDefinition = {
     ElementProperty.scale,
   ],
   defaultOverrides: {
-    placer_3d: [0, 0, 0, 0, 0, 0, 1, 1, 1],
+    placer_3d: [0, 0, 0, 90, 0, 0, 1, 1, 1],
     scale: 1
   },
   substituteProperties: [],
