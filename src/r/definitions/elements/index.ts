@@ -43,6 +43,7 @@ import { Screenshare } from "./types/Screenshare";
 import { Character } from "./types/Character";
 import { Embed3D } from "./types/Embed3D";
 import { Seat } from "./types/Seat";
+import { Minimap } from "./types/Minimap";
 import { IElementDefinition } from "./ElementDefinition";
 
 import { 
@@ -103,6 +104,7 @@ export const elementList: IElementDefinition[] = [
   Character,
   Embed3D,
   Seat,
+  Minimap
 ];
 
 /**
