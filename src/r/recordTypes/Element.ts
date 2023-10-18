@@ -146,7 +146,8 @@ export enum ElementProperty {
   linked_substitute_variable = "linked_substitute_variable",
 
   // minimap
-  minimap_alignment = "minimap_alignment"
+  minimap_alignment = "minimap_alignment",
+  minimap_margin = "minimap_margin",
 }
 
 export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
@@ -304,4 +305,5 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.enable_substitutes]: false,
   [ElementProperty.linked_substitute_variable]: undefined,
   [ElementProperty.minimap_alignment]: "bottom-left",
+  [ElementProperty.minimap_margin]: [80, 80],
 }
