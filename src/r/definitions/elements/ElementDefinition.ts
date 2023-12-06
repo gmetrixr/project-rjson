@@ -44,6 +44,7 @@ export enum ElementType {
   actionbar = "actionbar",
   product_card = "product_card",
   quiz = "quiz",
+  quiz2 = "quiz2",
   group = "group",
   qrcode_browser = "qrcode_browser",
   qrcode_matcher = "qrcode_matcher",
@@ -98,6 +99,7 @@ export const elementDisplayNames: Record<ElementType, string> = {
   score: "Score",
   timer: "Timer",
   quiz: "Quiz",
+  quiz2: "Quiz 2.0",
   speech: "Voice Recognition",
   capture_input: "Capture Input",
   media_upload: "Media Upload",
@@ -202,6 +204,7 @@ export const elementTypeByCategory: Record<ElementCategory, ElementType[]> = {
     ElementType.score,
     ElementType.timer,
     ElementType.quiz,
+    ElementType.quiz2,
   ],
   user_input: [
     ElementType.speech,

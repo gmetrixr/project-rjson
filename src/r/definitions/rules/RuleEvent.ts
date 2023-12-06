@@ -9,6 +9,8 @@ export enum RuleEvent {
   on_release = "on_release",
   on_select = "on_select", //On selecting menu items
   on_end = "on_end",
+  on_quiz_pass = "on_quiz_pass",
+  on_quiz_fail = "on_quiz_fail",
   on_timermatch = "on_timermatch", //additional property number
   on_swipeup = "on_swipeup",
   on_swipedown = "on_swipedown",
@@ -103,6 +105,8 @@ export const rEventProperties: Record<RuleEvent, Array<WhenEventProperty | unkno
   on_swipeleft: [],
   on_swiperight: [],
   on_end: [],
+  on_quiz_pass: [],
+  on_quiz_fail: [],
   on_timermatch: [WhenEventProperty.timer_value], //additional property number
   on_phrase_match: [WhenEventProperty.phrase], // speech
   on_phrase_nomatch: [], // speech
@@ -174,6 +178,8 @@ export const rEventDisplayName: Record<RuleEvent, string> = {
   [RuleEvent.on_swipeleft]: "is swiped left",
   [RuleEvent.on_swiperight]: "is swiped right",
   [RuleEvent.on_end]: "ends",
+  [RuleEvent.on_quiz_pass]: "passed quiz",
+  [RuleEvent.on_quiz_fail]: "failed quiz",
   [RuleEvent.on_timermatch]: "matches value", //additional property number
   [RuleEvent.on_phrase_match]: "matches phrase",
   [RuleEvent.on_phrase_nomatch]: "matches no phrase", // speech
