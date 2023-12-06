@@ -5,7 +5,7 @@ import { RuleEvent } from "../../rules";
 import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
 
 export const Quiz2: IElementDefinition = {
-  element_type: ElementType.quiz,
+  element_type: ElementType.quiz2,
   elementDefaultName: "Quiz",
   properties: [
     ...BasicElement.properties,
