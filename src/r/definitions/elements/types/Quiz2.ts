@@ -19,6 +19,7 @@ export const Quiz2: IElementDefinition = {
     ElementProperty.show_correct_answer_prompt,
     ElementProperty.linked_variable_id,
     ElementProperty.enable_skip,
+    ElementProperty.subset_number,
   ],
   defaultOverrides: {},
   itemProperties: [
