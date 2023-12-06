@@ -6,7 +6,7 @@ import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefini
 
 export const Quiz2: IElementDefinition = {
   element_type: ElementType.quiz2,
-  elementDefaultName: "Quiz",
+  elementDefaultName: "Quiz 2.0",
   properties: [
     ...BasicElement.properties,
     ElementProperty.quiz_starting_instructions,
