@@ -21,6 +21,7 @@ import { ProductCard } from "./types/ProductCard";
 import { QRMatcher } from "./types/QRMatcher";
 import { QRReader } from "./types/QRReader";
 import { Quiz } from "./types/Quiz";
+import { Quiz2 } from "./types/Quiz2";
 import { Score } from "./types/Score";
 import { Share } from "./types/Share";
 import { ShoppingItem } from "./types/ShoppingItem";
@@ -81,6 +82,7 @@ export const elementList: IElementDefinition[] = [
   QRMatcher,
   QRReader,
   Quiz,
+  Quiz2,
   Score,
   Share,
   ShoppingItem,
