@@ -16,6 +16,12 @@ export enum AvatarSystem {
   none = "none"
 }
 
+export enum AvatarQuality {
+  high = "high",
+  medium = "medium",
+  low = "low"
+}
+
 export enum AvatarBodyType {
   halfbody = "halfbody",
   fullbody = "fullbody",
