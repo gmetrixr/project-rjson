@@ -69,6 +69,11 @@ export enum ElementProperty {
   chroma_color = "chroma_color",
   share_attributes = "share_attributes",
   randomize_questions = "randomize_questions",
+  show_correct_answer_prompt = "show_correct_answer_prompt",
+  enable_pass_fail = "enable_pass_fail",
+  linked_variable_id = "linked_variable_id",
+  subset_number = "subset_number",
+  enable_skip = "enable_skip",
   embed_string = "embed_string",
   source_ar = "source_ar",
   embed_scorm_url = "embed_scorm_url",
@@ -235,6 +240,11 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   // file_camera => select file from device OR take an image from camera
   //[ElementProperty.media_upload_method]: "file", Changed to upload_methods_allowed
   [ElementProperty.randomize_questions]: false,
+  [ElementProperty.enable_pass_fail]: true,
+  [ElementProperty.show_correct_answer_prompt]: false,
+  [ElementProperty.linked_variable_id]: undefined,
+  [ElementProperty.subset_number]: 0,
+  [ElementProperty.enable_skip]: false,
   [ElementProperty.embed_string]: "<p>Paste your HTML code here.</p>",
   [ElementProperty.source_ar]: { },
   [ElementProperty.embed_scorm_url]: "",

@@ -6,6 +6,7 @@ import {
   ViewerControlPanelPosition,
   Language,
   SceneTransitionType,
+  AvatarQuality,
 } from "../definitions/project";
 
 export enum ProjectProperty {
@@ -55,6 +56,7 @@ export enum ProjectProperty {
   initial_graphics_setting = "initial_graphics_setting",
   avatar_system = "avatar_system",
   avatar_system_body_type = "avatar_system_body_type",
+  avatar_quality = "avatar_quality",
   viewer_camera_mode = "viewer_camera_mode",
   use_legacy_color_management = "use_legacy_color_management",
   viewer_language = "viewer_language",
@@ -123,6 +125,7 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.initial_graphics_setting]: InitialGraphicsSetting.high,
   [ProjectProperty.avatar_system_body_type]: AvatarBodyType.fullbody,
   [ProjectProperty.avatar_system]: AvatarSystem.none,
+  [ProjectProperty.avatar_quality]: AvatarQuality.medium,
   [ProjectProperty.viewer_camera_mode]: ViewerCameraMode.third_person,
   [ProjectProperty.use_legacy_color_management]: false,
   [ProjectProperty.viewer_language]: Language.en,
