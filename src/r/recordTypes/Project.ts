@@ -125,7 +125,7 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.initial_graphics_setting]: InitialGraphicsSetting.high,
   [ProjectProperty.avatar_system_body_type]: AvatarBodyType.fullbody,
   [ProjectProperty.avatar_system]: AvatarSystem.none,
-  [ProjectProperty.avatar_quality]: AvatarQuality.medium,
+  [ProjectProperty.avatar_quality]: AvatarQuality.low,
   [ProjectProperty.viewer_camera_mode]: ViewerCameraMode.third_person,
   [ProjectProperty.use_legacy_color_management]: false,
   [ProjectProperty.viewer_language]: Language.en,
