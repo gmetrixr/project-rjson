@@ -17,6 +17,7 @@ export const ProductCard: IElementDefinition = {
     ElementProperty.image_sources,
     ElementProperty.threed_source,
     ElementProperty.show_add_to_cart_button,
+    ElementProperty.show_share_button,
     ElementProperty.add_to_cart_button_text,
     ElementProperty.add_to_cart_button_link,
     ElementProperty.background_source,
