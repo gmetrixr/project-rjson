@@ -20,7 +20,6 @@ export enum AvatarQuality {
   high = "high",
   medium = "medium",
   low = "low",
-  ultra = "ultra",
 }
 
 export enum AvatarBodyType {
