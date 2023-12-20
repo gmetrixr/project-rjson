@@ -298,6 +298,18 @@ export class RecordFactory<T extends RT> {
     return Object.fromEntries(this.getDeepRecordEntries(type));
   }
 
+  getDeepRecordsByName(name: string, type?: RT): idAndRecord<RT>[] | undefined {
+    const recordEntries = this.getDeepRecordEntries(type);
+    const matchingRecords: idAndRecord<RT>[] = [];
+    for(const [id, record] of recordEntries) {
+      if(record.name === name) {
+        matchingRecords.push({id, record});
+      }
+    }
+    return matchingRecords;
+  }
+
+
   getIdAndRecord(id: number, type?: RT): idAndRecord<RT> | undefined {
     const rm = this.getRecordMap(type);
     return { id, record: rm[id] };
@@ -492,7 +504,6 @@ export class RecordFactory<T extends RT> {
       return this.getRecordAndParentWithAddress(idOrAddress);
     }
   }
-  
 
   private getBreadCrumbsWithId(id: number, breadCrumb?: idAndRecord<RT>[]): idAndRecord<RT>[] | undefined {
     if(breadCrumb === undefined) breadCrumb = [];
