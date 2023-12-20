@@ -58,6 +58,7 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
  * getDeepIdAndRecord -> works with idOrAddress
  * getRecordMap / getRecordEntries / getRecords / getRecordIds -> recordMap of one type (all types when type isn't passed) - lvl 1 records
  * getDeepRecordMap / getDeepRecordEntries / RecordUtils.getDeepRecordAndParentArray
+ * getDeepRecordByName -> Gets record(s) by name. Name can be duplicated, so returning an array of idAndRecord
  * 
  *! SORTED RECORDS (FOR UI)
  *   Sorting only makes sense in a single type (eg: you wont sort variables & scenes)
@@ -491,6 +492,7 @@ export class RecordFactory<T extends RT> {
       return this.getRecordAndParentWithAddress(idOrAddress);
     }
   }
+  
 
   private getBreadCrumbsWithId(id: number, breadCrumb?: idAndRecord<RT>[]): idAndRecord<RT>[] | undefined {
     if(breadCrumb === undefined) breadCrumb = [];
