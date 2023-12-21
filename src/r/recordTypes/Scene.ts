@@ -31,6 +31,7 @@ export enum SceneProperty {
   proximity_radius = "proximity_radius",
   linked_menu_id = "linked_menu_id",
   linked_tour_mode_id = "linked_tour_mode_id",
+  scene_zoom = "scene_zoom",
 }
 
 export const scenePropertyDefaults: Record<SceneProperty, unknown> = {
@@ -59,4 +60,5 @@ export const scenePropertyDefaults: Record<SceneProperty, unknown> = {
   [SceneProperty.proximity_radius]: 8,// 8M
   [SceneProperty.linked_menu_id]: undefined,
   [SceneProperty.linked_tour_mode_id]: undefined,
+  [SceneProperty.scene_zoom]: 1,
 };
