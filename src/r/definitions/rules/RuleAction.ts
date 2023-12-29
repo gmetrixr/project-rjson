@@ -24,6 +24,7 @@ export enum RuleAction {
   open_url = "open_url", //additional property url and target (new_page, same_page)
   change_view_mode = "change_view_mode",
   open_deployment = "open_deployment", // to open another gmetri deployment
+  show_notification = "show_notification",  // to show trigger based notification
   call_api = "call_api", //to make API calls when clicked,
   award_score = "award_score", //for score
   move_to = "move_to", //for any object, additional position element and move speed
@@ -153,6 +154,7 @@ export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | un
   open_url: [ThenActionProperty.uri, ThenActionProperty.target], //uri_type is either template or direct
   change_view_mode: [ThenActionProperty.view_mode],
   open_deployment: [ThenActionProperty.string_value],
+  show_notification: [ThenActionProperty.string_value],
   call_api: [ThenActionProperty.uri], //uri_type is either template or direct
   award_score: [ThenActionProperty.score],
   // deprecated
@@ -264,6 +266,7 @@ export const rActionDisplayName: Record<RuleAction, string> = {
   [RuleAction.open_url]: "open URL",
   [RuleAction.change_view_mode]: "change view mode",
   [RuleAction.open_deployment]: "open deployment",
+  [RuleAction.show_notification]: "show notification",
   [RuleAction.call_api]: "make API call",
   [RuleAction.award_score]: "award",
   [RuleAction.move_to]: "move to the position of",
