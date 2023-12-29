@@ -114,6 +114,7 @@ export class RulesSearch {
           switch (ta.props.action) {
             case RuleAction.open_url:
             case RuleAction.open_deployment:
+            case RuleAction.show_notification:
             case RuleAction.call_api:
             case RuleAction.load_project:
             case RuleAction.set_to_formula:
