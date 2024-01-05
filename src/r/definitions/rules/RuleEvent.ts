@@ -53,6 +53,7 @@ export enum RuleEvent {
 
   // for ProductCard
   on_product_card_cta1_click = "on_product_card_cta1_click",
+  on_product_card_share_click = "on_product_card_share_click",
   
   // for EmbedScorm
   on_scorm_set_score = "on_scorm_set_score",
@@ -130,6 +131,7 @@ export const rEventProperties: Record<RuleEvent, Array<WhenEventProperty | unkno
   on_successful_upload: [],
   // ProductCard
   on_product_card_cta1_click: [],
+  on_product_card_share_click: [],
   //is in list
   on_is_in_list: [WhenEventProperty.list_value],
   on_is_not_in_list: [WhenEventProperty.list_value],
@@ -207,6 +209,7 @@ export const rEventDisplayName: Record<RuleEvent, string> = {
   // for MediaUpload
   [RuleEvent.on_successful_upload]: "collects media",
   [RuleEvent.on_product_card_cta1_click]: "button is clicked",
+  [RuleEvent.on_product_card_share_click]: "share button is clicked",
   //for EmbedScorm
   [RuleEvent.on_scorm_set_score]: "sets score",
   [RuleEvent.on_scorm_initialize]: "is initialized",
