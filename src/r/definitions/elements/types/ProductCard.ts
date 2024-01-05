@@ -25,7 +25,7 @@ export const ProductCard: IElementDefinition = {
   defaultOverrides: {},
   itemProperties: [ItemProperty.item_text],
   itemDefaultOverrides: {},
-  events: [ RuleEvent.on_product_card_cta1_click, RuleEvent.on_close ],
+  events: [ RuleEvent.on_product_card_cta1_click, RuleEvent.on_product_card_share_click, RuleEvent.on_close],
   actions: [
     RuleAction.show,
     RuleAction.hide
