@@ -208,7 +208,7 @@ export const rEventDisplayName: Record<RuleEvent, string> = {
   [RuleEvent.on_nomatch]: "matches no data",
   // for MediaUpload
   [RuleEvent.on_successful_upload]: "collects media",
-  [RuleEvent.on_product_card_cta1_click]: "button is clicked",
+  [RuleEvent.on_product_card_cta1_click]: "cta button is clicked",
   [RuleEvent.on_product_card_share_click]: "share button is clicked",
   //for EmbedScorm
   [RuleEvent.on_scorm_set_score]: "sets score",
