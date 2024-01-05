@@ -11,9 +11,11 @@ export function isRuleValid(rule: RecordNode<RT.rule>): boolean {
   const wI = whenEvents.findIndex((w: RecordNode<RT.when_event>) => w.props.event === "");
   const tI = thenActions.findIndex((t: RecordNode<RT.then_action>) => t.props.action === "");
   
-  if (wI !== -1 || tI !== -1) return false;
+  if (wI !== -1 || tI !== -1) {
+    return false;
+  }
 
-  if (whenEvents.length === 0 || thenActions.length === 0) {
+  if (whenEvents.length === 0) {
     return false;
   }
 
