@@ -34,9 +34,11 @@ const migrateProject = (json: any) => {
         sceneF.deleteRecord(rId, RT.rule);
         continue;
       }
-      if( (ruleF.getRecordIds(RT.when_event).length === 0) || (ruleF.getRecordIds(RT.then_action).length === 0) ) {
-        sceneF.deleteRecord(rId, RT.rule);
-        continue;
+      if(!ruleF.get(rtp.rule.tracked)) {
+        if( (ruleF.getRecordIds(RT.when_event).length === 0) || (ruleF.getRecordIds(RT.then_action).length === 0) ) {
+          sceneF.deleteRecord(rId, RT.rule);
+          continue;
+        }
       }
     }
   }
