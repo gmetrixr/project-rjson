@@ -85,7 +85,7 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.custom_script]: "",
   [ProjectProperty.description]: "",
   [ProjectProperty.enable_gyro]: true,
-  [ProjectProperty.product_card_share_url_template]: "{{{deployment_url}}}?sceneId={{sceneId}}&product_card_id={{product_card_id}}",
+  [ProjectProperty.product_card_share_url_template]: "{{{deployment_url}}}?sceneId={{scene_id}}&product_card_id={{product_card_id}}",
   [ProjectProperty.enable_tour_mode]: false,
   [ProjectProperty.enforce_vr_mode]: false,
   [ProjectProperty.enforce_fullscreen_mode]: false,
