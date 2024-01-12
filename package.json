@@ -29,6 +29,7 @@
     "@gmetrixr/gdash": "1.x.x"
   },
   "dependencies": {
+    "console-log-colors": "^0.4.0",
     "ramda": "^0.27.1"
   },
   "devDependencies": {
@@ -40,7 +41,6 @@
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "chai": "^4.3.4",
-    "console-log-colors": "^0.4.0",
     "eslint": "^8.34.0",
     "mocha": "^8.3.2",
     "source-map-support": "^0.5.19",
