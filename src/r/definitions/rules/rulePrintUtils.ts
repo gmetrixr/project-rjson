@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import { color } from "console-log-colors";
 import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from ".";
 import { idAndRecord, RecordFactory, RecordMap, RecordNode, RT, rtp } from "../../R";
 import { ProjectFactory, SceneFactory } from "../../recordFactories";
@@ -118,15 +118,15 @@ class ConsoleRulePrinter {
   };
 
   public consoleRuleTextPrinter = (ruleText: RuleText): void => {
-    console.log(`${chalk.yellow.bold("RULE".padStart(5).padEnd(6))}${chalk.yellow(ruleText.ruleIdText)}`);
+    console.log(`${color.yellow.bold("RULE".padStart(5).padEnd(6))}${color.yellow(ruleText.ruleIdText)}`);
     let startText;
     for (let i = 0; i < ruleText.weTexts.length; i++) {
       startText = i === 0 ? "WHEN" : ruleText.weAndOr;
-      console.log(`${chalk.green.bold(startText.padStart(5).padEnd(6))}${chalk.green(ruleText.weTexts[i])}`);
+      console.log(`${color.green.bold(startText.padStart(5).padEnd(6))}${color.green(ruleText.weTexts[i])}`);
     }
     for (let i = 0; i < ruleText.taTexts.length; i++) {
       startText = i === 0 ? "THEN" : "AND";
-      console.log(`${chalk.blue.bold(startText.padStart(5).padEnd(6))}${chalk.blue(ruleText.taTexts[i])}`);
+      console.log(`${color.blue.bold(startText.padStart(5).padEnd(6))}${color.blue(ruleText.taTexts[i])}`);
     }
   };
 

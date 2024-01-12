@@ -21,6 +21,7 @@
     // Generate .d.ts files
     "declaration": true,
     //No need to use complie time options as we use ts-node to run ts files directly
+    "skipLibCheck": true
   },
   "include": ["src"],
 }
