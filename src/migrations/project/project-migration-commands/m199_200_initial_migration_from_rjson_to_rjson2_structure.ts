@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT } from "../../../r/R";
-import { IOrder } from "../../IOrder";
-import { ProjectFactory } from "../../../r/recordFactories";
+import { RecordNode, rtp, RT } from "../../../r/R/index.js";
+import { IOrder } from "../../IOrder.js";
+import { ProjectFactory } from "../../../r/recordFactories/index.js";
 import { jsUtils } from "@gmetrixr/gdash";
 
 const { generateIdV2 } = jsUtils;

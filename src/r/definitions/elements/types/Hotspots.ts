@@ -1,7 +1,7 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { IElementDefinition, ElementType, BasicElement } from "../ElementDefinition";
-import { RuleEvent } from "../../rules/RuleEvent";
-import { RuleAction } from "../../rules/RuleAction";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { IElementDefinition, ElementType, BasicElement } from "../ElementDefinition.js";
+import { RuleEvent } from "../../rules/RuleEvent.js";
+import { RuleAction } from "../../rules/RuleAction.js";
 
 export const Hotspot: IElementDefinition = {
   element_type: ElementType.hotspot,

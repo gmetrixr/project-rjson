@@ -1,7 +1,7 @@
-import { ItemProperty } from "../../../recordTypes/Item";
-import { RuleAction } from "../../rules";
-import { RuleEvent } from "../../rules";
-import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { ItemProperty } from "../../../recordTypes/Item.js";
+import { RuleAction } from "../../rules/index.js";
+import { RuleEvent } from "../../rules/index.js";
+import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition.js";
 
 //TODO: Write migration to move phrase into items
 // export interface Phrase {

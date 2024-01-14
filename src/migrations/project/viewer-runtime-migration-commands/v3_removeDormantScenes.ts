@@ -1,8 +1,8 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R";
-import { IOrder } from "../../IOrder";
-import { ElementFactory, ProjectFactory, SceneFactory } from "../../../r/recordFactories";
-import { RuleAction, ThenActionProperty } from "../../../r/definitions/rules";
-import { ElementType } from "../../../r/definitions/elements";
+import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { IOrder } from "../../IOrder.js";
+import { ElementFactory, ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
+import { RuleAction, ThenActionProperty } from "../../../r/definitions/rules/index.js";
+import { ElementType } from "../../../r/definitions/elements/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {

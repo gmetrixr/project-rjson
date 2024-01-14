@@ -1,5 +1,4 @@
-
-import { variableTypeToDefn } from "../definitions/variables";
+import { variableTypeToDefn } from "../definitions/variables/index.js";
 import {
   ArrayOfValues,
   predefinedVariableDefaults,
@@ -7,25 +6,27 @@ import {
   VarCategory,
   VariableType,
   variableTypeDefaults,
-} from "../definitions/variables/VariableTypes";
-import { RecordFactory, RecordUtils } from "../R/RecordFactory";
-import { ClipboardData, createRecord, idAndRecord, idOrAddress, rAndP, RecordMap, RecordNode } from "../R/RecordNode";
-import { RT, rtp } from "../R/RecordTypes";
-import { SceneFactory, SceneUtils } from "./SceneFactory";
+} from "../definitions/variables/VariableTypes.js";
+import { RecordFactory } from "../R/RecordFactory.js";
+import { RecordUtils } from "../R/RecordUtils.js";
+import { ClipboardData, createRecord, idAndRecord, idOrAddress, rAndP, RecordMap, RecordNode } from "../R/RecordNode.js";
+import { RT, rtp } from "../R/RecordTypes.js";
+import { SceneFactory, SceneUtils } from "./SceneFactory.js";
 import { jsUtils } from "@gmetrixr/gdash";
-import { ElementFactory } from "./ElementFactory";
-import { en, fn } from "../definitions";
-import { ProjectProperty } from "../recordTypes/Project";
-import { ElementProperty } from "../recordTypes/Element";
-import { ItemProperty } from "../recordTypes/Item";
-import { OptionProperty } from "../recordTypes/Options";
-import { ShoppingProperty } from "../recordTypes/Shopping";
-import { MenuProperty } from "../recordTypes/Menu";
-import { elementDisplayNames, ElementType } from "../definitions/elements/ElementDefinition";
-import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
-import { SceneCollisionOptions, SceneType } from "../definitions/special";
-import { sceneEnvironmentOptions } from "../definitions/special/SpecialTypes";
-import { SubstituteProperty } from "../recordTypes/Substitute";
+import { ElementFactory } from "./ElementFactory.js";
+import { en, fn } from "../definitions/index.js";
+import { ProjectProperty } from "../recordTypes/Project.js";
+import { ElementProperty } from "../recordTypes/Element.js";
+import { ItemProperty } from "../recordTypes/Item.js";
+import { OptionProperty } from "../recordTypes/Options.js";
+import { ShoppingProperty } from "../recordTypes/Shopping.js";
+import { MenuProperty } from "../recordTypes/Menu.js";
+import { elementDisplayNames, ElementType } from "../definitions/elements/ElementDefinition.js";
+import { LeadGenFieldProperty } from "../recordTypes/LeadGenField.js";
+import { SceneType } from "../definitions/special/index.js";
+import { SubstituteProperty } from "../recordTypes/Substitute.js";
+import { ProjectUtils } from "./ProjectUtils.js";
+import { getFactory } from "./index.js";
 
 const { deepClone, generateIdV2 } = jsUtils;
 type variable = RT.variable;
@@ -45,8 +46,8 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   addSceneRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress, sceneType}: {
-    record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, sceneType: SceneType
-  }): idAndRecord<RT.element> | undefined {
+    record?: RecordNode<RT.scene>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, sceneType: SceneType
+  }): idAndRecord<RT.scene> | undefined {
     if(!record) {
       record = createRecord(RT.scene);
     }
@@ -59,7 +60,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   addElementRecord({record, position, id, dontCycleSubRecordIds, parentIdOrAddress, elementType}: {
-    record?: RecordNode<RT>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, elementType: ElementType
+    record?: RecordNode<RT.element>, position?: number, id?: number, dontCycleSubRecordIds?: boolean, parentIdOrAddress: idOrAddress, elementType: ElementType
   }): idAndRecord<RT.element> | undefined {
     if(!record) {
       record = createRecord(RT.element);
@@ -309,7 +310,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const rAndP = this.getRecordAndParent(idOrAddress);
     if(rAndP === undefined) return undefined;
     if(rAndP.p === this._json) { //Parent is this project. In this case this.afterDeleteInProjectFactory is already run
-      return this.deleteRecord(rAndP.id, rAndP.r.type as RT);
+      return this.deleteRecord(rAndP.id, rAndP.r.type as N);
     } else {
       this.beforeDeleteInProjectFactory({id: rAndP.id, record: rAndP.r});
       const idAndRecord = new RecordFactory(rAndP.p).deleteRecord(rAndP.id, rAndP.r.type as RT);
@@ -790,10 +791,10 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   
     //Then check if any of these need to be added to the copied nodes
     const clipboardData = super.copyToClipboard(selectedIdOrAddrs);
-    for(const [id, copiedRecord] of Object.entries(clipboardData.nodes)) {
-      if(copiedRecord.record.type === RT.scene) {
+    for(const [id, copedIdAndRecord] of Object.entries(clipboardData.nodes)) {
+      if(copedIdAndRecord.record.type === RT.scene) {
         //Then go over all sub records to check if the variable name or ids exist in properties
-        const sceneFactory = new SceneFactory(copiedRecord.record);
+        const sceneFactory = new SceneFactory(copedIdAndRecord.record as RecordNode<RT.scene>);
         for(const [id, subRecord] of sceneFactory.getDeepRecordEntries()) {
           for(const [propName, propValue] of Object.entries(subRecord.props)) {
             if(typeof propValue === "number") {
@@ -865,94 +866,3 @@ export class ProjectFactory extends RecordFactory<RT.project> {
 }
 
 const varNameFromOriginName = (originName: string | undefined): string => `${originName}_var`;
-
-export class ProjectUtils {
-  static setupNewScene(project: RecordNode<RT.project>, sceneIdAndRecord: idAndRecord<RT.scene>) {
-    const projectF = new ProjectFactory(project);
-    const sceneF = new SceneFactory(sceneIdAndRecord.record);
-    const sceneId = sceneIdAndRecord.id;
-    const sceneType = sceneF.get(rtp.scene.scene_type) as SceneType;
-    // * Add a default pano
-    projectF.addElementRecord({
-      parentIdOrAddress: sceneId,
-      elementType: ElementType.pano_image
-    });
-
-    if(sceneType === SceneType.six_dof) {
-      sceneF.set(rtp.scene.scene_collision_type, SceneCollisionOptions.advanced_collision);
-      // * Add a default environment
-      const env = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.object_3d});
-
-      if(env) {
-        const elementF = new ElementFactory(env.record);
-        sceneF.changeRecordName(env.id, "Environment", RT.element);
-        elementF.set(rtp.element.source, sceneEnvironmentOptions[0].source);
-        elementF.set(rtp.element.scale, sceneEnvironmentOptions[0].scale);
-        elementF.set(rtp.element.placer_3d, sceneEnvironmentOptions[0].placer_3d);
-        elementF.set(rtp.element.locked, true);
-        sceneF.set(rtp.scene.scene_bounds, sceneEnvironmentOptions[0].scene_bounds);
-      }
-
-      // * Add a spawn zone
-      const zone = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.zone});
-      // * Reset the placer 3D for this zone element
-      if(zone) {
-        const elementF = new ElementFactory(zone.record);
-        const defaultPlacer3D = elementF.getDefault(rtp.element.placer_3d);
-        elementF.set(rtp.element.placer_3d, defaultPlacer3D);
-      }
-
-      const zoneElementId = zone?.id;
-      const envElementId = env?.id;
-
-      // * Assign the spawn zone to the scene
-      sceneF.set(rtp.scene.scene_spawn_zone_id, zoneElementId);
-      // * Add default light rig
-      ProjectUtils.setupDefaultLightRig(project, sceneId, envElementId);
-    } else {
-      // * Add default light rig
-      ProjectUtils.setupDefaultLightRig(project, sceneId);
-    }
-  }
-
-  static setupDefaultLightRig(project: RecordNode<RT.project>, sceneId: number, envElementId?: number) {
-    const projectF = new ProjectFactory(project);
-    const group = projectF.addElementRecord({parentIdOrAddress: sceneId, elementType: ElementType.group});
-    const useLegacyColorManagement = projectF.getValueOrDefault(rtp.project.use_legacy_color_management) as boolean;
-    if(group) {
-      group.record.name = `Lights`;
-      const groupF = new ElementFactory(group.record);
-      // add light rig to this groups
-      const ambientLight = groupF.addElementOfType(en.ElementType.light);
-      ambientLight.name = "Ambient Light";
-
-      const ambientLightF = new ElementFactory(ambientLight);
-      ambientLightF.set(rtp.element.light_type, en.lightType.ambient);
-      ambientLightF.set(rtp.element.color, "#FFFFFF");
-      ambientLightF.set(rtp.element.intensity, useLegacyColorManagement? 1: 3);
-
-      const directionalLight = groupF.addElementOfType(en.ElementType.light);
-      directionalLight.name = "Directional Light";
-
-      const directionalLightF = new ElementFactory(directionalLight);
-      directionalLightF.set(rtp.element.light_type, en.lightType.directional);
-      directionalLightF.set(rtp.element.color, "#FFFFFF");
-      directionalLightF.set(rtp.element.intensity, useLegacyColorManagement? 0.6: 3);
-      directionalLightF.set(rtp.element.placer_3d, [0, 12, 4, 0, 0, 0, 1, 1, 1]);
-      directionalLightF.set(rtp.element.target_element_id, envElementId);
-    }
-  }
-}
-
-export const getFactory = (rJson: RecordNode<RT>): RecordFactory<RT> => {
-  switch(rJson.type) {
-    case RT.project:
-      return new ProjectFactory(rJson);
-    case RT.scene:
-      return new SceneFactory(rJson);
-    case RT.element:
-      return new ElementFactory(rJson);
-    default:
-      return new RecordFactory(rJson);
-  }
-}

@@ -1,7 +1,6 @@
-import { r } from "../..";
-import { RecordNode, RT } from "../../R";
-import { RuleAction } from "./RuleAction";
-import { RuleEvent } from "./RuleEvent";
+import { r, RecordNode, RT } from "../../index.js";
+import { RuleAction } from "./RuleAction.js";
+import { RuleEvent } from "./RuleEvent.js";
 
 export function isRuleValid(rule: RecordNode<RT.rule>): boolean {
   const ruleF = r.record(rule);

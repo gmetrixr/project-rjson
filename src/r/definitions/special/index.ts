@@ -1,8 +1,8 @@
-import { SpecialAllVariables } from "./types/SpecialAllVariables";
-import { SpecialExperience } from "./types/SpecialExperience";
-import { SpecialScene } from "./types/SpecialScene";
-import { SpecialViewer } from "./types/SpecialViewer";
-import { ISpecialDefinition, SpecialType, isSpecialType } from "./SpecialTypes";
+import { SpecialAllVariables } from "./types/SpecialAllVariables.js";
+import { SpecialExperience } from "./types/SpecialExperience.js";
+import { SpecialScene } from "./types/SpecialScene.js";
+import { SpecialViewer } from "./types/SpecialViewer.js";
+import { ISpecialDefinition, SpecialType, isSpecialType } from "./SpecialTypes.js";
 
 export { SpecialType, isSpecialType };
 
@@ -19,8 +19,9 @@ import {
   SceneEnvironment,
   SceneCollisionOptions,
   BloomKernelSize
-} from "./SpecialTypes";
-import { SpecialCurrentTimee } from "./types/SpecialCurrentTime";
+} from "./SpecialTypes.js";
+
+import { SpecialCurrentTimee } from "./types/SpecialCurrentTime.js";
 
 export {
   SpecialRuleElementIds,

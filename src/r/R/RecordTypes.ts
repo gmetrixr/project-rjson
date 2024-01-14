@@ -1,25 +1,25 @@
-import { DeploymentProperty, deploymentPropertyDefaults } from "../recordTypes/Deployment";
-import { WebhookProperty, webhookPropertyDefaults } from "../recordTypes/Webhook";
-import { ProjectProperty, projectPropertyDefaults } from "../recordTypes/Project";
-import { LeadGenFieldProperty, leadGenFieldPropertyDefaults } from "../recordTypes/LeadGenField";
-import { MenuProperty, menuPropertyDefaults } from "../recordTypes/Menu";
-import { VariableProperty, variablePropertyDefaults } from "../recordTypes/Variable";
-import { SceneProperty, scenePropertyDefaults } from "../recordTypes/Scene";
-import { RuleProperty, rulePropertyDefaults } from "../recordTypes/Rule";
-import { WhenEventProperty, whenEventPropertyDefaults } from "../recordTypes/WhenEvent";
-import { ThenActionProperty, thenActionPropertyDefaults } from "../recordTypes/ThenAction";
-import { ElementProperty, elementPropertyDefaults } from "../recordTypes/Element";
-import { OptionProperty, optionPropertyDefaults } from "../recordTypes/Options";
-import { ShoppingProperty, shoppingPropertyDefaults } from "../recordTypes/Shopping";
-import { ProductProperty, productPropertyDefaults } from "../recordTypes/Product";
-import { ItemProperty, itemPropertyDefaults } from "../recordTypes/Item";
-import { SubstituteProperty, substitutePropertyDefaults } from "../recordTypes/Substitute";
-import { TourModeProperty, tourModePropertyDefaults } from "../recordTypes/TourMode";
-import { LanguageProperty, languagePropertyDefaults } from "../recordTypes/Language";
-import { AvatarProperty, avatarPropertyDefaults } from "../recordTypes/Avatar";
-import { DiscussionProperty, discussionPropertyDefaults } from "../recordTypes/Discussion";
-import { TopicProperty, topicPropertyDefaults } from "../recordTypes/Topic";
-import { CommentProperty, commentPropertyDefaults } from "../recordTypes/Comment";
+import { DeploymentProperty, deploymentPropertyDefaults } from "../recordTypes/Deployment.js";
+import { WebhookProperty, webhookPropertyDefaults } from "../recordTypes/Webhook.js";
+import { ProjectProperty, projectPropertyDefaults } from "../recordTypes/Project.js";
+import { LeadGenFieldProperty, leadGenFieldPropertyDefaults } from "../recordTypes/LeadGenField.js";
+import { MenuProperty, menuPropertyDefaults } from "../recordTypes/Menu.js";
+import { VariableProperty, variablePropertyDefaults } from "../recordTypes/Variable.js";
+import { SceneProperty, scenePropertyDefaults } from "../recordTypes/Scene.js";
+import { RuleProperty, rulePropertyDefaults } from "../recordTypes/Rule.js";
+import { WhenEventProperty, whenEventPropertyDefaults } from "../recordTypes/WhenEvent.js";
+import { ThenActionProperty, thenActionPropertyDefaults } from "../recordTypes/ThenAction.js";
+import { ElementProperty, elementPropertyDefaults } from "../recordTypes/Element.js";
+import { OptionProperty, optionPropertyDefaults } from "../recordTypes/Options.js";
+import { ShoppingProperty, shoppingPropertyDefaults } from "../recordTypes/Shopping.js";
+import { ProductProperty, productPropertyDefaults } from "../recordTypes/Product.js";
+import { ItemProperty, itemPropertyDefaults } from "../recordTypes/Item.js";
+import { SubstituteProperty, substitutePropertyDefaults } from "../recordTypes/Substitute.js";
+import { TourModeProperty, tourModePropertyDefaults } from "../recordTypes/TourMode.js";
+import { LanguageProperty, languagePropertyDefaults } from "../recordTypes/Language.js";
+import { AvatarProperty, avatarPropertyDefaults } from "../recordTypes/Avatar.js";
+import { DiscussionProperty, discussionPropertyDefaults } from "../recordTypes/Discussion.js";
+import { TopicProperty, topicPropertyDefaults } from "../recordTypes/Topic.js";
+import { CommentProperty, commentPropertyDefaults } from "../recordTypes/Comment.js";
 
 //https://stackoverflow.com/a/54178819/1233476
 // type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>

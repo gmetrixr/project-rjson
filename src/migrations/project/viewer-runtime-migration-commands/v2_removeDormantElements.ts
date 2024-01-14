@@ -1,9 +1,9 @@
-import { rtp, RT, RecordFactory } from "../../../r/R";
-import { IOrder } from "../../IOrder";
-import { ElementFactory, ProjectFactory, SceneFactory } from "../../../r/recordFactories";
-import { ElementType, elementList } from "../../../r/definitions/elements";
-import { ElementProperty } from "../../../r/recordTypes/Element";
-import { ArrayOfValues } from "../../../r/definitions/variables";
+import { rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { IOrder } from "../../IOrder.js";
+import { ElementFactory, ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
+import { ElementType, elementList } from "../../../r/definitions/elements/index.js";
+import { ElementProperty } from "../../../r/recordTypes/Element.js";
+import { ArrayOfValues } from "../../../r/definitions/variables/index.js";
 import { jsUtils } from "@gmetrixr/gdash";
 
 const { difference } = jsUtils; 

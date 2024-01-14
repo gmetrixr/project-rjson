@@ -1,5 +1,5 @@
-import { IOrder } from "../IOrder";
-import d199_200 from "./deployment-migration-commands/d199_200_initial_migration_from_rjson_to_rjson2";
+import { IOrder } from "../IOrder.js";
+import d199_200 from "./deployment-migration-commands/d199_200_initial_migration_from_rjson_to_rjson2.js";
 
 export const deploymentMigrationTree: {[key: number]: IOrder} = {
   [199]: d199_200,

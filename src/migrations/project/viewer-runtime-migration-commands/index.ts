@@ -1,11 +1,11 @@
 
-import { RT, RecordNode, createRecord, r, rtp } from "../../../r";
-import { IOrder } from "../../IOrder";
-import v1 from "./v1_removeDormantRules";
-import v2 from "./v2_removeDormantElements";
-import v3 from "./v3_removeDormantScenes";
-import v4 from "./v4_removeDormantAudios";
-import v5 from "./v5_addLinkedPopupRules";
+import { RT, RecordNode } from "../../../r/index.js";
+import { IOrder } from "../../IOrder.js";
+import v1 from "./v1_removeDormantRules.js";
+import v2 from "./v2_removeDormantElements.js";
+import v3 from "./v3_removeDormantScenes.js";
+import v4 from "./v4_removeDormantAudios.js";
+import v5 from "./v5_addLinkedPopupRules.js";
 
 const viewerRuntimeMigrationTree: {[key: number]: IOrder} = {
   [1]: v1,

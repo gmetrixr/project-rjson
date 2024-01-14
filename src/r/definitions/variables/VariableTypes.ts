@@ -1,4 +1,4 @@
-import { ICogObjectDefinition } from "../BaseCogObject";
+import { ICogObjectDefinition } from "../BaseCogObject.js";
 
 export interface IVariableDefinition extends ICogObjectDefinition {
   variable_type: VariableType;

@@ -1,4 +1,4 @@
-import { FileType } from "../definitions/files";
+import { FileType } from "../definitions/files/index.js";
 
 export enum ElementProperty {
   element_type = "element_type",

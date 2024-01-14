@@ -1,7 +1,7 @@
-import { RT, RecordFactory, RecordNode, rtp } from "../R";
-import { RuleAction } from "../definitions/rules";
-import { ProjectFactory } from "./ProjectFactory";
-import { SceneFactory } from "./SceneFactory";
+import { RT, RecordFactory, RecordNode, rtp } from "../R/index.js";
+import { RuleAction } from "../definitions/rules/index.js";
+import { ProjectFactory } from "./ProjectFactory.js";
+import { SceneFactory } from "./SceneFactory.js";
 import { jsUtils } from "@gmetrixr/gdash";
 import { flatten, uniq } from "ramda";
 

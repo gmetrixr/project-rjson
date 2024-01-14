@@ -1,4 +1,4 @@
-import { ViewerCameraMode } from "../project";
+import { ViewerCameraMode } from "../project/index.js";
 
 export enum RuleAction {
   do_nothing = "do_nothing",

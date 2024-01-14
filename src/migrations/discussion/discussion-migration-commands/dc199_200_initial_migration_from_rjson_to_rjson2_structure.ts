@@ -1,5 +1,5 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R";
-import { IOrder } from "../../IOrder";
+import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { IOrder } from "../../IOrder.js";
 
 class Migration implements IOrder {
   execute (discussionJson: any) {

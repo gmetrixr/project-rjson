@@ -1,5 +1,5 @@
-import { RT, RecordMap, RecordNode, createRecord } from "../../r";
-import { VarCategory, VarValue, VariableType } from "../../r/definitions/variables";
+import { RT, RecordMap, RecordNode, createRecord } from "../../r/index.js";
+import { VarCategory, VarValue, VariableType } from "../../r/definitions/variables/index.js";
 
 /** @deprecated */
 export interface OldGlobalVariableStructure {

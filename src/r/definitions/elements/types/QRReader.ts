@@ -1,4 +1,4 @@
-import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition.js";
 
 export const QRReader: IElementDefinition = {
   element_type: ElementType.qrcode_browser,

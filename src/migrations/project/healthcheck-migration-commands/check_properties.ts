@@ -1,5 +1,5 @@
-import { RecordNode, r, RT, rtp } from "../../../r";
-import { ElementType, eTypeToDefn } from "../../../r/definitions/elements";
+import { RecordNode, r, RT, rtp } from "../../../r/index.js";
+import { ElementType, eTypeToDefn } from "../../../r/definitions/elements/index.js";
 
 /**
  * Migration to check if any porperties are used that aren't a part of the rjson definition

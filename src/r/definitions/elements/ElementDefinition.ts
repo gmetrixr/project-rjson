@@ -1,9 +1,8 @@
-import { ElementProperty } from "../../recordTypes/Element";
-import { ItemProperty } from "../../recordTypes/Item";
-import { RuleAction } from "../rules";
-import { RuleEvent } from "../rules";
-import { ICogObjectDefinition } from "../BaseCogObject";
-import { SubstituteProperty } from "../../recordTypes/Substitute";
+import { ElementProperty } from "../../recordTypes/Element.js";
+import { ItemProperty } from "../../recordTypes/Item.js";
+import { RuleAction, RuleEvent } from "../rules/index.js";
+import { ICogObjectDefinition } from "../BaseCogObject.js";
+import { SubstituteProperty } from "../../recordTypes/Substitute.js";
 
 export interface IElementDefinition extends ICogObjectDefinition {
   element_type: ElementType;

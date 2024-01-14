@@ -1,5 +1,5 @@
-import { RT, r, rtp } from "../../../r";
-import { IOrder } from "../../IOrder";
+import { RT, r, rtp } from "../../../r/index.js";
+import { IOrder } from "../../IOrder.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {

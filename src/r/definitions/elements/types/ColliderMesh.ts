@@ -1,7 +1,7 @@
-import { FileType } from "../../files";
-import { ElementProperty } from "../../../recordTypes/Element";
-import { RuleAction, RuleEvent } from "../../rules";
-import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition";
+import { FileType } from "../../files/index.js";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { RuleAction, RuleEvent } from "../../rules/index.js";
+import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition.js";
 
 export const ColliderMesh: IElementDefinition = {
   element_type: ElementType.collider_mesh,

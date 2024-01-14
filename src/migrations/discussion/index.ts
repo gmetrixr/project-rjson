@@ -1,6 +1,6 @@
-import { createRecord, RecordFactory, RecordNode, RT, rtp } from "../../r/R";
-import { discussionMigrationTree, getHighestDiscussionVersion } from "./discussionMigration";
-import initialRMigration from "./discussion-migration-commands/dc199_200_initial_migration_from_rjson_to_rjson2_structure";
+import { createRecord, RecordFactory, RecordNode, RT, rtp } from "../../r/R/index.js";
+import { discussionMigrationTree, getHighestDiscussionVersion } from "./discussionMigration.js";
+import initialRMigration from "./discussion-migration-commands/dc199_200_initial_migration_from_rjson_to_rjson2_structure.js";
 
 const discussionMigrationVersions: number[] = Object.keys(discussionMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
 

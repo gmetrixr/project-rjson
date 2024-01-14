@@ -1,14 +1,15 @@
 import { jsUtils } from "@gmetrixr/gdash";
-import { RecordFactory, RecordUtils } from "../R/RecordFactory";
-import { RecordNode, idAndRecord, idOrAddress } from "../R/RecordNode";
-import { RT } from "../R/RecordTypes";
-import { ThenActionProperty } from "../recordTypes/ThenAction";
-import { WhenEventProperty } from "../recordTypes/WhenEvent";
-import { TopicProperty } from "../recordTypes/Topic";
-import { SceneProperty } from "../recordTypes/Scene";
-import { TourModeProperty } from "../recordTypes/TourMode";
-import { ElementProperty } from "../recordTypes/Element";
-import { LeadGenFieldProperty } from "../recordTypes/LeadGenField";
+import { RecordFactory } from "../R/RecordFactory.js";
+import { RecordUtils } from "../R/RecordUtils.js";
+import { RecordNode, idAndRecord, idOrAddress } from "../R/RecordNode.js";
+import { RT } from "../R/RecordTypes.js";
+import { ThenActionProperty } from "../recordTypes/ThenAction.js";
+import { WhenEventProperty } from "../recordTypes/WhenEvent.js";
+import { TopicProperty } from "../recordTypes/Topic.js";
+import { SceneProperty } from "../recordTypes/Scene.js";
+import { TourModeProperty } from "../recordTypes/TourMode.js";
+import { ElementProperty } from "../recordTypes/Element.js";
+import { LeadGenFieldProperty } from "../recordTypes/LeadGenField.js";
 
 const { generateIdV2 } = jsUtils;
 

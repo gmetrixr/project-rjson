@@ -1,4 +1,4 @@
-import { Source } from "../definitions/files";
+import { Source } from "../definitions/files/index.js";
 import {
   AvatarBodyType,
   AvatarSystem,
@@ -7,7 +7,7 @@ import {
   Language,
   SceneTransitionType,
   AvatarQuality,
-} from "../definitions/project";
+} from "../definitions/project/index.js";
 
 export enum ProjectProperty {
   autotrack_connection = "autotrack_connection",

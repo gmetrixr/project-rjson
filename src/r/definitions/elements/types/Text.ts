@@ -1,7 +1,7 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { SubstituteProperty } from "../../../recordTypes/Substitute";
-import { RuleEvent } from "../../rules";
-import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { SubstituteProperty } from "../../../recordTypes/Substitute.js";
+import { RuleEvent } from "../../rules/index.js";
+import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition.js";
 
 export const Text: IElementDefinition = {
   element_type: ElementType.text,

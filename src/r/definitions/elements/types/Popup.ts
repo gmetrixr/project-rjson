@@ -1,7 +1,7 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { ItemProperty } from "../../../recordTypes/Item";
-import { RuleEvent } from "../../rules";
-import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { ItemProperty } from "../../../recordTypes/Item.js";
+import { RuleEvent } from "../../rules/index.js";
+import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition.js";
 
 export const Popup: IElementDefinition = {
   element_type: ElementType.popup,

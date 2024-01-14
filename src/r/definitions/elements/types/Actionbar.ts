@@ -1,8 +1,8 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { ItemProperty } from "../../../recordTypes/Item";
-import { RuleAction } from "../../rules/RuleAction";
-import { RuleEvent } from "../../rules/RuleEvent";
-import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { ItemProperty } from "../../../recordTypes/Item.js";
+import { RuleAction } from "../../rules/RuleAction.js";
+import { RuleEvent } from "../../rules/RuleEvent.js";
+import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition.js";
 
 export const ActionBar: IElementDefinition = {
   element_type: ElementType.actionbar,

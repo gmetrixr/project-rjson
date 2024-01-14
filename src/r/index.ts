@@ -1,12 +1,13 @@
-import * as R from "./R";
-import { RecordNode, RecordMap, RT, RTP, rtp, createRecord, ClipboardData, idAndRecord } from "./R";
-import { ProjectUtils, getFactory } from "./recordFactories/ProjectFactory";
-import { RecordUtils } from "./R/RecordFactory";
-import { ElementUtils } from "./recordFactories/ElementFactory";
-import { ProjectFactory } from "./recordFactories/ProjectFactory";
-import { RulesSearch } from "./recordFactories/RulesSearch";
-import * as RF from "./recordFactories";
-import { en, sn, vn, rn, pn, fn, CogObjectType } from "./definitions";
+import * as R from "./R/index.js";
+import { RecordNode, RecordMap, RT, RTP, rtp, createRecord, ClipboardData, idAndRecord } from "./R/index.js";
+import { ProjectFactory } from "./recordFactories/ProjectFactory.js";
+import { RulesSearch } from "./recordFactories/RulesSearch.js";
+import * as RF from "./recordFactories/index.js";
+import { getFactory } from "./recordFactories/index.js";
+import { en, sn, vn, rn, pn, fn, CogObjectType } from "./definitions/index.js";
+import { RecordUtils } from "./R/RecordUtils.js"
+import { ElementUtils } from "./recordFactories/ElementUtils.js"
+import { ProjectUtils } from "./recordFactories/ProjectUtils.js"
 
 /**
  * Use r.record(json) for all RecordNode type objects, except the below ones
@@ -23,7 +24,6 @@ const rUtils = {
   ProjectUtils,
   RecordUtils,
   ElementUtils,
-  ProjectFactory,
   RulesSearch,
 }
 

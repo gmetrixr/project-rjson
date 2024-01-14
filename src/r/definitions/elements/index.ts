@@ -1,62 +1,62 @@
-import { ActionBar } from "./types/Actionbar";
-import { AR } from "./types/AR";
-import { Audio } from "./types/Audio";
-import { AudioSSML } from "./types/AudioSSML";
-import { CaptureInput } from "./types/CaptureInput";
-import { Cone } from "./types/Cone";
-import { Cube } from "./types/Cube";
-import { Cylinder } from "./types/Cylinder";
-import { EmbedHtml } from "./types/EmbedHtml";
-import { EmbedScorm } from "./types/EmbedSCORM";
-import { Gif } from "./types/Gif";
-import { Icon } from "./types/Icon";
-import { ImageFlat } from "./types/ImageFlat";
-import { Instruction } from "./types/Instructions";
-import { MediaUpload } from "./types/MediaUpload";
-import { Object3d } from "./types/Object3d";
-import { PanoImage } from "./types/PanoImage";
-import { PanoVideo } from "./types/PanoVideo";
-import { Polygon } from "./types/Polygon";
-import { ProductCard } from "./types/ProductCard";
-import { QRMatcher } from "./types/QRMatcher";
-import { QRReader } from "./types/QRReader";
-import { Quiz } from "./types/Quiz";
-import { Quiz2 } from "./types/Quiz2";
-import { Score } from "./types/Score";
-import { Share } from "./types/Share";
-import { ShoppingItem } from "./types/ShoppingItem";
-import { Speech } from "./types/Speech";
-import { Sphere } from "./types/Sphere";
-import { Text } from "./types/Text";
-import { Timer } from "./types/Timer";
-import { Torus } from "./types/Torus";
-import { VideoFlat } from "./types/VideoFlat";
-import { WayFinder } from "./types/Wayfinder";
-import { Popup } from "./types/Popup";
-import { Light } from "./types/Light";
-import { Hotspot } from "./types/Hotspots";
-import { Environment } from "./types/Environment";
-import { Zone } from "./types/Zone";
-import { ColliderBox } from "./types/ColliderBox";
-import { ColliderMesh } from "./types/ColliderMesh";
-import { WorkspaceLogo } from "./types/WorkspaceLogo";
-import { Screenshare } from "./types/Screenshare";
-import { Character } from "./types/Character";
-import { Embed3D } from "./types/Embed3D";
-import { Seat } from "./types/Seat";
-import { Minimap } from "./types/Minimap";
-import { IElementDefinition } from "./ElementDefinition";
+import { ActionBar } from "./types/Actionbar.js";
+import { AR } from "./types/AR.js";
+import { Audio } from "./types/Audio.js";
+import { AudioSSML } from "./types/AudioSSML.js";
+import { CaptureInput } from "./types/CaptureInput.js";
+import { Cone } from "./types/Cone.js";
+import { Cube } from "./types/Cube.js";
+import { Cylinder } from "./types/Cylinder.js";
+import { EmbedHtml } from "./types/EmbedHtml.js";
+import { EmbedScorm } from "./types/EmbedSCORM.js";
+import { Gif } from "./types/Gif.js";
+import { Icon } from "./types/Icon.js";
+import { ImageFlat } from "./types/ImageFlat.js";
+import { Instruction } from "./types/Instructions.js";
+import { MediaUpload } from "./types/MediaUpload.js";
+import { Object3d } from "./types/Object3d.js";
+import { PanoImage } from "./types/PanoImage.js";
+import { PanoVideo } from "./types/PanoVideo.js";
+import { Polygon } from "./types/Polygon.js";
+import { ProductCard } from "./types/ProductCard.js";
+import { QRMatcher } from "./types/QRMatcher.js";
+import { QRReader } from "./types/QRReader.js";
+import { Quiz } from "./types/Quiz.js";
+import { Quiz2 } from "./types/Quiz2.js";
+import { Score } from "./types/Score.js";
+import { Share } from "./types/Share.js";
+import { ShoppingItem } from "./types/ShoppingItem.js";
+import { Speech } from "./types/Speech.js";
+import { Sphere } from "./types/Sphere.js";
+import { Text } from "./types/Text.js";
+import { Timer } from "./types/Timer.js";
+import { Torus } from "./types/Torus.js";
+import { VideoFlat } from "./types/VideoFlat.js";
+import { WayFinder } from "./types/Wayfinder.js";
+import { Popup } from "./types/Popup.js";
+import { Light } from "./types/Light.js";
+import { Hotspot } from "./types/Hotspots.js";
+import { Environment } from "./types/Environment.js";
+import { Zone } from "./types/Zone.js";
+import { ColliderBox } from "./types/ColliderBox.js";
+import { ColliderMesh } from "./types/ColliderMesh.js";
+import { WorkspaceLogo } from "./types/WorkspaceLogo.js";
+import { Screenshare } from "./types/Screenshare.js";
+import { Character } from "./types/Character.js";
+import { Embed3D } from "./types/Embed3D.js";
+import { Seat } from "./types/Seat.js";
+import { Minimap } from "./types/Minimap.js";
+import { IElementDefinition } from "./ElementDefinition.js";
 
 import { 
   ElementType, elementDisplayNames, ElementCategory, elementCategoryDisplayNames, elementTypeByCategory, 
   isElementType, sourcePropertyNames, elementsWithLinkedVariables, BasicElement
-} from "./ElementDefinition";
+} from "./ElementDefinition.js";
 export { 
   ElementType, elementDisplayNames, ElementCategory, elementCategoryDisplayNames, elementTypeByCategory, 
   isElementType, sourcePropertyNames, elementsWithLinkedVariables, BasicElement 
 };
 
-import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment } from "./ElementTypes";
+import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment } from "./ElementTypes.js";
 export { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment };
 
 export const elementList: IElementDefinition[] = [

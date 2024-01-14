@@ -3,7 +3,7 @@
 {
   // "diff": true,
   "extension": ["ts", "tsx"],
-  "require": ["ts-node/register","source-map-support/register"],
+  // "require": ["ts-node/register"],
   //To choose a subset of tests, temporarily, swap the comment below:
   //"spec": "test/r/0.migrations.spec.{ts,tsx}",
   // "spec": "test/r/1.recordFactory.spec.{ts,tsx}",

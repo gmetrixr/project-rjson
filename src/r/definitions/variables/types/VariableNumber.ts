@@ -1,6 +1,6 @@
-import { RuleAction } from "../../rules/RuleAction";
-import { RuleEvent } from "../../rules/RuleEvent";
-import { IVariableDefinition, VariableType } from "../VariableTypes";
+import { RuleAction } from "../../rules/RuleAction.js";
+import { RuleEvent } from "../../rules/RuleEvent.js";
+import { IVariableDefinition, VariableType } from "../VariableTypes.js";
 
 export const VariableNumber: IVariableDefinition = {
   variable_type: VariableType.number,

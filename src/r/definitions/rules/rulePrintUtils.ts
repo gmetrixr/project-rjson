@@ -1,12 +1,13 @@
-import { color } from "console-log-colors";
-import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from ".";
-import { idAndRecord, RecordFactory, RecordMap, RecordNode, RT, rtp } from "../../R";
-import { ProjectFactory, SceneFactory } from "../../recordFactories";
-import { ElementUtils } from "../../recordFactories/ElementFactory";
-import { isElementType, ElementType } from "../elements";
-import { isSpecialType, specialElementDisplayNames, SpecialType } from "../special";
-import { ArrayOfValues, isVariableType } from "../variables";
-import { CogObjectType } from "..";
+import chalk from "chalk";
+import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from "./index.js";
+import { idAndRecord, RecordMap, RecordNode, RT, rtp } from "../../../r/index.js";
+import { RecordFactory } from "../../R/index.js";
+import { ProjectFactory, SceneFactory,  } from "../../recordFactories/index.js";
+import { ElementUtils } from "../../recordFactories/ElementUtils.js";
+import { isElementType, ElementType } from "../elements/index.js";
+import { isSpecialType, specialElementDisplayNames, SpecialType } from "../special/index.js";
+import { ArrayOfValues, isVariableType } from "../variables/index.js";
+import { CogObjectType } from "../index.js";
 
 export interface RuleText {
   ruleIdText: string;
@@ -118,15 +119,15 @@ class ConsoleRulePrinter {
   };
 
   public consoleRuleTextPrinter = (ruleText: RuleText): void => {
-    console.log(`${color.yellow.bold("RULE".padStart(5).padEnd(6))}${color.yellow(ruleText.ruleIdText)}`);
+    console.log(`${chalk.yellow.bold("RULE".padStart(5).padEnd(6))}${chalk.yellow(ruleText.ruleIdText)}`);
     let startText;
     for (let i = 0; i < ruleText.weTexts.length; i++) {
       startText = i === 0 ? "WHEN" : ruleText.weAndOr;
-      console.log(`${color.green.bold(startText.padStart(5).padEnd(6))}${color.green(ruleText.weTexts[i])}`);
+      console.log(`${chalk.green.bold(startText.padStart(5).padEnd(6))}${chalk.green(ruleText.weTexts[i])}`);
     }
     for (let i = 0; i < ruleText.taTexts.length; i++) {
       startText = i === 0 ? "THEN" : "AND";
-      console.log(`${color.blue.bold(startText.padStart(5).padEnd(6))}${color.blue(ruleText.taTexts[i])}`);
+      console.log(`${chalk.blue.bold(startText.padStart(5).padEnd(6))}${chalk.blue(ruleText.taTexts[i])}`);
     }
   };
 

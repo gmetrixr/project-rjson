@@ -1,5 +1,5 @@
-import { ICogObjectDefinition } from "../BaseCogObject";
-import { Source } from "../files";
+import { ICogObjectDefinition } from "../BaseCogObject.js";
+import { Source } from "../files/index.js";
 import { pathUtils } from "@gmetrixr/gdash";
 
 export interface ISpecialDefinition extends ICogObjectDefinition {

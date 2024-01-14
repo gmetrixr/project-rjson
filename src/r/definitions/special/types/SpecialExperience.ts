@@ -1,5 +1,5 @@
-import { RuleAction } from "../../rules/RuleAction";
-import { ISpecialDefinition, SpecialType } from "../SpecialTypes";
+import { RuleAction } from "../../rules/RuleAction.js";
+import { ISpecialDefinition, SpecialType } from "../SpecialTypes.js";
 
 export const SpecialExperience: ISpecialDefinition = {
   special_type: SpecialType.experience,

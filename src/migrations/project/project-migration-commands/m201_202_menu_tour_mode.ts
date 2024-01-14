@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R";
-import { IOrder } from "../../IOrder";
-import { ProjectFactory, SceneFactory } from "../../../r/recordFactories";
+import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { IOrder } from "../../IOrder.js";
+import { ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {

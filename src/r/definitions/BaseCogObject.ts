@@ -1,5 +1,5 @@
-import { RuleAction } from "./rules/RuleAction";
-import { RuleEvent } from "./rules/RuleEvent";
+import { RuleAction } from "./rules/RuleAction.js";
+import { RuleEvent } from "./rules/RuleEvent.js";
 
 /** 
  * Interface for RuleElement Type Definition (Objects that can be rule in defining Rules) 

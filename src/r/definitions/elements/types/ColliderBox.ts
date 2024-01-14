@@ -1,5 +1,5 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition.js";
 
 export const ColliderBox: IElementDefinition = {
   element_type: ElementType.collider_volume,

@@ -1,11 +1,11 @@
 import { expect } from "chai";
-import { RT, RecordFactory, RecordNode, createRecord, recordTypeDefinitions, rtp } from "../../src/r/R";
-import { projectPropertyDefaults } from "../../src/r/recordTypes/Project";
+import { RT, RecordFactory, RecordNode, createRecord, recordTypeDefinitions, rtp } from "../../src/r/R/index.js";
+import { projectPropertyDefaults } from "../../src/r/recordTypes/Project.js";
 import { jsUtils } from "@gmetrixr/gdash";
 import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/r3fJsons/project/old.json";
 import fs from "fs";
-import { ElementType } from "../../src/r/definitions/elements";
+import { ElementType } from "../../src/r/definitions/elements/index.js";
 
 const { deepClone } = jsUtils;
 

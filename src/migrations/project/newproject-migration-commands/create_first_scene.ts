@@ -1,6 +1,7 @@
-import { createRecord, RecordNode, RT, sn } from "../../../r";
-import { IOrder } from "../../IOrder";
-import { ProjectFactory, ProjectUtils } from "../../../r/recordFactories/ProjectFactory";
+import { createRecord, RecordNode, RT, sn } from "../../../r/index.js";
+import { IOrder } from "../../IOrder.js";
+import { ProjectFactory } from "../../../r/recordFactories/ProjectFactory.js";
+import { ProjectUtils } from "../../../r/recordFactories/ProjectUtils.js";
 
 /**
  * Adds predefined variables to the project json

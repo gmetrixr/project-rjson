@@ -1,6 +1,6 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { RuleAction, RuleEvent } from "../../rules";
-import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { RuleAction, RuleEvent } from "../../rules/index.js";
+import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition.js";
 
 export const EmbedHtml: IElementDefinition = {
   element_type: ElementType.embed_html,

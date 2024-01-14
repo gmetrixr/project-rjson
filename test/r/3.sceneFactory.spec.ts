@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { RT, RecordFactory, RecordNode } from "../../src/r/R";
-import { SceneFactory } from "../../src/r/recordFactories/SceneFactory";
+import { RT, RecordFactory, RecordNode } from "../../src/r/R/index.js";
+import { SceneFactory } from "../../src/r/recordFactories/SceneFactory.js";
 import manishMalhotraJson from "./jsons/r3fJsons/project/manish.json";
 
 describe("r SceneFactory tests", () => {

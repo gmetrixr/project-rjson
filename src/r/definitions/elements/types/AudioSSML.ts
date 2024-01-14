@@ -1,8 +1,8 @@
-import { ElementProperty } from "../../../recordTypes/Element";
-import { SubstituteProperty } from "../../../recordTypes/Substitute";
-import { RuleAction } from "../../rules";
-import { RuleEvent } from "../../rules";
-import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition";
+import { ElementProperty } from "../../../recordTypes/Element.js";
+import { SubstituteProperty } from "../../../recordTypes/Substitute.js";
+import { RuleAction } from "../../rules/index.js";
+import { RuleEvent } from "../../rules/index.js";
+import { BasicElement, ElementType,  IElementDefinition } from "../ElementDefinition.js";
 
 export const AudioSSML: IElementDefinition = {
   element_type: ElementType.audio_ssml,
