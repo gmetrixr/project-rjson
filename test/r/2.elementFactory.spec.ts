@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { ElementFactory } from "../../src/r/recordFactories/ElementFactory.js";
 import { ElementType } from "../../src/r/definitions/elements/index.js";
 import { RT, rtp } from "../../src/r/R/index.js";
@@ -8,38 +7,38 @@ import { element1, element2, element3, sourceMap} from "./jsons/2.elementsObject
 
 describe("r ElementFactory tests", () => {
 	it("should get element type for an element", () => {
-		expect(new ElementFactory(element1).getElementType()).to.be.equal(ElementType.group);
+		expect(new ElementFactory(element1).getElementType()).toBe(ElementType.group);
 	});
 
 	it("should set property for an element", () => {
 		const elementF = new ElementFactory(element1);
 		elementF.set(rtp.element.mouse_jump, false);
 		const mouseJump = elementF.get(rtp.element.mouse_jump);
-		expect(mouseJump).to.be.equal(false);
+		expect(mouseJump).toBe(false);
 	});
 
 	it("should get a default value for an element property", () => {
-		expect(new ElementFactory(element1).getDefault(rtp.element.element_type)).to.be.equal(elementPropertyDefaults.element_type);
+		expect(new ElementFactory(element1).getDefault(rtp.element.element_type)).toBe(elementPropertyDefaults.element_type);
 	});
 
 	it("should get json props and default props for an element", () => {
 		const elementF = new ElementFactory(element2);
 		const props = elementF.getJsonPropsAndDefaultProps();
-		expect(props).to.include("use_proximity_optimization");
-		expect(props).to.include("linked_element_id");
+		expect(props).toContain("use_proximity_optimization");
+		expect(props).toContain("linked_element_id");
 	});
 
 	it("should get file ids from element", () => {
 		const elementF = new ElementFactory(element3);
 		const fileIds = elementF.getFileIdsFromElement();
-		expect(fileIds.length).to.be.equal(1);
+		expect(fileIds.length).toBe(1);
 	});
 
 	it("should inject source into element", () => {
 		const elementF = new ElementFactory(element2);
 		elementF.injectSourceIntoElement(sourceMap);
 		const source = elementF.get(rtp.element.source) as fn.Source;
-		expect(source.name).to.be.equal("test");
+		expect(source.name).toBe("test");
 	});
 
 	it("should add element of type to an element", () => {
@@ -52,6 +51,6 @@ describe("r ElementFactory tests", () => {
 				found = true;
 			}
 		}
-		expect(found).to.be.true;
+		expect(found).toBe(true);
 	});
 });

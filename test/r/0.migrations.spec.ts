@@ -62,7 +62,7 @@ describe ("r Migration tests", () => {
   it("Testing if capture element gets deleted", function() {
     const migratedProject = projectViewerRuntimeMigrations(dormantElementJson);
     const idAndRecord = new RF.ProjectFactory(migratedProject).getDeepIdAndRecord(2353489588758041);
-    expect(idAndRecord).toBeDefined;
+    expect(idAndRecord).toBeDefined();
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/dormantElementTestMigrated.json", JSON.stringify(migratedProject));
   });
 });
