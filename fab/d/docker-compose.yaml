@@ -2,7 +2,7 @@ version: "3"
 
 services:
   project-rjson:
-    image: "gmetrixr/baseimage:node-20-dev-v3"
+    image: "gmetrixr/baseimage:node-20-dev-v4"
     container_name: gmetri_project-rjson
     command: ["tail", "-f", "/dev/null"]
     working_dir: /src
