@@ -1,6 +1,6 @@
 {
   "name": "@gmetrixr/project-rjson",
-  "version": "2.1.130",
+  "version": "2.1.131",
   "description": "(R)ecursive Json for Project/Deployment/Discussions",
   "exports": {
     "import": "./lib/esm/index.js",
