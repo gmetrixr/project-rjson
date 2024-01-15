@@ -8,7 +8,7 @@ workspace:
 
 steps:
 - name: install-dependencies
-  image: gmetrixr/baseimage:node-18-dev-v1
+  image: gmetrixr/baseimage:node-20-dev-v2
   commands:
 # Substitution: parameter//substring/replacemenet. So "// \/ / -" means replace / with -
   - echo "The image tag is ${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}"
@@ -16,7 +16,7 @@ steps:
   - pnpm install
 
 - name: lint-and-build
-  image: gmetrixr/baseimage:node-18-dev-v1
+  image: gmetrixr/baseimage:node-20-dev-v2
   commands:
   - pnpm lint
   - pnpm check
@@ -25,7 +25,7 @@ steps:
 
 #Commits all modified files. npm publish doesn't work with unstaged changes
 - name: npm-prepare-main
-  image: gmetrixr/baseimage:node-18-dev-v1
+  image: gmetrixr/baseimage:node-20-dev-v2
   when:
     branch: [main]
     event:
@@ -45,7 +45,7 @@ steps:
   - git push --tags origin ${DRONE_BRANCH}
 
 - name: npm-publish-main
-  image: gmetrixr/baseimage:node-18-dev-v1
+  image: gmetrixr/baseimage:node-20-dev-v2
   when:
     branch: [ main ]
     event:
