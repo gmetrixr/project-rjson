@@ -16,6 +16,7 @@ import learningJson from "./jsons/learning.json";
 import safeHandsJson from "./jsons/safeHands.json";
 import dormantElementJson from "./jsons/r3fJsons/project/dormantElementTest.json";
 import console from "console";
+import {afterEach, beforeEach, describe, expect, it, xit} from "@jest/globals";
 
 //https://stackoverflow.com/a/68017229/1233476
 const jestConsole = console;

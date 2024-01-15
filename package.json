@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "@gmetrixr/gdash": "^1.3.39",
+    "@jest/globals": "^29.7.0",
     "@tsconfig/node20": "^20.1.2",
-    "@types/jest": "^29.5.11",
     "@types/node": "^20.11.1",
     "@types/ramda": "^0.27.39",
     "@typescript-eslint/eslint-plugin": "^6.18.1",

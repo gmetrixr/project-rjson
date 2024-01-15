@@ -4,6 +4,7 @@ import { RT, rtp } from "../../src/r/R/index.js";
 import { elementPropertyDefaults } from "../../src/r/recordTypes/Element.js";
 import { fn } from "../../src/r/definitions/index.js";
 import { element1, element2, element3, sourceMap} from "./jsons/2.elementsObjects.js";
+import {afterEach, beforeAll, beforeEach, describe, expect, it, jest} from "@jest/globals";
 
 describe("r ElementFactory tests", () => {
 	it("should get element type for an element", () => {

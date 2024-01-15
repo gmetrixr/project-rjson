@@ -12,6 +12,7 @@ import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 import projectJson from "./jsons/project.json";
 import { r } from "../../src/index.js";
 import { avatarSourceMap, gvsMap, sourceMap } from "./jsons/4.projectObject.js";
+import {afterEach, beforeAll, beforeEach, describe, expect, it, jest, xit} from "@jest/globals";
 
 const { generateIdV2, deepClone } = jsUtils;
 

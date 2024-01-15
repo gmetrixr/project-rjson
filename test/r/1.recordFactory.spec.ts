@@ -5,6 +5,7 @@ import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/r3fJsons/project/old.json";
 import fs from "fs";
 import { ElementType } from "../../src/r/definitions/elements/index.js";
+import {afterEach, beforeAll, beforeEach, describe, expect, it, jest, xit} from "@jest/globals";
 
 const { deepClone } = jsUtils;
 
