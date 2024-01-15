@@ -2,8 +2,10 @@
   "name": "@gmetrixr/project-rjson",
   "version": "2.1.128",
   "description": "(R)ecursive Json for Project/Deployment/Discussions",
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
+  "exports": {
+    "import": "./lib/esm/index.js",
+    "require": "./lib/cjs/index.js"
+  },
   "repository": "https://github.com/gmetrixr/project-rjson",
   "author": "Sahil Ahuja <sahil@gmetri.com>",
   "sideEffects": false,
