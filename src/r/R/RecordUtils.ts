@@ -1,6 +1,20 @@
-import { MIN_SAFE_ORDER_DISTANCE, RecordFactory } from "./RecordFactory.js";
-import { RecordMap, RecordNode, rAndP } from "./RecordNode.js";
+import type { RecordMap, RecordNode, rAndP } from "./RecordNode.js";
+import { RecordFactory } from "./RecordFactory.js";
 import { RT, recordTypeDefinitions } from "./RecordTypes.js";
+
+/**
+ * If record.orders come this close, it is time to reset all orders
+ * Number.MIN_VALUE * 10E3   (~ 320 zeros after decimal)
+ * 
+ * JSON.stringify loses precision after 15 digits
+ * console.log(JSON.stringify({a: 1.123456789123456789123456789})); --> '{"a":1.1234567891234568}'
+ * 
+ * So we limit MIN_SAFE_ORDER_DISTANCE to 10E-15
+ * 
+ * However, 15 includes digits before and after decimal point. So we randomly choose 7.
+ * At 10 million records, order will start failing.
+ */
+const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
 
 export class RecordUtils {
   static getDefaultValues = <N extends RT>(type: N): Record<string, unknown> => recordTypeDefinitions[type].defaultValues;

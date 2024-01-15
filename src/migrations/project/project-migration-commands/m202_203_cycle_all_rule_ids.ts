@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { RT, rtp, RecordNode } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -17,10 +17,10 @@ class Migration implements IOrder {
   ta_delay = "ta_delay",
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json as RecordNode<RT.project>);
+  const pf = new RF.ProjectFactory(json as RecordNode<RT.project>);
   //Change all rule ids
   for(const scene of pf.getRecords(RT.scene)) {
-    const scenef = new SceneFactory(scene);
+    const scenef = new RF.SceneFactory(scene);
     scenef.cycleAllSubRecordIdsForRulesFix();
   }
 
@@ -28,7 +28,7 @@ const migrateProject = (json: any) => {
   for(const [rId, record] of pf.getDeepRecordEntries()) {
     switch(record.type) {
       case RT.then_action: {
-        const rf = new RecordFactory(record);
+        const rf = new RF.RecordFactory(record);
         rf.changePropertyName("co_id", "ta_co_id");
         rf.changePropertyName("co_type", "ta_co_type");
         rf.changePropertyName("properties", "ta_properties");
@@ -36,7 +36,7 @@ const migrateProject = (json: any) => {
         break;
       }
       case RT.when_event: {
-        const rf = new RecordFactory(record);
+        const rf = new RF.RecordFactory(record);
         rf.changePropertyName("co_id", "we_co_id");
         rf.changePropertyName("co_type", "we_co_type");
         rf.changePropertyName("properties", "we_properties");

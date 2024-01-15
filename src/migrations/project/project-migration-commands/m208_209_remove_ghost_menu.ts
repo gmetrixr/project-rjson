@@ -1,6 +1,6 @@
-import { rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { RT, rtp } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -12,11 +12,11 @@ class Migration implements IOrder {
  * Menu items that don't point to any valid scene should be deleted
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json);
+  const pf = new RF.ProjectFactory(json);
   const menuEntries = pf.getRecordEntries(RT.menu);
   const existingSceneIds = pf.getRecordIds(RT.scene);
   for(const [mId, m] of menuEntries) {
-    const menuF = new RecordFactory(m);
+    const menuF = new RF.RecordFactory(m);
     
     const linkedSceneId = menuF.get(rtp.menu.menu_scene_id) as number;
     //If linked scene id is undefined or doesn't exist, delete this menu entry

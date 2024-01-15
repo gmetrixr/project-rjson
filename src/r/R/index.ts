@@ -1,9 +1,7 @@
-import { RecordNode, RecordMap, createRecord, idAndRecord, idOrAddress, ClipboardData } from "./RecordNode.js";
-import { RT, RTP, rtp, RTDefinition, SINGLE_RECORD_ID, isRecordType, recordTypeDefinitions, rtHeirarchyTree, getTypeChildren, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes.js";
-import { RecordFactory } from "./RecordFactory.js";
+export type { RecordMap, idOrAddress, idAndRecord, ClipboardData } from "./RecordNode.js";
+export { RecordNode, createRecord } from "./RecordNode.js";
+  
+export type { RTP, RTDefinition } from "./RecordTypes.js";
+export { RT, SINGLE_RECORD_ID, rtp, recordTypeDefinitions, rtHeirarchyTree, getTypeChildren, isRecordType, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes.js";
 
-export {
-  RecordNode, RecordMap, createRecord, idAndRecord, idOrAddress, ClipboardData,
-  RT, RTP, rtp, RTDefinition, SINGLE_RECORD_ID, isRecordType, recordTypeDefinitions, rtHeirarchyTree, getTypeChildren, isTypeChildOf, isTypeSubChildOf,
-  RecordFactory,
-}
+export { RecordFactory } from "./RecordFactory.js";

@@ -11,7 +11,7 @@ import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 import projectJson from "./jsons/project.json";
-import { r } from "../../src/r/index.js";
+import { r } from "../../src/index.js";
 import { avatarSourceMap, gvsMap, sourceMap } from "./jsons/4.projectObject.js";
 
 const { generateIdV2, deepClone } = jsUtils;

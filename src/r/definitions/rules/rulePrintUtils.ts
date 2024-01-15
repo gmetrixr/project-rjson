@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import { rActionDisplayName, rEventDisplayName, RuleAction, RuleEvent } from "./index.js";
-import { idAndRecord, RecordMap, RecordNode, RT, rtp } from "../../../r/index.js";
+import { RT, rtp, RecordNode, RecordMap, idAndRecord } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
+import { CogObjectType } from "../../../r/definitions/index.js";
 import { RecordFactory } from "../../R/index.js";
-import { ProjectFactory, SceneFactory,  } from "../../recordFactories/index.js";
 import { ElementUtils } from "../../recordFactories/ElementUtils.js";
 import { isElementType, ElementType } from "../elements/index.js";
 import { isSpecialType, specialElementDisplayNames, SpecialType } from "../special/index.js";
 import { ArrayOfValues, isVariableType } from "../variables/index.js";
-import { CogObjectType } from "../index.js";
 
 export interface RuleText {
   ruleIdText: string;
@@ -31,7 +31,7 @@ export class rulePrintUtils {
     varMap: RecordMap<RT.variable> = {},
   ): void => {
     let ruleText;
-    const sceneF = new SceneFactory(scene);
+    const sceneF = new RF.SceneFactory(scene);
     for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
       ruleText = rulePrintUtils.crp().generateRuleText({id: ruleId, record: rule}, scene, varMap);
       rulePrintUtils.crp().consoleRuleTextPrinter(ruleText);
@@ -39,7 +39,7 @@ export class rulePrintUtils {
   };
 
   static generateFriendlyRuleTextsAndPrint = (project: RecordNode<RT.project>, sceneIds: number[]): void => {
-    const projectF = new ProjectFactory(project);
+    const projectF = new RF.ProjectFactory(project);
     const varDefROM = projectF.getRecordMap(RT.variable);
     for (const sceneId of sceneIds) {
       const scene = projectF.getRecord(sceneId, RT.scene);
@@ -50,14 +50,14 @@ export class rulePrintUtils {
   };
 
   static generateFriendlyRuleTexts = (project: RecordNode<RT.project>, sceneIds: number[]): string => {
-    const projectF = new ProjectFactory(project);
+    const projectF = new RF.ProjectFactory(project);
     const varDefROM = projectF.getRecordMap(RT.variable);
     let rulesText = "";
     const frp = rulePrintUtils.frp();
     for (const sceneId of sceneIds) {
       const scene = projectF.getRecord(sceneId, RT.scene);
       if (scene !== undefined) {
-        const sceneF = new SceneFactory(scene);
+        const sceneF = new RF.SceneFactory(scene);
         for (const rule of sceneF.getRecords(RT.rule)) {
           const ruleText = frp.generateRuleText(rule, project, scene, varDefROM);
           rulesText += frp.friendlyRuleLine(ruleText);
@@ -87,7 +87,7 @@ class ConsoleRulePrinter {
     varMap: RecordMap<RT.variable> = {},
   ): void => {
     let ruleText;
-    const sceneF = new SceneFactory(scene);
+    const sceneF = new RF.SceneFactory(scene);
     for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
       ruleText = this.generateRuleText({id: ruleId, record: rule}, scene, varMap);
       this.consoleRuleTextPrinter(ruleText);
@@ -224,7 +224,7 @@ class FriendlyRulePrinter {
     varMap: RecordMap<RT.variable> = {},
   ): void => {
     let ruleText;
-    const sceneF = new SceneFactory(scene);
+    const sceneF = new RF.SceneFactory(scene);
     for (const rule of sceneF.getRecords(RT.rule)) {
       ruleText = this.generateRuleText(rule, project, scene, varMap);
       console.log(this.friendlyRuleLine(ruleText));
@@ -320,7 +320,7 @@ class FriendlyRulePrinter {
         case RuleAction.change_scene:
           //properties[0] is the scene id
           coIdScene = properties[0] as number;
-          propsScene = new ProjectFactory(project).getRecord(coIdScene, RT.scene);
+          propsScene = new RF.ProjectFactory(project).getRecord(coIdScene, RT.scene);
           if (propsScene?.name !== undefined) {
             propertiesText = ` ${propsScene.name}`; //need a space before the scene name
           }

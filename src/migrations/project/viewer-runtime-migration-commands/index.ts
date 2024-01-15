@@ -1,5 +1,5 @@
 
-import { RT, RecordNode } from "../../../r/index.js";
+import { RT, RecordNode } from "../../../r/R/index.js";
 import { IOrder } from "../../IOrder.js";
 import v1 from "./v1_removeDormantRules.js";
 import v2 from "./v2_removeDormantElements.js";

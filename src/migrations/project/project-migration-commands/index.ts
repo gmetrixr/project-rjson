@@ -1,4 +1,4 @@
-import { RT, RecordNode } from "../../../r/index.js";
+import { RT, RecordNode } from "../../../r/R/index.js";
 import { IOrder } from "../../IOrder.js";
 import initialRMigration from "./m199_200_initial_migration_from_rjson_to_rjson2_structure.js";
 import m200_201 from "./m200_201_ta_we_prefix.js";

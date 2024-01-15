@@ -1,5 +1,6 @@
 
-import { RT, RecordNode, createRecord, r, rtp } from "../../../r/index.js";
+import { RT, RecordNode, createRecord, rtp } from "../../../r/R/index.js";
+import { r } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
 import { getHighestProjectVersion } from "../project-migration-commands/index.js";
 import create_first_scene from "./create_first_scene.js";

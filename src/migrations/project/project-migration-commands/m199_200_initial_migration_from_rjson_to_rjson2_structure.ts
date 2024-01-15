@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT } from "../../../r/R/index.js";
+import { RT, rtp, RecordNode } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory } from "../../../r/recordFactories/index.js";
 import { jsUtils } from "@gmetrixr/gdash";
 
 const { generateIdV2 } = jsUtils;
@@ -16,7 +16,7 @@ const migrateProject = (json: any) => {
   const updatedJson = recursivelyMigrateJson(json);
   const projectJson = updatedJson as unknown as RecordNode<RT.project>;
   changeLeadGenAndShoppingIds(projectJson);
-  const projectF = new ProjectFactory(projectJson);
+  const projectF = new RF.ProjectFactory(projectJson);
   projectF.cycleAllSubRecordIdsForRulesFix();
   projectF.set(rtp.project.version, 200);
   return projectJson;
@@ -29,7 +29,7 @@ const migrateProject = (json: any) => {
  * And Leadgen ids and shopping ids aren't referenced from anywhere. So we can just move these ids to something random.
  */
 const changeLeadGenAndShoppingIds = (projectJson: RecordNode<RT.project>) => {
-  const projectF = new ProjectFactory(projectJson);
+  const projectF = new RF.ProjectFactory(projectJson);
   const shoppingRecords = projectF.getRecords(RT.shopping);
   if(shoppingRecords.length > 0) {
     const shoppingRM = projectF.getRecordMap(RT.shopping);

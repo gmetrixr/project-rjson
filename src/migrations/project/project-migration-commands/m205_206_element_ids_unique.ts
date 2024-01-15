@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT } from "../../../r/R/index.js";
+import { RT, rtp, RecordNode } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 import { jsUtils } from "@gmetrixr/gdash";
 
 const { generateIdV2 } = jsUtils;
@@ -17,11 +17,11 @@ class Migration implements IOrder {
  * duplicate element ids across scenes
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json as RecordNode<RT.project>);
+  const pf = new RF.ProjectFactory(json as RecordNode<RT.project>);
 
   const listOfElementIdsUsed: number[] = [];
   for(const scene of pf.getRecords(RT.scene)) {
-    const scenef = new SceneFactory(scene);
+    const scenef = new RF.SceneFactory(scene);
     const replacementMap: {[oldId: number]: number} = {};
     //Do this only for affected scenes, not all scenes. Don't want it to impact all projects
     let isSceneCorrupt = false;

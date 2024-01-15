@@ -1,5 +1,7 @@
-import { RecordNode, r, RT, vn } from "../../../r/index.js";
+import { RT, RecordNode } from "../../../r/R/index.js";
+import { r } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
+import { vn } from "../../../r/definitions/index.js";
 
 /**
  * Adds predefined variables to the project json

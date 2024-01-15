@@ -1,5 +1,6 @@
-import { createRecord, RecordNode, RT, sn } from "../../../r/index.js";
+import { RT, RecordNode, createRecord } from "../../../r/R/index.js";
 import { IOrder } from "../../IOrder.js";
+import { sn } from "../../../r/definitions/index.js";
 import { ProjectFactory } from "../../../r/recordFactories/ProjectFactory.js";
 import { ProjectUtils } from "../../../r/recordFactories/ProjectUtils.js";
 

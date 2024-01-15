@@ -1,6 +1,8 @@
-import { RT, r, rn, rtp } from "../../../r/index.js";
-import { VarValue } from "../../../r/definitions/variables/index.js";
+import { RT, rtp } from "../../../r/R/index.js";
+import { r } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
+import { rn } from "../../../r/definitions/index.js";
+import { VarValue } from "../../../r/definitions/variables/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {

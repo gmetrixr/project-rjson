@@ -1,4 +1,4 @@
-import { RT, RecordNode } from "../../../r/index.js";
+import { RT, RecordNode } from "../../../r/R/index.js";
 import { healthCheckMigration } from "./check_properties.js";
 
 /**

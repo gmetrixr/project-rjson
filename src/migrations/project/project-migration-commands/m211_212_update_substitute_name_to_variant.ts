@@ -1,4 +1,5 @@
-import { RT, r, rtp } from "../../../r/index.js";
+import { RT, rtp } from "../../../r/R/index.js";
+import { r } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
 
 class Migration implements IOrder {

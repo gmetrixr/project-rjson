@@ -1,4 +1,5 @@
-import { recordTypeDefinitions, RT, RTP } from "./RecordTypes.js";
+import type { RTP } from "./RecordTypes.js";
+import { recordTypeDefinitions, RT } from "./RecordTypes.js";
 
 export interface RecordNode<T extends RT> {
   /** 

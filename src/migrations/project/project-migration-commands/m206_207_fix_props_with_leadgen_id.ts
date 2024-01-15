@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { RT, rtp, RecordNode } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -15,7 +15,7 @@ class Migration implements IOrder {
  * Get all leadgens and replace them with 1,2,3 in properties
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json as RecordNode<RT.project>);
+  const pf = new RF.ProjectFactory(json as RecordNode<RT.project>);
   const leadgenEntries = pf.getSortedRecordEntries(RT.lead_gen_field);
   const replacementMap: Record<number, number> = {};
 
@@ -38,14 +38,14 @@ const migrateProject = (json: any) => {
 
     for(const type of pf.getRecordTypes()) { //This doesn't contain the type element
       for(const [id, record] of pf.getDeepRecordEntries(type)) { 
-        new RecordFactory(record).changeRecordIdInProperties(replacementMap);
+        new RF.RecordFactory(record).changeRecordIdInProperties(replacementMap);
       }
     }
 
     for(const [sceneId, scene] of pf.getRecordEntries(RT.scene)) {
-      const sf = new RecordFactory(scene);
+      const sf = new RF.RecordFactory(scene);
       for(const [id, record] of sf.getDeepRecordEntries()) { 
-        new RecordFactory(record).changeRecordIdInProperties(replacementMap);
+        new RF.RecordFactory(record).changeRecordIdInProperties(replacementMap);
       }
     }
   }

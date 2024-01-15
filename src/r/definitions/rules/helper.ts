@@ -1,4 +1,5 @@
-import { r, RecordNode, RT } from "../../index.js";
+import { RT, RecordNode } from "../../../r/R/index.js";
+import { r } from "../../../r/index.js";
 import { RuleAction } from "./RuleAction.js";
 import { RuleEvent } from "./RuleEvent.js";
 

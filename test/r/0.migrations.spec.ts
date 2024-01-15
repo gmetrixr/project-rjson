@@ -1,7 +1,7 @@
 import { createNewDeployment, migrateDeployment } from "../../src/migrations/deployment/index.js";
 import { migrateProject, projectViewerRuntimeMigrations } from "./../../src/migrations/project/index.js";
 import { migrateDiscussion } from "./../../src/migrations/discussion/index.js";
-import { RT } from "../../src/r/R/index.js";
+import { RT, RF } from "../../src/index.js";
 import fs from "fs";
 import deploymentJson from "./jsons/deployment.json";
 import campusJson from "./jsons/campus.json";
@@ -15,7 +15,6 @@ import myMetaverseJson from "./jsons/myMetaverse.json";
 import learningJson from "./jsons/learning.json";
 import safeHandsJson from "./jsons/safeHands.json";
 import dormantElementJson from "./jsons/r3fJsons/project/dormantElementTest.json";
-import { ProjectFactory } from "../../src/r/recordFactories/index.js";
 import console from "console";
 
 //https://stackoverflow.com/a/68017229/1233476
@@ -62,7 +61,7 @@ describe ("r Migration tests", () => {
 
   it("Testing if capture element gets deleted", function() {
     const migratedProject = projectViewerRuntimeMigrations(dormantElementJson);
-    const idAndRecord = new ProjectFactory(migratedProject).getDeepIdAndRecord(2353489588758041);
+    const idAndRecord = new RF.ProjectFactory(migratedProject).getDeepIdAndRecord(2353489588758041);
     expect(idAndRecord).toBeDefined;
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/dormantElementTestMigrated.json", JSON.stringify(migratedProject));
   });

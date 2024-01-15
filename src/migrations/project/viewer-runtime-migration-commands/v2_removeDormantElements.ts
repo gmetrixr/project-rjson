@@ -1,6 +1,6 @@
-import { rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { RT, rtp } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ElementFactory, ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 import { ElementType, elementList } from "../../../r/definitions/elements/index.js";
 import { ElementProperty } from "../../../r/recordTypes/Element.js";
 import { ArrayOfValues } from "../../../r/definitions/variables/index.js";
@@ -27,16 +27,16 @@ const migrateProject = (json: any) => {
     }
   }
 
-  const projectF = new ProjectFactory(json);
+  const projectF = new RF.ProjectFactory(json);
   const scenes = projectF.getRecords(RT.scene);
   for(const s of scenes) {
-    const sceneF = new SceneFactory(s);
+    const sceneF = new RF.SceneFactory(s);
 
     // * 1. Get all hidden elements
     const deepElementEntries = sceneF.getDeepRecordEntries(RT.element);
     const deleteElementIds: number[] = [];
     for(const [eId, e] of deepElementEntries) {
-      const elementF = new ElementFactory(e);
+      const elementF = new RF.ElementFactory(e);
       if(elementsWithHidden.includes(elementF.getElementType())) {
         if(elementF.getValueOrDefault(rtp.element.hidden) === true) {
           deleteElementIds.push(eId);
@@ -48,13 +48,13 @@ const migrateProject = (json: any) => {
     const allPropValues: ArrayOfValues = [];
     const thenActionEntries = sceneF.getDeepRecordEntries(RT.then_action);
     for(const [taId, ta] of thenActionEntries) {
-      const taF = new RecordFactory(ta);
+      const taF = new RF.RecordFactory(ta);
       allPropValues.push(...taF.getAllPropValues() as ArrayOfValues);
     }
     
     const whenEventEntries = sceneF.getDeepRecordEntries(RT.when_event);
     for(const [weId, we] of whenEventEntries) {
-      const weF = new RecordFactory(we);
+      const weF = new RF.RecordFactory(we);
       allPropValues.push(...weF.getAllPropValues() as ArrayOfValues);
     }
     

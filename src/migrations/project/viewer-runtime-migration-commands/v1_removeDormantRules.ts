@@ -12,9 +12,9 @@
  * There might be hotspot element deletions (hidden, no rules) which might impact scene deletion also.
  */
 
-import { rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { RT, rtp } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -23,13 +23,13 @@ class Migration implements IOrder {
 }
 
 const migrateProject = (json: any) => {
-  const projectF = new ProjectFactory(json);
+  const projectF = new RF.ProjectFactory(json);
   const scenes = projectF.getRecords(RT.scene);
   for(const s of scenes) {
-    const sceneF = new SceneFactory(s);
+    const sceneF = new RF.SceneFactory(s);
     const ruleEntries = sceneF.getRecordEntries(RT.rule);
     for(const [rId, r] of ruleEntries) {
-      const ruleF = new RecordFactory(r);
+      const ruleF = new RF.RecordFactory(r);
       if(ruleF.get(rtp.rule.disabled) === true) {
         sceneF.deleteRecord(rId, RT.rule);
         continue;

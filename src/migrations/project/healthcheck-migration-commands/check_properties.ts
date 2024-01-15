@@ -1,4 +1,5 @@
-import { RecordNode, r, RT, rtp } from "../../../r/index.js";
+import { RT, RecordNode, rtp } from "../../../r/R/index.js";
+import { r } from "../../../r/index.js";
 import { ElementType, eTypeToDefn } from "../../../r/definitions/elements/index.js";
 
 /**

@@ -1,7 +1,6 @@
-import { rtp, RT, RecordFactory, RecordMap } from "../../../r/R/index.js";
+import { RT, rtp, RecordMap } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ElementFactory, ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
-import { RuleAction } from "../../../r/definitions/rules/index.js";
 import { ElementType } from "../../../r/definitions/elements/index.js";
 
 class Migration implements IOrder {
@@ -15,17 +14,17 @@ class Migration implements IOrder {
  * loading them during scene loading.
  */
 const migrateProject = (json: any) => {
-  const projectF = new ProjectFactory(json);
+  const projectF = new RF.ProjectFactory(json);
   const scenes = projectF.getRecords(RT.scene);
 
   for(const scene of scenes) {
-    const sceneF = new SceneFactory(scene);
+    const sceneF = new RF.SceneFactory(scene);
     
     //* 1. Find all audio elements
     const deepElements = sceneF.getDeepRecordEntries(RT.element);
     const audiosToDelete: RecordMap<RT.element> = {};
     for(const [eId, element] of deepElements) {
-      const elementF = new ElementFactory(element);
+      const elementF = new RF.ElementFactory(element);
       if(elementF.get(rtp.element.element_type) === ElementType.audio || elementF.get(rtp.element.element_type) === ElementType.audio_ssml) {
         audiosToDelete[eId] = element;
       }
@@ -33,7 +32,7 @@ const migrateProject = (json: any) => {
 
     //* 2. Check if there are volume rules for these audio elements
     for(const [ruleId, rule] of sceneF.getSortedRecordEntries(RT.rule)) {
-      const ruleF = new RecordFactory(rule);
+      const ruleF = new RF.RecordFactory(rule);
       if(ruleF.getValueOrDefault(rtp.rule.disabled) !== false) {
         for(const [weId, we] of ruleF.getSortedRecordEntries(RT.when_event)) {
           if(typeof we.props.we_co_id === "number") { //If an audio element has a when event associated, don't delete it

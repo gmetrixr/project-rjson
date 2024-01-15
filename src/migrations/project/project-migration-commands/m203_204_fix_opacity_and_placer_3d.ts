@@ -1,6 +1,6 @@
-import { RecordNode, rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { RT, rtp, RecordNode } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -16,7 +16,7 @@ class Migration implements IOrder {
  * Go through all props, and anything that matches this (big) number, should be set to 1.
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json as RecordNode<RT.project>);
+  const pf = new RF.ProjectFactory(json as RecordNode<RT.project>);
   //Get shopping id
   const shoppingEntry = pf.getRecordEntries(RT.shopping);
   const shopping_id = shoppingEntry?.[0]?.[0] ?? 0;
@@ -28,14 +28,14 @@ const migrateProject = (json: any) => {
       //Don't go through scenes here because different scenes may 
       //have element ids that are same
       for(const [id, record] of pf.getDeepRecordEntries(type)) { 
-        new RecordFactory(record).changeRecordIdInProperties({[shopping_id]: 1});
+        new RF.RecordFactory(record).changeRecordIdInProperties({[shopping_id]: 1});
       }
     }
 
     for(const [sceneId, scene] of pf.getRecordEntries(RT.scene)) {
-      const sf = new RecordFactory(scene);
+      const sf = new RF.RecordFactory(scene);
       for(const [id, record] of sf.getDeepRecordEntries()) { 
-        new RecordFactory(record).changeRecordIdInProperties({[shopping_id]: 1});
+        new RF.RecordFactory(record).changeRecordIdInProperties({[shopping_id]: 1});
       }
     }
   }

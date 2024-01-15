@@ -1,6 +1,6 @@
-import { rtp, RT } from "../../../r/R/index.js";
+import { RT, rtp } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory, SceneFactory } from "../../../r/recordFactories/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -12,10 +12,10 @@ class Migration implements IOrder {
  * Voice Recognition element was removed. Remove it from project graph
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json);
+  const pf = new RF.ProjectFactory(json);
     const scenes = pf.getRecords(RT.scene);
     for(const s of scenes) {
-      const sceneF = new SceneFactory(s);
+      const sceneF = new RF.SceneFactory(s);
       // * find out any speech elements and delete them
       const deepElements = sceneF.getDeepRecordEntries(RT.element);
       for(const [id, e] of deepElements) {

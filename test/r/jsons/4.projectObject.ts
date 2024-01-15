@@ -1,5 +1,5 @@
 import { pathUtils } from "@gmetrixr/gdash"
-import { RT, RecordMap } from "../../../src/r"
+import { RT, RecordMap } from "../../../src/index.js";
 
 export const gvsMap: RecordMap<RT.variable> = {
   "9605223715681184": {

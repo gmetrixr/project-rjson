@@ -1,8 +1,8 @@
-import { rtp, RT, RecordFactory } from "../../../r/R/index.js";
+import { rtp } from "../../../r/R/index.js";
+import { RF } from "../../../r/index.js";
 import { IOrder } from "../../IOrder.js";
-import { ProjectFactory } from "../../../r/recordFactories/index.js";
+import { pn } from "../../../r/definitions/index.js";
 import { ProjectProperty } from "../../../r/recordTypes/Project.js";
-import { pn } from "../../../r/index.js";
 
 class Migration implements IOrder {
   execute (projectJson: any) {
@@ -16,7 +16,7 @@ class Migration implements IOrder {
  * But so that older behaviour is maintained, we set this manually to blend for older projects
  */
 const migrateProject = (json: any) => {
-  const pf = new ProjectFactory(json);
+  const pf = new RF.ProjectFactory(json);
   if(pf.get(ProjectProperty.scene_transition_type) === undefined) {
     pf.set(ProjectProperty.scene_transition_type, pn.SceneTransitionType.blend);
   }

@@ -1,4 +1,4 @@
-import { RT, RecordMap, RecordNode, createRecord } from "../../r/index.js";
+import { RecordMap, RecordNode, RT, createRecord } from "../../r/R/index.js";
 import { VarCategory, VarValue, VariableType } from "../../r/definitions/variables/index.js";
 
 /** @deprecated */

@@ -26,7 +26,7 @@ import { LeadGenFieldProperty } from "../recordTypes/LeadGenField.js";
 import { SceneType } from "../definitions/special/index.js";
 import { SubstituteProperty } from "../recordTypes/Substitute.js";
 import { ProjectUtils } from "./ProjectUtils.js";
-import { getFactory } from "./index.js";
+import { getFactory } from "../index.js";
 
 const { deepClone, generateIdV2 } = jsUtils;
 type variable = RT.variable;

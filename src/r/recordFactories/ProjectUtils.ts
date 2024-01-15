@@ -4,9 +4,9 @@ import { SceneFactory } from "./SceneFactory.js";
 import { ElementFactory } from "./ElementFactory.js";
 import { en } from "../definitions/index.js";
 import { SceneCollisionOptions, SceneType } from "../definitions/special/index.js";
-import { ProjectFactory } from "./index.js";
 import { ElementType } from "../definitions/elements/ElementDefinition.js";
 import { sceneEnvironmentOptions } from "../definitions/special/SpecialTypes.js";
+import { ProjectFactory } from "./ProjectFactory.js";
 
 export class ProjectUtils {
   static setupNewScene(project: RecordNode<RT.project>, sceneIdAndRecord: idAndRecord<RT.scene>) {
