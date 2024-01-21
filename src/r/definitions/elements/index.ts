@@ -9,6 +9,7 @@ import { Cylinder } from "./types/Cylinder.js";
 import { EmbedHtml } from "./types/EmbedHtml.js";
 import { EmbedScorm } from "./types/EmbedSCORM.js";
 import { Gif } from "./types/Gif.js";
+import { Group } from "./types/Group.js";
 import { Icon } from "./types/Icon.js";
 import { ImageFlat } from "./types/ImageFlat.js";
 import { Instruction } from "./types/Instructions.js";
@@ -71,6 +72,7 @@ export const elementList: IElementDefinition[] = [
   EmbedHtml,
   EmbedScorm,
   Gif,
+  Group,
   Icon,
   Instruction,
   MediaUpload,
