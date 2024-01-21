@@ -650,7 +650,7 @@ export class RecordFactory<T extends RT> {
    */
   cycleAllSubRecordIds(): void {
     const replacementMap: {[oldId: number]: number} = {};
-    for(const [key, value] of this.getDeepRecordEntries()) {
+    for(const [key, _value] of this.getDeepRecordEntries()) {
       const oldId = Number(key);
       const newId = generateIdV2();
       replacementMap[oldId] = newId;
