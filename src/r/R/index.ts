@@ -1,4 +1,4 @@
-export type { RecordMap, idOrAddress, idAndRecord, ClipboardData } from "./RecordNode.js";
+export type { RecordMap, idOrAddress, idAndRecord, RecordEntry, ClipboardData } from "./RecordNode.js";
 export { RecordNode, createRecord } from "./RecordNode.js";
   
 export type { RTP, RTDefinition } from "./RecordTypes.js";

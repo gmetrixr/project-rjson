@@ -1,4 +1,4 @@
-import type { RecordMap, RecordNode, rAndP } from "./RecordNode.js";
+import type { RecordEntry, RecordMap, RecordNode, rAndP } from "./RecordNode.js";
 import { RecordFactory } from "./RecordFactory.js";
 import { RT, recordTypeDefinitions } from "./RecordTypes.js";
 
@@ -19,9 +19,9 @@ const MIN_SAFE_ORDER_DISTANCE = 10E-7; //Number.MIN_VALUE * 10E3
 export class RecordUtils {
   static getDefaultValues = <N extends RT>(type: N): Record<string, unknown> => recordTypeDefinitions[type].defaultValues;
 
-  static getRecordEntries <N extends RT>(rm: RecordMap<N>): [number, RecordNode<N>][] {
+  static getRecordEntries <N extends RT>(rm: RecordMap<N>): RecordEntry<N>[] {
     return Object.entries(rm)
-            .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+            .map((entry): RecordEntry<RT> => [Number(entry[0]), entry[1]]);
   }
 
   static getRecords <N extends RT>(rm: RecordMap<N>): RecordNode<N>[] {
@@ -33,13 +33,13 @@ export class RecordUtils {
   }
 
   /** ORDERED entries of id, records. Returns ids as strings. */
-  static getSortedRecordEntries <N extends RT>(rm: RecordMap<N>): [number, RecordNode<N>][] {
+  static getSortedRecordEntries <N extends RT>(rm: RecordMap<N>): RecordEntry<N>[] {
     RecordUtils.ensureOrderKeyPresentOfType(rm);
     const entriesArray = Object.entries(rm);
     //We know that at this point order is not undefined. So we just forcefully cast it to a number.
     const numberEntriesArray = entriesArray
       .sort((a,b) => {return <number>a[1].order - <number>b[1].order})
-      .map((entry): [number, RecordNode<RT>] => [Number(entry[0]), entry[1]]);
+      .map((entry): RecordEntry<RT> => [Number(entry[0]), entry[1]]);
     return numberEntriesArray;
   }
  

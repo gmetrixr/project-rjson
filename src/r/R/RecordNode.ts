@@ -40,6 +40,7 @@ export const createRecord = <T extends RT>(type: T, name?: string) :RecordNode<T
 export type rAndP = {id: number, r: RecordNode<RT>, p: RecordNode<RT> };
 export type idAndRecord<N extends RT> = {id: number, record: RecordNode<N>};
 export type idOrAddress = number | string;
+export type RecordEntry<N extends RT> = [number, RecordNode<N>];
 /** clipboard contains the strigified version of this */
 export interface ClipboardData {
   nodes: idAndRecord<RT>[]

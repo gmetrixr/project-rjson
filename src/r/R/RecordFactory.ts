@@ -1,4 +1,4 @@
-import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData } from "./RecordNode.js";
+import { RecordNode, RecordMap, createRecord, RecordMapGeneric, idAndRecord, idOrAddress, rAndP, ClipboardData, RecordEntry } from "./RecordNode.js";
 import { RT, RTP, recordTypeDefinitions, isRecordType, rtp, isTypeChildOf, isTypeSubChildOf } from "./RecordTypes.js";
 import { jsUtils, stringUtils } from "@gmetrixr/gdash";
 import { RecordUtils } from "./RecordUtils.js";
@@ -189,7 +189,7 @@ export class RecordFactory<T extends RT> {
     }
   }
 
-  getRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
+  getRecordEntries<N extends RT>(type?: N): RecordEntry<N>[] {
     return RecordUtils.getRecordEntries(this.getRecordMap(type));
   }
 
@@ -201,7 +201,7 @@ export class RecordFactory<T extends RT> {
     return RecordUtils.getRecordIds(this.getRecordMap(type));
   }
 
-  private getSortedDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
+  private getSortedDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: RecordEntry<RT>[]): RecordEntry<RT>[] {
     if(recordEntries === undefined) recordEntries = [];
     if(type === undefined) { //Just return all types
       const typesToIterate = this.getRecordTypes();
@@ -236,11 +236,11 @@ export class RecordFactory<T extends RT> {
    * A Pure DFS of the tree
    * An array that goes depth first, then breadth
    */
-  getSortedDFSRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
+  getSortedDFSRecordEntries<N extends RT>(type?: N): RecordEntry<N>[] {
     return this.getSortedDFSRecordEntriesInternal(type);
   }
 
-  private getDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: [number, RecordNode<RT>][]): [number, RecordNode<RT>][] {
+  private getDFSRecordEntriesInternal<N extends RT>(type?: N, recordEntries?: RecordEntry<RT>[]): RecordEntry<RT>[] {
     if(recordEntries === undefined) recordEntries = [];
     if(type === undefined) { //Just return all types
       const typesToIterate = this.getRecordTypes();
@@ -271,7 +271,7 @@ export class RecordFactory<T extends RT> {
     return recordEntries;
   }
 
-  getDeepRecordEntries<N extends RT>(type?: N): [number, RecordNode<N>][] {
+  getDeepRecordEntries<N extends RT>(type?: N): RecordEntry<N>[] {
     return this.getDFSRecordEntriesInternal(type);
   }
 
@@ -367,7 +367,7 @@ export class RecordFactory<T extends RT> {
   }
 
   /** ORDERED entries of id, records. Returns ids as strings. */
-  getSortedRecordEntries <N extends RT>(type: N): [number, RecordNode<N>][] {
+  getSortedRecordEntries <N extends RT>(type: N): RecordEntry<N>[] {
     return RecordUtils.getSortedRecordEntries(this.getRecordMap(type));
   }
 
