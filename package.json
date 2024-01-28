@@ -24,11 +24,14 @@
     "watch-test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --watch",
     "circular": "npx madge --circular --extensions ts src/index.ts",
     "@comment PUBLISH": "Used for publishing this repo",
-    "build": "rm -rf lib; ./node_modules/.bin/tsc -p tsconfig.json && ./node_modules/.bin/tsc -p tsconfig-cjs.json",
     "bundle": "pnpm publish:version && pnpm publish:npm",
     "publish:version": "N=$(node -p \"require('./package.json').name\") && pnpm version patch --message \"v%s: $N [ci skip]\"",
     "publish:version-notag": "N=$(node -p \"require('./package.json').name\") && pnpm version --no-git-tag-version patch && git commit -am \"trigger: $N [no skip]\"",
-    "publish:npm": "V=$(node -p \"require('./package.json').version\") && pnpm publish --no-git-check"
+    "publish:npm": "V=$(node -p \"require('./package.json').version\") && pnpm publish --no-git-check",
+    "build": "rm -rf lib; pnpm buildesm && pnpm buildcjs && pnpm buildpackagejson",
+    "buildpackagejson": "tsconfig-to-dual-package ./tsconfig.json ./tsconfig-cjs.json",
+    "buildesm": "./node_modules/.bin/tsc -p tsconfig.json;",
+    "buildcjs": "./node_modules/.bin/tsc -p tsconfig-cjs.json;"
   },
   "peerDependencies": {
     "@gmetrixr/gdash": "1.x.x"
@@ -49,6 +52,7 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
+    "tsconfig-to-dual-package": "^1.2.0",
     "typescript": "^5.3.3"
   }
 }
