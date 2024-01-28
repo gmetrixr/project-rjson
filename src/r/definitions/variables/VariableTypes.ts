@@ -82,23 +82,28 @@ export interface PredefinedVarDefaults {
  * How to identify a Predefined Variable?
  * Ans: id < 0
  * Predefined variables cannot be renamed or deleted by the user.
- * 
- 
  */
 export const predefinedVariableDefaults: Record<PredefinedVariableName, PredefinedVarDefaults> = {
   [PredefinedVariableName.score]: {id: -2, type: VariableType.number, 
-    description: "This is a special numeric field that gets used in Leaderboard. Can be used to store overall score." },
-  [PredefinedVariableName.lang]: {id: -3, type: VariableType.string, description: "In case Language Tools are used, the language defined in that section gets stored here." },
+    description: "Store overall score and use it in leaderboard." },
+  [PredefinedVariableName.lang]: {id: -3, type: VariableType.string, 
+    description: "Stores the language selected from Language Tools." },
   [PredefinedVariableName.v_identifier_var]: {id: -8, type: VariableType.string, 
-    description: "Stores the unique identifier of the viewer viewing this experience. Can be email/name etc. - depends on the authenticaion mechanism used in the Deployment section." },
-  [PredefinedVariableName.device_var]: {id: -9, type: VariableType.string, description: "Viewer device type. 'm' for mobile, 'd' for desktop and 'h' for headset." },
-  [PredefinedVariableName.browser_var]: {id: -10, type: VariableType.string, description: "Contains a string identifying the browser the viewer is using." },
-  [PredefinedVariableName.vrmode_var]: {id: -11, type: VariableType.boolean, description: "If the user is in VR mode, this is set to true. Can be used to display things differently in VR mode." },
+    description: "Unique ID of the viewer viewing this experience." },
+  [PredefinedVariableName.device_var]: {id: -9, type: VariableType.string, 
+    description: "Viewer device type. 'm' for mobile, 'd' for desktop and 'h' for headset." },
+  [PredefinedVariableName.browser_var]: {id: -10, type: VariableType.string, 
+    description: "Contains a string identifying the browser." },
+  [PredefinedVariableName.vrmode_var]: {id: -11, type: VariableType.boolean, 
+    description: "Contains true if the user is in VR mode." },
   [PredefinedVariableName.firstname_var]: {id: -12, type: VariableType.string,
-    description: "Stores the viewer's first name if available from the authentication mechanism" },
-  [PredefinedVariableName.scorm_progress]: {id: -13, type: VariableType.number, description: "This is a special variable that can share the progress with a LMS and will be retrieved upon experience revisit" },
-  [PredefinedVariableName.scorm_suspend_data]: {id: -14, type: VariableType.number, description: "This a special variable that can share arbitrary data with a LMS and will be retrieved upon experience revisit" },
-  [PredefinedVariableName.scorm_score]: {id: -15, type: VariableType.number, description: "This a special variable that can share score with a LMS and will be retrieved upon experience revisit" },
+    description: "Stores the viewer's first name if available from the authentication mechanism." },
+  [PredefinedVariableName.scorm_progress]: {id: -13, type: VariableType.number, 
+    description: "Share the progress with a LMS." },
+  [PredefinedVariableName.scorm_suspend_data]: {id: -14, type: VariableType.number, 
+    description: "Share arbitrary data with a LMS. Persists across sessions." },
+  [PredefinedVariableName.scorm_score]: {id: -15, type: VariableType.number, 
+    description: "Share score with a LMS." },
   [PredefinedVariableName.lastname_var]: {id: -16, type: VariableType.string,
     description: "Stores the viewer's last name if available from the authentication mechanism" },
   [PredefinedVariableName.fullname_var]: {id: -17, type: VariableType.string,
