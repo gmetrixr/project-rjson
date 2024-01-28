@@ -23,6 +23,7 @@ class Migration implements IOrder {
     projectF.addPredefinedVariable(vn.PredefinedVariableName.lastname_var);
     projectF.addPredefinedVariable(vn.PredefinedVariableName.fullname_var);
     projectF.addPredefinedVariable(vn.PredefinedVariableName.player_count_var);
+    projectF.addPredefinedVariable(vn.PredefinedVariableName.player_count_all_var);
   }
 }
 
