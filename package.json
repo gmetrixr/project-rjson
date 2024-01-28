@@ -3,6 +3,8 @@
   "version": "2.1.140",
   "description": "(R)ecursive Json for Project/Deployment/Discussions",
   "types": "./lib/esm/index.d.ts",
+  "@comment main": "This key is still kept around until older version of node are used that don't understand exports key",
+  "main": "./lib/cjs/index.js",
   "exports": {
     "import": "./lib/esm/index.js",
     "require": "./lib/cjs/index.js"
