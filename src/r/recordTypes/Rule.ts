@@ -10,6 +10,7 @@ export enum RuleProperty {
   tracked = "tracked",
   events_and = "events_and", //if true, works like an AND operand on all events. Else assume OR.
   comment = "comment",
+  shared = "shared",
 }
 
 export const rulePropertyDefaults: Record<RuleProperty, unknown> = {
@@ -18,5 +19,5 @@ export const rulePropertyDefaults: Record<RuleProperty, unknown> = {
   [RuleProperty.tracked]: false,
   [RuleProperty.events_and]: true,
   [RuleProperty.comment]: "",
+  [RuleProperty.shared]: false,
 }
-
