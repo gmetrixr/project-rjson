@@ -16,6 +16,8 @@ export enum DeploymentProperty {
   room_instance_count = "room_instance_count",
   room_instance_member_limit = "room_instance_member_limit",
   room_instance_overspill_message = "room_instance_overspill_message",
+  remember_user_login = "remember_user_login",
+  remember_user_login_duration_hours = "remember_user_login_duration_hours"
 }
 
 export const deploymentPropertyDefaults:  Record<DeploymentProperty, unknown> = {
@@ -35,4 +37,6 @@ export const deploymentPropertyDefaults:  Record<DeploymentProperty, unknown> = 
   [DeploymentProperty.room_instance_count]: 1,
   [DeploymentProperty.room_instance_member_limit]: 6,
   [DeploymentProperty.room_instance_overspill_message]: "Looks like all rooms are full. Check back again after some time. You can still explore this space.",
+  [DeploymentProperty.remember_user_login]: false,
+  [DeploymentProperty.remember_user_login_duration_hours]: 24
 };
