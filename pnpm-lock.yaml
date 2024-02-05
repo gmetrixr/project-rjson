@@ -11,8 +11,8 @@ dependencies:
 
 devDependencies:
   '@gmetrixr/gdash':
-    specifier: ^1.3.39
-    version: 1.3.39
+    specifier: ^1.3.43
+    version: 1.3.43
   '@jest/globals':
     specifier: ^29.7.0
     version: 29.7.0
@@ -448,8 +448,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@gmetrixr/gdash@1.3.39:
-    resolution: {integrity: sha512-7zvR2Tb58cdOZULwJYH8kIWlO/08tN2+Yxdy68y9BLM0JE/MCeWwo03k07+IlZsMYxa27ZoK1FV5L+Vyyp6Nug==}
+  /@gmetrixr/gdash@1.3.43:
+    resolution: {integrity: sha512-dSJ6X1ROwircUo1LvGFzp0tJCQKQ0YBj2oLplDqVFpinlT+caNGKAu+Gr7PaEDF39PM1WZQp3x49PT6d5ymTvA==}
     dependencies:
       '@types/js-cookie': 3.0.6
       '@types/mustache': 4.2.5

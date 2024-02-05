@@ -10,22 +10,15 @@ export enum InitialGraphicsSetting {
 }
 
 export enum AvatarSystem {
-  basic = "basic",
-  basic_custom = "basic_custom",
-  basic_rpm = "basic_rpm",
-  none = "none"
+  none = "none",
+  rpm = "rpm",
+  custom = "custom",
 }
 
 export enum AvatarQuality {
   high = "high",
   medium = "medium",
   low = "low",
-}
-
-export enum AvatarBodyType {
-  halfbody = "halfbody",
-  fullbody = "fullbody",
-  selectable = "selectable"
 }
 
 export enum ViewerCameraMode {

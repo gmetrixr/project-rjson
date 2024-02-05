@@ -1,6 +1,5 @@
 import { Source } from "../definitions/files/index.js";
 import {
-  AvatarBodyType,
   AvatarSystem,
   InitialGraphicsSetting, ViewerCameraMode,
   ViewerControlPanelPosition,
@@ -56,7 +55,6 @@ export enum ProjectProperty {
   project_metadata_tags = "project_metadata_tags",
   initial_graphics_setting = "initial_graphics_setting",
   avatar_system = "avatar_system",
-  avatar_system_body_type = "avatar_system_body_type",
   avatar_quality = "avatar_quality",
   viewer_camera_mode = "viewer_camera_mode",
   use_legacy_color_management = "use_legacy_color_management",
@@ -125,7 +123,6 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.project_metadata_tags]: [],
   [ProjectProperty.use_custom_branding]: false,
   [ProjectProperty.initial_graphics_setting]: InitialGraphicsSetting.high,
-  [ProjectProperty.avatar_system_body_type]: AvatarBodyType.fullbody,
   [ProjectProperty.avatar_system]: AvatarSystem.none,
   [ProjectProperty.avatar_quality]: AvatarQuality.low,
   [ProjectProperty.viewer_camera_mode]: ViewerCameraMode.third_person,
