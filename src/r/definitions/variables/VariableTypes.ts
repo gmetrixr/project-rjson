@@ -132,6 +132,10 @@ export const predefinedVariableIdToName: Record<number, PredefinedVariableName> 
   [-19]: PredefinedVariableName.player_count_all_var,
 }
 
+/**
+ * Typecast and conversion function
+ * Ensure that a number is actually number, boolean is actually boolean and a string is actually string
+ */
 export function convertVarValueToType(value: VarValue, varType: VariableType): number | string | boolean {
   switch(varType) {
     // removing type check from here.
