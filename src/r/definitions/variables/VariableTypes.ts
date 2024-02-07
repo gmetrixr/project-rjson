@@ -132,7 +132,7 @@ export const predefinedVariableIdToName: Record<number, PredefinedVariableName> 
   [-19]: PredefinedVariableName.player_count_all_var,
 }
 
-export function convertVarValueToType(value: any, varType: VariableType): number | string | boolean {
+export function convertVarValueToType(value: VarValue, varType: VariableType): number | string | boolean {
   switch(varType) {
     // removing type check from here.
     case VariableType.boolean: {
