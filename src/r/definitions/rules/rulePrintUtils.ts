@@ -58,7 +58,7 @@ export class rulePrintUtils {
       const scene = projectF.getRecord(sceneId, RT.scene);
       if (scene !== undefined) {
         const sceneF = new RF.SceneFactory(scene);
-        for (const rule of sceneF.getRecords(RT.rule)) {
+        for (const rule of sceneF.getSortedRecords(RT.rule)) {
           const ruleText = frp.generateRuleText(rule, project, scene, varDefROM);
           rulesText += frp.friendlyRuleLine(ruleText);
           rulesText += "\n"; // new line
@@ -88,7 +88,7 @@ class ConsoleRulePrinter {
   ): void => {
     let ruleText;
     const sceneF = new RF.SceneFactory(scene);
-    for (const [ruleId, rule] of sceneF.getRecordEntries(RT.rule)) {
+    for (const [ruleId, rule] of sceneF.getSortedRecordEntries(RT.rule)) {
       ruleText = this.generateRuleText({id: ruleId, record: rule}, scene, varMap);
       this.consoleRuleTextPrinter(ruleText);
     }
@@ -102,11 +102,11 @@ class ConsoleRulePrinter {
     const rf = new RecordFactory(rule.record);
     const whenEventsArray: string[] = [];
     const thenActionsArray: string[] = [];
-    rf.getRecords(RT.when_event).forEach(whenEvent => {
+    rf.getSortedRecords(RT.when_event).forEach(whenEvent => {
       //whenEventsArray.push(`${whenEvent.ce_type}(${whenEvent.ce_id}) ${cEventsDisplayNames[<ConnectionEvent>whenEvent.event]} ${whenEvent.properties}`.trim());
       whenEventsArray.push(this.weText(whenEvent, scene, varMap));
     });
-    rf.getRecords(RT.then_action).forEach(thenAction => {
+    rf.getSortedRecords(RT.then_action).forEach(thenAction => {
       //thenActionsArray.push(`${thenAction.ce_type}(${thenAction.ce_id}) should ${cActionsDisplayNames[<ConnectionAction>thenAction.action]} ${thenAction.properties}`.trim());
       thenActionsArray.push(this.taText(thenAction, scene, varMap));
     });
@@ -225,7 +225,7 @@ class FriendlyRulePrinter {
   ): void => {
     let ruleText;
     const sceneF = new RF.SceneFactory(scene);
-    for (const rule of sceneF.getRecords(RT.rule)) {
+    for (const rule of sceneF.getSortedRecords(RT.rule)) {
       ruleText = this.generateRuleText(rule, project, scene, varMap);
       console.log(this.friendlyRuleLine(ruleText));
     }
@@ -240,10 +240,10 @@ class FriendlyRulePrinter {
     const rf = new RecordFactory(rule);
     const whenEventsArray: string[] = [];
     const thenActionsArray: string[] = [];
-    rf.getRecords(RT.when_event).forEach(whenEvent => {
+    rf.getSortedRecords(RT.when_event).forEach(whenEvent => {
       whenEventsArray.push(this.weText(whenEvent, scene, varMap));
     });
-    rf.getRecords(RT.then_action).forEach(thenAction => {
+    rf.getSortedRecords(RT.then_action).forEach(thenAction => {
       thenActionsArray.push(this.taText(thenAction, project, scene, varMap));
     });
     return {
