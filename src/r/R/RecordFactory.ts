@@ -586,6 +586,59 @@ export class RecordFactory<T extends RT> {
     return false;
   }
 
+  /**
+   * We assume that the element names are unique. If there are 2 elements (at different depths), we update only the 1st one.
+   *  Apply any property level overrides
+   *  propertiesReplacementMap:
+   *  {
+   *    "scene intro|character john!brain_slug": "BRAIN_SLUG"
+   *  }
+   *
+   *  externalValueMap:
+   *  {
+   *    "BRAIN_SLUG": "gmetri"
+   *  }
+   */
+  applyPropertiesReplacementMap(
+    record: RecordNode<RT>,
+    propertiesReplacementMap: Record<string, string>,
+    externalValueMap: Record<string, any>,
+  ) {
+    for (const [key, valueKey] of Object.entries(propertiesReplacementMap)) {
+      const value = externalValueMap[valueKey];
+      const recordNameArray = key.replace(/!.*/, "").split("|"); // [scene, element]
+      const propertyAddr = key.match(/!.*/)?.[0]?.replace("!", "") || ""; // ex: !character_brain_slug
+      let parentRecord: RecordNode<RT> | undefined = record;
+
+      for (const name of recordNameArray) {
+        const records = this.getDeepRecordsByName(name);
+        parentRecord = records?.[0]?.record;
+        if (parentRecord === undefined) {
+          console.log(`Unable to find a record with name: ${name}`);
+          break;
+        }
+      }
+
+      // * at this point the parentRecord will contain the ref of the correct record or it will be undefined
+      if (parentRecord) {
+        // * update the property value
+        const rf = new RecordFactory(parentRecord);
+        const [property, index] = propertyAddr.split(">");
+        if (property) {
+          if (index === undefined) {
+            rf.set(property as any, value);
+          } else {
+            const propertyValue = rf.getValueOrDefault(property as any);
+            if (Array.isArray(propertyValue)) {
+              propertyValue[Number(index)] = value;
+              rf.set(property as any, propertyValue);
+            }
+          }
+        }
+      }
+    }
+  }
+
   getLinkedSubRecords <N extends RT>(matchingId: number, type?: N): idAndRecord<N>[] {
     const matchedIdsAndRecords: idAndRecord<N>[] = [];
     for(const [id, record] of this.getDeepRecordEntries(type)) {
