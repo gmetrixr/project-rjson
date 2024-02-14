@@ -7,12 +7,13 @@ import { ElementFactory } from "../../src/r/recordFactories/ElementFactory.js";
 import { fn } from "../../src/r/definitions/index.js";
 import fs from "fs";
 import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
+import propertiesReplacementJson from "./jsons/r3fJsons/project/propertiesReplacement.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 import projectJson from "./jsons/project.json";
 import { r } from "../../src/index.js";
 import { avatarSourceMap, gvsMap, sourceMap } from "./jsons/4.projectObject.js";
-import {afterEach, beforeAll, beforeEach, describe, expect, it, jest, xit} from "@jest/globals";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, jest, xit } from "@jest/globals";
 
 const { generateIdV2, deepClone } = jsUtils;
 
@@ -273,5 +274,36 @@ describe ("r ProjectFactory tests", () => {
     const substituteF = r.record(idAndRecord?.record as RecordNode<RT.substitute>);
     substituteF.set(rtp.substitute.substitute_variable, 1);
     expect(substituteF.getValueOrDefault(rtp.substitute.substitute_variable)).toBe(1);
+  });
+});
+
+describe("Test ProjectUtils", () => {
+  it("should apply propertiesReplacementMap", () => {
+    const propertiesReplacementMap = {
+      "Scene|Zone!color": "ZONE_COLOR",
+      "Scene|Group|Polygon!color": "POLYGON_COLOR",
+      "Scene|Group|some_element_that_doesn't_exist!color": "POLYGON_COLOR",
+      "Scene|yolo|Group!color": "POLYGON_COLOR",
+    };
+    const externalValueMap = {
+      "ZONE_COLOR": "#FFF",
+      "POLYGON_COLOR": "#333",
+    };
+    const project = deepClone(propertiesReplacementJson);
+    const pf = r.project(project);
+
+    pf.applyPropertiesReplacementMap(project, propertiesReplacementMap, externalValueMap);
+    const projectF = r.project(project);
+
+    // * zone element -> 1st entry
+    const modifiedZone = projectF.getDeepIdAndRecord(9408062916307064);
+    if (modifiedZone?.record) {
+      expect(modifiedZone.record.props.color).toBe("#FFF");
+    }
+
+    const modifiedPolygon = projectF.getDeepIdAndRecord(6773622241304474);
+    if (modifiedPolygon?.record) {
+      expect(modifiedPolygon.record.props.color).toBe("#333");
+    }
   });
 });
