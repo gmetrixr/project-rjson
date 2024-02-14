@@ -281,6 +281,7 @@ describe("Test ProjectUtils", () => {
   it("should apply propertiesReplacementMap", () => {
     const propertiesReplacementMap = {
       "Scene|Zone!color": "ZONE_COLOR",
+      "Scene|Zone!placer_3d>2": "ZONE_PLACER_Z",
       "Scene|Group|Polygon!color": "POLYGON_COLOR",
       "Scene|Group|some_element_that_doesn't_exist!color": "POLYGON_COLOR",
       "Scene|yolo|Group!color": "POLYGON_COLOR",
@@ -288,6 +289,7 @@ describe("Test ProjectUtils", () => {
     const externalValueMap = {
       "ZONE_COLOR": "#FFF",
       "POLYGON_COLOR": "#333",
+      "ZONE_PLACER_Z": 99
     };
     const project = deepClone(propertiesReplacementJson);
     const pf = r.project(project);
@@ -299,6 +301,7 @@ describe("Test ProjectUtils", () => {
     const modifiedZone = projectF.getDeepIdAndRecord(9408062916307064);
     if (modifiedZone?.record) {
       expect(modifiedZone.record.props.color).toBe("#FFF");
+      expect(modifiedZone.record.props.placer_3d).toEqual([0, 0, 99, 0, 0, 0, 1, 1, 1]);
     }
 
     const modifiedPolygon = projectF.getDeepIdAndRecord(6773622241304474);
