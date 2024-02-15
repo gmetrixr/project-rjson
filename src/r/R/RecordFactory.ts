@@ -600,7 +600,6 @@ export class RecordFactory<T extends RT> {
    *  }
    */
   applyPropertiesReplacementMap(
-    record: RecordNode<RT>,
     propertiesReplacementMap: Record<string, string>,
     externalValueMap: Record<string, any>,
   ) {
@@ -608,7 +607,7 @@ export class RecordFactory<T extends RT> {
       const value = externalValueMap[valueKey];
       const recordNameArray = key.replace(/!.*/, "").split("|"); // [scene, element]
       const propertyAddr = key.match(/!.*/)?.[0]?.replace("!", "") || ""; // ex: !character_brain_slug
-      let parentRecord: RecordNode<RT> | undefined = record;
+      let parentRecord: RecordNode<RT> | undefined = this._json;
 
       for (const name of recordNameArray) {
         const records = this.getDeepRecordsByName(name);
