@@ -294,7 +294,7 @@ describe("Test ProjectUtils", () => {
     const project = deepClone(propertiesReplacementJson);
     const pf = r.project(project);
 
-    pf.applyPropertiesReplacementMap(project, propertiesReplacementMap, externalValueMap);
+    pf.applyPropertiesReplacementMap(propertiesReplacementMap, externalValueMap);
     const projectF = r.project(project);
 
     // * zone element -> 1st entry
