@@ -141,7 +141,7 @@ export enum ElementProperty {
 
   // Intelligence
   use_ai_brain = "use_ai_brain",
-  character_brain_slug = "brain_slug",
+  character_brain_slug = "character_brain_slug",
   character_chatbot_trigger_radius = "character_chatbot_trigger_radius",
   character_chatbot_welcome_dialogue = "character_chatbot_welcome_dialogue",
   character_chatbot_welcome_dialogue_repeat = "character_chatbot_welcome_dialogue_repeat",
