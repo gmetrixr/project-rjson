@@ -15,8 +15,10 @@ import myMetaverseJson from "./jsons/myMetaverse.json";
 import learningJson from "./jsons/learning.json";
 import safeHandsJson from "./jsons/safeHands.json";
 import dormantElementJson from "./jsons/r3fJsons/project/dormantElementTest.json";
+import brainJson from "./jsons/r3fJsons/project/brain.json";
 import console from "console";
 import {afterEach, beforeEach, describe, expect, it, xit} from "@jest/globals";
+import { ElementType } from "../../src/r/definitions/elements/ElementDefinition.js";
 
 //https://stackoverflow.com/a/68017229/1233476
 const jestConsole = console;
@@ -65,5 +67,12 @@ describe ("r Migration tests", () => {
     const idAndRecord = new RF.ProjectFactory(migratedProject).getDeepIdAndRecord(2353489588758041);
     expect(idAndRecord).toBeDefined();
     //fs.writeFileSync("./test/r/jsons/r3fJsons/project/dormantElementTestMigrated.json", JSON.stringify(migratedProject));
+  });
+
+  it("apply brain property change migrations", () => {
+    const migratedProject = migrateProject(brainJson, 214);
+    const pf = new RF.ProjectFactory(migratedProject);
+    const element = pf.getDeepRecordEntries(RT.element).filter(([id, e]) => e.props.element_type === ElementType.character);
+    expect(element[0][1].props.character_brain_slug).toBeDefined();
   });
 });
