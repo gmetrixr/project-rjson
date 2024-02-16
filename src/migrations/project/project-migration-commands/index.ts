@@ -14,6 +14,7 @@ import m209_210 from "./m209_210_legacy_scene_transition_type.js";
 import m210_211 from "./m210_211_add_animation_to_talk_then_action.js";
 import m211_212 from "./m211_212_update_substitute_name_to_variant.js";
 import m212_213 from "./m212_213_rename_character_property.js";
+import m213_214 from "./m213_214_rerun_rename_character_property.js";
 
 const projectMigrationTree: {[key: number]: IOrder} = {
   [200]: m200_201,
@@ -29,6 +30,7 @@ const projectMigrationTree: {[key: number]: IOrder} = {
   [210]: m210_211,
   [211]: m211_212,
   [212]: m212_213,
+  [213]: m213_214,
 };
 
 const projectMigrationVersions: number[] = Object.keys(projectMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));

@@ -1,0 +1,386 @@
+{
+  "type": "project",
+  "props": {
+    "version": 212
+  },
+  "records": {
+    "menu": {
+      "4157948876273205": {
+        "type": "menu",
+        "order": 1,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 9005285582058374
+        }
+      }
+    },
+    "scene": {
+      "9005285582058374": {
+        "name": "Scene",
+        "type": "scene",
+        "order": 1,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -15,
+            4.5,
+            0,
+            5,
+            -4.5,
+            15
+          ],
+          "linked_menu_id": 4157948876273205,
+          "linked_tour_mode_id": 1503915945902198,
+          "scene_spawn_zone_id": 2429598490356399,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "element": {
+            "1588693271854521": {
+              "name": "Lights",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "6085443041440418": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 8805860665498783
+                    }
+                  },
+                  "9682117256304108": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    }
+                  }
+                }
+              }
+            },
+            "2429598490356399": {
+              "name": "Zone",
+              "type": "element",
+              "order": 3,
+              "props": {
+                "placer_3d": [
+                  1.729157940028542,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "6921175956375647": {
+              "name": "Image 360",
+              "type": "element",
+              "order": 1,
+              "props": {
+                "element_type": "pano_image"
+              }
+            },
+            "8805860665498783": {
+              "name": "Environment",
+              "type": "element",
+              "order": 2,
+              "props": {
+                "scale": 1,
+                "locked": false,
+                "source": {
+                  "id": 773723,
+                  "name": "Minimalistic Modern Office.zip",
+                  "file_paths": {
+                    "o": "o/Minimalistic Modern Office.zip",
+                    "t": "t/Minimalistic Modern Office.jpeg",
+                    "gltf": "gltf/scene.gltf",
+                    "usdz": "usdz/Minimalistic Modern Office.usdz"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/f9732559-a180-43d2-b8fe-5f794e1d8fb4/o/Minimalistic%20Modern%20Office.zip",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/f9732559-a180-43d2-b8fe-5f794e1d8fb4/t/Minimalistic%20Modern%20Office.jpeg",
+                    "gltf": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/f9732559-a180-43d2-b8fe-5f794e1d8fb4/gltf/scene.gltf",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/f9732559-a180-43d2-b8fe-5f794e1d8fb4/usdz/Minimalistic%20Modern%20Office.usdz"
+                  },
+                  "size": 35489536,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "zip",
+                    "mimeType": "application/zip",
+                    "vertices": 133399,
+                    "triangles": 133674,
+                    "numOfFiles": 11,
+                    "numberOfTextures": 8,
+                    "totalTextureSize": 29.75
+                  }
+                },
+                "placer_3d": [
+                  -6.230846623263895,
+                  1.4245835492507788,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "object3d_animations": []
+              }
+            },
+            "8530582253560784": {
+              "type": "element",
+              "props": {
+                "element_type": "character",
+                "placer_3d": [
+                  -3.3745432162290285,
+                  0.05238973146546333,
+                  -2.563481602315086,
+                  1.2527839643652627,
+                  82.14922048997754,
+                  5.070220979145184e-15,
+                  1,
+                  1,
+                  1
+                ],
+                "object3d_animations": [],
+                "source": {
+                  "id": 773725,
+                  "name": "Character (28).glb",
+                  "file_paths": {
+                    "o": "o/Character.glb",
+                    "t": "t/Character.png",
+                    "glb": "glb/Character_q_medium.glb",
+                    "usdz": "usdz/Character (28).usdz",
+                    "glb_low": "glb/Character_q_low.glb",
+                    "glb_high": "glb/Character_q_high.glb",
+                    "glb_medium": "glb/Character_q_medium.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/o/Character.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/t/Character.png",
+                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/glb/Character_q_medium.glb",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/usdz/Character%20(28).usdz",
+                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/glb/Character_q_low.glb",
+                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/glb/Character_q_high.glb",
+                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/gmetri/3bd15d1b-a22d-4864-8b5e-81abcfae7936/glb/Character_q_medium.glb"
+                  },
+                  "size": 10561888,
+                  "type": "CHARACTER_RPM",
+                  "metadata": {
+                    "ext": "glb",
+                    "rpm_id": "65c3bee7bee65ecd7a1da2a1",
+                    "from_rpm": true,
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 8470,
+                    "triangles": 14138,
+                    "rpmAvatarGender": "masculine",
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 2.55
+                  }
+                },
+                "use_ai_brain": true,
+                "brain_slug": "vgwswo",
+                "character_chatbot_welcome_dialogue": "Hi, I'm SIlvio! Ask me anything about your testing needs!",
+                "ssml_voice": "en-US-Wavenet-D"
+              },
+              "name": "AI Character",
+              "order": 3.5
+            }
+          }
+        }
+      }
+    },
+    "variable": {
+      "-8": {
+        "name": "v_identifier_var",
+        "type": "variable",
+        "order": 1,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-9": {
+        "name": "device_var",
+        "type": "variable",
+        "order": 6,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-10": {
+        "name": "browser_var",
+        "type": "variable",
+        "order": 5,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-11": {
+        "name": "vrmode_var",
+        "type": "variable",
+        "order": 7,
+        "props": {
+          "var_type": "boolean",
+          "var_track": true,
+          "var_default": false,
+          "var_category": "predefined"
+        }
+      },
+      "-12": {
+        "name": "firstname_var",
+        "type": "variable",
+        "order": 3,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-13": {
+        "name": "scorm_progress",
+        "type": "variable",
+        "order": 8,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-14": {
+        "name": "scorm_suspend_data",
+        "type": "variable",
+        "order": 9,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-15": {
+        "name": "scorm_score",
+        "type": "variable",
+        "order": 10,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-16": {
+        "name": "lastname_var",
+        "type": "variable",
+        "order": 4,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-17": {
+        "name": "fullname_var",
+        "type": "variable",
+        "order": 2,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-18": {
+        "name": "player_count_var",
+        "type": "variable",
+        "order": 11,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-19": {
+        "name": "player_count_all_var",
+        "type": "variable",
+        "order": 12,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      }
+    },
+    "tour_mode": {
+      "1503915945902198": {
+        "type": "tour_mode",
+        "order": 1,
+        "props": {
+          "tour_mode_scene_id": 9005285582058374
+        }
+      }
+    }
+  }
+}
