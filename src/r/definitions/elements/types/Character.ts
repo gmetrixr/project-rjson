@@ -1,6 +1,6 @@
 import { FileType } from "../../files/index.js";
 import { ElementProperty } from "../../../recordTypes/Element.js";
-import { RuleAction } from "../../rules/index.js";
+import { RuleAction, RuleEvent } from "../../rules/index.js";
 import { BasicElement, ElementType, IElementDefinition } from "../ElementDefinition.js";
 
 export const Character: IElementDefinition = {
@@ -45,7 +45,8 @@ export const Character: IElementDefinition = {
     [ElementProperty.scale]: 0.9
   },
   events: [
-    ...BasicElement.events
+    ...BasicElement.events,
+    RuleEvent.on_finish_speaking
   ],
   actions: [
     ...BasicElement.actions,
