@@ -46,7 +46,8 @@ export const Character: IElementDefinition = {
   },
   events: [
     ...BasicElement.events,
-    RuleEvent.on_finish_speaking
+    RuleEvent.on_finish_speaking,
+    RuleEvent.on_finish_ai_response,
   ],
   actions: [
     ...BasicElement.actions,

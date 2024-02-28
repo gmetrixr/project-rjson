@@ -74,7 +74,8 @@ export enum RuleEvent {
   // When Viewer leaves zone <zone1>
   on_enter = "on_enter",
   on_leave = "on_leave",
-  on_finish_speaking = "on_finish_speaking"
+  on_finish_speaking = "on_finish_speaking",
+  on_finish_ai_response = "on_finish_ai_response",
 }
 
 export enum WhenEventProperty {
@@ -150,7 +151,8 @@ export const rEventProperties: Record<RuleEvent, Array<WhenEventProperty | unkno
   on_enter: [],
   on_leave: [],
 
-  on_finish_speaking: []
+  on_finish_speaking: [],
+  on_finish_ai_response: [],
 };
 
 export const rEventPropertyDefaults: Record<WhenEventProperty, Array<unknown> | string | number | null> =  {
@@ -224,5 +226,6 @@ export const rEventDisplayName: Record<RuleEvent, string> = {
   // viewer
   [RuleEvent.on_enter]: "enters",
   [RuleEvent.on_leave]: "leaves",
-  [RuleEvent.on_finish_speaking]: "finishes speaking"
+  [RuleEvent.on_finish_speaking]: "finishes speaking",
+  [RuleEvent.on_finish_ai_response]: "finishes AI response",
 };
