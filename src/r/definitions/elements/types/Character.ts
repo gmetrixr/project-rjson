@@ -42,7 +42,9 @@ export const Character: IElementDefinition = {
       type: FileType.THREED
     },
     [ElementProperty.billboarding]: null,
-    [ElementProperty.scale]: 0.9
+    [ElementProperty.scale]: 0.9,
+    [ElementProperty.ssml_lang]: "en-US",
+    [ElementProperty.ssml_voice]: "en-US-Studio-Q",
   },
   events: [
     ...BasicElement.events,
