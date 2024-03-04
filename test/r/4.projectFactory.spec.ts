@@ -280,21 +280,17 @@ describe ("r ProjectFactory tests", () => {
 describe("Test ProjectUtils", () => {
   it("should apply propertiesReplacementMap", () => {
     const propertiesReplacementMap = {
-      "Scene|Zone!color": "ZONE_COLOR",
-      "Scene|Zone!placer_3d>2": "ZONE_PLACER_Z",
-      "Scene|Group|Polygon!color": "POLYGON_COLOR",
-      "Scene|Group|some_element_that_doesn't_exist!color": "POLYGON_COLOR",
-      "Scene|yolo|Group!color": "POLYGON_COLOR",
+      "Scene|Zone!color": "#FFF",
+      "Scene|Zone!placer_3d>2": 99,
+      "Scene|Group|Polygon!color": "#333",
+      "Scene|Group|some_element_that_doesn't_exist!color": "#333",
+      "Scene|yolo|Group!color": "#333",
     };
-    const externalValueMap = {
-      "ZONE_COLOR": "#FFF",
-      "POLYGON_COLOR": "#333",
-      "ZONE_PLACER_Z": 99
-    };
+
     const project = deepClone(propertiesReplacementJson);
     const pf = r.project(project);
 
-    pf.applyPropertiesReplacementMap(propertiesReplacementMap, externalValueMap);
+    pf.applyPropertiesReplacementMap(propertiesReplacementMap);
     const projectF = r.project(project);
 
     // * zone element -> 1st entry

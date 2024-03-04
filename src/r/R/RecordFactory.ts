@@ -591,20 +591,15 @@ export class RecordFactory<T extends RT> {
    *  Apply any property level overrides
    *  propertiesReplacementMap:
    *  {
-   *    "scene intro|character john!brain_slug": "BRAIN_SLUG"
+   *    "scene intro|character john!brain_slug": "gmetri"
    *  }
    *
-   *  externalValueMap:
-   *  {
-   *    "BRAIN_SLUG": "gmetri"
-   *  }
    */
   applyPropertiesReplacementMap(
-    propertiesReplacementMap: Record<string, string>,
-    externalValueMap: Record<string, any>,
+    propertiesReplacementMap: Record<string, any>,
   ) {
     for (const [key, valueKey] of Object.entries(propertiesReplacementMap)) {
-      const value = externalValueMap[valueKey];
+      const value = valueKey;
       const recordNameArray = key.replace(/!.*/, "").split("|"); // [scene, element]
       const propertyAddr = key.match(/!.*/)?.[0]?.replace("!", "") || ""; // ex: !character_brain_slug
       let parentRecord: RecordNode<RT> | undefined = this._json;
