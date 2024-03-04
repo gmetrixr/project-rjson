@@ -30,6 +30,7 @@ export enum ProjectProperty {
   project_logo_source = "project_logo_source", //click_to_start_img_path earlier
   project_start_description = "project_start_description",
   show_click_to_start = "show_click_to_start",
+  show_tap_to_start_mobile = "show_tap_to_start_mobile",
   show_language_screen = "show_language_screen",
   show_lead_gen = "show_lead_gen", //show_viewer_form_screen earlier
   show_logout = "show_logout",
@@ -99,6 +100,7 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.project_logo_source]: defaultLogo,
   [ProjectProperty.project_start_description]: "",
   [ProjectProperty.show_click_to_start]: false,
+  [ProjectProperty.show_tap_to_start_mobile]: true,
   [ProjectProperty.show_language_screen]: false,
   [ProjectProperty.show_lead_gen]: false,
   [ProjectProperty.show_logout]: false,
