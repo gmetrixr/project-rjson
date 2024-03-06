@@ -1,7 +1,7 @@
 import { createNewDeployment, migrateDeployment } from "../../src/migrations/deployment/index.js";
 import { migrateProject, projectViewerRuntimeMigrations } from "./../../src/migrations/project/index.js";
 import { migrateDiscussion } from "./../../src/migrations/discussion/index.js";
-import { RT, RF } from "../../src/index.js";
+import { RT, RF, rtp } from "../../src/index.js";
 import fs from "fs";
 import deploymentJson from "./jsons/deployment.json";
 import campusJson from "./jsons/campus.json";
@@ -74,5 +74,12 @@ describe ("r Migration tests", () => {
     const pf = new RF.ProjectFactory(migratedProject);
     const element = pf.getDeepRecordEntries(RT.element).filter(([id, e]) => e.props.element_type === ElementType.character);
     expect(element[0][1].props.character_brain_slug).toBeDefined();
+  });
+
+  it("set show_tap_to_start_mobile", () => {
+    const migratedProject = migrateProject(brainJson, 215);
+    const pf = new RF.ProjectFactory(migratedProject);
+    const migratedValue = pf.get(rtp.project.show_tap_to_start_mobile);
+    expect(migratedValue).toBe(false);
   });
 });
