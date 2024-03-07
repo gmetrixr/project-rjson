@@ -22,5 +22,7 @@ export const SpecialExperience: ISpecialDefinition = {
     RuleAction.set_scorm_score,
     RuleAction.replace_screen_reader_text,
     RuleAction.change_view_mode,
+    RuleAction.set_fs_score,
+    RuleAction.end_fs_experience,
   ],
 }
