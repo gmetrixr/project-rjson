@@ -92,6 +92,8 @@ export enum RuleAction {
   clap = "clap",
   talk = "talk",
   speak = "speak",
+  set_fs_score = "set_fs_score",
+  end_fs_experience = "end_fs_experience",
 }
 
 export enum ThenActionProperty {
@@ -208,7 +210,9 @@ export const rActionProperties: Record<RuleAction, Array<ThenActionProperty | un
   wave: [],
   clap: [],
   talk: [ThenActionProperty.animation, ThenActionProperty.duration],
-  speak: [ThenActionProperty.string_value]
+  speak: [ThenActionProperty.string_value],
+  set_fs_score: [ThenActionProperty.string_value],
+  end_fs_experience: [],
 };
 
 export const rActionPropertyDefaults: Record<ThenActionProperty, string | number | null> =  {
@@ -318,4 +322,6 @@ export const rActionDisplayName: Record<RuleAction, string> = {
   [RuleAction.clap]: "clap",
   [RuleAction.talk]: "talk for x seconds",
   [RuleAction.speak]: "speak",
+  [RuleAction.set_fs_score]: "set FS score",
+  [RuleAction.end_fs_experience]: "end FS experience",
 };
