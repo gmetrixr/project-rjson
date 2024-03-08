@@ -57,8 +57,8 @@ export {
   isElementType, sourcePropertyNames, elementsWithLinkedVariables, BasicElement 
 };
 
-import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment } from "./ElementTypes.js";
-export { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment };
+import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment, CharacterBrainType } from "./ElementTypes.js";
+export { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment, CharacterBrainType };
 
 export const elementList: IElementDefinition[] = [
   ActionBar,
