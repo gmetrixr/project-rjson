@@ -47,9 +47,3 @@ export enum MinimapAlignment {
  "bottom-center" = "bottom-center",
  "top-center" = "top-center",
 }
-
-export enum CharacterBrainType {
-  none = "none",
-  basic = "basic",
-  advanced = "advanced",
-}
