@@ -16,7 +16,6 @@ import m211_212 from "./m211_212_update_substitute_name_to_variant.js";
 import m212_213 from "./m212_213_rename_character_property.js";
 import m213_214 from "./m213_214_rerun_rename_character_property.js";
 import m214_215 from "./m214_215_show_tap_to_start_mobile.js"
-import m215_216 from "./m215_216_migrate_use_ai_brain_property.js"
 
 const projectMigrationTree: {[key: number]: IOrder} = {
   [200]: m200_201,
@@ -34,7 +33,6 @@ const projectMigrationTree: {[key: number]: IOrder} = {
   [212]: m212_213,
   [213]: m213_214,
   [214]: m214_215,
-  [215]: m215_216,
 };
 
 const projectMigrationVersions: number[] = Object.keys(projectMigrationTree).map(numStr => parseInt(numStr)).sort((a, b) => (a - b));
