@@ -28,6 +28,7 @@ export const Character: IElementDefinition = {
     ElementProperty.env_map_intensity,
     ElementProperty.apply_env_map,
     ElementProperty.character_chatbot_initial_prompt,
+    ElementProperty.character_brain_type,
   ],
   defaultOverrides: {
     [ElementProperty.source]: {

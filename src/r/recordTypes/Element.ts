@@ -1,4 +1,5 @@
 import { FileType } from "../definitions/files/index.js";
+import { CharacterBrainType } from "../definitions/elements/ElementTypes.js";
 
 export enum ElementProperty {
   element_type = "element_type",
@@ -146,6 +147,7 @@ export enum ElementProperty {
   character_chatbot_welcome_dialogue = "character_chatbot_welcome_dialogue",
   character_chatbot_welcome_dialogue_repeat = "character_chatbot_welcome_dialogue_repeat",
   character_chatbot_initial_prompt = "character_chatbot_initial_prompt",
+  character_brain_type = "character_brain_type",
 
   // Substitute
   enable_substitutes = "enable_substitutes",
@@ -314,6 +316,7 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.character_chatbot_welcome_dialogue]: undefined,
   [ElementProperty.character_chatbot_welcome_dialogue_repeat]: "once", // once | always
   [ElementProperty.character_chatbot_initial_prompt]: "",
+  [ElementProperty.character_brain_type]: CharacterBrainType.none,
 
   [ElementProperty.enable_substitutes]: false,
   [ElementProperty.linked_substitute_variable]: undefined,
