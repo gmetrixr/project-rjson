@@ -148,6 +148,7 @@ export enum ElementProperty {
   character_chatbot_welcome_dialogue_repeat = "character_chatbot_welcome_dialogue_repeat",
   character_chatbot_initial_prompt = "character_chatbot_initial_prompt",
   character_brain_type = "character_brain_type",
+  character_thinking_dialogue = "character_thinking_dialogue",
 
   // Substitute
   enable_substitutes = "enable_substitutes",
@@ -317,6 +318,7 @@ export const elementPropertyDefaults: Record<ElementProperty, unknown> = {
   [ElementProperty.character_chatbot_welcome_dialogue_repeat]: "once", // once | always
   [ElementProperty.character_chatbot_initial_prompt]: "",
   [ElementProperty.character_brain_type]: CharacterBrainType.none,
+  [ElementProperty.character_thinking_dialogue]: "Let me think about that, please wait a bit",
 
   [ElementProperty.enable_substitutes]: false,
   [ElementProperty.linked_substitute_variable]: undefined,
