@@ -32,6 +32,7 @@ export enum SceneProperty {
   linked_menu_id = "linked_menu_id",
   linked_tour_mode_id = "linked_tour_mode_id",
   scene_zoom = "scene_zoom",
+  scene_walking_speed_multiplier = "scene_walking_speed_multiplier",
 }
 
 export const scenePropertyDefaults: Record<SceneProperty, unknown> = {
@@ -61,4 +62,5 @@ export const scenePropertyDefaults: Record<SceneProperty, unknown> = {
   [SceneProperty.linked_menu_id]: undefined,
   [SceneProperty.linked_tour_mode_id]: undefined,
   [SceneProperty.scene_zoom]: 1,
+  [SceneProperty.scene_walking_speed_multiplier]: 1
 };
