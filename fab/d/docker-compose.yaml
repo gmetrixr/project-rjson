@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   project-rjson:
     image: "gmetrixr/baseimage:node-20-dev-v6"
