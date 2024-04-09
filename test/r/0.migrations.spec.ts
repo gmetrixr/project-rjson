@@ -1,7 +1,4 @@
-import { createNewDeployment, migrateDeployment } from "../../src/migrations/deployment/index.js";
-import { migrateProject, projectViewerRuntimeMigrations } from "./../../src/migrations/project/index.js";
-import { migrateDiscussion } from "./../../src/migrations/discussion/index.js";
-import { RT, RF, rtp } from "../../src/index.js";
+import { RT, RF, rtp, migrations } from "../../src/index.js";
 import fs from "fs";
 import deploymentJson from "./jsons/deployment.json";
 import campusJson from "./jsons/campus.json";
@@ -19,6 +16,9 @@ import brainJson from "./jsons/r3fJsons/project/brain.json";
 import console from "console";
 import {afterEach, beforeEach, describe, expect, it, xit} from "@jest/globals";
 import { ElementType } from "../../src/r/definitions/elements/ElementDefinition.js";
+
+const { createNewDeployment, migrateDeployment } = migrations;
+const { projectViewerRuntimeMigrations, migrateProject, migrateDiscussion } = migrations;
 
 //https://stackoverflow.com/a/68017229/1233476
 const jestConsole = console;
