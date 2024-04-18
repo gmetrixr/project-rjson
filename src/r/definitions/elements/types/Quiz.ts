@@ -13,6 +13,9 @@ export const Quiz: IElementDefinition = {
     ElementProperty.quiz_passing_score,
     ElementProperty.quiz_correct_score,
     ElementProperty.quiz_wrong_score,
+    ElementProperty.quiz_show_starting_screen,
+    ElementProperty.quiz_show_ending_screen,
+    ElementProperty.quiz_randomize_options,
     ElementProperty.randomize_questions,
     ElementProperty.background_source
   ],
