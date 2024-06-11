@@ -626,8 +626,8 @@ export class RecordFactory<T extends RT> {
       }
 
       if(!parentRecord) {
-        console.log("unable to find a parent record");
-        return undefined;
+        console.log(`unable to find a leaf record in the path: ${key}. Moving to the next possible entry`);
+        continue;
       }
 
       // * at this point the parentRecord will contain the ref of the correct record or it will be undefined

@@ -5,7 +5,7 @@
     "initial_scene_id": 1726394643399417,
     "enable_viewer_jump": false,
     "project_logo_source": {
-      "id": 824140,
+      "id": 9617,
       "name": "icon_fs_v2.png",
       "file_paths": {
         "o": "o/icon_fs_v2.png",
@@ -15,12 +15,12 @@
         "q_medium": "q_medium/icon_fs_v2.png"
       },
       "file_urls": {
-        "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/o/icon_fs_v2.png",
-        "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/t/icon_fs_v2.png",
-        "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/q_low/icon_fs_v2.png",
-        "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/o/icon_fs_v2.png",
-        "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/q_medium/icon_fs_v2.png",
-        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/o/icon_fs_v2.png"
+        "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/6c5dcb97-3c72-4aa6-98ea-cda7857f6f66/o/icon_fs_v2.png",
+        "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/6c5dcb97-3c72-4aa6-98ea-cda7857f6f66/t/icon_fs_v2.png",
+        "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/6c5dcb97-3c72-4aa6-98ea-cda7857f6f66/q_low/icon_fs_v2.png",
+        "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/6c5dcb97-3c72-4aa6-98ea-cda7857f6f66/o/icon_fs_v2.png",
+        "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/6c5dcb97-3c72-4aa6-98ea-cda7857f6f66/q_medium/icon_fs_v2.png",
+        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/6c5dcb97-3c72-4aa6-98ea-cda7857f6f66/o/icon_fs_v2.png"
       },
       "size": 6806,
       "type": "IMAGE",
@@ -36,9 +36,10 @@
     "use_custom_branding": true,
     "enable_cursor_movement": false,
     "project_metadata_title": "Expert AMA",
+    "show_6dof_instructions": false,
     "show_tap_to_start_mobile": true,
     "show_thumbstick_controls": true,
-    "show_6dof_instructions": false
+    "show_menu": true
   },
   "records": {
     "menu": {
@@ -46,7 +47,7 @@
         "type": "menu",
         "order": 4,
         "props": {
-          "menu_show": false,
+          "menu_show": true,
           "menu_scene_id": 8343907763934261
         }
       },
@@ -54,7 +55,7 @@
         "type": "menu",
         "order": 6,
         "props": {
-          "menu_show": false,
+          "menu_show": true,
           "menu_scene_id": 3036812519760323
         }
       },
@@ -62,7 +63,7 @@
         "type": "menu",
         "order": 5,
         "props": {
-          "menu_show": false,
+          "menu_show": true,
           "menu_scene_id": 9938517067294432
         }
       },
@@ -70,7 +71,7 @@
         "type": "menu",
         "order": 7,
         "props": {
-          "menu_show": false,
+          "menu_show": true,
           "menu_scene_id": 1726394643399417
         }
       },
@@ -78,8 +79,16 @@
         "type": "menu",
         "order": 3,
         "props": {
-          "menu_show": false,
+          "menu_show": true,
           "menu_scene_id": 9122363484735106
+        }
+      },
+      "9769012700657696": {
+        "type": "menu",
+        "order": 2,
+        "props": {
+          "menu_show": true,
+          "menu_scene_id": 3916022126662702
         }
       }
     },
@@ -310,7 +319,7 @@
               "order": 1,
               "props": {
                 "source": {
-                  "id": 811143,
+                  "id": 9620,
                   "name": "Black.png",
                   "file_paths": {
                     "o": "o/Black.png",
@@ -320,12 +329,12 @@
                     "q_medium": "q_medium/Black.png"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/o/Black.png",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/t/Black.png",
-                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/q_low/Black.png",
-                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/o/Black.png",
-                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/q_medium/Black.png",
-                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/o/Black.png"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/9d6de006-c921-4917-922b-0f95f429a6fc/o/Black.png",
+                    "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/9d6de006-c921-4917-922b-0f95f429a6fc/t/Black.png",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/9d6de006-c921-4917-922b-0f95f429a6fc/q_low/Black.png",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/9d6de006-c921-4917-922b-0f95f429a6fc/o/Black.png",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/9d6de006-c921-4917-922b-0f95f429a6fc/q_medium/Black.png",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/9d6de006-c921-4917-922b-0f95f429a6fc/o/Black.png"
                   },
                   "size": 10647,
                   "type": "IMAGE",
@@ -957,13 +966,13 @@
               "order": 3.875,
               "props": {
                 "source": {
-                  "id": 773729,
+                  "id": 9613,
                   "name": "portal.mp3",
                   "file_paths": {
                     "o": "o/portal.mp3"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/7a986a7f-668e-4f56-b278-8f7bf99f66ab/o/portal.mp3"
                   },
                   "size": 28745,
                   "type": "AUDIO",
@@ -1004,17 +1013,13 @@
               "props": {
                 "scale": 1.5,
                 "source": {
-                  "id": 814013,
+                  "id": 9622,
                   "name": "zoneAnim_v01.glb",
                   "file_paths": {
-                    "o": "o/zoneAnim_v01.glb",
-                    "t": "t/zoneAnim_v01.jpg",
-                    "usdz": "usdz/zoneAnim_v01.usdz"
+                    "o": "o/zoneAnim_v01.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/67d7b03d-ed5f-4a7e-ba38-628f365c3524/o/zoneAnim_v01.glb"
                   },
                   "size": 226440,
                   "type": "THREED",
@@ -1145,36 +1150,21 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 845865,
+                  "id": 9610,
                   "name": "Character (18).glb",
                   "file_paths": {
-                    "o": "o/Character.glb",
-                    "t": "t/Character.png",
-                    "glb": "glb/Character_q_medium.glb",
-                    "usdz": "usdz/Character (18).usdz",
-                    "glb_low": "glb/Character_q_low.glb",
-                    "glb_high": "glb/Character_q_high.glb",
-                    "glb_medium": "glb/Character_q_medium.glb"
+                    "o": "o/Character (18).glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/o/Character.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/t/Character.png",
-                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_medium.glb",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/usdz/Character%20(18).usdz",
-                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_low.glb",
-                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_high.glb",
-                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_medium.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/5f22d1ed-0e3a-403a-b1f0-797fbe6a7586/o/Character%20(18).glb"
                   },
                   "size": 10847844,
-                  "type": "CHARACTER_RPM",
+                  "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "rpm_id": "6652e2198d8a1340f4f7a1f3",
-                    "from_rpm": true,
                     "mimeType": "model/gltf-binary",
                     "vertices": 8612,
                     "triangles": 14198,
-                    "rpmAvatarGender": "feminine",
                     "numberOfTextures": 3,
                     "totalTextureSize": 2.7
                   }
@@ -1447,7 +1437,7 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 813839,
+                  "id": 9615,
                   "name": "colorLines01_v03.jpg",
                   "file_paths": {
                     "o": "o/colorLines01_v03.jpg",
@@ -1457,12 +1447,12 @@
                     "q_medium": "q_medium/colorLines01_v03.jpeg"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
-                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
-                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
-                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg"
                   },
                   "size": 3008543,
                   "type": "IMAGE",
@@ -1489,19 +1479,23 @@
                 "hidden": false,
                 "locked": false,
                 "source": {
-                  "id": 814398,
+                  "id": 9626,
                   "name": "12_v09.glb",
                   "file_paths": {
                     "o": "o/12_v09.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/39e47026-a830-4254-8485-8791467b21ad/o/12_v09.glb"
                   },
                   "size": 556860,
                   "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "mimeType": "model/gltf-binary"
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 965,
+                    "triangles": 842,
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 0.48
                   }
                 },
                 "placer_3d": [
@@ -1582,6 +1576,1805 @@
                         1
                       ],
                       "element_type": "zone"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "3916022126662702": {
+        "name": "feedback",
+        "type": "scene",
+        "order": 2,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -5,
+            5,
+            0,
+            5,
+            -5,
+            10
+          ],
+          "scene_env_map": "venice_dawn_1_1k",
+          "linked_menu_id": 9769012700657696,
+          "linked_tour_mode_id": 7440737693283119,
+          "scene_spawn_zone_id": 8993501254712839,
+          "scene_collision_type": "advanced_collision",
+          "scene_reset_rotation": true
+        },
+        "records": {
+          "rule": {
+            "1438098683341322": {
+              "name": "Rule (37)",
+              "type": "rule",
+              "order": -1.125,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": false,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "4371152812119682": {
+                    "type": "when_event",
+                    "order": 2,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 7181860674785738,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "5311442448930554": {
+                    "type": "when_event",
+                    "order": 3,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 6923717151140632,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1510161012023464": {
+                    "type": "then_action",
+                    "order": 10,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6010600438850703,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "4314463058122672": {
+                    "type": "then_action",
+                    "order": 7,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 4374850260757101,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "4737821148751373": {
+                    "type": "then_action",
+                    "order": 8,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 6923717151140632,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5300842252432620": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2632503520491308,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5332013212799585": {
+                    "type": "then_action",
+                    "order": 11,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 5294748134994254,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "7436691745945416": {
+                    "type": "then_action",
+                    "order": 12,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2422609367593652,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "8029089963242097": {
+                    "type": "then_action",
+                    "order": 9,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2934161917130779,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "8592466406457898": {
+                    "type": "then_action",
+                    "order": 13,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 7181860674785738,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9092123644354892": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2098955501368480,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9533995033511460": {
+                    "type": "then_action",
+                    "order": 14,
+                    "props": {
+                      "action": "set_to_number",
+                      "ta_co_id": 2641439278005680,
+                      "ta_co_type": "number",
+                      "ta_properties": [
+                        5
+                      ]
+                    }
+                  },
+                  "9798753086007622": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 4624778126787726,
+                      "ta_delay": 0,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "1628853988864633": {
+              "name": "Rule (40)",
+              "type": "rule",
+              "order": -1.09375,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": false,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "2625655777309943": {
+                    "type": "when_event",
+                    "order": 2,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 5294748134994254,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "6433920122563019": {
+                    "type": "when_event",
+                    "order": 3,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2632503520491308,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "3722817274293391": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 4624778126787726,
+                      "ta_delay": 0,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "4769787193948496": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2632503520491308,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5078040004653858": {
+                    "type": "then_action",
+                    "order": 13,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 7181860674785738,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5278727933485760": {
+                    "type": "then_action",
+                    "order": 12,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2422609367593652,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "6685846947419834": {
+                    "type": "then_action",
+                    "order": 10,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6010600438850703,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "7010391161981332": {
+                    "type": "then_action",
+                    "order": 11,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 5294748134994254,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "7157035446134939": {
+                    "type": "then_action",
+                    "order": 14,
+                    "props": {
+                      "action": "set_to_number",
+                      "ta_co_id": 2641439278005680,
+                      "ta_co_type": "number",
+                      "ta_properties": [
+                        3
+                      ]
+                    }
+                  },
+                  "8181676176156399": {
+                    "type": "then_action",
+                    "order": 9,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2934161917130779,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9315518718576788": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2098955501368480,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9886358938615164": {
+                    "type": "then_action",
+                    "order": 8,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6923717151140632,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9985989008071288": {
+                    "type": "then_action",
+                    "order": 7,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 4374850260757101,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "3637977268497234": {
+              "name": "Rule (41)",
+              "type": "rule",
+              "order": -1.109375,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": false,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5335769200598844": {
+                    "type": "when_event",
+                    "order": 2,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2422609367593652,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "9877080106876852": {
+                    "type": "when_event",
+                    "order": 3,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 4374850260757101,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1733239460334367": {
+                    "type": "then_action",
+                    "order": 9,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2934161917130779,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "2179492981658339": {
+                    "type": "then_action",
+                    "order": 10,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6010600438850703,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5045569463142222": {
+                    "type": "then_action",
+                    "order": 11,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 5294748134994254,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5888551711457108": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 4624778126787726,
+                      "ta_delay": 0,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "6270248045701957": {
+                    "type": "then_action",
+                    "order": 7,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 4374850260757101,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "6948681893883436": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2632503520491308,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "8328702074669910": {
+                    "type": "then_action",
+                    "order": 14,
+                    "props": {
+                      "action": "set_to_number",
+                      "ta_co_id": 2641439278005680,
+                      "ta_co_type": "number",
+                      "ta_properties": [
+                        4
+                      ]
+                    }
+                  },
+                  "8652982154095350": {
+                    "type": "then_action",
+                    "order": 13,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 7181860674785738,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "8703934187245621": {
+                    "type": "then_action",
+                    "order": 8,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6923717151140632,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "8929079333102933": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2098955501368480,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9011472961849978": {
+                    "type": "then_action",
+                    "order": 12,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2422609367593652,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "5758221524525801": {
+              "name": "Rule (39)",
+              "type": "rule",
+              "order": -1.0625,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": false,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "6311023476745263": {
+                    "type": "when_event",
+                    "order": 3,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 4624778126787726,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "7580211791996576": {
+                    "type": "when_event",
+                    "order": 2,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 6010600438850703,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1144979565227866": {
+                    "type": "then_action",
+                    "order": 12,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2422609367593652,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "2808276727547433": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2098955501368480,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "3195414117071268": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 4624778126787726,
+                      "ta_delay": 0,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "3455785956648893": {
+                    "type": "then_action",
+                    "order": 7,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 4374850260757101,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "3565290215223404": {
+                    "type": "then_action",
+                    "order": 14,
+                    "props": {
+                      "action": "set_to_number",
+                      "ta_co_id": 2641439278005680,
+                      "ta_co_type": "number",
+                      "ta_properties": [
+                        2
+                      ]
+                    }
+                  },
+                  "3597473720763579": {
+                    "type": "then_action",
+                    "order": 8,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6923717151140632,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "3854651037943575": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2632503520491308,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5562718792358936": {
+                    "type": "then_action",
+                    "order": 13,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 7181860674785738,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "6732691017250062": {
+                    "type": "then_action",
+                    "order": 9,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2934161917130779,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "8122322899872975": {
+                    "type": "then_action",
+                    "order": 10,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6010600438850703,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9246519856784420": {
+                    "type": "then_action",
+                    "order": 11,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 5294748134994254,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "6544125340286069": {
+              "name": "Rule",
+              "type": "rule",
+              "order": -2.125,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": false,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "1009990153913043": {
+                    "type": "when_event",
+                    "order": 8,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2632503520491308,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "1908992555929957": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2934161917130779,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "2070252346467959": {
+                    "type": "when_event",
+                    "order": 6,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2098955501368480,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "3193713302237758": {
+                    "type": "when_event",
+                    "order": 9,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 4374850260757101,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "3743402177006947": {
+                    "type": "when_event",
+                    "order": 3,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 5294748134994254,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "4271805045367001": {
+                    "type": "when_event",
+                    "order": 10,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 6923717151140632,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "4433621562863705": {
+                    "type": "when_event",
+                    "order": 4,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2422609367593652,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "7122623568650797": {
+                    "type": "when_event",
+                    "order": 7,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 4624778126787726,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "7176647472774426": {
+                    "type": "when_event",
+                    "order": 5,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 7181860674785738,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "8069472012774044": {
+                    "type": "when_event",
+                    "order": 2,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 6010600438850703,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1213918736194396": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2415396967353910,
+                      "ta_delay": 3,
+                      "ta_co_type": "text",
+                      "ta_properties": []
+                    }
+                  },
+                  "3019646435045968": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 1643010354163832,
+                      "ta_delay": 3,
+                      "ta_co_type": "text",
+                      "ta_properties": []
+                    }
+                  },
+                  "5837369648487221": {
+                    "type": "then_action",
+                    "order": 7,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 3822207414051146,
+                      "ta_co_type": "text",
+                      "ta_properties": []
+                    }
+                  },
+                  "5844625426147894": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 3075222828560356,
+                      "ta_delay": 3,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  },
+                  "6521174359272017": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6694691220078201,
+                      "ta_delay": 3,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  },
+                  "8987980822132803": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "end_fs_experience",
+                      "ta_co_id": -100,
+                      "ta_delay": 4,
+                      "ta_co_type": "experience",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "7334317948967015": {
+              "name": "Rule (42)",
+              "type": "rule",
+              "order": -3.125,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5089746678470019": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_load",
+                      "we_co_id": -99,
+                      "we_co_type": "scene",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "3922873518513198": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "change_view_mode",
+                      "ta_co_id": -100,
+                      "ta_delay": 0,
+                      "ta_co_type": "experience",
+                      "ta_properties": [
+                        "first_person"
+                      ]
+                    }
+                  },
+                  "6206241405771620": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "point_to",
+                      "ta_co_id": -102,
+                      "ta_delay": 1,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        2415396967353910
+                      ]
+                    }
+                  },
+                  "8484046080899259": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "set_fs_score",
+                      "ta_co_id": -100,
+                      "ta_co_type": "experience",
+                      "ta_properties": [
+                        "100"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "8345467275619113": {
+              "name": "Rule (38)",
+              "type": "rule",
+              "order": -1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": false,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "3944850966344242": {
+                    "type": "when_event",
+                    "order": 2,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2098955501368480,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  },
+                  "4294786789759568": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 2934161917130779,
+                      "we_co_type": "image_flat",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1708366887064685": {
+                    "type": "then_action",
+                    "order": 14,
+                    "props": {
+                      "action": "set_to_number",
+                      "ta_co_id": 2641439278005680,
+                      "ta_co_type": "number",
+                      "ta_properties": [
+                        1
+                      ]
+                    }
+                  },
+                  "1735229765765337": {
+                    "type": "then_action",
+                    "order": 9,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2934161917130779,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "2949535083210890": {
+                    "type": "then_action",
+                    "order": 11,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 5294748134994254,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "4077076464882506": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 4624778126787726,
+                      "ta_delay": 0,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "4381202622999182": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2632503520491308,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5107082411307314": {
+                    "type": "then_action",
+                    "order": 13,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 7181860674785738,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "5741468048650845": {
+                    "type": "then_action",
+                    "order": 7,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 4374850260757101,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "6996843456188805": {
+                    "type": "then_action",
+                    "order": 8,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6923717151140632,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "7490078954922172": {
+                    "type": "then_action",
+                    "order": 12,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2422609367593652,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9192099107829278": {
+                    "type": "then_action",
+                    "order": 10,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 6010600438850703,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  },
+                  "9214941006504756": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "show",
+                      "ta_co_id": 2098955501368480,
+                      "ta_co_type": "image_flat",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "9666871411700490": {
+              "name": "Rule (43)",
+              "type": "rule",
+              "order": -4.125,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5997569032508240": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_click",
+                      "we_co_id": 3822207414051146,
+                      "we_co_type": "text",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1281112466808526": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "end_fs_experience",
+                      "ta_co_id": -100,
+                      "ta_delay": 0.5,
+                      "ta_co_type": "experience",
+                      "ta_properties": []
+                    }
+                  },
+                  "3283551003390878": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 6694691220078201,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  },
+                  "3512672912352425": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 2415396967353910,
+                      "ta_co_type": "text",
+                      "ta_properties": []
+                    }
+                  },
+                  "6861805695358351": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 3822207414051146,
+                      "ta_co_type": "text",
+                      "ta_properties": []
+                    }
+                  },
+                  "8125991168957936": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 3075222828560356,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "element": {
+            "3075222828560356": {
+              "name": "openStars",
+              "type": "element",
+              "order": 4.65625,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2422609367593652": {
+                    "name": "open_star04",
+                    "type": "element",
+                    "order": 4,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "source": {
+                        "id": 9607,
+                        "name": "star_open.png",
+                        "file_paths": {
+                          "o": "o/star_open.png",
+                          "t": "t/star_open.png",
+                          "q_low": "q_low/star_open.png",
+                          "q_high": "o/star_open.png",
+                          "q_medium": "q_medium/star_open.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/t/star_open.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_low/star_open.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_medium/star_open.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png"
+                        },
+                        "size": 950,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        0.5,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "2934161917130779": {
+                    "name": "open_star01",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "source": {
+                        "id": 9607,
+                        "name": "star_open.png",
+                        "file_paths": {
+                          "o": "o/star_open.png",
+                          "t": "t/star_open.png",
+                          "q_low": "q_low/star_open.png",
+                          "q_high": "o/star_open.png",
+                          "q_medium": "q_medium/star_open.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/t/star_open.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_low/star_open.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_medium/star_open.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png"
+                        },
+                        "size": 950,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        -1,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "5294748134994254": {
+                    "name": "open_star03",
+                    "type": "element",
+                    "order": 3,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "source": {
+                        "id": 9607,
+                        "name": "star_open.png",
+                        "file_paths": {
+                          "o": "o/star_open.png",
+                          "t": "t/star_open.png",
+                          "q_low": "q_low/star_open.png",
+                          "q_high": "o/star_open.png",
+                          "q_medium": "q_medium/star_open.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/t/star_open.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_low/star_open.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_medium/star_open.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png"
+                        },
+                        "size": 950,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        0,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "6010600438850703": {
+                    "name": "open_star02",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "source": {
+                        "id": 9607,
+                        "name": "star_open.png",
+                        "file_paths": {
+                          "o": "o/star_open.png",
+                          "t": "t/star_open.png",
+                          "q_low": "q_low/star_open.png",
+                          "q_high": "o/star_open.png",
+                          "q_medium": "q_medium/star_open.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/t/star_open.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_low/star_open.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_medium/star_open.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png"
+                        },
+                        "size": 950,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        -0.5,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "7181860674785738": {
+                    "name": "open_star05",
+                    "type": "element",
+                    "order": 5,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "source": {
+                        "id": 9607,
+                        "name": "star_open.png",
+                        "file_paths": {
+                          "o": "o/star_open.png",
+                          "t": "t/star_open.png",
+                          "q_low": "q_low/star_open.png",
+                          "q_high": "o/star_open.png",
+                          "q_medium": "q_medium/star_open.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/t/star_open.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_low/star_open.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/q_medium/star_open.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/308a9283-64aa-4ebf-87ae-b78507e4bc8a/o/star_open.png"
+                        },
+                        "size": 950,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        1,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  }
+                }
+              }
+            },
+            "6694691220078201": {
+              "name": "filledStars",
+              "type": "element",
+              "order": 5.1875,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2098955501368480": {
+                    "name": "filled_star01",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "hidden": true,
+                      "source": {
+                        "id": 9611,
+                        "name": "star_filled.png",
+                        "file_paths": {
+                          "o": "o/star_filled.png",
+                          "t": "t/star_filled.png",
+                          "q_low": "q_low/star_filled.png",
+                          "q_high": "o/star_filled.png",
+                          "q_medium": "q_medium/star_filled.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/t/star_filled.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_low/star_filled.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_medium/star_filled.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png"
+                        },
+                        "size": 736,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        -1,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "2632503520491308": {
+                    "name": "filled_star03",
+                    "type": "element",
+                    "order": 3,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "hidden": true,
+                      "source": {
+                        "id": 9611,
+                        "name": "star_filled.png",
+                        "file_paths": {
+                          "o": "o/star_filled.png",
+                          "t": "t/star_filled.png",
+                          "q_low": "q_low/star_filled.png",
+                          "q_high": "o/star_filled.png",
+                          "q_medium": "q_medium/star_filled.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/t/star_filled.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_low/star_filled.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_medium/star_filled.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png"
+                        },
+                        "size": 736,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        0,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "4374850260757101": {
+                    "name": "filled_star04",
+                    "type": "element",
+                    "order": 4,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "hidden": true,
+                      "source": {
+                        "id": 9611,
+                        "name": "star_filled.png",
+                        "file_paths": {
+                          "o": "o/star_filled.png",
+                          "t": "t/star_filled.png",
+                          "q_low": "q_low/star_filled.png",
+                          "q_high": "o/star_filled.png",
+                          "q_medium": "q_medium/star_filled.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/t/star_filled.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_low/star_filled.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_medium/star_filled.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png"
+                        },
+                        "size": 736,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        0.5,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "4624778126787726": {
+                    "name": "filled_star02",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "hidden": true,
+                      "source": {
+                        "id": 9611,
+                        "name": "star_filled.png",
+                        "file_paths": {
+                          "o": "o/star_filled.png",
+                          "t": "t/star_filled.png",
+                          "q_low": "q_low/star_filled.png",
+                          "q_high": "o/star_filled.png",
+                          "q_medium": "q_medium/star_filled.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/t/star_filled.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_low/star_filled.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_medium/star_filled.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png"
+                        },
+                        "size": 736,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        -0.5,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  },
+                  "6923717151140632": {
+                    "name": "filled_star05",
+                    "type": "element",
+                    "order": 5,
+                    "props": {
+                      "wh": [
+                        2,
+                        2
+                      ],
+                      "scale": 0.2,
+                      "hidden": true,
+                      "source": {
+                        "id": 9611,
+                        "name": "star_filled.png",
+                        "file_paths": {
+                          "o": "o/star_filled.png",
+                          "t": "t/star_filled.png",
+                          "q_low": "q_low/star_filled.png",
+                          "q_high": "o/star_filled.png",
+                          "q_medium": "q_medium/star_filled.png"
+                        },
+                        "file_urls": {
+                          "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/t/star_filled.png",
+                          "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_low/star_filled.png",
+                          "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png",
+                          "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/q_medium/star_filled.png",
+                          "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/1a285ca1-fcdf-4d58-952f-6070cb02a31a/o/star_filled.png"
+                        },
+                        "size": 736,
+                        "type": "IMAGE",
+                        "metadata": {
+                          "ext": "png",
+                          "mimeType": "image/png",
+                          "resolution": {
+                            "x": 56,
+                            "y": 55
+                          }
+                        }
+                      },
+                      "placer_3d": [
+                        1,
+                        0.75,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "image_flat"
+                    }
+                  }
+                }
+              }
+            },
+            "9994813100722940": {
+              "name": "Defaults",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "1643010354163832": {
+                    "name": "thanks",
+                    "type": "element",
+                    "order": 4,
+                    "props": {
+                      "text": "thank you!",
+                      "hidden": true,
+                      "font_size": 0.5,
+                      "placer_3d": [
+                        0.06048409760456974,
+                        2.419286561596514,
+                        -4.436506848852774,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "text"
+                    }
+                  },
+                  "2415396967353910": {
+                    "name": "inst",
+                    "type": "element",
+                    "order": 3,
+                    "props": {
+                      "text": "please rate this experience",
+                      "font_size": 0.5,
+                      "placer_3d": [
+                        0.06048409760456974,
+                        2.419286561596514,
+                        -4.436506848852774,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "text"
+                    }
+                  },
+                  "3822207414051146": {
+                    "name": "exit",
+                    "type": "element",
+                    "order": 5,
+                    "props": {
+                      "wh": [
+                        1.5,
+                        0.6
+                      ],
+                      "text": "exit",
+                      "scale": 0.8,
+                      "hidden": false,
+                      "font_size": 0.5,
+                      "placer_3d": [
+                        0,
+                        -0.16634261416663332,
+                        0,
+                        0,
+                        -1.0961176839821344e-210,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#000000",
+                      "font_family": "NunitoSans",
+                      "font_weight": 600,
+                      "border_color": "#FFFFFF",
+                      "element_type": "text",
+                      "border_radius": 0.1,
+                      "background_color": "#FFFFFF",
+                      "background_opacity": 0.6
+                    }
+                  },
+                  "8993501254712839": {
+                    "name": "Zone",
+                    "type": "element",
+                    "order": 0,
+                    "props": {
+                      "locked": false,
+                      "opacity": 0,
+                      "placer_3d": [
+                        0,
+                        0,
+                        6.713812381706395,
+                        0,
+                        90,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "zone"
+                    }
+                  },
+                  "9151371800533890": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 0.5,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
                     }
                   }
                 }
@@ -1817,13 +3610,13 @@
               "order": 3.875,
               "props": {
                 "source": {
-                  "id": 773729,
+                  "id": 9613,
                   "name": "portal.mp3",
                   "file_paths": {
                     "o": "o/portal.mp3"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/7a986a7f-668e-4f56-b278-8f7bf99f66ab/o/portal.mp3"
                   },
                   "size": 28745,
                   "type": "AUDIO",
@@ -1864,36 +3657,21 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 845864,
+                  "id": 9616,
                   "name": "Character (17).glb",
                   "file_paths": {
-                    "o": "o/Character.glb",
-                    "t": "t/Character.png",
-                    "glb": "glb/Character_q_medium.glb",
-                    "usdz": "usdz/Character (17).usdz",
-                    "glb_low": "glb/Character_q_low.glb",
-                    "glb_high": "glb/Character_q_high.glb",
-                    "glb_medium": "glb/Character_q_medium.glb"
+                    "o": "o/Character (17).glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/o/Character.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/t/Character.png",
-                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_medium.glb",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/usdz/Character%20(17).usdz",
-                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_low.glb",
-                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_high.glb",
-                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_medium.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/fd3c4b26-09da-4e0d-9334-1074fcac6a16/o/Character%20(17).glb"
                   },
                   "size": 10074396,
-                  "type": "CHARACTER_RPM",
+                  "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "rpm_id": "6652e1a2cf97e5aaac49d35d",
-                    "from_rpm": true,
                     "mimeType": "model/gltf-binary",
                     "vertices": 8153,
                     "triangles": 13574,
-                    "rpmAvatarGender": "masculine",
                     "numberOfTextures": 3,
                     "totalTextureSize": 2.36
                   }
@@ -1930,17 +3708,13 @@
               "props": {
                 "scale": 1.5,
                 "source": {
-                  "id": 814013,
+                  "id": 9622,
                   "name": "zoneAnim_v01.glb",
                   "file_paths": {
-                    "o": "o/zoneAnim_v01.glb",
-                    "t": "t/zoneAnim_v01.jpg",
-                    "usdz": "usdz/zoneAnim_v01.usdz"
+                    "o": "o/zoneAnim_v01.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/67d7b03d-ed5f-4a7e-ba38-628f365c3524/o/zoneAnim_v01.glb"
                   },
                   "size": 226440,
                   "type": "THREED",
@@ -2661,19 +4435,23 @@
                 "hidden": false,
                 "locked": false,
                 "source": {
-                  "id": 814398,
+                  "id": 9626,
                   "name": "12_v09.glb",
                   "file_paths": {
                     "o": "o/12_v09.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/39e47026-a830-4254-8485-8791467b21ad/o/12_v09.glb"
                   },
                   "size": 556860,
                   "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "mimeType": "model/gltf-binary"
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 965,
+                    "triangles": 842,
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 0.48
                   }
                 },
                 "placer_3d": [
@@ -2724,7 +4502,7 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 813839,
+                  "id": 9615,
                   "name": "colorLines01_v03.jpg",
                   "file_paths": {
                     "o": "o/colorLines01_v03.jpg",
@@ -2734,12 +4512,12 @@
                     "q_medium": "q_medium/colorLines01_v03.jpeg"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
-                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
-                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
-                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg"
                   },
                   "size": 3008543,
                   "type": "IMAGE",
@@ -3107,13 +4885,13 @@
               "order": 3.875,
               "props": {
                 "source": {
-                  "id": 773729,
+                  "id": 9613,
                   "name": "portal.mp3",
                   "file_paths": {
                     "o": "o/portal.mp3"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/7a986a7f-668e-4f56-b278-8f7bf99f66ab/o/portal.mp3"
                   },
                   "size": 28745,
                   "type": "AUDIO",
@@ -3134,19 +4912,23 @@
                 "hidden": false,
                 "locked": false,
                 "source": {
-                  "id": 814398,
+                  "id": 9626,
                   "name": "12_v09.glb",
                   "file_paths": {
                     "o": "o/12_v09.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/39e47026-a830-4254-8485-8791467b21ad/o/12_v09.glb"
                   },
                   "size": 556860,
                   "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "mimeType": "model/gltf-binary"
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 965,
+                    "triangles": 842,
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 0.48
                   }
                 },
                 "placer_3d": [
@@ -3174,7 +4956,7 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 813839,
+                  "id": 9615,
                   "name": "colorLines01_v03.jpg",
                   "file_paths": {
                     "o": "o/colorLines01_v03.jpg",
@@ -3184,12 +4966,12 @@
                     "q_medium": "q_medium/colorLines01_v03.jpeg"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
-                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
-                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
-                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg"
                   },
                   "size": 3008543,
                   "type": "IMAGE",
@@ -3279,17 +5061,13 @@
               "props": {
                 "scale": 1.5,
                 "source": {
-                  "id": 814013,
+                  "id": 9622,
                   "name": "zoneAnim_v01.glb",
                   "file_paths": {
-                    "o": "o/zoneAnim_v01.glb",
-                    "t": "t/zoneAnim_v01.jpg",
-                    "usdz": "usdz/zoneAnim_v01.usdz"
+                    "o": "o/zoneAnim_v01.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/67d7b03d-ed5f-4a7e-ba38-628f365c3524/o/zoneAnim_v01.glb"
                   },
                   "size": 226440,
                   "type": "THREED",
@@ -3998,36 +5776,21 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 807351,
+                  "id": 9623,
                   "name": "Character (2).glb",
                   "file_paths": {
-                    "o": "o/Character.glb",
-                    "t": "t/Character.png",
-                    "glb": "glb/Character_q_medium.glb",
-                    "usdz": "usdz/Character (2).usdz",
-                    "glb_low": "glb/Character_q_low.glb",
-                    "glb_high": "glb/Character_q_high.glb",
-                    "glb_medium": "glb/Character_q_medium.glb"
+                    "o": "o/Character (2).glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/o/Character.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/t/Character.png",
-                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_medium.glb",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/usdz/Character%20(2).usdz",
-                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_low.glb",
-                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_high.glb",
-                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_medium.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/b5f0faa6-fecc-418a-b5f3-e09de8678c95/o/Character%20(2).glb"
                   },
                   "size": 10724464,
-                  "type": "CHARACTER_RPM",
+                  "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "rpm_id": "65c9bedb99ba1893c8cfafa8",
-                    "from_rpm": true,
                     "mimeType": "model/gltf-binary",
                     "vertices": 8200,
                     "triangles": 13295,
-                    "rpmAvatarGender": "feminine",
                     "numberOfTextures": 3,
                     "totalTextureSize": 2.95
                   }
@@ -4516,19 +6279,23 @@
                 "hidden": false,
                 "locked": false,
                 "source": {
-                  "id": 814398,
+                  "id": 9626,
                   "name": "12_v09.glb",
                   "file_paths": {
                     "o": "o/12_v09.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/39e47026-a830-4254-8485-8791467b21ad/o/12_v09.glb"
                   },
                   "size": 556860,
                   "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "mimeType": "model/gltf-binary"
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 965,
+                    "triangles": 842,
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 0.48
                   }
                 },
                 "placer_3d": [
@@ -4621,17 +6388,13 @@
               "props": {
                 "scale": 1.5,
                 "source": {
-                  "id": 814013,
+                  "id": 9622,
                   "name": "zoneAnim_v01.glb",
                   "file_paths": {
-                    "o": "o/zoneAnim_v01.glb",
-                    "t": "t/zoneAnim_v01.jpg",
-                    "usdz": "usdz/zoneAnim_v01.usdz"
+                    "o": "o/zoneAnim_v01.glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/67d7b03d-ed5f-4a7e-ba38-628f365c3524/o/zoneAnim_v01.glb"
                   },
                   "size": 226440,
                   "type": "THREED",
@@ -4674,7 +6437,7 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 813839,
+                  "id": 9615,
                   "name": "colorLines01_v03.jpg",
                   "file_paths": {
                     "o": "o/colorLines01_v03.jpg",
@@ -4684,12 +6447,12 @@
                     "q_medium": "q_medium/colorLines01_v03.jpeg"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
-                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
-                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
-                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
-                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-dev/media/2022-12/gmetri/e8da1738-4561-4592-af27-2135c7faa5c7/o/colorLines01_v03.jpg"
                   },
                   "size": 3008543,
                   "type": "IMAGE",
@@ -5143,13 +6906,13 @@
               "order": 3.875,
               "props": {
                 "source": {
-                  "id": 773729,
+                  "id": 9613,
                   "name": "portal.mp3",
                   "file_paths": {
                     "o": "o/portal.mp3"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/7a986a7f-668e-4f56-b278-8f7bf99f66ab/o/portal.mp3"
                   },
                   "size": 28745,
                   "type": "AUDIO",
@@ -5233,36 +6996,21 @@
               "props": {
                 "hidden": false,
                 "source": {
-                  "id": 845863,
+                  "id": 9618,
                   "name": "Character (16).glb",
                   "file_paths": {
-                    "o": "o/Character.glb",
-                    "t": "t/Character.png",
-                    "glb": "glb/Character_q_medium.glb",
-                    "usdz": "usdz/Character (16).usdz",
-                    "glb_low": "glb/Character_q_low.glb",
-                    "glb_high": "glb/Character_q_high.glb",
-                    "glb_medium": "glb/Character_q_medium.glb"
+                    "o": "o/Character (16).glb"
                   },
                   "file_urls": {
-                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/o/Character.glb",
-                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/t/Character.png",
-                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_medium.glb",
-                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/usdz/Character%20(16).usdz",
-                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_low.glb",
-                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_high.glb",
-                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_medium.glb"
+                    "o": "https://u.vrgmetri.com/gb-sms-dev/media/2022-12/gmetri/555c44ce-496f-447e-9ee3-5524a712cc2d/o/Character%20(16).glb"
                   },
                   "size": 10579872,
-                  "type": "CHARACTER_RPM",
+                  "type": "THREED",
                   "metadata": {
                     "ext": "glb",
-                    "rpm_id": "6652dfe35cf5f4e6c6f2bc98",
-                    "from_rpm": true,
                     "mimeType": "model/gltf-binary",
                     "vertices": 8831,
                     "triangles": 15173,
-                    "rpmAvatarGender": "masculine",
                     "numberOfTextures": 3,
                     "totalTextureSize": 2.25
                   }
@@ -5511,6 +7259,13 @@
         "order": 3,
         "props": {
           "tour_mode_scene_id": 9122363484735106
+        }
+      },
+      "7440737693283119": {
+        "type": "tour_mode",
+        "order": 2,
+        "props": {
+          "tour_mode_scene_id": 3916022126662702
         }
       },
       "8555262350507270": {

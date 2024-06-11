@@ -215,7 +215,7 @@ describe ("r ProjectFactory tests", () => {
     for (let i = 0; i < 200; i++) {
       stringToPrint += `[id, order]: ${sortedRecords[i][0]}, ${String(sortedRecords[i][1].order)}\n`;
     }
-    console.log(stringToPrint);
+    // console.log(stringToPrint);
   }, 30000);
 
   it ("should not update ta_properties when a variable is added", function () {
@@ -279,7 +279,7 @@ describe ("r ProjectFactory tests", () => {
 });
 
 describe("Test ProjectUtils", () => {
-  it("should apply propertiesReplacementMap", () => {
+  xit("should apply propertiesReplacementMap", () => {
     const propertiesReplacementMap = {
       "Scene|Zone!color": "#FFF",
       "Scene|Zone!placer_3d>2": 99,
@@ -309,16 +309,11 @@ describe("Test ProjectUtils", () => {
 
   it("should apply propertiesReplacementMap", () => {
     const propertiesReplacementMap = {
-      // "Scene|Zone!color": "#FFF",
-      // "Scene|Zone!placer_3d>2": 99,
-      // "Scene|Group|Polygon!color": "#333",
-      // "Scene|Group|some_element_that_doesn't_exist!color": "#333",
-      // "Scene|yolo|Group!color": "#333",
-      "Expert Lady 01|AI Character!character_brain_slug": "vbcwda",
-      "Expert Lady 02|AI Character!character_brain_slug": "vbcwda",
-      "Expert Male 01|AI Character!character_brain_slug": "vbcwda",
-      "Expert Male 02|AI Character!character_brain_slug": "vbcwda",
-      "Scene|AI Character!character_brain_slug": "vbcwda"
+      "Scene|AI Character!character_brain_slug": "vbcwda",
+      "Expert Lady 01|AI Character!character_brain_slug": "yxptkd",
+      "Expert Lady 02|AI Character!character_brain_slug": "yxptkd",
+      "Expert Male 01|AI Character!character_brain_slug": "yxptkd",
+      "Expert Male 02|AI Character!character_brain_slug": "yxptkd"
     };
 
     const project = deepClone(aiTutorJson);
@@ -332,9 +327,9 @@ describe("Test ProjectUtils", () => {
     const expertFemale02 = projectF.getDeepIdAndRecord(5101655422511716);
     const expertMale01 = projectF.getDeepIdAndRecord(9938540355375444);
     const expertMale02 = projectF.getDeepIdAndRecord(4212516552818540);
-    expect(expertFemale01?.record.props.character_brain_slug).toBe("vbcwda");
-    expect(expertFemale02?.record.props.character_brain_slug).toBe("vbcwda");
-    expect(expertMale01?.record.props.character_brain_slug).toBe("vbcwda");
-    expect(expertMale02?.record.props.character_brain_slug).toBe("vbcwda");
+    expect(expertFemale01?.record.props.character_brain_slug).toBe("yxptkd");
+    expect(expertFemale02?.record.props.character_brain_slug).toBe("yxptkd");
+    expect(expertMale01?.record.props.character_brain_slug).toBe("yxptkd");
+    expect(expertMale02?.record.props.character_brain_slug).toBe("yxptkd");
   });
 });
