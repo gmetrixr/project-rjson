@@ -1,0 +1,5532 @@
+{
+  "type": "project",
+  "props": {
+    "version": 217,
+    "initial_scene_id": 1726394643399417,
+    "enable_viewer_jump": false,
+    "project_logo_source": {
+      "id": 824140,
+      "name": "icon_fs_v2.png",
+      "file_paths": {
+        "o": "o/icon_fs_v2.png",
+        "t": "t/icon_fs_v2.png",
+        "q_low": "q_low/icon_fs_v2.png",
+        "q_high": "o/icon_fs_v2.png",
+        "q_medium": "q_medium/icon_fs_v2.png"
+      },
+      "file_urls": {
+        "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/o/icon_fs_v2.png",
+        "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/t/icon_fs_v2.png",
+        "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/q_low/icon_fs_v2.png",
+        "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/o/icon_fs_v2.png",
+        "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/q_medium/icon_fs_v2.png",
+        "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/4afbd7df-dfa9-43bf-ae03-53904923df46/o/icon_fs_v2.png"
+      },
+      "size": 6806,
+      "type": "IMAGE",
+      "metadata": {
+        "ext": "png",
+        "mimeType": "image/png",
+        "resolution": {
+          "x": 100,
+          "y": 100
+        }
+      }
+    },
+    "use_custom_branding": true,
+    "enable_cursor_movement": false,
+    "project_metadata_title": "Expert AMA",
+    "show_tap_to_start_mobile": true,
+    "show_thumbstick_controls": true,
+    "show_6dof_instructions": false
+  },
+  "records": {
+    "menu": {
+      "1796335108896201": {
+        "type": "menu",
+        "order": 4,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 8343907763934261
+        }
+      },
+      "5783555049821568": {
+        "type": "menu",
+        "order": 6,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 3036812519760323
+        }
+      },
+      "7810656193962676": {
+        "type": "menu",
+        "order": 5,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 9938517067294432
+        }
+      },
+      "8975877298254018": {
+        "type": "menu",
+        "order": 7,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 1726394643399417
+        }
+      },
+      "9219233298779494": {
+        "type": "menu",
+        "order": 3,
+        "props": {
+          "menu_show": false,
+          "menu_scene_id": 9122363484735106
+        }
+      }
+    },
+    "scene": {
+      "1726394643399417": {
+        "name": "Character Selector",
+        "type": "scene",
+        "order": 0.5,
+        "props": {
+          "scene_type": "first_person",
+          "linked_menu_id": 8975877298254018,
+          "linked_tour_mode_id": 9578267703842480
+        },
+        "records": {
+          "rule": {
+            "1663456015336748": {
+              "name": "Rule (3)",
+              "type": "rule",
+              "order": 1.25,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5314512946576289": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_set_eq",
+                      "we_co_id": 1204051289496039,
+                      "we_co_type": "number",
+                      "we_properties": [
+                        "2"
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "7608168006016556": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "change_scene",
+                      "ta_co_id": -102,
+                      "ta_delay": 0.2,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        3036812519760323
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "1697604688981419": {
+              "name": "Rule (1)",
+              "type": "rule",
+              "order": 2,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "3363205898486515": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_preload",
+                      "we_co_id": -99,
+                      "we_co_type": "scene",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "8965662938221870": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "set_to_formula",
+                      "ta_co_id": 1204051289496039,
+                      "ta_co_type": "number",
+                      "ta_properties": [
+                        "random_1_4"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "3970953072359148": {
+              "name": "Rule (4)",
+              "type": "rule",
+              "order": 1.125,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "1254850016211321": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_set_eq",
+                      "we_co_id": 1204051289496039,
+                      "we_co_type": "number",
+                      "we_properties": [
+                        "3"
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "6782801838884297": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "change_scene",
+                      "ta_co_id": -102,
+                      "ta_delay": 0.2,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        9938517067294432
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "4303799963638867": {
+              "name": "Rule",
+              "type": "rule",
+              "order": 1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "6970083192529463": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_set_eq",
+                      "we_co_id": 1204051289496039,
+                      "we_co_type": "number",
+                      "we_properties": [
+                        "4"
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "8954999660107043": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "change_scene",
+                      "ta_co_id": -102,
+                      "ta_delay": 0.2,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        8343907763934261
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "6664823790529795": {
+              "name": "Rule (2)",
+              "type": "rule",
+              "order": 1.5,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "6340573796526089": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_set_eq",
+                      "we_co_id": 1204051289496039,
+                      "we_co_type": "number",
+                      "we_properties": [
+                        "1"
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "3259404680186817": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "change_scene",
+                      "ta_co_id": -102,
+                      "ta_delay": 0.2,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        9122363484735106
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "element": {
+            "9693542472244902": {
+              "name": "Pano Image",
+              "type": "element",
+              "order": 1,
+              "props": {
+                "source": {
+                  "id": 811143,
+                  "name": "Black.png",
+                  "file_paths": {
+                    "o": "o/Black.png",
+                    "t": "t/Black.png",
+                    "q_low": "q_low/Black.png",
+                    "q_high": "o/Black.png",
+                    "q_medium": "q_medium/Black.png"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/o/Black.png",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/t/Black.png",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/q_low/Black.png",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/o/Black.png",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/q_medium/Black.png",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/fba4f4b1-cf26-442f-9780-00a378d4f1fe/o/Black.png"
+                  },
+                  "size": 10647,
+                  "type": "IMAGE",
+                  "metadata": {
+                    "ext": "png",
+                    "mimeType": "image/png",
+                    "resolution": {
+                      "x": 2048,
+                      "y": 1024
+                    }
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  -8,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "pano_image"
+              }
+            }
+          }
+        }
+      },
+      "3036812519760323": {
+        "name": "Expert Lady 02",
+        "type": "scene",
+        "order": 1.5625,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -6,
+            6,
+            0,
+            5,
+            -6,
+            14
+          ],
+          "linked_menu_id": 5783555049821568,
+          "linked_tour_mode_id": 1027468708779111,
+          "scene_spawn_zone_id": 3254543405390745,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "rule": {
+            "1003089110387664": {
+              "name": "Rule (2)",
+              "type": "rule",
+              "order": -1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "2989836748250526": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        8020336672691855
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "9337808550724724": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 9386754236376352,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "2432691994444257": {
+              "name": "Rule (1)",
+              "type": "rule",
+              "order": 0,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5959078411989173": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        4208456370726572
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "5783893777423144": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "end_fs_experience",
+                      "ta_co_id": -100,
+                      "ta_delay": 0.7,
+                      "ta_co_type": "experience",
+                      "ta_properties": []
+                    }
+                  },
+                  "6492880756030924": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "gltf_preset_stop_all",
+                      "ta_co_id": 3880970887343505,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": []
+                    }
+                  },
+                  "6539501512266567": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 3880970887343505,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "DOWN",
+                        "false"
+                      ]
+                    }
+                  },
+                  "6748567072167358": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "set_fs_score",
+                      "ta_co_id": -100,
+                      "ta_co_type": "experience",
+                      "ta_properties": [
+                        "100"
+                      ]
+                    }
+                  },
+                  "9028685083307748": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "play_resume",
+                      "ta_co_id": 2711617425452143,
+                      "ta_co_type": "audio",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "4511294162616014": {
+              "name": "Rule",
+              "type": "rule",
+              "order": 1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "7929902445019976": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_load",
+                      "we_co_id": -99,
+                      "we_co_type": "scene",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "3142958863534806": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "point_to",
+                      "ta_co_id": -102,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        5101655422511716
+                      ]
+                    }
+                  },
+                  "5449716739905108": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "wave",
+                      "ta_co_id": 5101655422511716,
+                      "ta_co_type": "character",
+                      "ta_properties": []
+                    }
+                  },
+                  "8117104746880430": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 3880970887343505,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "UP",
+                        "false"
+                      ]
+                    }
+                  },
+                  "8616964275441995": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "speak",
+                      "ta_co_id": 5101655422511716,
+                      "ta_co_type": "character",
+                      "ta_properties": [
+                        "Hey!"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "element": {
+            "1365143258628391": {
+              "name": "sceneTag",
+              "type": "element",
+              "order": 4.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2310873324812292": {
+                    "name": "scene_tag01b",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "2423258465385920": {
+                    "name": "scene_tag02b",
+                    "type": "element",
+                    "order": 1.6666666666666667,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "2533933547008164": {
+                    "name": "scene_tag05b",
+                    "type": "element",
+                    "order": 8,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "3523688045618260": {
+                    "name": "scene_tag02a",
+                    "type": "element",
+                    "order": 1.1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "4216936206971704": {
+                    "name": "scene_tag01a",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "6736989250487718": {
+                    "name": "scene_tag03b",
+                    "type": "element",
+                    "order": 3.333333333333333,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "7286825704057166": {
+                    "name": "scene_tag05a",
+                    "type": "element",
+                    "order": 1.4,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "8823954772722694": {
+                    "name": "scene_tag04a",
+                    "type": "element",
+                    "order": 1.3,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9249408968945016": {
+                    "name": "scene_tag03a",
+                    "type": "element",
+                    "order": 1.2,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9968748926188644": {
+                    "name": "scene_tag04b",
+                    "type": "element",
+                    "order": 6,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  }
+                }
+              }
+            },
+            "2711617425452143": {
+              "name": "sfx_teleport",
+              "type": "element",
+              "order": 3.875,
+              "props": {
+                "source": {
+                  "id": 773729,
+                  "name": "portal.mp3",
+                  "file_paths": {
+                    "o": "o/portal.mp3"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                  },
+                  "size": 28745,
+                  "type": "AUDIO",
+                  "metadata": {
+                    "ext": "mp3",
+                    "mimeType": "audio/mpeg"
+                  }
+                },
+                "element_type": "audio"
+              }
+            },
+            "3254543405390745": {
+              "name": "Zone",
+              "type": "element",
+              "order": 3,
+              "props": {
+                "height": 0.1,
+                "hidden": false,
+                "opacity": 0,
+                "placer_3d": [
+                  0,
+                  -0.08432191538530054,
+                  5,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "3880970887343505": {
+              "name": "zoneAnim_exit",
+              "type": "element",
+              "order": 3.75,
+              "props": {
+                "scale": 1.5,
+                "source": {
+                  "id": 814013,
+                  "name": "zoneAnim_v01.glb",
+                  "file_paths": {
+                    "o": "o/zoneAnim_v01.glb",
+                    "t": "t/zoneAnim_v01.jpg",
+                    "usdz": "usdz/zoneAnim_v01.usdz"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                  },
+                  "size": 226440,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 5760,
+                    "triangles": 2880,
+                    "numberOfTextures": 0,
+                    "totalTextureSize": 0
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "object3d_animations": [
+                  "DOWN",
+                  "UP",
+                  "Torus.009",
+                  "Torus.010",
+                  "Torus.011",
+                  "Torus.012",
+                  "Torus.008"
+                ]
+              }
+            },
+            "4208456370726572": {
+              "name": "Zone_exit",
+              "type": "element",
+              "order": 3.5,
+              "props": {
+                "color": "#F5A623",
+                "hidden": false,
+                "radius": 1.4,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "4351885304799220": {
+              "name": "Lights",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "6168004344519380": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 8819286948387418
+                    }
+                  },
+                  "8926816334559481": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    }
+                  }
+                }
+              }
+            },
+            "5101655422511716": {
+              "name": "AI Character",
+              "type": "element",
+              "order": 2.75,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 845865,
+                  "name": "Character (18).glb",
+                  "file_paths": {
+                    "o": "o/Character.glb",
+                    "t": "t/Character.png",
+                    "glb": "glb/Character_q_medium.glb",
+                    "usdz": "usdz/Character (18).usdz",
+                    "glb_low": "glb/Character_q_low.glb",
+                    "glb_high": "glb/Character_q_high.glb",
+                    "glb_medium": "glb/Character_q_medium.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/o/Character.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/t/Character.png",
+                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_medium.glb",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/usdz/Character%20(18).usdz",
+                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_low.glb",
+                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_high.glb",
+                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/03bb561f-ede2-4987-ad21-f0a593b59e1f/glb/Character_q_medium.glb"
+                  },
+                  "size": 10847844,
+                  "type": "CHARACTER_RPM",
+                  "metadata": {
+                    "ext": "glb",
+                    "rpm_id": "6652e2198d8a1340f4f7a1f3",
+                    "from_rpm": true,
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 8612,
+                    "triangles": 14198,
+                    "rpmAvatarGender": "feminine",
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 2.7
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "ssml_lang": "en-GB",
+                "ssml_pitch": -3,
+                "ssml_speed": 0.85,
+                "ssml_voice": "en-GB-Studio-C",
+                "element_type": "character",
+                "use_ai_brain": true,
+                "object3d_animations": [],
+                "character_brain_slug": "vxfwdl",
+                "character_brain_type": "advanced",
+                "character_thinking_dialogue": "Hmm. Interesting question, let me think about that.",
+                "character_chatbot_welcome_dialogue": "Hey.! I'm an expert on {{mainTopic}}. Ask me anything.",
+                "character_chatbot_welcome_dialogue_repeat": "always"
+              }
+            },
+            "6176241027238350": {
+              "name": "txt_exit",
+              "type": "element",
+              "order": 5.5,
+              "props": {
+                "wh": [
+                  2,
+                  1
+                ],
+                "text": "EXIT",
+                "scale": 0.7,
+                "hidden": false,
+                "placer_3d": [
+                  0,
+                  3,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "font_family": "NunitoSans",
+                "font_weight": 700,
+                "billboarding": "xyz",
+                "element_type": "text",
+                "border_radius": 0.1,
+                "background_color": "#F6B74E",
+                "background_opacity": 0.8
+              }
+            },
+            "6390075948495160": {
+              "name": "Topic",
+              "type": "element",
+              "order": 6.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "4101679151685175": {
+                    "name": "topic_tag01",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.47807016298413,
+                        1.0956833434551476,
+                        -2.2499336642497703,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "5202528668469572": {
+                    "name": "topic_tag04",
+                    "type": "element",
+                    "order": 1.575,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.55005095099808,
+                        1.0956833434551476,
+                        -2.411605161143706,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "6121681450718182": {
+                    "name": "topic_tag02",
+                    "type": "element",
+                    "order": 1.525,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.48985095699743,
+                        1.0956833434551476,
+                        -2.2763937608294333,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "7195201633420773": {
+                    "name": "topic_tag05",
+                    "type": "element",
+                    "order": 1.6,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.5795094215036745,
+                        1.0956833434551476,
+                        -2.4777699692022437,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#141414",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "9790236493343268": {
+                    "name": "topic_tag03",
+                    "type": "element",
+                    "order": 1.55,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.517752409887223,
+                        1.0956833434551476,
+                        -2.339061450065264,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  }
+                }
+              }
+            },
+            "7268544336068338": {
+              "name": "pano_02",
+              "type": "element",
+              "order": 1.5,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 813839,
+                  "name": "colorLines01_v03.jpg",
+                  "file_paths": {
+                    "o": "o/colorLines01_v03.jpg",
+                    "t": "t/colorLines01_v03.jpeg",
+                    "q_low": "q_low/colorLines01_v03.jpeg",
+                    "q_high": "o/colorLines01_v03.jpg",
+                    "q_medium": "q_medium/colorLines01_v03.jpeg"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                  },
+                  "size": 3008543,
+                  "type": "IMAGE",
+                  "metadata": {
+                    "ext": "jpg",
+                    "mimeType": "image/jpeg",
+                    "resolution": {
+                      "x": 4000,
+                      "y": 2000
+                    }
+                  }
+                },
+                "opacity": 1,
+                "element_type": "pano_image",
+                "pano_yaw_correction": -20
+              }
+            },
+            "8819286948387418": {
+              "name": "Environment",
+              "type": "element",
+              "order": 2,
+              "props": {
+                "scale": 1,
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "id": 814398,
+                  "name": "12_v09.glb",
+                  "file_paths": {
+                    "o": "o/12_v09.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                  },
+                  "size": 556860,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary"
+                  }
+                },
+                "placer_3d": [
+                  -0.016367636569871266,
+                  2.302122160730042,
+                  0.000010679390332057892,
+                  0,
+                  148.8071922267532,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "object3d_animations": [
+                  "Plane.003_Material.001_0Action"
+                ]
+              }
+            },
+            "9386754236376352": {
+              "name": "instruction",
+              "type": "element",
+              "order": 3.90625,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2250651151997325": {
+                    "name": "Text_Instruction",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "wh": [
+                        4,
+                        2
+                      ],
+                      "text": "Step closer to initiate a conversation",
+                      "scale": 1.5,
+                      "hidden": false,
+                      "placer_3d": [
+                        0,
+                        3.608297437627851,
+                        -2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_family": "Oswald",
+                      "font_weight": 600,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_opacity": 0
+                    }
+                  },
+                  "8020336672691855": {
+                    "name": "Zone_Instruction",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "height": 0.1,
+                      "hidden": false,
+                      "radius": 3,
+                      "opacity": 0,
+                      "placer_3d": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "zone"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "8343907763934261": {
+        "name": "Expert Male 02",
+        "type": "scene",
+        "order": 1.75,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -6,
+            6,
+            0,
+            5,
+            -6,
+            14
+          ],
+          "linked_menu_id": 1796335108896201,
+          "linked_tour_mode_id": 2337939367958347,
+          "scene_spawn_zone_id": 4045410754672301,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "rule": {
+            "1069265926069055": {
+              "name": "Rule (1)",
+              "type": "rule",
+              "order": 0,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "9907699432598912": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        9223624537510264
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "3774139560528777": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "gltf_preset_stop_all",
+                      "ta_co_id": 4459633152911652,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": []
+                    }
+                  },
+                  "4052814833052278": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "set_fs_score",
+                      "ta_co_id": -100,
+                      "ta_co_type": "experience",
+                      "ta_properties": [
+                        "100"
+                      ]
+                    }
+                  },
+                  "5675470618145989": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "end_fs_experience",
+                      "ta_co_id": -100,
+                      "ta_delay": 0.7,
+                      "ta_co_type": "experience",
+                      "ta_properties": []
+                    }
+                  },
+                  "7206394323401904": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "play_resume",
+                      "ta_co_id": 2958668262597788,
+                      "ta_co_type": "audio",
+                      "ta_properties": []
+                    }
+                  },
+                  "8613135668542820": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 4459633152911652,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "DOWN",
+                        "false"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "2261761201352990": {
+              "name": "Rule",
+              "type": "rule",
+              "order": 1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5177769658890740": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_load",
+                      "we_co_id": -99,
+                      "we_co_type": "scene",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "8217237363516228": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "wave",
+                      "ta_co_id": 4212516552818540,
+                      "ta_co_type": "character",
+                      "ta_properties": []
+                    }
+                  },
+                  "8895310447932750": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 4459633152911652,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "UP",
+                        "false"
+                      ]
+                    }
+                  },
+                  "9739443663007944": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "point_to",
+                      "ta_co_id": -102,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        4212516552818540
+                      ]
+                    }
+                  },
+                  "9871187893008336": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "speak",
+                      "ta_co_id": 4212516552818540,
+                      "ta_co_type": "character",
+                      "ta_properties": [
+                        "Hey!"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "7757480102240483": {
+              "name": "Rule (2)",
+              "type": "rule",
+              "order": -1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "1469626904182181": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        8595722009600621
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "9315243982323892": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 9555005952838120,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "element": {
+            "2958668262597788": {
+              "name": "sfx_teleport",
+              "type": "element",
+              "order": 3.875,
+              "props": {
+                "source": {
+                  "id": 773729,
+                  "name": "portal.mp3",
+                  "file_paths": {
+                    "o": "o/portal.mp3"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                  },
+                  "size": 28745,
+                  "type": "AUDIO",
+                  "metadata": {
+                    "ext": "mp3",
+                    "mimeType": "audio/mpeg"
+                  }
+                },
+                "element_type": "audio"
+              }
+            },
+            "4045410754672301": {
+              "name": "Zone",
+              "type": "element",
+              "order": 3,
+              "props": {
+                "height": 0.1,
+                "hidden": false,
+                "opacity": 0,
+                "placer_3d": [
+                  0,
+                  -0.08432191538530054,
+                  5,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "4212516552818540": {
+              "name": "AI Character",
+              "type": "element",
+              "order": 2.75,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 845864,
+                  "name": "Character (17).glb",
+                  "file_paths": {
+                    "o": "o/Character.glb",
+                    "t": "t/Character.png",
+                    "glb": "glb/Character_q_medium.glb",
+                    "usdz": "usdz/Character (17).usdz",
+                    "glb_low": "glb/Character_q_low.glb",
+                    "glb_high": "glb/Character_q_high.glb",
+                    "glb_medium": "glb/Character_q_medium.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/o/Character.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/t/Character.png",
+                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_medium.glb",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/usdz/Character%20(17).usdz",
+                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_low.glb",
+                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_high.glb",
+                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/4d36d8d7-245f-4d7b-8df6-00ccc4e93a79/glb/Character_q_medium.glb"
+                  },
+                  "size": 10074396,
+                  "type": "CHARACTER_RPM",
+                  "metadata": {
+                    "ext": "glb",
+                    "rpm_id": "6652e1a2cf97e5aaac49d35d",
+                    "from_rpm": true,
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 8153,
+                    "triangles": 13574,
+                    "rpmAvatarGender": "masculine",
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 2.36
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "ssml_lang": "en-GB",
+                "ssml_pitch": -3,
+                "ssml_speed": 0.85,
+                "ssml_voice": "en-GB-Studio-B",
+                "element_type": "character",
+                "use_ai_brain": true,
+                "object3d_animations": [],
+                "character_brain_slug": "vxfwdl",
+                "character_brain_type": "advanced",
+                "character_thinking_dialogue": "Hmm. Interesting question, let me think about that.",
+                "character_chatbot_welcome_dialogue": "Hey.! I'm an expert on {{mainTopic}}. Ask me anything.",
+                "character_chatbot_welcome_dialogue_repeat": "always"
+              }
+            },
+            "4459633152911652": {
+              "name": "zoneAnim_exit",
+              "type": "element",
+              "order": 3.75,
+              "props": {
+                "scale": 1.5,
+                "source": {
+                  "id": 814013,
+                  "name": "zoneAnim_v01.glb",
+                  "file_paths": {
+                    "o": "o/zoneAnim_v01.glb",
+                    "t": "t/zoneAnim_v01.jpg",
+                    "usdz": "usdz/zoneAnim_v01.usdz"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                  },
+                  "size": 226440,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 5760,
+                    "triangles": 2880,
+                    "numberOfTextures": 0,
+                    "totalTextureSize": 0
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "object3d_animations": [
+                  "DOWN",
+                  "UP",
+                  "Torus.009",
+                  "Torus.010",
+                  "Torus.011",
+                  "Torus.012",
+                  "Torus.008"
+                ]
+              }
+            },
+            "4727465914361931": {
+              "name": "Topic",
+              "type": "element",
+              "order": 6.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "3545547054901005": {
+                    "name": "topic_tag02",
+                    "type": "element",
+                    "order": 1.525,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.48985095699743,
+                        1.0956833434551476,
+                        -2.2763937608294333,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "4270011152715654": {
+                    "name": "topic_tag04",
+                    "type": "element",
+                    "order": 1.575,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.55005095099808,
+                        1.0956833434551476,
+                        -2.411605161143706,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "5742897337651383": {
+                    "name": "topic_tag01",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.47807016298413,
+                        1.0956833434551476,
+                        -2.2499336642497703,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "6302586114054021": {
+                    "name": "topic_tag05",
+                    "type": "element",
+                    "order": 1.6,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.5795094215036745,
+                        1.0956833434551476,
+                        -2.4777699692022437,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#141414",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "8005811982378161": {
+                    "name": "topic_tag03",
+                    "type": "element",
+                    "order": 1.55,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.517752409887223,
+                        1.0956833434551476,
+                        -2.339061450065264,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  }
+                }
+              }
+            },
+            "5801060467200418": {
+              "name": "sceneTag",
+              "type": "element",
+              "order": 4.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "1340234686437406": {
+                    "name": "scene_tag02b",
+                    "type": "element",
+                    "order": 1.6666666666666667,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "1740827255301127": {
+                    "name": "scene_tag03a",
+                    "type": "element",
+                    "order": 1.2,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "1908587601432216": {
+                    "name": "scene_tag02a",
+                    "type": "element",
+                    "order": 1.1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "2895955178039975": {
+                    "name": "scene_tag04b",
+                    "type": "element",
+                    "order": 6,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "4475702434944708": {
+                    "name": "scene_tag01a",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "4634896991084052": {
+                    "name": "scene_tag01b",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "5406134027825932": {
+                    "name": "scene_tag03b",
+                    "type": "element",
+                    "order": 3.333333333333333,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "5856870751215851": {
+                    "name": "scene_tag04a",
+                    "type": "element",
+                    "order": 1.3,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "8927549906997343": {
+                    "name": "scene_tag05b",
+                    "type": "element",
+                    "order": 8,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9751025001699258": {
+                    "name": "scene_tag05a",
+                    "type": "element",
+                    "order": 1.4,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  }
+                }
+              }
+            },
+            "5953755121168119": {
+              "name": "Lights",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "3752480938740016": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    }
+                  },
+                  "7429278026486347": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 7814026715803539
+                    }
+                  }
+                }
+              }
+            },
+            "6597666594189189": {
+              "name": "txt_exit",
+              "type": "element",
+              "order": 5.5,
+              "props": {
+                "wh": [
+                  2,
+                  1
+                ],
+                "text": "EXIT",
+                "scale": 0.7,
+                "hidden": false,
+                "placer_3d": [
+                  0,
+                  3,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "font_family": "NunitoSans",
+                "font_weight": 700,
+                "billboarding": "xyz",
+                "element_type": "text",
+                "border_radius": 0.1,
+                "background_color": "#F6B74E",
+                "background_opacity": 0.8
+              }
+            },
+            "7814026715803539": {
+              "name": "Environment",
+              "type": "element",
+              "order": 2,
+              "props": {
+                "scale": 1,
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "id": 814398,
+                  "name": "12_v09.glb",
+                  "file_paths": {
+                    "o": "o/12_v09.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                  },
+                  "size": 556860,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary"
+                  }
+                },
+                "placer_3d": [
+                  -0.016367636569871266,
+                  2.302122160730042,
+                  0.000010679390332057892,
+                  0,
+                  148.8071922267532,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "object3d_animations": [
+                  "Plane.003_Material.001_0Action"
+                ]
+              }
+            },
+            "9223624537510264": {
+              "name": "Zone_exit",
+              "type": "element",
+              "order": 3.5,
+              "props": {
+                "color": "#F5A623",
+                "hidden": false,
+                "radius": 1.4,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "9432689508474998": {
+              "name": "pano_02",
+              "type": "element",
+              "order": 1.5,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 813839,
+                  "name": "colorLines01_v03.jpg",
+                  "file_paths": {
+                    "o": "o/colorLines01_v03.jpg",
+                    "t": "t/colorLines01_v03.jpeg",
+                    "q_low": "q_low/colorLines01_v03.jpeg",
+                    "q_high": "o/colorLines01_v03.jpg",
+                    "q_medium": "q_medium/colorLines01_v03.jpeg"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                  },
+                  "size": 3008543,
+                  "type": "IMAGE",
+                  "metadata": {
+                    "ext": "jpg",
+                    "mimeType": "image/jpeg",
+                    "resolution": {
+                      "x": 4000,
+                      "y": 2000
+                    }
+                  }
+                },
+                "opacity": 1,
+                "element_type": "pano_image",
+                "pano_yaw_correction": -20
+              }
+            },
+            "9555005952838120": {
+              "name": "instruction",
+              "type": "element",
+              "order": 3.90625,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2143707451160765": {
+                    "name": "Text_Instruction",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "wh": [
+                        4,
+                        2
+                      ],
+                      "text": "Step closer to initiate a conversation",
+                      "scale": 1.5,
+                      "hidden": false,
+                      "placer_3d": [
+                        0,
+                        3.608297437627851,
+                        -2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_family": "Oswald",
+                      "font_weight": 600,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_opacity": 0
+                    }
+                  },
+                  "8595722009600621": {
+                    "name": "Zone_Instruction",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "height": 0.1,
+                      "hidden": false,
+                      "radius": 3,
+                      "opacity": 0,
+                      "placer_3d": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "zone"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "9122363484735106": {
+        "name": "Expert Lady 01",
+        "type": "scene",
+        "order": 1.5,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -6,
+            6,
+            0,
+            5,
+            -6,
+            14
+          ],
+          "linked_menu_id": 9219233298779494,
+          "linked_tour_mode_id": 6770023466088989,
+          "scene_spawn_zone_id": 7705440041756126,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "rule": {
+            "5156559031675514": {
+              "name": "Rule (2)",
+              "type": "rule",
+              "order": -1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5867581377528689": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        6917779442684824
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "5839621799587949": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 7199023391271010,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "6517071985836374": {
+              "name": "Rule",
+              "type": "rule",
+              "order": 1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "4107055262747948": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_load",
+                      "we_co_id": -99,
+                      "we_co_type": "scene",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1648495732024423": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "point_to",
+                      "ta_co_id": -102,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        9926016643099198
+                      ]
+                    }
+                  },
+                  "2287655458623495": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 7343688601834107,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "UP",
+                        "false"
+                      ]
+                    }
+                  },
+                  "5211710305658282": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "wave",
+                      "ta_co_id": 9926016643099198,
+                      "ta_co_type": "character",
+                      "ta_properties": []
+                    }
+                  },
+                  "8953904818247516": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "speak",
+                      "ta_co_id": 9926016643099198,
+                      "ta_co_type": "character",
+                      "ta_properties": [
+                        "Hey!"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "9446676259174124": {
+              "name": "Rule (1)",
+              "type": "rule",
+              "order": 0,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "2471607065714028": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        2040537484455603
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "2389621583380354": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "gltf_preset_stop_all",
+                      "ta_co_id": 7343688601834107,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": []
+                    }
+                  },
+                  "6759636666070213": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 7343688601834107,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "DOWN",
+                        "false"
+                      ]
+                    }
+                  },
+                  "9024979731431028": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "end_fs_experience",
+                      "ta_co_id": -100,
+                      "ta_delay": 0.7,
+                      "ta_co_type": "experience",
+                      "ta_properties": []
+                    }
+                  },
+                  "9542684701486686": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "play_resume",
+                      "ta_co_id": 2237161027981083,
+                      "ta_co_type": "audio",
+                      "ta_properties": []
+                    }
+                  },
+                  "9562325879328356": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "set_fs_score",
+                      "ta_co_id": -100,
+                      "ta_co_type": "experience",
+                      "ta_properties": [
+                        "100"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "element": {
+            "1099194525840850": {
+              "name": "txt_exit",
+              "type": "element",
+              "order": 5.5,
+              "props": {
+                "wh": [
+                  2,
+                  1
+                ],
+                "text": "EXIT",
+                "scale": 0.7,
+                "hidden": false,
+                "placer_3d": [
+                  0,
+                  3,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "font_family": "NunitoSans",
+                "font_weight": 700,
+                "billboarding": "xyz",
+                "element_type": "text",
+                "border_radius": 0.1,
+                "background_color": "#F6B74E",
+                "background_opacity": 0.8
+              }
+            },
+            "2040537484455603": {
+              "name": "Zone_exit",
+              "type": "element",
+              "order": 3.5,
+              "props": {
+                "color": "#F5A623",
+                "hidden": false,
+                "radius": 1.4,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "2237161027981083": {
+              "name": "sfx_teleport",
+              "type": "element",
+              "order": 3.875,
+              "props": {
+                "source": {
+                  "id": 773729,
+                  "name": "portal.mp3",
+                  "file_paths": {
+                    "o": "o/portal.mp3"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                  },
+                  "size": 28745,
+                  "type": "AUDIO",
+                  "metadata": {
+                    "ext": "mp3",
+                    "mimeType": "audio/mpeg"
+                  }
+                },
+                "element_type": "audio"
+              }
+            },
+            "4482867424514280": {
+              "name": "Environment",
+              "type": "element",
+              "order": 2,
+              "props": {
+                "scale": 1,
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "id": 814398,
+                  "name": "12_v09.glb",
+                  "file_paths": {
+                    "o": "o/12_v09.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                  },
+                  "size": 556860,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary"
+                  }
+                },
+                "placer_3d": [
+                  -0.016367636569871266,
+                  2.302122160730042,
+                  0.000010679390332057892,
+                  0,
+                  148.8071922267532,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "object3d_animations": [
+                  "Plane.003_Material.001_0Action"
+                ]
+              }
+            },
+            "5723499201208804": {
+              "name": "pano_02",
+              "type": "element",
+              "order": 1.5,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 813839,
+                  "name": "colorLines01_v03.jpg",
+                  "file_paths": {
+                    "o": "o/colorLines01_v03.jpg",
+                    "t": "t/colorLines01_v03.jpeg",
+                    "q_low": "q_low/colorLines01_v03.jpeg",
+                    "q_high": "o/colorLines01_v03.jpg",
+                    "q_medium": "q_medium/colorLines01_v03.jpeg"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                  },
+                  "size": 3008543,
+                  "type": "IMAGE",
+                  "metadata": {
+                    "ext": "jpg",
+                    "mimeType": "image/jpeg",
+                    "resolution": {
+                      "x": 4000,
+                      "y": 2000
+                    }
+                  }
+                },
+                "opacity": 1,
+                "element_type": "pano_image",
+                "pano_yaw_correction": -20
+              }
+            },
+            "7199023391271010": {
+              "name": "instruction",
+              "type": "element",
+              "order": 3.90625,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "6917779442684824": {
+                    "name": "Zone_Instruction",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "height": 0.1,
+                      "hidden": false,
+                      "radius": 3,
+                      "opacity": 0,
+                      "placer_3d": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "zone"
+                    }
+                  },
+                  "8813173383957914": {
+                    "name": "Text_Instruction",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "wh": [
+                        4,
+                        2
+                      ],
+                      "text": "Step closer to initiate a conversation",
+                      "scale": 1.5,
+                      "hidden": false,
+                      "placer_3d": [
+                        0,
+                        3.608297437627851,
+                        -2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_family": "Oswald",
+                      "font_weight": 600,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_opacity": 0
+                    }
+                  }
+                }
+              }
+            },
+            "7343688601834107": {
+              "name": "zoneAnim_exit",
+              "type": "element",
+              "order": 3.75,
+              "props": {
+                "scale": 1.5,
+                "source": {
+                  "id": 814013,
+                  "name": "zoneAnim_v01.glb",
+                  "file_paths": {
+                    "o": "o/zoneAnim_v01.glb",
+                    "t": "t/zoneAnim_v01.jpg",
+                    "usdz": "usdz/zoneAnim_v01.usdz"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                  },
+                  "size": 226440,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 5760,
+                    "triangles": 2880,
+                    "numberOfTextures": 0,
+                    "totalTextureSize": 0
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "object3d_animations": [
+                  "DOWN",
+                  "UP",
+                  "Torus.009",
+                  "Torus.010",
+                  "Torus.011",
+                  "Torus.012",
+                  "Torus.008"
+                ]
+              }
+            },
+            "7705440041756126": {
+              "name": "Zone",
+              "type": "element",
+              "order": 3,
+              "props": {
+                "height": 0.1,
+                "hidden": false,
+                "opacity": 0,
+                "placer_3d": [
+                  0,
+                  -0.08432191538530054,
+                  5,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "7919738373179571": {
+              "name": "Lights",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "3401410823745804": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 4482867424514280
+                    }
+                  },
+                  "6531614259147580": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    }
+                  }
+                }
+              }
+            },
+            "8317942309804893": {
+              "name": "sceneTag",
+              "type": "element",
+              "order": 4.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2166923022286685": {
+                    "name": "scene_tag03b",
+                    "type": "element",
+                    "order": 3.333333333333333,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "2239053419485732": {
+                    "name": "scene_tag05b",
+                    "type": "element",
+                    "order": 8,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "2256383068920089": {
+                    "name": "scene_tag01a",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "4913795097184064": {
+                    "name": "scene_tag02a",
+                    "type": "element",
+                    "order": 1.1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "5833885041024709": {
+                    "name": "scene_tag04a",
+                    "type": "element",
+                    "order": 1.3,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "6056160076141585": {
+                    "name": "scene_tag04b",
+                    "type": "element",
+                    "order": 6,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "7640502403055183": {
+                    "name": "scene_tag05a",
+                    "type": "element",
+                    "order": 1.4,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "8809291520121318": {
+                    "name": "scene_tag03a",
+                    "type": "element",
+                    "order": 1.2,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "8952086572356870": {
+                    "name": "scene_tag02b",
+                    "type": "element",
+                    "order": 1.6666666666666667,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9150285318299286": {
+                    "name": "scene_tag01b",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  }
+                }
+              }
+            },
+            "9146233786942942": {
+              "name": "Topic",
+              "type": "element",
+              "order": 6.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "1783870352532742": {
+                    "name": "topic_tag02",
+                    "type": "element",
+                    "order": 1.525,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.48985095699743,
+                        1.0956833434551476,
+                        -2.2763937608294333,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "5479415457661748": {
+                    "name": "topic_tag01",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.47807016298413,
+                        1.0956833434551476,
+                        -2.2499336642497703,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "7267481617774341": {
+                    "name": "topic_tag05",
+                    "type": "element",
+                    "order": 1.6,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.5795094215036745,
+                        1.0956833434551476,
+                        -2.4777699692022437,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#141414",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "8014255237026357": {
+                    "name": "topic_tag03",
+                    "type": "element",
+                    "order": 1.55,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.517752409887223,
+                        1.0956833434551476,
+                        -2.339061450065264,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "8254769010937546": {
+                    "name": "topic_tag04",
+                    "type": "element",
+                    "order": 1.575,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.55005095099808,
+                        1.0956833434551476,
+                        -2.411605161143706,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  }
+                }
+              }
+            },
+            "9926016643099198": {
+              "name": "AI Character",
+              "type": "element",
+              "order": 2.75,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 807351,
+                  "name": "Character (2).glb",
+                  "file_paths": {
+                    "o": "o/Character.glb",
+                    "t": "t/Character.png",
+                    "glb": "glb/Character_q_medium.glb",
+                    "usdz": "usdz/Character (2).usdz",
+                    "glb_low": "glb/Character_q_low.glb",
+                    "glb_high": "glb/Character_q_high.glb",
+                    "glb_medium": "glb/Character_q_medium.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/o/Character.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/t/Character.png",
+                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_medium.glb",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/usdz/Character%20(2).usdz",
+                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_low.glb",
+                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_high.glb",
+                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/cdac50e0-b0fa-4694-9e49-1b59a62d6e6d/glb/Character_q_medium.glb"
+                  },
+                  "size": 10724464,
+                  "type": "CHARACTER_RPM",
+                  "metadata": {
+                    "ext": "glb",
+                    "rpm_id": "65c9bedb99ba1893c8cfafa8",
+                    "from_rpm": true,
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 8200,
+                    "triangles": 13295,
+                    "rpmAvatarGender": "feminine",
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 2.95
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "ssml_lang": "en-US",
+                "ssml_pitch": -3,
+                "ssml_speed": 0.85,
+                "ssml_voice": "en-US-Studio-O",
+                "element_type": "character",
+                "use_ai_brain": true,
+                "object3d_animations": [],
+                "character_brain_slug": "vxfwdl",
+                "character_brain_type": "advanced",
+                "character_thinking_dialogue": "Hmm. Interesting question, let me think about that.",
+                "character_chatbot_welcome_dialogue": "Hey.! I'm an expert on {{mainTopic}}. Ask me anything.",
+                "character_chatbot_welcome_dialogue_repeat": "always"
+              }
+            }
+          }
+        }
+      },
+      "9938517067294432": {
+        "name": "Expert Male 01",
+        "type": "scene",
+        "order": 1.625,
+        "props": {
+          "scene_type": "six_dof",
+          "scene_bounds": [
+            -6,
+            6,
+            0,
+            5,
+            -6,
+            14
+          ],
+          "linked_menu_id": 7810656193962676,
+          "linked_tour_mode_id": 8555262350507270,
+          "scene_spawn_zone_id": 3094268311855239,
+          "scene_collision_type": "advanced_collision"
+        },
+        "records": {
+          "rule": {
+            "4514396073402966": {
+              "name": "Rule (2)",
+              "type": "rule",
+              "order": -1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "9649338923647396": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        6215262968901748
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "8702023598401099": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "hide",
+                      "ta_co_id": 4045860835891857,
+                      "ta_co_type": "group",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "7673692874272170": {
+              "name": "Rule (1)",
+              "type": "rule",
+              "order": 0,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "6883603336376573": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_enter",
+                      "we_co_id": -102,
+                      "we_co_type": "viewer",
+                      "we_properties": [
+                        8798731137109920
+                      ]
+                    }
+                  }
+                },
+                "then_action": {
+                  "3970555418881008": {
+                    "type": "then_action",
+                    "order": 6,
+                    "props": {
+                      "action": "set_fs_score",
+                      "ta_co_id": -100,
+                      "ta_co_type": "experience",
+                      "ta_properties": [
+                        "100"
+                      ]
+                    }
+                  },
+                  "4109803286179122": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 4113168636290853,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "DOWN",
+                        "false"
+                      ]
+                    }
+                  },
+                  "6224565028529945": {
+                    "type": "then_action",
+                    "order": 5,
+                    "props": {
+                      "action": "end_fs_experience",
+                      "ta_co_id": -100,
+                      "ta_delay": 0.7,
+                      "ta_co_type": "experience",
+                      "ta_properties": []
+                    }
+                  },
+                  "7302103897362860": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "gltf_preset_stop_all",
+                      "ta_co_id": 4113168636290853,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": []
+                    }
+                  },
+                  "7356423943916547": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "play_resume",
+                      "ta_co_id": 9181694642745936,
+                      "ta_co_type": "audio",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            },
+            "9847756708355028": {
+              "name": "Rule",
+              "type": "rule",
+              "order": 1,
+              "props": {
+                "tracked": false,
+                "disabled": false,
+                "events_and": true,
+                "accent_color": "#8ED1FC"
+              },
+              "records": {
+                "when_event": {
+                  "5885341134238408": {
+                    "type": "when_event",
+                    "order": 1,
+                    "props": {
+                      "event": "on_load",
+                      "we_co_id": -99,
+                      "we_co_type": "scene",
+                      "we_properties": []
+                    }
+                  }
+                },
+                "then_action": {
+                  "1840453758163854": {
+                    "type": "then_action",
+                    "order": 4,
+                    "props": {
+                      "action": "gltf_preset_start",
+                      "ta_co_id": 4113168636290853,
+                      "ta_co_type": "object_3d",
+                      "ta_properties": [
+                        "UP",
+                        "false"
+                      ]
+                    }
+                  },
+                  "2769643922058870": {
+                    "type": "then_action",
+                    "order": 3,
+                    "props": {
+                      "action": "speak",
+                      "ta_co_id": 9938540355375444,
+                      "ta_co_type": "character",
+                      "ta_properties": [
+                        "Hey!"
+                      ]
+                    }
+                  },
+                  "3556623081358852": {
+                    "type": "then_action",
+                    "order": 1,
+                    "props": {
+                      "action": "point_to",
+                      "ta_co_id": -102,
+                      "ta_co_type": "viewer",
+                      "ta_properties": [
+                        9938540355375444
+                      ]
+                    }
+                  },
+                  "6835741024265332": {
+                    "type": "then_action",
+                    "order": 2,
+                    "props": {
+                      "action": "wave",
+                      "ta_co_id": 9938540355375444,
+                      "ta_co_type": "character",
+                      "ta_properties": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "element": {
+            "1252617770926650": {
+              "name": "Topic",
+              "type": "element",
+              "order": 6.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "2296556211986886": {
+                    "name": "topic_tag05",
+                    "type": "element",
+                    "order": 1.6,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.5795094215036745,
+                        1.0956833434551476,
+                        -2.4777699692022437,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#141414",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "5343427147000850": {
+                    "name": "topic_tag04",
+                    "type": "element",
+                    "order": 1.575,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.55005095099808,
+                        1.0956833434551476,
+                        -2.411605161143706,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "6901639003760923": {
+                    "name": "topic_tag02",
+                    "type": "element",
+                    "order": 1.525,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.48985095699743,
+                        1.0956833434551476,
+                        -2.2763937608294333,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "8643148670279504": {
+                    "name": "topic_tag01",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.47807016298413,
+                        1.0956833434551476,
+                        -2.2499336642497703,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  },
+                  "8915226422597935": {
+                    "name": "topic_tag03",
+                    "type": "element",
+                    "order": 1.55,
+                    "props": {
+                      "wh": [
+                        6,
+                        2
+                      ],
+                      "text": "{{{mainTopic}}}",
+                      "scale": 1.2,
+                      "hidden": false,
+                      "locked": false,
+                      "padding": 0.1,
+                      "font_size": 0.8,
+                      "placer_3d": [
+                        -4.517752409887223,
+                        1.0956833434551476,
+                        -2.339061450065264,
+                        0,
+                        24.000000000000004,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "vertical_alignment": "bottom",
+                      "horizontal_alignment": "right"
+                    }
+                  }
+                }
+              }
+            },
+            "3094268311855239": {
+              "name": "Zone",
+              "type": "element",
+              "order": 3,
+              "props": {
+                "height": 0.1,
+                "hidden": false,
+                "opacity": 0,
+                "placer_3d": [
+                  0,
+                  -0.08432191538530054,
+                  5,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "4024293942343736": {
+              "name": "Environment",
+              "type": "element",
+              "order": 2,
+              "props": {
+                "scale": 1,
+                "hidden": false,
+                "locked": false,
+                "source": {
+                  "id": 814398,
+                  "name": "12_v09.glb",
+                  "file_paths": {
+                    "o": "o/12_v09.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/f75b6244-cb88-4e49-9bd0-bb609a81a214/o/12_v09.glb"
+                  },
+                  "size": 556860,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary"
+                  }
+                },
+                "placer_3d": [
+                  -0.016367636569871266,
+                  2.302122160730042,
+                  0.000010679390332057892,
+                  0,
+                  148.8071922267532,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "apply_env_map": true,
+                "object3d_animations": [
+                  "Plane.003_Material.001_0Action"
+                ]
+              }
+            },
+            "4045860835891857": {
+              "name": "instruction",
+              "type": "element",
+              "order": 3.90625,
+              "props": {
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "6215262968901748": {
+                    "name": "Zone_Instruction",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "height": 0.1,
+                      "hidden": false,
+                      "radius": 3,
+                      "opacity": 0,
+                      "placer_3d": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "element_type": "zone"
+                    }
+                  },
+                  "7004329112101560": {
+                    "name": "Text_Instruction",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "wh": [
+                        4,
+                        2
+                      ],
+                      "text": "Step closer to initiate a conversation",
+                      "scale": 1.5,
+                      "hidden": false,
+                      "placer_3d": [
+                        0,
+                        3.608297437627851,
+                        -2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_family": "Oswald",
+                      "font_weight": 600,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_opacity": 0
+                    }
+                  }
+                }
+              }
+            },
+            "4113168636290853": {
+              "name": "zoneAnim_exit",
+              "type": "element",
+              "order": 3.75,
+              "props": {
+                "scale": 1.5,
+                "source": {
+                  "id": 814013,
+                  "name": "zoneAnim_v01.glb",
+                  "file_paths": {
+                    "o": "o/zoneAnim_v01.glb",
+                    "t": "t/zoneAnim_v01.jpg",
+                    "usdz": "usdz/zoneAnim_v01.usdz"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/o/zoneAnim_v01.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/t/zoneAnim_v01.jpg",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/278db5da-b549-43a9-bcba-33bfbfb33903/usdz/zoneAnim_v01.usdz"
+                  },
+                  "size": 226440,
+                  "type": "THREED",
+                  "metadata": {
+                    "ext": "glb",
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 5760,
+                    "triangles": 2880,
+                    "numberOfTextures": 0,
+                    "totalTextureSize": 0
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "object_3d",
+                "object3d_animations": [
+                  "DOWN",
+                  "UP",
+                  "Torus.009",
+                  "Torus.010",
+                  "Torus.011",
+                  "Torus.012",
+                  "Torus.008"
+                ]
+              }
+            },
+            "4125222711095282": {
+              "name": "pano_02",
+              "type": "element",
+              "order": 1.5,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 813839,
+                  "name": "colorLines01_v03.jpg",
+                  "file_paths": {
+                    "o": "o/colorLines01_v03.jpg",
+                    "t": "t/colorLines01_v03.jpeg",
+                    "q_low": "q_low/colorLines01_v03.jpeg",
+                    "q_high": "o/colorLines01_v03.jpg",
+                    "q_medium": "q_medium/colorLines01_v03.jpeg"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/t/colorLines01_v03.jpeg",
+                    "q_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_low/colorLines01_v03.jpeg",
+                    "q_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg",
+                    "q_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/q_medium/colorLines01_v03.jpeg",
+                    "r": "https://u.vrgmetri.com/image/{{TRANSFORM_PARAMS}}/gb-sms-prod-1/media/2021-1/game/3f2acd02-80e5-4ad8-a2a0-bec78825d24e/o/colorLines01_v03.jpg"
+                  },
+                  "size": 3008543,
+                  "type": "IMAGE",
+                  "metadata": {
+                    "ext": "jpg",
+                    "mimeType": "image/jpeg",
+                    "resolution": {
+                      "x": 4000,
+                      "y": 2000
+                    }
+                  }
+                },
+                "opacity": 1,
+                "element_type": "pano_image",
+                "pano_yaw_correction": -20
+              }
+            },
+            "6076138786645630": {
+              "name": "txt_exit",
+              "type": "element",
+              "order": 5.5,
+              "props": {
+                "wh": [
+                  2,
+                  1
+                ],
+                "text": "EXIT",
+                "scale": 0.7,
+                "hidden": false,
+                "placer_3d": [
+                  0,
+                  3,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "font_family": "NunitoSans",
+                "font_weight": 700,
+                "billboarding": "xyz",
+                "element_type": "text",
+                "border_radius": 0.1,
+                "background_color": "#F6B74E",
+                "background_opacity": 0.8
+              }
+            },
+            "8798731137109920": {
+              "name": "Zone_exit",
+              "type": "element",
+              "order": 3.5,
+              "props": {
+                "color": "#F5A623",
+                "hidden": false,
+                "radius": 1.4,
+                "opacity": 1,
+                "placer_3d": [
+                  0,
+                  0,
+                  12,
+                  0,
+                  180,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "element_type": "zone"
+              }
+            },
+            "8876748023936279": {
+              "name": "sceneTag",
+              "type": "element",
+              "order": 4.5,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "3082318825018500": {
+                    "name": "scene_tag01a",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "3236618489069821": {
+                    "name": "scene_tag01b",
+                    "type": "element",
+                    "order": 1.5,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "opacity": 1,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "3480874135334710": {
+                    "name": "scene_tag02b",
+                    "type": "element",
+                    "order": 1.6666666666666667,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "5285731450536504": {
+                    "name": "scene_tag03a",
+                    "type": "element",
+                    "order": 1.2,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#CE6060",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "7074053303575403": {
+                    "name": "scene_tag05b",
+                    "type": "element",
+                    "order": 8,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "8507359308595204": {
+                    "name": "scene_tag03b",
+                    "type": "element",
+                    "order": 3.333333333333333,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "8793304419162045": {
+                    "name": "scene_tag02a",
+                    "type": "element",
+                    "order": 1.1,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.3,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#75BEDB",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9036743649516684": {
+                    "name": "scene_tag04b",
+                    "type": "element",
+                    "order": 6,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "AMA",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.253390441865243,
+                        0.7463925707579973,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9172232551161788": {
+                    "name": "scene_tag04a",
+                    "type": "element",
+                    "order": 1.3,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#FFFFFF",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  },
+                  "9209122003297932": {
+                    "name": "scene_tag05a",
+                    "type": "element",
+                    "order": 1.4,
+                    "props": {
+                      "wh": [
+                        3,
+                        0.3
+                      ],
+                      "text": "expert",
+                      "scale": 2,
+                      "hidden": false,
+                      "padding": 0.1,
+                      "font_size": 1,
+                      "placer_3d": [
+                        4.241422700697765,
+                        1.9459430948332181,
+                        -4.6,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "font_color": "#3B3B3B",
+                      "font_family": "NunitoSans",
+                      "font_weight": 900,
+                      "border_width": 0.05,
+                      "element_type": "text",
+                      "border_opacity": 0,
+                      "background_color": "#EC7B62",
+                      "background_opacity": 0,
+                      "horizontal_alignment": "left"
+                    }
+                  }
+                }
+              }
+            },
+            "9181694642745936": {
+              "name": "sfx_teleport",
+              "type": "element",
+              "order": 3.875,
+              "props": {
+                "source": {
+                  "id": 773729,
+                  "name": "portal.mp3",
+                  "file_paths": {
+                    "o": "o/portal.mp3"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/06cb4e6d-61c1-4902-bc2a-df7a2e76257d/o/portal.mp3"
+                  },
+                  "size": 28745,
+                  "type": "AUDIO",
+                  "metadata": {
+                    "ext": "mp3",
+                    "mimeType": "audio/mpeg"
+                  }
+                },
+                "element_type": "audio"
+              }
+            },
+            "9580204085468904": {
+              "name": "Lights",
+              "type": "element",
+              "order": 4,
+              "props": {
+                "hidden": false,
+                "element_type": "group"
+              },
+              "records": {
+                "element": {
+                  "8300237883665776": {
+                    "name": "Directional Light",
+                    "type": "element",
+                    "order": 2,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        12,
+                        4,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "directional",
+                      "element_type": "light",
+                      "target_element_id": 4024293942343736
+                    }
+                  },
+                  "8689731196819117": {
+                    "name": "Ambient Light",
+                    "type": "element",
+                    "order": 1,
+                    "props": {
+                      "color": "#FFFFFF",
+                      "hidden": false,
+                      "locked": false,
+                      "fall_off": 10,
+                      "intensity": 3,
+                      "placer_3d": [
+                        0,
+                        0,
+                        -8,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1
+                      ],
+                      "light_type": "ambient",
+                      "element_type": "light",
+                      "target_element_id": null
+                    }
+                  }
+                }
+              }
+            },
+            "9938540355375444": {
+              "name": "AI Character",
+              "type": "element",
+              "order": 2.75,
+              "props": {
+                "hidden": false,
+                "source": {
+                  "id": 845863,
+                  "name": "Character (16).glb",
+                  "file_paths": {
+                    "o": "o/Character.glb",
+                    "t": "t/Character.png",
+                    "glb": "glb/Character_q_medium.glb",
+                    "usdz": "usdz/Character (16).usdz",
+                    "glb_low": "glb/Character_q_low.glb",
+                    "glb_high": "glb/Character_q_high.glb",
+                    "glb_medium": "glb/Character_q_medium.glb"
+                  },
+                  "file_urls": {
+                    "o": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/o/Character.glb",
+                    "t": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/t/Character.png",
+                    "glb": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_medium.glb",
+                    "usdz": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/usdz/Character%20(16).usdz",
+                    "glb_low": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_low.glb",
+                    "glb_high": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_high.glb",
+                    "glb_medium": "https://u.vrgmetri.com/gb-sms-prod-1/media/2021-1/game/d8f53106-de8f-4301-9e70-455c24d94b9f/glb/Character_q_medium.glb"
+                  },
+                  "size": 10579872,
+                  "type": "CHARACTER_RPM",
+                  "metadata": {
+                    "ext": "glb",
+                    "rpm_id": "6652dfe35cf5f4e6c6f2bc98",
+                    "from_rpm": true,
+                    "mimeType": "model/gltf-binary",
+                    "vertices": 8831,
+                    "triangles": 15173,
+                    "rpmAvatarGender": "masculine",
+                    "numberOfTextures": 3,
+                    "totalTextureSize": 2.25
+                  }
+                },
+                "placer_3d": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "ssml_lang": "en-US",
+                "ssml_pitch": -3,
+                "ssml_speed": 0.85,
+                "ssml_voice": "en-US-Studio-Q",
+                "element_type": "character",
+                "use_ai_brain": true,
+                "object3d_animations": [],
+                "character_brain_slug": "vxfwdl",
+                "character_brain_type": "advanced",
+                "character_thinking_dialogue": "Hmm. Interesting question, let me think about that.",
+                "character_chatbot_welcome_dialogue": "Hey.! I'm an expert on {{mainTopic}}. Ask me anything.",
+                "character_chatbot_welcome_dialogue_repeat": "always"
+              }
+            }
+          }
+        }
+      }
+    },
+    "shopping": {
+      "5360651117296440": {
+        "type": "shopping",
+        "order": 1,
+        "props": {
+          "plugin": "none"
+        }
+      }
+    },
+    "variable": {
+      "-2": {
+        "name": "score",
+        "type": "variable",
+        "order": 14,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-8": {
+        "name": "v_identifier_var",
+        "type": "variable",
+        "order": 1,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-9": {
+        "name": "device_var",
+        "type": "variable",
+        "order": 6,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-10": {
+        "name": "browser_var",
+        "type": "variable",
+        "order": 5,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-11": {
+        "name": "vrmode_var",
+        "type": "variable",
+        "order": 7,
+        "props": {
+          "var_type": "boolean",
+          "var_track": true,
+          "var_default": false,
+          "var_category": "predefined"
+        }
+      },
+      "-12": {
+        "name": "firstname_var",
+        "type": "variable",
+        "order": 3,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-13": {
+        "name": "scorm_progress",
+        "type": "variable",
+        "order": 8,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-14": {
+        "name": "scorm_suspend_data",
+        "type": "variable",
+        "order": 9,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-15": {
+        "name": "scorm_score",
+        "type": "variable",
+        "order": 10,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-16": {
+        "name": "lastname_var",
+        "type": "variable",
+        "order": 4,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-17": {
+        "name": "fullname_var",
+        "type": "variable",
+        "order": 2,
+        "props": {
+          "var_type": "string",
+          "var_track": true,
+          "var_default": "Hi there!",
+          "var_category": "predefined"
+        }
+      },
+      "-18": {
+        "name": "player_count_var",
+        "type": "variable",
+        "order": 11,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "-19": {
+        "name": "player_count_all_var",
+        "type": "variable",
+        "order": 12,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "predefined"
+        }
+      },
+      "1204051289496039": {
+        "name": "character",
+        "type": "variable",
+        "order": 17,
+        "props": {
+          "var_type": "number",
+          "var_default": 0,
+          "var_category": "user_defined"
+        }
+      },
+      "2641439278005680": {
+        "name": "rating",
+        "type": "variable",
+        "order": 15,
+        "props": {
+          "var_type": "number",
+          "var_track": true,
+          "var_default": 0,
+          "var_category": "user_defined"
+        }
+      },
+      "4882585480960464": {
+        "name": "this",
+        "type": "variable",
+        "order": 16,
+        "props": {
+          "var_type": "string",
+          "var_default": "speak this as a sub",
+          "var_category": "user_defined"
+        }
+      },
+      "6210987871239024": {
+        "name": "mainTopic",
+        "type": "variable",
+        "order": 13,
+        "props": {
+          "var_type": "string",
+          "var_default": "AI & Metaverse",
+          "var_category": "user_defined"
+        }
+      }
+    },
+    "tour_mode": {
+      "1027468708779111": {
+        "type": "tour_mode",
+        "order": 6,
+        "props": {
+          "tour_mode_scene_id": 3036812519760323
+        }
+      },
+      "2337939367958347": {
+        "type": "tour_mode",
+        "order": 4,
+        "props": {
+          "tour_mode_scene_id": 8343907763934261
+        }
+      },
+      "6770023466088989": {
+        "type": "tour_mode",
+        "order": 3,
+        "props": {
+          "tour_mode_scene_id": 9122363484735106
+        }
+      },
+      "8555262350507270": {
+        "type": "tour_mode",
+        "order": 5,
+        "props": {
+          "tour_mode_scene_id": 9938517067294432
+        }
+      },
+      "9578267703842480": {
+        "type": "tour_mode",
+        "order": 7,
+        "props": {
+          "tour_mode_scene_id": 1726394643399417
+        }
+      }
+    }
+  }
+}
