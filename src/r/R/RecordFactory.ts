@@ -298,9 +298,7 @@ export class RecordFactory<T extends RT> {
 
   // * works with records at a single level
   getRecordByName(name: string, type?: RT): idAndRecord<RT> | undefined {
-    let parentRecord: RecordNode<RT> | undefined = this._json;
-    const parentF = new RecordFactory(parentRecord);
-    const recordEntries = parentF.getRecordEntries(type);
+    const recordEntries = this.getRecordEntries(type);
     for(const [id, record] of recordEntries) {
       if(record.name === name) {
         return { id, record };
