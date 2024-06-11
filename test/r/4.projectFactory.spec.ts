@@ -22,7 +22,7 @@ const jestConsole = console;
 beforeEach(() => { global.console = console; });
 afterEach(() => { global.console = jestConsole; });
 
-xdescribe ("r ProjectFactory tests", () => {
+describe ("r ProjectFactory tests", () => {
   it ("should add element record to a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const idAndRecord = projectF.addElementRecord({ parentIdOrAddress: 1684926140314, elementType: ElementType.character });
@@ -279,7 +279,7 @@ xdescribe ("r ProjectFactory tests", () => {
 });
 
 describe("Test ProjectUtils", () => {
-  xit("should apply propertiesReplacementMap", () => {
+  it("should apply propertiesReplacementMap", () => {
     const propertiesReplacementMap = {
       "Scene|Zone!color": "#FFF",
       "Scene|Zone!placer_3d>2": 99,
