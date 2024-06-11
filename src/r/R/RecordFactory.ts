@@ -296,6 +296,19 @@ export class RecordFactory<T extends RT> {
     return matchingRecords;
   }
 
+  // * works with records at a single level
+  getRecordByName(name: string, type?: RT): idAndRecord<RT> | undefined {
+    let parentRecord: RecordNode<RT> | undefined = this._json;
+    const parentF = new RecordFactory(parentRecord);
+    const recordEntries = parentF.getRecordEntries(type);
+    for(const [id, record] of recordEntries) {
+      if(record.name === name) {
+        return { id, record };
+      }
+    }
+
+    return undefined;
+  }
 
   getIdAndRecord(id: number, type?: RT): idAndRecord<RT> | undefined {
     const rm = this.getRecordMap(type);
@@ -602,15 +615,21 @@ export class RecordFactory<T extends RT> {
       const value = valueKey;
       const recordNameArray = key.replace(/!.*/, "").split("|"); // [scene, element]
       const propertyAddr = key.match(/!.*/)?.[0]?.replace("!", "") || ""; // ex: !character_brain_slug
-      let parentRecord: RecordNode<RT> | undefined = this._json;
+      let parentRecord: RecordNode<RT> = this._json;
 
       for (const name of recordNameArray) {
-        const records = this.getDeepRecordsByName(name);
-        parentRecord = records?.[0]?.record;
-        if (parentRecord === undefined) {
-          console.log(`Unable to find a record with name: ${name}`);
+        if(!parentRecord) {
+          console.log("unable to find a parent record");
           break;
         }
+        const parentF = new RecordFactory(parentRecord);
+        const matchingChild = parentF.getRecordByName(name);
+        parentRecord = matchingChild?.record as RecordNode<RT>;
+      }
+
+      if(!parentRecord) {
+        console.log("unable to find a parent record");
+        return undefined;
       }
 
       // * at this point the parentRecord will contain the ref of the correct record or it will be undefined
