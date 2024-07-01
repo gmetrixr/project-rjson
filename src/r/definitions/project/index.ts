@@ -41,3 +41,8 @@ export enum SceneTransitionType {
   fade_to_black = "fade_to_black", //default, optimized
   blend = "blend" //Older transition for 360 scenes only, takes more memory
 }
+
+export enum TextRenderingMode {
+  basic = "basic",
+  advanced = "advanced"
+}
