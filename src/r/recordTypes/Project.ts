@@ -6,7 +6,7 @@ import {
   ViewerControlPanelPosition,
   Language,
   SceneTransitionType,
-  AvatarQuality,
+  AvatarQuality, TextRenderingMode,
 } from "../definitions/project/index.js";
 
 export enum ProjectProperty {
@@ -66,6 +66,7 @@ export enum ProjectProperty {
   enable_cursor_movement = "enable_cursor_movement",
   enable_viewer_jump = "enable_viewer_jump",
   scene_transition_type = "scene_transition_type",
+  text_rendering_mode = "text_rendering_mode",
 }
 
 //https://s.vrgmetri.com/gb-web/common/images/blackPixel-000000-1.png
@@ -138,4 +139,5 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.enable_cursor_movement]: true,
   [ProjectProperty.enable_viewer_jump]: true,
   [ProjectProperty.scene_transition_type]: SceneTransitionType.fade_to_black,
+  [ProjectProperty.text_rendering_mode]: TextRenderingMode.basic,
 };
