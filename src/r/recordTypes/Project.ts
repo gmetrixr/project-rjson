@@ -51,6 +51,7 @@ export enum ProjectProperty {
   show_powered_by_gmetri = "show_powered_by_gmetri",
   show_splash_screen = "show_splash_screen",
   use_custom_branding = "use_custom_branding",
+  project_loading_splash_source = "project_loading_splash_source",
   //TODO: Should be renamed to project_metadata_thumbnail via a migration
   project_thumbnail_source = "project_thumbnail_source",
   project_metadata_title = "project_metadata_title",
@@ -130,6 +131,7 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.project_metadata_description]: "",
   [ProjectProperty.project_metadata_tags]: [],
   [ProjectProperty.use_custom_branding]: false,
+  [ProjectProperty.project_loading_splash_source]: "",
   [ProjectProperty.initial_graphics_setting]: InitialGraphicsSetting.high,
   [ProjectProperty.avatar_system_body_type]: AvatarBodyType.fullbody,
   [ProjectProperty.avatar_system]: AvatarSystem.none,
