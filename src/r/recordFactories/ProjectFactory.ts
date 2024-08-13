@@ -27,7 +27,6 @@ import { SceneType } from "../definitions/special/index.js";
 import { SubstituteProperty } from "../recordTypes/Substitute.js";
 import { ProjectUtils } from "./ProjectUtils.js";
 import { getFactory } from "../index.js";
-import { elementPropertiesContainingText } from "../definitions/elements/index.js";
 
 const { deepClone, generateIdV2 } = jsUtils;
 type variable = RT.variable;
@@ -402,30 +401,16 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const searchValue = new RegExp("({{\\s*" + oldVarName + "\\s*}})+", "gm");
     const replaceValue = `{{${newVarName}}}`;
     switch(record.type) {
-      case RT.element: {
-        const elementF = new RecordFactory(record);
-        const elementProps = elementF.getProps();
-        for(const prop of elementPropertiesContainingText) {
-          if(elementProps.includes(prop)) {
-            const oldValue = elementF.get(prop);
-            if (typeof oldValue === "string") {
-              const newValue = oldValue.replace(searchValue, replaceValue);
-              elementF.set(prop, newValue);
-            }
-          }
-        }
-        break;
-      }
       case RT.then_action: {
         const taRecord = record as RecordNode<RT.then_action>;
         if (taRecord.props.ta_properties !== undefined) {
           const properties = taRecord.props.ta_properties as ArrayOfValues;
-          for (const p of properties) {
-            if (typeof p === "string") {
-              p.replace(searchValue, replaceValue);
+          for(let i=0; i<properties.length; i++) {
+            const oldValue = properties[i];
+            if(typeof oldValue === "string") {
+              properties[i] = oldValue.replace(searchValue, replaceValue);
             }
           }
-          taRecord.props.ta_properties = properties;
         }
         break;
       }
@@ -433,12 +418,12 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         const weRecord = record as RecordNode<RT.when_event>;
         if (weRecord.props.we_properties !== undefined) {
           const properties = weRecord.props.we_properties as ArrayOfValues;
-          for (const p of properties) {
-            if (typeof p === "string") {
-              p.replace(searchValue, replaceValue);
+          for(let i=0; i<properties.length; i++) {
+            const oldValue = properties[i];
+            if(typeof oldValue === "string") {
+              properties[i] = oldValue.replace(searchValue, replaceValue);
             }
           }
-          weRecord.props.we_properties = properties;
         }
         break;
       }
