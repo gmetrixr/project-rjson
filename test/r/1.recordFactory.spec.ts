@@ -5,7 +5,7 @@ import projectJson from "./jsons/project.json";
 import migratedOldProjectJson from "./jsons/r3fJsons/project/old.json";
 import fs from "fs";
 import { ElementType } from "../../src/r/definitions/elements/index.js";
-import {afterEach, beforeAll, beforeEach, describe, expect, it, jest, xit} from "@jest/globals";
+import { describe, it, expect } from "vitest";
 
 const { deepClone } = jsUtils;
 
@@ -498,7 +498,7 @@ describe ("r RecordFactory tests", () => {
     expect(rAndP?.p.type).toBe(record?.type);
   });
 
-  xit ("should copy to clipboard for a project", () => {
+  it.skip ("should copy to clipboard for a project", () => {
     const projectF = new RecordFactory(deepClone(projectJson));
     const recordIds = projectF.getRecordIds(RT.scene);
     const clipboard = projectF.copyToClipboard([ recordIds[0] ]);

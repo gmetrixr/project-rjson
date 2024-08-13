@@ -1,5 +1,5 @@
 import { RuleEvent } from "../../rules/RuleEvent.js";
-import { RuleAction } from "../../rules/RuleAction.js";
+// import { RuleAction } from "../../rules/RuleAction.js";
 import { ISpecialDefinition, SpecialType } from "../SpecialTypes.js";
 
 export const SpecialScene: ISpecialDefinition = {

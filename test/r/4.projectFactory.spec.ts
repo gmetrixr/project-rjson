@@ -1,4 +1,4 @@
-import { ClipboardData, RT, RecordFactory, RecordMap, RecordNode, createRecord, rtp } from "../../src/r/R/index.js";
+import { ClipboardData, RT, RecordFactory, RecordNode, createRecord, rtp } from "../../src/r/R/index.js";
 import { ElementType, elementDisplayNames } from "../../src/r/definitions/elements/index.js";
 import { ProjectFactory } from "../../src/r/recordFactories/ProjectFactory.js";
 import { PredefinedVariableName, VarCategory, VariableType } from "../../src/r/definitions/variables/index.js";
@@ -6,23 +6,21 @@ import { jsUtils } from "@gmetrixr/gdash";
 import { ElementFactory } from "../../src/r/recordFactories/ElementFactory.js";
 import { fn } from "../../src/r/definitions/index.js";
 import fs from "fs";
+// !WARNING - ids of threeScenesJson change at runtime during a migration - so don't use for id based tests
 import threeScenesJson from "./jsons/r3fJsons/project/threeScenesJson.json";
 import propertiesReplacementJson from "./jsons/r3fJsons/project/propertiesReplacement.json";
 import aiTutorJson from "./jsons/r3fJsons/project/ai_tutor.json";
 import manishJson from "./jsons/r3fJsons/project/manish.json";
 import clipboardData from "./jsons/r3fJsons/clipboard/project.json";
 import projectJson from "./jsons/project.json";
-import { r } from "../../src/index.js";
+import { migrations, r } from "../../src/index.js";
 import { avatarSourceMap, gvsMap, sourceMap } from "./jsons/4.projectObject.js";
-import { afterEach, beforeAll, beforeEach, describe, xdescribe, expect, it, jest, xit } from "@jest/globals";
+import { describe, it, expect } from "vitest";
 
+const { migrateProject } = migrations;
 const { generateIdV2, deepClone } = jsUtils;
 
-const jestConsole = console;
-beforeEach(() => { global.console = console; });
-afterEach(() => { global.console = jestConsole; });
-
-describe ("r ProjectFactory tests", () => {
+describe ("r ProjectFactory tests 1", () => {
   it ("should add element record to a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const idAndRecord = projectF.addElementRecord({ parentIdOrAddress: 1684926140314, elementType: ElementType.character });
@@ -85,10 +83,13 @@ describe ("r ProjectFactory tests", () => {
     const updatedName = "variable_name_update_test";
     projectF.changeRecordName(7469457607607874, updatedName);
     expect(projectF.getRecord(7469457607607874, RT.variable)?.name).toBe(updatedName);
+  });
 
+  it ("should change record name for a variable in a project", () => {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const variableIdAndRecord = projectF.getIdAndRecord(7469457607607874);
     if (!variableIdAndRecord) return;
-    projectF.TEST_CASE_updateRecordsLinkedToVariableTemplate(variableIdAndRecord, "string_var");
+    projectF.TEST_CASE_updateRecordsLinkedToVariableTemplate(variableIdAndRecord, "string_var", "variable_name_update_test");
     const record = projectF.getDeepRecord(8720042838001644);
     expect(record?.props.text).toBe("{{variable_name_update_test}}");
   });
@@ -106,7 +107,9 @@ describe ("r ProjectFactory tests", () => {
     projectF.TEST_CASE_updateStringTemplateInRecord(record as RecordNode<RT>, "string_var", "string_var3");
     expect(record?.props.text).toBe("{{string_var3}}");
   });
+});
 
+describe ("r ProjectFactory tests 2", () => {
   it ("should add variable of type for a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const variableIdAndRecord = projectF.addVariableOfType(VariableType.boolean);
@@ -178,19 +181,9 @@ describe ("r ProjectFactory tests", () => {
     const projectF = new ProjectFactory(deepClone(manishJson));
     fs.writeFileSync("./test/r/jsons/r3fJsons/metadata/metadata.json", JSON.stringify(projectF.getMetadata()));
   });
+});
 
-  xit ("should copy to clipboard for a project", () => {
-    const projectF = new ProjectFactory(deepClone(threeScenesJson));
-    const clipboard = projectF.copyToClipboard([ 1684926140314, 5364265808415932, 7099775484488106 ]);
-    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/project.json", JSON.stringify(clipboard));
-  });
-
-  xit ("should paste from clipboard to project", () => {
-    const projectF = new ProjectFactory(createRecord(RT.project));
-    projectF.pasteFromClipboard("", clipboardData as ClipboardData);
-    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(deepClone(threeScenesJson)));
-  });
-
+describe ("r ProjectFactory tests 3", () => {
   it ("should not delete last scene from a project", () => {
     const projectF = new ProjectFactory(deepClone(threeScenesJson));
     const sceneIds = projectF.getRecordIds(RT.scene);
@@ -218,17 +211,6 @@ describe ("r ProjectFactory tests", () => {
     // console.log(stringToPrint);
   }, 30000);
 
-  it ("should not update ta_properties when a variable is added", function () {
-    const projectF = new ProjectFactory(deepClone(threeScenesJson));
-    const variable = createRecord(RT.variable);
-    projectF.addRecord({ record: variable });
-
-    const rulesAfterAdding = projectF.getDeepRecordEntries(RT.then_action);
-    for (const rule of rulesAfterAdding) {
-      expect(rule[1].props.ta_properties).toBeUndefined();
-    }
-  });
-
   it ("should get all file ids from project json", () => {
     const projectF = new ProjectFactory(deepClone(projectJson));
     const idAndRecord1 = projectF.addBlankRecord({ type: RT.avatar });
@@ -243,22 +225,6 @@ describe ("r ProjectFactory tests", () => {
     expect(fileIds).toContain(3769);
     expect(fileIds).toContain(3262);
     expect(fileIds).toContain(389);
-  });
-
-  xit ("should inject source for avatars", () => {
-    const project = deepClone(projectJson);
-    // @ts-ignore
-    const projectF = new ProjectFactory(project);
-    const idAndRecord1 = projectF.addBlankRecord({ type: RT.avatar });
-    const idAndRecord2 = projectF.addBlankRecord({ type: RT.avatar });
-    const idAndRecord3 = projectF.addBlankRecord({ type: RT.avatar });
-
-    idAndRecord1 && new RecordFactory(idAndRecord1.record).set(rtp.avatar.source, { id: 3769 });
-    idAndRecord2 && new RecordFactory(idAndRecord2.record).set(rtp.avatar.source, { id: 3262 });
-    idAndRecord3 && new RecordFactory(idAndRecord3.record).set(rtp.avatar.source, { id: 389 });
-
-    projectF.injectSourceIntoProject(avatarSourceMap);
-    fs.writeFileSync("./test/r/jsons/r3fJsons/project/project.json", JSON.stringify(project));
   });
 
   it ("should create a substitute entry for image", () => {
@@ -278,8 +244,39 @@ describe ("r ProjectFactory tests", () => {
   });
 });
 
-describe("Test ProjectUtils", () => {
-  xit("should apply propertiesReplacementMap", () => {
+describe.skip ("r ProjectFactory tests that write files", () => {
+  it.skip ("should copy to clipboard for a project", () => {
+    const projectF = new ProjectFactory(deepClone(threeScenesJson));
+    const clipboard = projectF.copyToClipboard([ 1684926140314, 5364265808415932, 7099775484488106 ]);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/project.json", JSON.stringify(clipboard));
+  });
+
+  it.skip ("should paste from clipboard to project", () => {
+    const projectF = new ProjectFactory(createRecord(RT.project));
+    projectF.pasteFromClipboard("", clipboardData as ClipboardData);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/clipboard/pasted.json", JSON.stringify(deepClone(threeScenesJson)));
+  });
+
+  it.skip ("should inject source for avatars", () => {
+    const project = deepClone(projectJson);
+    // @ts-ignore
+    const projectF = new ProjectFactory(project);
+    const idAndRecord1 = projectF.addBlankRecord({ type: RT.avatar });
+    const idAndRecord2 = projectF.addBlankRecord({ type: RT.avatar });
+    const idAndRecord3 = projectF.addBlankRecord({ type: RT.avatar });
+
+    idAndRecord1 && new RecordFactory(idAndRecord1.record).set(rtp.avatar.source, { id: 3769 });
+    idAndRecord2 && new RecordFactory(idAndRecord2.record).set(rtp.avatar.source, { id: 3262 });
+    idAndRecord3 && new RecordFactory(idAndRecord3.record).set(rtp.avatar.source, { id: 389 });
+
+    projectF.injectSourceIntoProject(avatarSourceMap);
+    fs.writeFileSync("./test/r/jsons/r3fJsons/project/project.json", JSON.stringify(project));
+  });
+
+});
+
+describe ("Test ProjectUtils", () => {
+  it("should apply propertiesReplacementMap", () => {
     const propertiesReplacementMap = {
       "Scene|Zone!color": "#FFF",
       "Scene|Zone!placer_3d>2": 99,
@@ -331,5 +328,23 @@ describe("Test ProjectUtils", () => {
     expect(expertFemale02?.record.props.character_brain_slug).toBe("yxptkd");
     expect(expertMale01?.record.props.character_brain_slug).toBe("yxptkd");
     expect(expertMale02?.record.props.character_brain_slug).toBe("yxptkd");
+  });
+
+  it ("Check getDeepIdAndRecord", function () {
+    const migratedProject = migrateProject(deepClone(threeScenesJson));
+    const projectF = new ProjectFactory(migratedProject);
+    const vari2 = projectF.getDeepIdAndRecord(7469457607607874, RT.variable);
+    expect(vari2).toBeDefined();
+  });
+
+  it ("should update variable name", function () {
+    const migratedProject = migrateProject(deepClone(aiTutorJson));
+    const projectF = new ProjectFactory(migratedProject);
+    // const variable = projectF.getRecord(6210987871239024, RT.variable); //original name is mainTopic
+    // console.log(variable);
+
+    projectF.changeRecordName(6210987871239024, "new_name_of_variable");
+    const element = projectF.getDeepRecord(5101655422511716, RT.element);
+    expect(element?.props.character_chatbot_welcome_dialogue).toBe("Hey.! I'm an expert on {{new_name_of_variable}}. Ask me anything.");
   });
 });

@@ -14,16 +14,11 @@ import safeHandsJson from "./jsons/safeHands.json";
 import dormantElementJson from "./jsons/r3fJsons/project/dormantElementTest.json";
 import brainJson from "./jsons/r3fJsons/project/brain.json";
 import console from "console";
-import {afterEach, beforeEach, describe, expect, it, xit} from "@jest/globals";
+import { describe, it, expect } from "vitest";
 import { ElementType } from "../../src/r/definitions/elements/ElementDefinition.js";
 
 const { createNewDeployment, migrateDeployment } = migrations;
 const { projectViewerRuntimeMigrations, migrateProject, migrateDiscussion } = migrations;
-
-//https://stackoverflow.com/a/68017229/1233476
-const jestConsole = console;
-beforeEach(() => { global.console = console; });
-afterEach(() => { global.console = jestConsole; });
 
 describe ("r Migration tests", () => {
   it ("should create new deployment", () => {
@@ -31,7 +26,7 @@ describe ("r Migration tests", () => {
     expect(deployment.type).toBe(RT.deployment);
   });
 
-  xit ("migrate elements", function () {
+  it.skip ("migrate elements", function () {
     fs.writeFileSync("./test/r/jsons/r3fJsons/deployment/deployment.json", JSON.stringify(migrateDeployment(deploymentJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/safeHands.json", JSON.stringify(migrateProject(safeHandsJson)));
     fs.writeFileSync("./test/r/jsons/r3fJsons/project/newton.json", JSON.stringify(migrateProject(newtonStoreJson)));

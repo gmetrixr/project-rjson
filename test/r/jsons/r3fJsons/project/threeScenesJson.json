@@ -536,6 +536,16 @@
                       "properties": []
                     },
                     "order": 0
+                  },
+                  "8606692769329687": {
+                    "type": "then_action",
+                    "props": {
+                      "co_id": 9428326879519510,
+                      "co_type": "character",
+                      "action": "speak",
+                      "ta_properties": ["Welcome to text replacement test {{   string_var}} should change to new var name"]
+                    },
+                    "order": 1
                   }
                 }
               },

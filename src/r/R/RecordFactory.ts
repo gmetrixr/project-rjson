@@ -347,25 +347,48 @@ export class RecordFactory<T extends RT> {
    * This function works faster if type is passed
    */
   private getDeepRecordWithIdInternal(id: number, type?: RT): RecordNode<RT> | undefined {
-    for (const currentType of this.getRecordTypes()) {
-      if(type) {
-        const typesToConsider = recordTypeDefinitions[type].typesInRootPath;
-        if(!typesToConsider.includes(currentType)) {
-          continue;
+    if(type) { //If type is given then we need lesser iterations
+      const typesInPath = recordTypeDefinitions[type].typesInRootPath;
+      for (const currentType of this.getRecordTypes()) {
+        //When type is given, we go inside a record type only if 
+        // A. it itself is the type we are trying to find, or 
+        // B. it lies in the path of what we are trying to find.
+        
+        //Case A. If the given type is a child of "this"'s, then compare record ids
+        if(currentType === type) { 
+          const recordIdsOfType = this.getRecordIds(currentType);
+          if(recordIdsOfType.includes(id)) { //match!
+            return this.getRecord(id, currentType);
+          }            
+        }
+
+        //Case B. Do we go deeper? Ans. Only if this type has a chance of containing the target type
+        if(typesInPath.includes(currentType)) {
+          for(const record of this.getRecords(currentType)) {
+            // console.log("Going deeper in ", id, record.type, record.name);
+            const found = new RecordFactory(record).getDeepRecordWithIdInternal(id, type); //records get added to the same object
+            if(found !== undefined) { //match!
+              return found;
+            }
+          }
         }
       }
-      const recordIdsOfType = this.getRecordIds(currentType);
-      if(recordIdsOfType.includes(id)) { //match!
-        return this.getRecord(id, currentType);
-      }
-      for(const record of this.getRecords(currentType)) {
-        const found = new RecordFactory(record).getDeepRecordWithIdInternal(id, type); //records get added to the same object
-        if(found !== undefined) { //match!
-          return found;
+      return undefined;
+    } else {
+      for (const currentType of this.getRecordTypes()) {
+        const recordIdsOfType = this.getRecordIds(currentType);
+        if(recordIdsOfType.includes(id)) { //match!
+          return this.getRecord(id, currentType);
+        }
+        for(const record of this.getRecords(currentType)) {
+          const found = new RecordFactory(record).getDeepRecordWithIdInternal(id, type); //records get added to the same object
+          if(found !== undefined) { //match!
+            return found;
+          }
         }
       }
+      return undefined;
     }
-    return undefined;
   }
 
   /** if idOrAddress is "", it refers to the current node */

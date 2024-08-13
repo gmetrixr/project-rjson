@@ -58,6 +58,7 @@ export {
 };
 
 import { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment, CharacterBrainType } from "./ElementTypes.js";
+import { ElementProperty } from "../../recordTypes/Element.js";
 export { lightType, BillboardingTypes, SHOPPING_ITEM_ELEMENT_ID, VolumeTypes, CharacterPoseTypes, MinimapAlignment, CharacterBrainType };
 
 export const elementList: IElementDefinition[] = [
@@ -126,3 +127,11 @@ const init = () => {
   }
 };
 init();
+
+//Properties that can contian a variable name, and should through variable templating
+export const elementPropertiesContainingText: Array<ElementProperty> = [
+  ElementProperty.text,
+  ElementProperty.embed_string,
+  ElementProperty.character_thinking_dialogue,
+  ElementProperty.character_chatbot_welcome_dialogue,
+];

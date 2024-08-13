@@ -1190,7 +1190,7 @@
                 "character_brain_slug": "vxfwdl",
                 "character_brain_type": "advanced",
                 "character_thinking_dialogue": "Hmm. Interesting question, let me think about that.",
-                "character_chatbot_welcome_dialogue": "Hey.! I'm an expert on {{mainTopic}}. Ask me anything.",
+                "character_chatbot_welcome_dialogue": "Hey.! I'm an expert on {{mainTopic }}. Ask me anything.",
                 "character_chatbot_welcome_dialogue_repeat": "always"
               }
             },

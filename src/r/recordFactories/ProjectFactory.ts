@@ -27,6 +27,7 @@ import { SceneType } from "../definitions/special/index.js";
 import { SubstituteProperty } from "../recordTypes/Substitute.js";
 import { ProjectUtils } from "./ProjectUtils.js";
 import { getFactory } from "../index.js";
+import { elementPropertiesContainingText } from "../definitions/elements/index.js";
 
 const { deepClone, generateIdV2 } = jsUtils;
 type variable = RT.variable;
@@ -367,7 +368,7 @@ export class ProjectFactory extends RecordFactory<RT.project> {
       }
       case RT.variable: {
         if(oldName !== undefined && newName !== undefined) {
-          this.updateRecordsLinkedToVariableTemplate(idAndRecord, newName);
+          this.updateRecordsLinkedToVariableTemplate(idAndRecord, oldName, newName);
         }
         break;
       }
@@ -380,17 +381,14 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   // ! ONLY TO BE USED FOR TESTING
-  TEST_CASE_updateRecordsLinkedToVariableTemplate (variableIdAndRecord: idAndRecord<RT.variable>, newName: string) {
-    this.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, newName);
+  TEST_CASE_updateRecordsLinkedToVariableTemplate (variableIdAndRecord: idAndRecord<RT.variable>, oldName: string, newName: string) {
+    this.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, oldName, newName);
   }
 
-  private updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, newName: string) {
-    const oldName = variableIdAndRecord.record.name;
-    if(oldName) {
-      const deepRecords = this.getDeepRecordEntries();
-      for(const [id, record] of deepRecords) {
-        this.updateStringTemplateInRecord(record, oldName, newName);
-      }
+  private updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, oldName: string, newName: string) {
+    const deepRecords = this.getDeepRecordEntries();
+    for(const [id, record] of deepRecords) {
+      this.updateStringTemplateInRecord(record, oldName, newName);
     }
   }
 
@@ -401,25 +399,19 @@ export class ProjectFactory extends RecordFactory<RT.project> {
 
   private updateStringTemplateInRecord(record: RecordNode<RT>, oldVarName: string, newVarName: string) {
     if(oldVarName === newVarName) return;
-    const searchValue = new RegExp(`({{[s]*${oldVarName}[s]*}})+`, "gm");
+    const searchValue = new RegExp("({{\\s*" + oldVarName + "\\s*}})+", "gm");
     const replaceValue = `{{${newVarName}}}`;
     switch(record.type) {
       case RT.element: {
-        const elementRecord = record as RecordNode<RT.element>;
-        switch (elementRecord.props.element_type) {
-          case ElementType.text: {
-            const oldValue = elementRecord.props.text;
+        const elementF = new RecordFactory(record);
+        const elementProps = elementF.getProps();
+        for(const prop of elementPropertiesContainingText) {
+          if(elementProps.includes(prop)) {
+            const oldValue = elementF.get(prop);
             if (typeof oldValue === "string") {
-              elementRecord.props.text = oldValue.replace(searchValue, replaceValue);
+              const newValue = oldValue.replace(searchValue, replaceValue);
+              elementF.set(prop, newValue);
             }
-            break;
-          }
-          case ElementType.embed_html: {
-            const oldValue = elementRecord.props.embed_string;
-            if (typeof oldValue === "string") {
-              elementRecord.props.embed_string = oldValue.replace(searchValue, replaceValue);
-            }
-            break;
           }
         }
         break;
