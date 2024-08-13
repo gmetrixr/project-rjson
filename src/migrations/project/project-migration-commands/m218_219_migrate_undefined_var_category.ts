@@ -11,9 +11,9 @@ class Migration implements IOrder {
 
 const migrateProject = (json: any) => {
   const pf = r.project(json);
-  const variables = pf.getSortedRecordEntries(RT.variable);
+  const variables = pf.getRecords(RT.variable);
   
-  for(const [_vId, variable] of variables) {
+  for(const variable of variables) {
     const varF = new RF.RecordFactory(variable);
     const varCategory = varF.get(rtp.variable.var_category);
     if(varCategory === undefined) {
