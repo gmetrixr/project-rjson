@@ -366,8 +366,8 @@ export class ProjectFactory extends RecordFactory<RT.project> {
         break;
       }
       case RT.variable: {
-        if(oldName !== undefined) {
-          this.updateRecordsLinkedToVariableTemplate(idAndRecord, oldName);
+        if(oldName !== undefined && newName !== undefined) {
+          this.updateRecordsLinkedToVariableTemplate(idAndRecord, newName);
         }
         break;
       }
@@ -380,13 +380,13 @@ export class ProjectFactory extends RecordFactory<RT.project> {
   }
 
   // ! ONLY TO BE USED FOR TESTING
-  TEST_CASE_updateRecordsLinkedToVariableTemplate (variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
-    this.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, oldName);
+  TEST_CASE_updateRecordsLinkedToVariableTemplate (variableIdAndRecord: idAndRecord<RT.variable>, newName: string) {
+    this.updateRecordsLinkedToVariableTemplate(variableIdAndRecord, newName);
   }
 
-  private updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, oldName: string) {
-    const newName = variableIdAndRecord.record.name;
-    if(newName) {
+  private updateRecordsLinkedToVariableTemplate(variableIdAndRecord: idAndRecord<RT.variable>, newName: string) {
+    const oldName = variableIdAndRecord.record.name;
+    if(oldName) {
       const deepRecords = this.getDeepRecordEntries();
       for(const [id, record] of deepRecords) {
         this.updateStringTemplateInRecord(record, oldName, newName);
@@ -434,6 +434,19 @@ export class ProjectFactory extends RecordFactory<RT.project> {
             }
           }
           taRecord.props.ta_properties = properties;
+        }
+        break;
+      }
+      case RT.when_event: {
+        const weRecord = record as RecordNode<RT.when_event>;
+        if (weRecord.props.we_properties !== undefined) {
+          const properties = weRecord.props.we_properties as ArrayOfValues;
+          for (const p of properties) {
+            if (typeof p === "string") {
+              p.replace(searchValue, replaceValue);
+            }
+          }
+          weRecord.props.we_properties = properties;
         }
         break;
       }
