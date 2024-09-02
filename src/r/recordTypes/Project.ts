@@ -69,7 +69,8 @@ export enum ProjectProperty {
   enable_viewer_jump = "enable_viewer_jump",
   scene_transition_type = "scene_transition_type",
   text_rendering_mode = "text_rendering_mode",
-  allow_embeds = "allow_embeds"
+  allow_embeds = "allow_embeds",
+  csp_allowed_domains = "csp_allowed_domains"
 }
 
 //https://s.vrgmetri.com/gb-web/common/images/blackPixel-000000-1.png
@@ -145,5 +146,6 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.enable_viewer_jump]: true,
   [ProjectProperty.scene_transition_type]: SceneTransitionType.fade_to_black,
   [ProjectProperty.text_rendering_mode]: TextRenderingMode.basic,
-  [ProjectProperty.allow_embeds]: true
+  [ProjectProperty.allow_embeds]: true,
+  [ProjectProperty.csp_allowed_domains]: ""
 };
