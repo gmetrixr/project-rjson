@@ -70,7 +70,8 @@ export enum ProjectProperty {
   scene_transition_type = "scene_transition_type",
   text_rendering_mode = "text_rendering_mode",
   allow_embeds = "allow_embeds",
-  csp_allowed_domains = "csp_allowed_domains"
+  csp_allowed_domains = "csp_allowed_domains",
+  thumbstick_rotation_multiplier = "thumbstick_rotation_multiplier",
 }
 
 //https://s.vrgmetri.com/gb-web/common/images/blackPixel-000000-1.png
@@ -147,5 +148,6 @@ export const projectPropertyDefaults:  Record<ProjectProperty, unknown> = {
   [ProjectProperty.scene_transition_type]: SceneTransitionType.fade_to_black,
   [ProjectProperty.text_rendering_mode]: TextRenderingMode.basic,
   [ProjectProperty.allow_embeds]: true,
-  [ProjectProperty.csp_allowed_domains]: ""
+  [ProjectProperty.csp_allowed_domains]: "",
+  [ProjectProperty.thumbstick_rotation_multiplier]: 1
 };
