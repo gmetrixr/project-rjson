@@ -29,7 +29,7 @@ const migrateProject = (json: any) => {
     for(const [ oeId, oe ] of originalElements) {
       const elementF = new RF.ElementFactory(oe);
       const linkedElementId = elementF.getValueOrDefault(rtp.element.linked_element_id) as number;
-      const linkedPopup = sceneF.getRecord(linkedElementId);
+      const linkedPopup = sceneF.getDeepRecord(linkedElementId);
 
       if(linkedPopup !== undefined) {
         //* 3. Add new rule that opens linked popup on clicking original element
