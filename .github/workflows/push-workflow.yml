@@ -51,8 +51,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        git config --global user.name 'bot-build'
-        git config --global user.email 'techbots+build@gmetri.com'
+        git config --global user.name 'gmetridev'
+        git config --global user.email 'techbots+build-gmetrixr@gmetri.com'
 
         export N=`node -p require\(\'./package.json\'\).name` && echo $N
         pnpm version patch --message "v%s: $N [CI SKIP]"
