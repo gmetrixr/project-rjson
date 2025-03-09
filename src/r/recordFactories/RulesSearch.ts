@@ -46,16 +46,20 @@ export class RulesSearch {
 
         // rule name entry
         if (ruleName) {
-          this.ruleNamesDict[ruleName] ?
-            this.ruleNamesDict[ruleName].push(ruleId) :
+          if (this.ruleNamesDict[ruleName]) {
+            this.ruleNamesDict[ruleName].push(ruleId);
+          } else {
             this.ruleNamesDict[ruleName] = [ruleId];
+          }
         }
 
         // accent colour entry
         if (accentColor) {
-          this.accentColorsDict[accentColor] ?
-            this.accentColorsDict[accentColor].push(ruleId) :
+          if (this.accentColorsDict[accentColor]) {
+            this.accentColorsDict[accentColor].push(ruleId);
+          } else {
             this.accentColorsDict[accentColor] = [ruleId];
+          }
         }
 
         // element and variable names entries
@@ -69,23 +73,29 @@ export class RulesSearch {
           if (element) {
             const eleName = element[1].name?.trim().toLowerCase();
             if (eleName) {
-              this.elementNamesDict[eleName] ?
-                this.elementNamesDict[eleName].push(ruleId) :
+              if (this.elementNamesDict[eleName]) {
+                this.elementNamesDict[eleName].push(ruleId);
+              } else {
                 this.elementNamesDict[eleName] = [ruleId];
+              }
             }
           }
 
           const event = we.props.event as string;
-          this.eventsDict[event] ?
-            this.eventsDict[event].push(ruleId) :
+          if (this.eventsDict[event]) {
+            this.eventsDict[event].push(ruleId);
+          } else {
             this.eventsDict[event] = [ruleId];
+          }
 
           if (variable) {
             const varName = variable.name?.trim().toLowerCase();
             if (varName) {
-              this.variableNamesDict[varName] ?
-                this.variableNamesDict[varName].push(ruleId) :
+              if (this.variableNamesDict[varName]) {
+                this.variableNamesDict[varName].push(ruleId);
+              } else {
                 this.variableNamesDict[varName] = [ruleId];
+              }
             }
           }
         }
@@ -100,16 +110,20 @@ export class RulesSearch {
           if (element) {
             const eleName = element[1].name?.trim().toLowerCase();
             if (eleName) {
-              this.elementNamesDict[eleName] ?
-                this.elementNamesDict[eleName].push(ruleId) :
+              if (this.elementNamesDict[eleName]) {
+                this.elementNamesDict[eleName].push(ruleId);
+              } else {
                 this.elementNamesDict[eleName] = [ruleId];
+              }
             }
           }
 
           const action = ta.props.action as string;
-          this.actionDict[action] ?
-            this.actionDict[action].push(ruleId) :
+          if (this.actionDict[action]) {
+            this.actionDict[action].push(ruleId);
+          } else {
             this.actionDict[action] = [ruleId];
+          }
 
           switch (ta.props.action) {
             case RuleAction.open_url:
@@ -125,10 +139,12 @@ export class RulesSearch {
             case RuleAction.change_view_mode:
             case RuleAction.add_number: {
               if (Array.isArray(ta.props.ta_properties)) {
-                for(const p of ((ta.props.ta_properties ?? []) as string[])) {
-                  this.propsNameDict[p] ?
-                    this.propsNameDict[p].push(ruleId) :
+                for (const p of (ta.props.ta_properties ?? []) as string[]) {
+                  if (this.propsNameDict[p]) {
+                    this.propsNameDict[p].push(ruleId);
+                  } else {
                     this.propsNameDict[p] = [ruleId];
+                  }
                 }
               }
               break;
@@ -140,13 +156,15 @@ export class RulesSearch {
               if (Array.isArray(ta.props.ta_properties)) {
                 const elem_id = ta.props.ta_properties[0] as number;
                 const element = elementEntries.find(([eId, ele]) => eId === elem_id);
-                if(element) {
+                if (element) {
                   const elementName = element[1]?.name?.trim().toLowerCase();
-  
+
                   if (elementName) {
-                    this.propsNameDict[elementName] ?
-                      this.propsNameDict[elementName].push(ruleId) :
+                    if (this.propsNameDict[elementName]) {
+                      this.propsNameDict[elementName].push(ruleId);
+                    } else {
                       this.propsNameDict[elementName] = [ruleId];
+                    }
                   }
                 }
               }
@@ -159,10 +177,12 @@ export class RulesSearch {
                 const sceneId = ta.props.ta_properties[0] as number;
                 const scene = projectF.getRecord(sceneId, RT.scene);
                 const sceneName = scene?.name?.trim().toLowerCase();
-                if(sceneName) {
-                  this.propsNameDict[sceneName] ?
-                    this.propsNameDict[sceneName].push(ruleId) :
+                if (sceneName) {
+                  if (this.propsNameDict[sceneName]) {
+                    this.propsNameDict[sceneName].push(ruleId);
+                  } else {
                     this.propsNameDict[sceneName] = [ruleId];
+                  }
                 }
               }
               break;
@@ -172,13 +192,15 @@ export class RulesSearch {
               if (Array.isArray(ta.props.ta_properties)) {
                 const itemId = ta.props.ta_properties[0] as number;
                 const itemEntries = sceneF.getDeepRecordEntries(RT.item).filter(([id, item]) => id === itemId);
-                
-                for(const [id, item] of itemEntries) {
+
+                for (const [id, item] of itemEntries) {
                   const itemName = item.name?.trim().toLowerCase();
-                  if(itemName) {
-                    this.propsNameDict[itemName] ?
-                      this.propsNameDict[itemName].push(ruleId) :
+                  if (itemName) {
+                    if (this.propsNameDict[itemName]) {
+                      this.propsNameDict[itemName].push(ruleId);
+                    } else {
                       this.propsNameDict[itemName] = [ruleId];
+                    }
                   }
                 }
               }
@@ -191,9 +213,11 @@ export class RulesSearch {
           if (variable) {
             const varName = variable.name?.trim().toLowerCase();
             if (varName) {
-              this.variableNamesDict[varName] ?
-                this.variableNamesDict[varName].push(ruleId) :
+              if (this.variableNamesDict[varName]) {
+                this.variableNamesDict[varName].push(ruleId);
+              } else {
                 this.variableNamesDict[varName] = [ruleId];
+              }
             }
           }
         }
@@ -201,41 +225,57 @@ export class RulesSearch {
     }
   };
 
-  simpleSearchInRules({ searchString, accentColor }: {
-    searchString: string;
-    accentColor?: string;
-  }): number[] {
+  simpleSearchInRules({ searchString, accentColor }: { searchString: string; accentColor?: string }): number[] {
     // to filter by accent colour
-    const idsForAccentColor: number[] = accentColor ?
-      this.accentColorsDict[accentColor.toLowerCase()] || [] :
-      flatten(Object.values(this.accentColorsDict));
+    const idsForAccentColor: number[] = accentColor
+      ? this.accentColorsDict[accentColor.toLowerCase()] || []
+      : flatten(Object.values(this.accentColorsDict));
 
     if (accentColor && idsForAccentColor && !searchString) {
       return uniq(idsForAccentColor);
     }
 
     // search in rule names
-    const matchingRuleNames: string[] = Object.keys(this.ruleNamesDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
+    const matchingRuleNames: string[] = Object.keys(this.ruleNamesDict).filter((key: string) =>
+      key.includes(searchString.trim().toLowerCase()),
+    );
     const idsForRuleNames: number[] = flatten(matchingRuleNames.map((key: string) => this.ruleNamesDict[key]));
 
     // search in element names
-    const matchingElementNames: string[] = Object.keys(this.elementNamesDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
+    const matchingElementNames: string[] = Object.keys(this.elementNamesDict).filter((key: string) =>
+      key.includes(searchString.trim().toLowerCase()),
+    );
     const idsForElementNames: number[] = flatten(matchingElementNames.map((key: string) => this.elementNamesDict[key]));
 
     // search in variable names
-    const matchingVariableNames: string[] = Object.keys(this.variableNamesDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
-    const idsForVariableNames: number[] = flatten(matchingVariableNames.map((key: string) => this.variableNamesDict[key]));
+    const matchingVariableNames: string[] = Object.keys(this.variableNamesDict).filter((key: string) =>
+      key.includes(searchString.trim().toLowerCase()),
+    );
+    const idsForVariableNames: number[] = flatten(
+      matchingVariableNames.map((key: string) => this.variableNamesDict[key]),
+    );
 
-    const matchingEvents: string[] = Object.keys(this.eventsDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
+    const matchingEvents: string[] = Object.keys(this.eventsDict).filter((key: string) =>
+      key.includes(searchString.trim().toLowerCase()),
+    );
     const idsForEvents: number[] = flatten(matchingEvents.map((key: string) => this.eventsDict[key]));
 
-    const matchingAction: string[] = Object.keys(this.actionDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
+    const matchingAction: string[] = Object.keys(this.actionDict).filter((key: string) =>
+      key.includes(searchString.trim().toLowerCase()),
+    );
     const idsForAction: number[] = flatten(matchingAction.map((key: string) => this.actionDict[key]));
 
-    const matchingProps: string[] = Object.keys(this.propsNameDict).filter((key: string) => key.includes(searchString.trim().toLowerCase()));
+    const matchingProps: string[] = Object.keys(this.propsNameDict).filter((key: string) =>
+      key.includes(searchString.trim().toLowerCase()),
+    );
     const idsForProps: number[] = flatten(matchingProps.map((key: string) => this.propsNameDict[key]));
 
-    const concatenatedRuleIds: number[] = idsForElementNames.concat(idsForRuleNames).concat(idsForVariableNames).concat(idsForEvents).concat(idsForAction).concat(idsForProps);
+    const concatenatedRuleIds: number[] = idsForElementNames
+      .concat(idsForRuleNames)
+      .concat(idsForVariableNames)
+      .concat(idsForEvents)
+      .concat(idsForAction)
+      .concat(idsForProps);
     let outputRuleIds: number[] = concatenatedRuleIds;
     if (searchString && accentColor) {
       const intersection = jsUtils.intersection(new Set(idsForAccentColor), new Set(concatenatedRuleIds));

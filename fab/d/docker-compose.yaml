@@ -1,6 +1,6 @@
 services:
   project-rjson:
-    image: "gmetrixr/baseimage:node-20-dev-v6"
+    image: repo2.hub.gmetri.io/gmetrivr/basin:node-22-dev-v3
     container_name: gmetri_project-rjson
     command: ["tail", "-f", "/dev/null"]
     working_dir: /src

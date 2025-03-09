@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/node20/tsconfig.json",
+  "extends": "@tsconfig/node22/tsconfig.json",
   //https://www.typescriptlang.org/tsconfig/#module
   "compilerOptions": {
     "outDir": "./lib/esm",
@@ -12,11 +12,6 @@
     "resolveJsonModule": true,
     // "noImplicitAny": true,
     // "preserveConstEnums": true,
-  },
-  "ts-node": {
-    //https://typestrong.org/ts-node/docs/imports/#native-ecmascript-modules
-    // Tell ts-node CLI to install the --loader automatically, explained below
-    "esm": true
   },
   "include": ["src"],
 }

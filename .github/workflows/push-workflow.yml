@@ -1,0 +1,65 @@
+name: Push Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  #Runs pnpm lint and pnpm check
+  lint-and-check:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+      
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Install npm dependencies
+      run: |
+        npm install -g pnpm
+        pnpm install
+
+    - run: pnpm lint
+    - run: pnpm check
+  
+  #Runs `pnpm build_npm`
+  push-npm:
+    runs-on: ubuntu-22.04
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        registry-url: ${{ vars.NPM_REGISTRY }}
+        token: ${{ secrets.NPM_TOKEN }}
+
+    - run: npm install -g pnpm
+
+    - uses: actions/checkout@v4
+
+    - name: Install npm dependencies and build
+      run: |
+        pnpm install
+        pnpm build_npm
+
+    - name: Increment package version and push
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        git config --global user.name 'bot-build'
+        git config --global user.email 'techbots+build@gmetri.com'
+
+        export N=`node -p require\(\'./package.json\'\).name` && echo $N
+        pnpm version patch --message "v%s: $N [CI SKIP]"
+
+        npm publish
+        
+        git push origin
+        git push --tags origin

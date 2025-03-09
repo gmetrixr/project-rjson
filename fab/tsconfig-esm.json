@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig",
+  //include needed so the whole src and dev folder doesn't get built
+  "include": ["src/**/*"],
+  //files needed because includes doesn't work without files when using "p build"
+  "files": ["../src/index.ts"],
+  "compilerOptions": {
+    "module": "node16",
+    "declaration": true,
+    "outDir": "../lib/esm"
+  },
+}

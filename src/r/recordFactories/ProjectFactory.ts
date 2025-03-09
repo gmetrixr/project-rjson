@@ -257,7 +257,6 @@ export class ProjectFactory extends RecordFactory<RT.project> {
     const record = elementIdAndRecord.record;
     switch ((record as RecordNode<RT.element>).props.element_type) {
       case ElementType.media_upload: {
-        ElementProperty.media_upload_var_id
         const linkedVarId = (record as RecordNode<RT.element>).props.media_upload_var_id as number;
         super.deleteRecord(linkedVarId, RT.variable);
         break;
