@@ -1,6 +1,6 @@
 {
   "name": "@gmetrixr/project-rjson",
-  "version": "2.1.188",
+  "version": "2.1.189",
   "description": "(R)ecursive Json for Project/Deployment/Discussions",
   "types": "./lib/esm/index.d.ts",
   "@comment main": "This key is still kept around until older version of node are used that don't understand exports key",
