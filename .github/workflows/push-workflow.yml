@@ -37,8 +37,6 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 22
-        registry-url: ${{ vars.NPM_REGISTRY }}
-        token: ${{ secrets.NPM_TOKEN }}
 
     - run: npm install -g pnpm
 
@@ -58,6 +56,9 @@ jobs:
 
         export N=`node -p require\(\'./package.json\'\).name` && echo $N
         pnpm version patch --message "v%s: $N [CI SKIP]"
+
+        npm set registry https://registry.npmjs.org/
+        npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
 
         npm publish
         
