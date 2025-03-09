@@ -8,7 +8,7 @@ on:
 jobs:
 
   #Runs pnpm lint and pnpm check
-  lint-and-check:
+  lint-check-and-test:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
@@ -24,6 +24,10 @@ jobs:
 
     - run: pnpm lint
     - run: pnpm check
+    
+    - name: Run Tests
+      run: |
+        pnpm test
   
   #Runs `pnpm build_npm`
   push-npm:
